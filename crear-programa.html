@@ -1,21 +1,48 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 
-<!-- Mirrored from https://cancionerocatolico.cl/crear-programa.html by HTTrack Website Copier/3.x [XR&CO], Fri, 25 Sep 2026 12:35:29 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
 <meta charset="utf-8">
 <title>PROGRAMA DE MISA</title>
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 <link rel="canonical" href="crear-programa.html" />
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<script src="scripts/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/cancionero.css">
-<script src="scripts/jquery.min.js"></script>
-<script src="scripts/Sortable.min.js"></script>
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+<script src="./scripts/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/cancionero.css">
+<script src="./scripts/jquery.min.js"></script>
+<script src="./scripts/Sortable.min.js"></script>
 <style>
+:root {
+    --primary-color: #0d6efd;
+    --primary-hover: #0b5ed7;
+    --bg-soft: #f8f9fa;
+    --border-color: #dee2e6;
+    --radius-main: 12px;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+main.container {
+    background: #ffffff;
+    border-radius: var(--radius-main);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem 2rem;
+    margin-top: 2rem !important;
+    margin-bottom: 3rem;
+}
+
+h1.titulo {
+    font-weight: 800;
+    color: #2c3e50;
+    letter-spacing: -0.5px;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
 .search-box-container {
     position: relative;
     margin: 20px 0;
@@ -24,11 +51,19 @@
 
 #globalSearch {
     width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 2px solid #004a99;
-    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-main);
     outline: none;
+    transition: all 0.3s ease;
+    background-color: var(--bg-soft);
+}
+
+#globalSearch:focus {
+    border-color: var(--primary-color);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
 }
 
 .suggestions-panel {
@@ -37,22 +72,23 @@
     left: 0;
     right: 0;
     background: white;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-top: none;
-    max-height: 300px;
+    max-height: 320px;
     overflow-y: auto;
     z-index: 10000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    border-radius: 0 0 8px 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 0 0 var(--radius-main) var(--radius-main);
 }
 
 .suggestion-item {
-    padding: 12px;
+    padding: 12px 16px;
     cursor: pointer;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #f1f1f1;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: background-color 0.2s;
 }
 
 .suggestion-item:hover {
@@ -60,22 +96,122 @@
 }
 
 .suggestion-item .category-tag {
-    font-size: 0.8em;
-    background: #e1e1e1;
-    padding: 2px 8px;
-    border-radius: 4px;
-    color: #666;
+    font-size: 0.75rem;
+    background: #e9ecef;
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: #495057;
+    font-weight: 500;
 }
-    
+
+.form-select, #nombreMisa {
+    border-radius: 8px;
+    padding: 10px 14px;
+    border: 2px solid var(--border-color);
+    font-size: 0.95rem;
+}
+
+.form-select:focus, #nombreMisa:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+}
+
+/* Lista de programa moderna */
+#programa-lista {
+    margin-top: 1.5rem;
+}
+
 .programa-item {
-    touch-action: none;      /* Evita que el navegador use el touch para scroll en este elemento */
-    user-select: none;       /* Evita que se seleccione texto al mantener presionado */
+    touch-action: none;
+    user-select: none;
     cursor: grab;
     -webkit-tap-highlight-color: transparent;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .programa-item:active {
     cursor: grabbing;
+}
+
+.programa-item:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border-color: #cbd5e1;
+}
+
+/* Botones de acción general */
+.btn-outline-primary {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 10px 18px;
+    transition: all 0.2s;
+}
+
+/* Controles de tono y capo modernos */
+.control-tono, .control-capo {
+    background: var(--bg-soft);
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.flecha-tono {
+    cursor: pointer;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    user-select: none;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.flecha-tono:hover {
+    background: #e2e8f0;
+}
+
+.tono-actual, .capo-actual {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #2c3e50;
+    min-width: 32px;
+    text-align: center;
+}
+
+/* Botón eliminar personalizado */
+.btn-eliminar {
+    background: transparent;
+    border: none;
+    color: #dc3545;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    margin-left: 10px;
+}
+
+.btn-eliminar:hover {
+    background: #f8d7da;
+}
+
+hr {
+    border-color: var(--border-color);
+    opacity: 0.5;
+    margin: 2rem 0;
 }
 </style>
 </head>
@@ -83,17 +219,16 @@
 <body>
   <div id="nav-placeholder"></div>
 <script>
-$(function(){
-  $("#nav-placeholder").load("navbar.html");
+$(function(){$("#nav-placeholder").load("./navbar.html");
 });
 </script>
 
-  <main class="container mt-4 text-center">
+  <main class="container">
     <h1 class="titulo">CREAR PROGRAMA DE MISA</h1>
 
-    <div class="d-flex mt-3 mb-3 justify-content-start">
-    <div class="fw-bold"><p>TÍTULO:  </p></div>
-    <div class="col ms-3"><input type="text" id="nombreMisa" class="form-control"  style="border: 2px solid #004a99; font-weight: bold; text-align: center;"></div>
+    <div class="d-flex mt-3 mb-3 align-items-center">
+      <div class="fw-bold text-secondary text-nowrap"><p class="mb-0">TÍTULO:</p></div>
+      <div class="col ms-3"><input type="text" id="nombreMisa" class="form-control text-center fw-bold" placeholder="Ej. Misa Dominical"></div>
     </div>
 
     <div class="search-box-container">
@@ -101,36 +236,42 @@ $(function(){
       <div id="searchSuggestions" class="suggestions-panel"></div>
     </div>
 
-    <form id="form-seccion" class="mt-4">
-      <label for="seccion-select">Sección:</label>
-      <select id="seccion-select" class="form-select" onchange="actualizarListaCanciones()"></select>
-    </form>
+    <div class="row g-3">
+      <div class="col-md-6 text-start">
+        <form id="form-seccion">
+          <label for="seccion-select" class="form-label fw-semibold text-secondary">Sección:</label>
+          <select id="seccion-select" class="form-select" onchange="actualizarListaCanciones()"></select>
+        </form>
+      </div>
+      <div class="col-md-6 text-start">
+        <form id="form-cancion">
+          <label for="cancion-select" class="form-label fw-semibold text-secondary">Canción:</label>
+          <select id="cancion-select" class="form-select"></select>
+        </form>
+      </div>
+    </div>
 
-    <form id="form-cancion" class="mt-3">
-      <label for="cancion-select">Canción:</label>
-      <select id="cancion-select" class="form-select"></select>
-    <div class="d-flex justify-content-evenly">
-      <button type="button" class="btn btn-outline-primary mt-2" onclick="agregarCancion()">Agregar</button>
-      <button id="limpiar-programa" class="btn btn-outline-primary mt-2">Limpiar listado</button>
-  </div>
-    </form>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <button type="button" class="btn btn-primary px-4 shadow-sm" onclick="agregarCancion()">Agregar Canción</button>
+      <button id="limpiar-programa" class="btn btn-outline-danger px-4">Limpiar listado</button>
+    </div>
 
     <hr>
 
-    <ul id="programa-lista" class="list-unstyled mt-3"></ul>
+    <ul id="programa-lista" class="list-unstyled"></ul>
 
-<div class="mt-4">
-    <button id="programa-full" class="btn btn-outline-primary mb-3">Programa full (con acordes)</button>
-    <button id="programa-acordes" class="btn btn-outline-primary mb-3">Lista canciones (con acordes)</button>
-    <button id="programa-texto" class="btn btn-outline-primary mb-3">Lista canciones (sólo texto)</button>
-    <button id="programa-proyector" class="btn btn-outline-primary mb-3">Proyectar letra</button>
-    <button id="compartir-programa" class="btn btn-outline-primary mb-3">Compartir listado</button>
-  </div>
+    <div class="mt-4 d-flex flex-wrap justify-content-center gap-2">
+      <button id="programa-full" class="btn btn-outline-primary mb-2">Programa full (con acordes)</button>
+      <button id="programa-acordes" class="btn btn-outline-primary mb-2">Lista canciones (con acordes)</button>
+      <button id="programa-texto" class="btn btn-outline-primary mb-2">Lista canciones (sólo texto)</button>
+      <button id="programa-proyector" class="btn btn-outline-primary mb-2">Proyectar letra</button>
+      <button id="compartir-programa" class="btn btn-success mb-2 text-white fw-bold px-3">Compartir listado</button>
+    </div>
 
-  <div class="mb-5"></div>
+    <div class="mb-4"></div>
   </main>
 
-  <script src="scripts/canciones.js"></script>
+  <script src="./scripts/canciones.js"></script>
 
   <script>
     let programa = JSON.parse(localStorage.getItem("programaMisa")) || [];
@@ -138,14 +279,12 @@ $(function(){
     /* --- Lógica para el Nombre de la Misa --- */
     const inputMisa = document.getElementById("nombreMisa");
 
-    // Cargar nombre guardado al iniciar
     if(localStorage.getItem("nombreMisaActual")) {
         const nombreGuardado = localStorage.getItem("nombreMisaActual");
         inputMisa.value = nombreGuardado;
         document.title = nombreGuardado;
     }
 
-    // Escuchar cambios en el input
     inputMisa.addEventListener('input', function() {
         const valor = this.value;
         localStorage.setItem("nombreMisaActual", valor);
@@ -176,14 +315,13 @@ $(function(){
       }
     }
 
-    //código buscador
-   document.addEventListener('DOMContentLoaded', () => {
+    // Código buscador
+    document.addEventListener('DOMContentLoaded', () => {
     const buscador = document.getElementById('globalSearch');
     const sugerencias = document.getElementById('searchSuggestions');
     const seccionSelect = document.getElementById("seccion-select");
     const cancionSelect = document.getElementById("cancion-select");
 
-    // 1. Crear el catálogo (usando tu variable 'canciones')
     const catalogo = [];
     for (const [nombreSeccion, listaDeCanciones] of Object.entries(canciones)) {
         for (const nombreCancion in listaDeCanciones) {
@@ -194,7 +332,6 @@ $(function(){
         }
     }
 
-    // 2. Lógica de búsqueda
     buscador.addEventListener('input', () => {
         const txt = buscador.value.toLowerCase().trim();
         sugerencias.innerHTML = '';
@@ -207,43 +344,34 @@ $(function(){
             const div = document.createElement('div');
             div.className = 'suggestion-item';
             
-            // Mostramos siempre la sección para dar contexto (Solución punto 2)
             div.innerHTML = `
                 <div style="display: flex; flex-direction: column;">
-                    <span style="font-weight: 500;">${item.nombre}</span>
-                    <small style="color: #666; font-size: 0.75em;">${item.seccion}</small>
+                    <span style="font-weight: 600; color: #2c3e50;">${item.nombre}</span>
+                    <small style="color: #6c757d; font-size: 0.75rem;">${item.seccion}</small>
                 </div>
                 <span class="category-tag">${item.seccion}</span>
             `;
             
             div.onclick = () => {
-                // Sincronizar los selects invisibles
                 seccionSelect.value = item.seccion;
-                actualizarListaCanciones(); // Tu función que llena el segundo select
+                actualizarListaCanciones();
                 cancionSelect.value = item.nombre;
-
-                // PUNTO 1: Agregar automáticamente al listado
-                // Llamamos a tu función existente que ya sabe qué hacer con los datos
                 agregarCancion();
 
-                // Limpiar y resetear el buscador para la siguiente canción
                 buscador.value = '';
                 sugerencias.innerHTML = '';
-                buscador.focus(); // Dejamos el foco listo por si quiere buscar otra
+                buscador.focus();
             };
             sugerencias.appendChild(div);
         });
     });
 
-    // Cerrar sugerencias al hacer clic fuera
     document.addEventListener('click', (e) => {
         if (!buscador.contains(e.target)) sugerencias.innerHTML = '';
     });
 });
 
-// fin código buscador
-
- /* --- Transposición de tono (respeta 'm') --- */
+    /* --- Transposición de tono (respeta 'm') --- */
     function transponerTono(tono, semitonos) {
       const tonos = ["DO","DO#","RE","MIb","MI","FA","FA#","SOL","LAb","LA","SIb","SI"];
       const esMenor = tono.endsWith("m");
@@ -283,10 +411,14 @@ $(function(){
       programa.forEach((item, index) => {
         const li = document.createElement("li");
         li.classList.add("programa-item");
-        li.textContent = `${item.seccion}: ${item.nombre} `;
+        
+        const textSpan = document.createElement("span");
+        textSpan.innerHTML = `<strong>${item.seccion}</strong>: ${item.nombre}`;
+        textSpan.style.textAlign = "left";
+        li.appendChild(textSpan);
 
-       const buttonGroup = document.createElement('div');
-        buttonGroup.className = 'd-inline-flex justify-content-end';
+        const buttonGroup = document.createElement('div');
+        buttonGroup.className = 'd-inline-flex align-items-center gap-2';
 
         // Control de tono
         const contTono = document.createElement("span");
@@ -319,56 +451,51 @@ $(function(){
         contTono.appendChild(btnUp);
         buttonGroup.appendChild(contTono);
 
-// ← NUEVO: Control de capo
-const contCapo = document.createElement("span");
-contCapo.classList.add("control-capo");
-contCapo.style.marginLeft = "15px";
+        // Control de capo
+        const contCapo = document.createElement("span");
+        contCapo.classList.add("control-capo");
 
-const btnCapoDown = document.createElement("span");
-btnCapoDown.textContent = "◀";
-btnCapoDown.classList.add("flecha-tono");
-btnCapoDown.onclick = () => {
-  if (item.capo > 0) {
-    item.capo--;
-    spanCapo.textContent = `Cej: ${item.capo}`;
-    guardarPrograma();
-  }
-};
+        const btnCapoDown = document.createElement("span");
+        btnCapoDown.textContent = "◀";
+        btnCapoDown.classList.add("flecha-tono");
+        btnCapoDown.onclick = () => {
+          if (item.capo > 0) {
+            item.capo--;
+            spanCapo.textContent = `Cej: ${item.capo}`;
+            guardarPrograma();
+          }
+        };
 
-const spanCapo = document.createElement("span");
-spanCapo.classList.add("capo-actual");
-spanCapo.textContent = `Cej: ${item.capo || 0}`;
+        const spanCapo = document.createElement("span");
+        spanCapo.classList.add("capo-actual");
+        spanCapo.textContent = `Cej: ${item.capo || 0}`;
 
-const btnCapoUp = document.createElement("span");
-btnCapoUp.textContent = "▶";
-btnCapoUp.classList.add("flecha-tono");
-btnCapoUp.onclick = () => {
-  if (item.capo < 7) {
-    item.capo++;
-    spanCapo.textContent = `Cej: ${item.capo}`;
-    guardarPrograma();
-  }
-};
+        const btnCapoUp = document.createElement("span");
+        btnCapoUp.textContent = "▶";
+        btnCapoUp.classList.add("flecha-tono");
+        btnCapoUp.onclick = () => {
+          if (item.capo < 7) {
+            item.capo++;
+            spanCapo.textContent = `Cej: ${item.capo}`;
+            guardarPrograma();
+          }
+        };
 
-contCapo.appendChild(btnCapoDown);
-contCapo.appendChild(spanCapo);
-contCapo.appendChild(btnCapoUp);
-buttonGroup.appendChild(contCapo);
-// ← FIN nuevo control de capo
-
+        contCapo.appendChild(btnCapoDown);
+        contCapo.appendChild(spanCapo);
+        contCapo.appendChild(btnCapoUp);
+        buttonGroup.appendChild(contCapo);
 
         // Botón eliminar
         const btnEliminar = document.createElement("button");
-    btnEliminar.className = 'btn-eliminar';
-    btnEliminar.title = "Eliminar canción";
-    
-    // Icono SVG de papelera (minimalista)
-    btnEliminar.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-      </svg>
-    `;
+        btnEliminar.className = 'btn-eliminar';
+        btnEliminar.title = "Eliminar canción";
+        btnEliminar.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+          </svg>
+        `;
         btnEliminar.onclick = () => {
           programa.splice(index, 1);
           mostrarPrograma();
@@ -382,123 +509,97 @@ buttonGroup.appendChild(contCapo);
     }
 
     /* --- Inicialización de Arrastre --- */
-function inicializarSortable() {
-  const lista = document.getElementById("programa-lista");
-  
-  // Destruimos instancia previa para evitar duplicados si la función se llama varias veces
-  if (window.sortableInstance) { window.sortableInstance.destroy(); }
+    function inicializarSortable() {
+      const lista = document.getElementById("programa-lista");
+      if (window.sortableInstance) { window.sortableInstance.destroy(); }
 
-  window.sortableInstance = Sortable.create(lista, {
-    animation: 150,
-    delay: 50,             // <--- MANTENER ESTO (vital para móvil)
-    delayOnTouchOnly: true, 
-    touchStartThreshold: 5,
-    ghostClass: 'sortable-ghost', // Usa la clase de tu código viejo
-    
-    onStart: function() {
-        if (navigator.vibrate) navigator.vibrate(40);
-    },
-    
-    onEnd: function (evt) {
-      const itemMovido = programa.splice(evt.oldIndex, 1)[0];
-      programa.splice(evt.newIndex, 0, itemMovido);
-      guardarPrograma();
-      mostrarPrograma(); 
+      window.sortableInstance = Sortable.create(lista, {
+        animation: 150,
+        delay: 50,
+        delayOnTouchOnly: true, 
+        touchStartThreshold: 5,
+        ghostClass: 'sortable-ghost',
+        
+        onStart: function() {
+            if (navigator.vibrate) navigator.vibrate(40);
+        },
+        
+        onEnd: function (evt) {
+          const itemMovido = programa.splice(evt.oldIndex, 1)[0];
+          programa.splice(evt.newIndex, 0, itemMovido);
+          guardarPrograma();
+          mostrarPrograma(); 
+        }
+      });
     }
-  });
-}
 
+    window.addEventListener("DOMContentLoaded", () => {
+      actualizarListaCanciones();
+      mostrarPrograma();
+      cargarProgramaDesdeURL();
+      inicializarSortable();
+    });
 
+    /* --- Compartir programa --- */
+    document.getElementById("compartir-programa").addEventListener("click", () => {
+      const nombreMisa = document.getElementById("nombreMisa").value || "Programa de Misa";
+      
+      let paramsArray = programa.map(item =>
+        `${encodeURIComponent(item.seccion)}=${encodeURIComponent(item.nombre)}~${encodeURIComponent(item.tono)}~${item.capo || 0}`
+      );
 
+      if (nombreMisa) {
+        paramsArray.push(`Misa=${encodeURIComponent(nombreMisa)}`);
+      }
 
-/* --- Actualiza tu window.addEventListener final --- */
-window.addEventListener("DOMContentLoaded", () => {
-  actualizarListaCanciones();
-  mostrarPrograma();
-  cargarProgramaDesdeURL();
-  inicializarSortable(); // <--- Activar el arrastre aquí
-});
+      const queryString = paramsArray.join("&");
+      const url = `${window.location.origin}${window.location.pathname}${queryString ? '?' + queryString : ''}`;
 
-    /* --- Limpiar programa --- */
-    document.getElementById("limpiar-programa").addEventListener("click", () => {
-       {
-        programa = [];
-        guardarPrograma();
-        mostrarPrograma();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          alert("✅ Enlace copiado al portapapeles.");
+        });
+      } else {
+        prompt("Copia el enlace:", url);
       }
     });
 
+    /* --- Cargar programa y Misa desde URL --- */
+    function cargarProgramaDesdeURL() {
+      const params = new URLSearchParams(window.location.search);
+      
+      if (params.has('Misa')) {
+        const nombreURL = params.get('Misa');
+        document.getElementById("nombreMisa").value = nombreURL;
+        document.title = nombreURL;
+        localStorage.setItem("nombreMisaActual", nombreURL);
+      }
 
+      if ([...params].length === 0 || ([...params].length === 1 && params.has('Misa'))) return;
 
+      programa = [];
+      for (const [seccion, valor] of params.entries()) {
+        if (seccion === "Misa") continue;
+        
+        const partes = valor.split("~");
+        const nombre = partes[0];
+        const tono = partes[1];
+        const capo = parseInt(partes[2]) || 0;
 
-
-/* --- Compartir programa --- */
-document.getElementById("compartir-programa").addEventListener("click", () => {
-  const nombreMisa = document.getElementById("nombreMisa").value || "Programa de Misa";
-  
-let paramsArray = programa.map(item =>
-  `${encodeURIComponent(item.seccion)}=${encodeURIComponent(item.nombre)}~${encodeURIComponent(item.tono)}~${item.capo || 0}`
-  //                                                                                                          ↑ AGREGAR ESTO
-);
-
-  if (nombreMisa) {
-    paramsArray.push(`Misa=${encodeURIComponent(nombreMisa)}`);
-  }
-
-  const queryString = paramsArray.join("&");
-  const url = `${window.location.origin}${window.location.pathname}${queryString ? '?' + queryString : ''}`;
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    // Copiamos el texto con el nombre incluido
-    navigator.clipboard.writeText(url).then(() => {
-      alert("✅ Enlace copiado al portapapeles.");
-    });
-  } else {
-    prompt("Copia el enlace:", url);
-  }
-});
-
-
-
-
-
-/* --- Cargar programa y Misa desde URL --- */
-function cargarProgramaDesdeURL() {
-  const params = new URLSearchParams(window.location.search);
-  
-  // 1. Cargar el nombre de la misa si viene en la URL
-  if (params.has('Misa')) {
-    const nombreURL = params.get('Misa');
-    document.getElementById("nombreMisa").value = nombreURL;
-    document.title = nombreURL;
-    localStorage.setItem("nombreMisaActual", nombreURL);
-  }
-
-  if ([...params].length === 0 || ([...params].length === 1 && params.has('Misa'))) return;
-
-  programa = [];
-  for (const [seccion, valor] of params.entries()) {
-    if (seccion === "Misa") continue; // Ignoramos el parámetro Misa aquí
-    
-const partes = valor.split("~");
-const nombre = partes[0];
-const tono = partes[1];
-const capo = parseInt(partes[2]) || 0;  // ← NUEVO
-
-if (canciones[seccion] && canciones[seccion][nombre]) {
-  const datos = canciones[seccion][nombre];
-  programa.push({
-    seccion: seccion,
-    nombre: nombre,
-    cancion: datos.ruta,
-    tono: tono || datos.tono,
-    capo: capo  // ← NUEVO
-      });
+        if (canciones[seccion] && canciones[seccion][nombre]) {
+          const datos = canciones[seccion][nombre];
+          programa.push({
+            seccion: seccion,
+            nombre: nombre,
+            cancion: datos.ruta,
+            tono: tono || datos.tono,
+            capo: capo
+          });
+        }
+      }
+      guardarPrograma();
+      mostrarPrograma();
     }
-  }
-  guardarPrograma();
-  mostrarPrograma();
-}
 
     document.getElementById("limpiar-programa").addEventListener("click", () => {
         programa = [];
@@ -508,40 +609,32 @@ if (canciones[seccion] && canciones[seccion][nombre]) {
         mostrarPrograma();
     });
 
-    // Botones de salida
+    /* --- Redirección a otras páginas con ruta relativa limpia --- */
     document.getElementById("programa-full").addEventListener("click", () => {
       guardarPrograma();
-      window.location.href = "programa-full.html";
+      window.location.href = "./programa-full.html";
     });
     document.getElementById("programa-acordes").addEventListener("click", () => {
       guardarPrograma();
-      window.location.href = "programa-acordes.html";
+      window.location.href = "./programa-acordes.html";
     });
     document.getElementById("programa-texto").addEventListener("click", () => {
       guardarPrograma();
-      window.location.href = "programa-texto.html";
+      window.location.href = "./programa-texto.html";
     });
     document.getElementById("programa-proyector").addEventListener("click", () => {
       guardarPrograma();
-      window.location.href = "proyector.html";
+      window.location.href = "./proyector.html";
     });
 
-  window.addEventListener('load', function(){
-    if (window.location.hash === '#autoTexto=1') {
-      setTimeout(() => {
-        document.getElementById('programa-texto').click();
-      }, 50);
-    }
-  });
-
-    window.addEventListener("DOMContentLoaded", () => {
-      actualizarListaCanciones();
-      cargarProgramaDesdeURL();
-      mostrarPrograma();
-      inicializarSortable();
+    window.addEventListener('load', function(){
+      if (window.location.hash === '#autoTexto=1') {
+        setTimeout(() => {
+          document.getElementById('programa-texto').click();
+        }, 50);
+      }
     });
   </script>
 </body>
 
-<!-- Mirrored from https://cancionerocatolico.cl/crear-programa.html by HTTrack Website Copier/3.x [XR&CO], Fri, 25 Sep 2026 12:35:31 GMT -->
 </html>
