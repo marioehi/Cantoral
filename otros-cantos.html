@@ -1,0 +1,2073 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANTOS CARISMÁTICOS - Cancionero Litúrgico</title>
+<style>
+:root[data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-hover: #334155;
+    --accent: #f59e0b;
+    --accent-hover: #d97706;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+}
+:root[data-theme="light"] {
+    --bg-main: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-hover: #e2e8f0;
+    --accent: #d97706;
+    --accent-hover: #b45309;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border: #cbd5e1;
+}
+:root[data-theme="sepia"] {
+    --bg-main: #fbf0d9;
+    --bg-card: #f5e6cc;
+    --bg-hover: #e6d3b3;
+    --accent: #a0522d;
+    --accent-hover: #8b4513;
+    --text-main: #3e2723;
+    --text-muted: #6d4c41;
+    --border: #d7ccc8;
+}
+:root[data-theme="blue"] {
+    --bg-main: #0a192f;
+    --bg-card: #172a45;
+    --bg-hover: #303c55;
+    --accent: #64ffda;
+    --accent-hover: #4cdbc2;
+    --text-main: #e6f1ff;
+    --text-muted: #8892b0;
+    --border: #233554;
+}
+:root[data-theme="green"] {
+    --bg-main: #064e3b;
+    --bg-card: #065f46;
+    --bg-hover: #047857;
+    --accent: #34d399;
+    --accent-hover: #10b981;
+    --text-main: #ecfdf5;
+    --text-muted: #a7f3d0;
+    --border: #047857;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s, color 0.3s;
+}
+
+header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.logo-icon {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.header-titles h1 {
+    font-size: 20px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.badge-parroquia {
+    font-size: 11px;
+    background: var(--bg-main);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    font-weight: normal;
+}
+.header-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.btn {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+.btn:hover { opacity: 0.9; }
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--bg-main);
+    font-weight: 600;
+    border: none;
+}
+.theme-selector {
+    background: var(--bg-main);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    flex: 1;
+    height: calc(100vh - 78px);
+    overflow: hidden;
+}
+@media (max-width: 900px) {
+    .main-container { grid-template-columns: 1fr; height: auto; overflow: visible; }
+}
+.sidebar {
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+.sidebar-search {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+}
+.search-input {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px 10px 36px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2394a3b8" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0 z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 12px center;
+}
+.search-input:focus { border-color: var(--accent); }
+
+.filters-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+}
+.filter-title {
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.tag {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+}
+.tag.active {
+    background: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+.alphabet-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+}
+.alphabet-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.letter-btn {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.letter-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-main);
+}
+.letter-btn.active {
+    background: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+}
+.letter-btn.btn-todos {
+    width: auto;
+    padding: 0 8px;
+}
+
+.song-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+.song-item {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    transition: all 0.2s;
+}
+.song-item:hover { background: var(--bg-hover); }
+.song-item.selected {
+    background: var(--bg-hover);
+    border-color: var(--accent);
+}
+.song-item-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+.song-item-meta {
+    display: flex;
+    gap: 8px;
+    font-size: 11px;
+}
+.badge-cat {
+    background: var(--bg-main);
+    color: var(--text-muted);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+.badge-tone {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.content-panel {
+    background-color: var(--bg-main);
+    padding: 30px;
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.welcome-screen {
+    text-align: center;
+    margin: auto;
+    color: var(--text-muted);
+    max-width: 400px;
+}
+.welcome-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    background: var(--bg-card);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    color: var(--accent);
+}
+.song-display {
+    width: 100%;
+    max-width: 800px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.transposer-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-main);
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    flex-wrap: wrap;
+}
+.transposer-toolbar select {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+.nav-menu-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.nav-menu-bar span {
+    font-size: 11px;
+    padding: 4px 8px;
+    background: var(--bg-main);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+}
+
+.media-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.media-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+audio {
+    width: 100%;
+    max-width: 350px;
+    height: 35px;
+}
+.youtube-embed {
+    width: 100%;
+    max-width: 400px;
+    height: 225px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.song-lyrics-container {
+    font-family: "Courier New", Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.song-line {
+    margin-bottom: 8px;
+}
+.chord-line {
+    color: var(--accent);
+    font-weight: bold;
+    white-space: pre;
+    transition: display 0.2s;
+}
+.chord-line.hidden {
+    display: none !important;
+}
+.lyric-line {
+    color: var(--text-main);
+    white-space: pre-wrap;
+}
+
+/* Modal Estilos */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+.modal-overlay.active { display: flex; }
+.modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+.modal-header h3 { color: var(--accent); font-size: 18px; }
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+.form-control {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+}
+.form-control:focus { border-color: var(--accent); }
+textarea.form-control {
+    font-family: monospace;
+    resize: vertical;
+    height: 120px;
+}
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <div class="logo-icon">🔥</div>
+        <div class="header-titles">
+            <h1>CANTOS CARISMÁTICOS <span class="badge-parroquia">Parroquia.</span></h1>
+            <div class="header-sub">John Ramos Arévalo - Cancionero Litúrgico</div>
+        </div>
+    </div>
+    <div class="header-actions">
+<a href="index.html" class="btn">🏠 Volver al Inicio</a>
+        <select class="theme-selector" id="themeSelect" onchange="changeTheme(this.value)">
+            <option value="dark">🌙 Oscuro</option>
+            <option value="light">☀ Claro</option>
+            <option value="sepia">📜 Sepia</option>
+            <option value="blue">🌊 Azul Litúrgico</option>
+            <option value="green">🌿 Verde Litúrgico</option>
+        </select>
+        <button class="btn btn-primary" onclick="openSongModal()">+ Nueva Canción</button>
+    </div>
+</header>
+
+<div class="main-container">
+    <div class="sidebar">
+        <div class="sidebar-search">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar canto por título o número..." onkeyup="filterSongs()">
+        </div>
+        <div class="filters-section">
+            <div class="filter-title"><span>Categoría:</span> <span id="countDisplay">0 cantos</span></div>
+            <div class="filter-tags">
+                <span class="tag active" onclick="setFilter('todos', this)">Todos</span>
+                <span class="tag" onclick="setFilter('Carismáticos', this)">Carismáticos</span>
+                <span class="tag" onclick="setFilter('Alabanza', this)">Alabanza</span>
+                <span class="tag" onclick="setFilter('Espíritu Santo', this)">Espíritu Santo</span>
+            </div>
+        </div>
+        <div class="alphabet-section">
+            <div class="filter-title"><span>Buscar por letra:</span></div>
+            <div class="alphabet-grid" id="alphabetGrid"></div>
+        </div>
+        <div class="song-list" id="songListContainer"></div>
+    </div>
+
+    <div class="content-panel" id="contentPanel">
+        <div class="welcome-screen">
+            <div class="welcome-icon">🎵</div>
+            <h3>Selecciona una canción del repertorio</h3>
+            <p style="font-size: 13px; margin-top: 8px;">Haz clic en cualquiera de los cantos de la izquierda para visualizar su contenido completo, tonos y letra.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Crear / Editar Canción -->
+<div class="modal-overlay" id="songModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">Nueva Canción</h3>
+            <button class="btn" style="padding: 4px 8px;" onclick="closeSongModal()">✕</button>
+        </div>
+        <input type="hidden" id="editSongId">
+        <div class="form-group">
+            <label>Título del Canto (Ej: 211. Rock Del Espíritu)</label>
+            <input type="text" id="inputTitle" class="form-control" placeholder="Número y Título">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="form-group">
+                <label>Categoría</label>
+                <select id="inputCategory" class="form-control">
+                    <option value="Carismáticos">Carismáticos</option>
+                    <option value="Alabanza">Alabanza</option>
+                    <option value="Espíritu Santo">Espíritu Santo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tono Original (Ej: Do, Sol, Lam)</label>
+                <input type="text" id="inputTone" class="form-control" value="Do">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Enlace de YouTube (URL completa o de video)</label>
+            <input type="text" id="inputYoutube" class="form-control" placeholder="https://www.youtube.com/watch?v=...">
+        </div>
+        <div class="form-group">
+            <label>Enlace de Audio MP3 (Opcional)</label>
+            <input type="text" id="inputAudio" class="form-control" placeholder="https://ejemplo.com/audio.mp3">
+        </div>
+        <div class="form-group">
+            <label>Letra y Acordes (Formato: Alternar línea de Acordes y línea de Letra)</label>
+            <textarea id="inputRawLyrics" class="form-control" placeholder="Do   Sol   Fa&#10;Aleluya aleluya"></textarea>
+            <small style="color: var(--text-muted); font-size: 11px;">Nota: Puedes ingresar múltiples líneas. Las líneas impares se detectarán como acordes y las pares como letra.</small>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeSongModal()">Cancelar</button>
+            <button class="btn btn-primary" onclick="saveSong()">Guardar Canto</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let songs = [
+    {
+        id: 211,
+        title: "211. Rock Del Espíritu",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Es un rio, es la lluvia," },
+            { chords: "Re", lyrics: "es un soplo, es un fuego." },
+            { chords: "Do", lyrics: "Es el espíritu de Dios que está aquí." },
+            { chords: "Sol", lyrics: "Ahí va bajando, va cayendo," },
+            { chords: "Re", lyrics: "va soplando, va ardiendo" },
+            { chords: "Do", lyrics: "Es el espíritu de Dios que está aquí//" },
+            { chords: "Sol", lyrics: "//Bajando en ti, cayendo en ti" },
+            { chords: "Re", lyrics: "Soplando en ti, ardiendo en ti//" }
+        ]
+    },
+    {
+        id: 212,
+        title: "212. Como Corren Ríos",
+        category: "Carismáticos",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Como corren ríos dentro de mi ser //" },
+            { chords: "La7", lyrics: "Es que yo confío en Cristo mi Rey /" },
+            { chords: "Re", lyrics: "Como ríos de agua viva," },
+            { chords: "Sol", lyrics: "que salta pa’ arriba" },
+            { chords: "Re", lyrics: "Que llevo dentro." },
+            { chords: "La7", lyrics: "Confirma, confirma" },
+            { chords: "Re", lyrics: "en este momento" },
+            { chords: "La7", lyrics: "El Espíritu Santo su derramamiento (2)" },
+            { chords: "Re", lyrics: "Dame agua que nace para la vida eterna//" },
+            { chords: "La7", lyrics: "Del agua que diste a la samaritana//" }
+        ]
+    },
+    {
+        id: 213,
+        title: "213. Voy De Camino",
+        category: "Carismáticos",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Voy de camino, al lugar de gloria (2)" },
+            { chords: "Sol", lyrics: "Voy de camino, voy de camino" },
+            { chords: "Do", lyrics: "Voy de camino, al lugar de gloria." },
+            { chords: "Fa", lyrics: "No habrá tristezas, en el otro lado (2)" },
+            { chords: "Sol", lyrics: "No habrá tristezas, no habrá tristezas," },
+            { chords: "Do", lyrics: "No habrá tristezas, en el otro lado." },
+            { chords: "Sol", lyrics: "Veré a Jesús, al llegar allá (2)" },
+            { chords: "Do", lyrics: "Veré a Jesús, Veré a Jesús," },
+            { chords: "Sol Do", lyrics: "Veré a Jesús, al llegar allá." }
+        ]
+    },
+    {
+        id: 214,
+        title: "214. Hay Un Rio De Vida",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Hay un rio de vida corriendo por mi ser," },
+            { chords: "Re", lyrics: "Que hace a los enfermos caminar y ver" },
+            { chords: "Do", lyrics: "Libera a los oprimidos y les da felicidad" },
+            { chords: "Sol", lyrics: "Hay un rio de vida corriendo por mi ser." },
+            { chords: "Sol", lyrics: "Está el amor del padre corriendo …" },
+            { chords: "Re", lyrics: "Está el amor del hijo corriendo …" },
+            { chords: "Do", lyrics: "Está el Espíritu Santo corriendo …" },
+            { chords: "Sol", lyrics: "Está el amor de María corriendo …" },
+            { chords: "Re", lyrics: "Está el amor de la Iglesia corriendo …" }
+        ]
+    },
+    {
+        id: 215,
+        title: "215. Ah Que Tu No Sabes",
+        category: "Carismáticos",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "//Ah que tú no sabes" },
+            { chords: "La7", lyrics: "Lo que en Damasco pasó (3) //" },
+            { chords: "Sol", lyrics: "Fue el Espíritu Santo (3)" },
+            { chords: "Re", lyrics: "Lo que en Damasco se derramó//" },
+            { chords: "Re", lyrics: "//Ah que tú no sabes" },
+            { chords: "La7", lyrics: "Lo que en mi vida pasó (3) //" },
+            { chords: "Re", lyrics: "//Ah que tú no sabes" },
+            { chords: "La7", lyrics: "Lo que en la Iglesia pasó (3) //" }
+        ]
+    },
+    {
+        id: 216,
+        title: "216. Fiesta",
+        category: "Carismáticos",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Fiesta, fiesta, fiesta de fe" },
+            { chords: "Sol", lyrics: "Fiesta, fiesta, fiesta de amor (2)" },
+            { chords: "Fa", lyrics: "Aleluya, aleluya" },
+            { chords: "Sol Do", lyrics: "Este día al gran encuentro con Jesús." },
+            { chords: "Fa", lyrics: "Aleluya, cantaremos" },
+            { chords: "Sol Do", lyrics: "Este día al gran encuentro con Jesús." },
+            { chords: "Fa", lyrics: "Aleluya, bailaremos" },
+            { chords: "Sol Do", lyrics: "Este día al gran encuentro con Jesús." }
+        ]
+    },
+    {
+        id: 217,
+        title: "217. Los Hijos De Sion",
+        category: "Carismáticos",
+        tone: "Lam",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Lam", lyrics: "Los hijos de Sion, se gozan en su Rey" },
+            { chords: "Sol", lyrics: "Alaban su nombre con danzas." },
+            { chords: "Fa", lyrics: "Con panderos y arpas, Cantan alabanzas" },
+            { chords: "Mi7 Lam", lyrics: "Cantan alabanzas al Rey." },
+            { chords: "Sol Fa Mi7", lyrics: "Aleluya, aleluya, aleluya al Rey." },
+            { chords: "Lam", lyrics: "Alaben al Señor de todo corazón" },
+            { chords: "Sol", lyrics: "Con manos pies y cabezas." },
+            { chords: "Fa", lyrics: "Zapateando, aplaudiendo" },
+            { chords: "Mi7 Lam", lyrics: "Y también riendo. Alabemos a nuestro Rey." }
+        ]
+    },
+    {
+        id: 218,
+        title: "218. Te Alabaran",
+        category: "Alabanza",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Te alabaran oh Señor" },
+            { chords: "La7", lyrics: "Todos los reyes" },
+            { chords: "Sol", lyrics: "Todos los reyes de la tierra" },
+            { chords: "Re", lyrics: "Porque han oído los juicios de boca" },
+            { chords: "La7 Re", lyrics: "Caminaran los caminos del Señor (2)" },
+            { chords: "Sol", lyrics: "Porque la gloria del Señor es grande" },
+            { chords: "Re", lyrics: "Porque el Señor es excelso" },
+            { chords: "La7", lyrics: "En sus caminos" },
+            { chords: "Sol", lyrics: "Porque el Señor atiende al humilde" },
+            { chords: "La7 Re", lyrics: "Mas mira de lejos al altivo. (2)" }
+        ]
+    },
+    {
+        id: 219,
+        title: "219. Viva La Fe",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Viva la fe viva la esperanza viva el amor (3)" },
+            { chords: "Re", lyrics: "Que viva Cristo (2) que viva Él." },
+            { chords: "Sol", lyrics: "Que viva Cristo, que viva, que viva Cristo" },
+            { chords: "Re Sol", lyrics: "que viva, que viva Cristo, que viva Él (2)" }
+        ]
+    },
+    {
+        id: 220,
+        title: "220. Tengo Un Dios Alegre",
+        category: "Carismáticos",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Tengo un Dios alegre," },
+            { chords: "Sol", lyrics: "Mi Dios no es triste." },
+            { chords: "Fa", lyrics: "Mi Dios es muy feliz," },
+            { chords: "Sol Do", lyrics: "Feliz él quiere hacerme." },
+            { chords: "Fa", lyrics: "//Ahora todas las mujeres" },
+            { chords: "Sol Do", lyrics: "Expresaran su felicidad//" },
+            { chords: "Fa", lyrics: "Porque somos un pueblo alegre" },
+            { chords: "Sol Do", lyrics: "Que quiere caminar." },
+            { chords: "Fa", lyrics: "Ahora todas las mujeres" },
+            { chords: "Sol Do", lyrics: "Expresaran su felicidad." },
+            { chords: "Sol Do", lyrics: "Ahora todos los varones …" }
+        ]
+    },
+    {
+        id: 221,
+        title: "221. Ya Llegó",
+        category: "Espíritu Santo",
+        tone: "Mim",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Mim", lyrics: "Ya llegó, ya llegó," },
+            { chords: "Si7", lyrics: "El Espíritu Santo, ya llegó (2)" },
+            { chords: "Mim", lyrics: "Lo siento en mis manos," },
+            { chords: "Si7", lyrics: "Lo siento en mis pies" },
+            { chords: "Mim", lyrics: "Lo siento en mis alma" },
+            { chords: "Si7 Mim", lyrics: "Y en todo mi ser (2)" },
+            { chords: "Sol", lyrics: "Aquel que caminó, sobre las aguas (2)" },
+            { chords: "Re", lyrics: "Está aquí, está a mi lado (2)" },
+            { chords: "Mim", lyrics: "Como un fuego cayendo sobre mi (2)" },
+            { chords: "Si7 Mim", lyrics: "Me quema, me quema, me quema ¡ah! (4)" }
+        ]
+    },
+    {
+        id: 222,
+        title: "222. Señor Te Alabo",
+        category: "Alabanza",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Señor te alabo, Señor te alabo" },
+            { chords: "Re", lyrics: "Señor te alabo con todo mi ser. (2)" },
+            { chords: "Do", lyrics: "Hay que seguir orando, seguir orando," },
+            { chords: "Sol", lyrics: "Orando en la presencia del Señor." },
+            { chords: "Re", lyrics: "Hay que seguir cantando, seguir cantando," },
+            { chords: "Sol", lyrics: "Cantando en la presencia del Señor." },
+            { chords: "Do", lyrics: "Hay que seguir creyendo, seguir creyendo," },
+            { chords: "Re Sol", lyrics: "Creyendo en la presencia del Señor." }
+        ]
+    },
+    {
+        id: 223,
+        title: "223. En El Cielo Se Oye",
+        category: "Carismáticos",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Vamos a alabar al Señor" },
+            { chords: "La7", lyrics: "Con panderos y guitarras. (2)" },
+            { chords: "Sol", lyrics: "Porque en el cielo se oye" },
+            { chords: "Re", lyrics: "Lo que en la tierra se canta. (2)" },
+            { chords: "La7", lyrics: "Así, así, así se alaba a Dios." },
+            { chords: "Re", lyrics: "Cantando todos cantando (3) Así se alaba a Dios." },
+            { chords: "La7", lyrics: "Aplaudiendo todos aplaudiendo (3) Así se alaba a Dios." },
+            { chords: "Re", lyrics: "Saltando todos saltando (3) Así se alaba a Dios." },
+            { chords: "Sol", lyrics: "Cristo me dijo que luchara otra vez," },
+            { chords: "Re", lyrics: "Que luchara otra vez, Que luchara otra vez. (2)" },
+            { chords: "La7", lyrics: "Que no me desesperara Si no que tuviera fe. (2)" },
+            { chords: "Re", lyrics: "Y yo, y yo y yo le sigo alabando. (2)" },
+            { chords: "Sol", lyrics: "Nosotros no Señor, a ti es el que toca," },
+            { chords: "Re", lyrics: "Yo cantaré, lo que pongas en mi boca." },
+            { chords: "La7", lyrics: "Lo que pongas en mi boca, Lo que pongas en mi boca," },
+            { chords: "Re", lyrics: "Yo cantare, lo que pongas en mi boca." }
+        ]
+    },
+    {
+        id: 224,
+        title: "224. Mira Lo Que Hizo En Mi Jesús",
+        category: "Alabanza",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Mira lo que hizo en mi Jesús. (2)" },
+            { chords: "Sol", lyrics: "Me levanto y me liberó," },
+            { chords: "Do", lyrics: "Mira lo que hizo en mi Jesús." },
+            { chords: "Fa", lyrics: "Caminando con mi Cristo voy. (2)" },
+            { chords: "Sol", lyrics: "De prueba en prueba, victoria tras victoria," },
+            { chords: "Do", lyrics: "Caminando con mi Cristo voy." },
+            { chords: "Sol", lyrics: "El enemigo ya vencido está. (2)" },
+            { chords: "Fa", lyrics: "Jesús lo venció, muriendo en la cruz," },
+            { chords: "Sol Do", lyrics: "El enemigo ya vencido está." }
+        ]
+    },
+    {
+        id: 225,
+        title: "225. Este Gozo No Va A Pasar",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Este gozo no va a pasar. (3)" },
+            { chords: "Re", lyrics: "Porque está dentro de mi corazón." },
+            { chords: "Do", lyrics: "El fuego cae, cae, cae" },
+            { chords: "Re", lyrics: "Lo males salen, salen, salen" },
+            { chords: "Sol", lyrics: "Y el creyente alaba al Señor. (2)" },
+            { chords: "Re", lyrics: "Esta obra no va a parar. (3)" },
+            { chords: "Sol", lyrics: "Porque está dentro de mi corazón." }
+        ]
+    },
+    {
+        id: 226,
+        title: "226. Pentecostés",
+        category: "Espíritu Santo",
+        tone: "Lam",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Lam", lyrics: "Pentecostés, día de fiesta" },
+            { chords: "Sol", lyrics: "Pentecostés, día de gozo" },
+            { chords: "Fa", lyrics: "//Pentecostés, día de la Iglesia" },
+            { chords: "Mi7 Lam", lyrics: "De la Iglesia del Señor//" },
+            { chords: "Sol", lyrics: "Ya se derrama, ya se derrama" },
+            { chords: "Fa Mi7 Lam", lyrics: "Ya se derrama el Espíritu de Dios. (2)" },
+            { chords: "Sol", lyrics: "Ya se siente, ya se siente," },
+            { chords: "Fa Mi7 Lam", lyrics: "Ya se siente el Espíritu de Dios. (2)" },
+            { chords: "Sol Fa Mi7 Lam", lyrics: "Aleluya, aleluya Aleluya el Espíritu de Dios. (2)" }
+        ]
+    },
+    {
+        id: 227,
+        title: "227. Se Siente El Señor",
+        category: "Carismáticos",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Se siente aquí. (3) ¡El Señor!" },
+            { chords: "La7", lyrics: "El Espíritu de Dios se siente, ¡Gloria a Dios!" },
+            { chords: "Sol", lyrics: "Si los hijos de la tierra glorifican al Señor," },
+            { chords: "La7 Re", lyrics: "El Espíritu de Dios Se siente aquí." },
+            { chords: "La7 Re", lyrics: "Se goza aquí. (3) ¡El Señor!" }
+        ]
+    },
+    {
+        id: 228,
+        title: "228. No Es Con Espadas",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "No es con espadas, ni con ejércitos" },
+            { chords: "Re", lyrics: "Más con tu Santo Espíritu. (3)" },
+            { chords: "Do", lyrics: "Y esas almas se salvarán. (3)" },
+            { chords: "Sol", lyrics: "Con tu Santo Espíritu." }
+        ]
+    },
+    {
+        id: 229,
+        title: "229. Hay Un Gozo",
+        category: "Carismáticos",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Hay un gozo que no puedo parar (4)" },
+            { chords: "Sol", lyrics: "Es como un Rio de agua viva. (3)" },
+            { chords: "Fa Do", lyrics: "Que nace para vida y verdad." },
+            { chords: "Sol", lyrics: "Canta y baila. (9)" },
+            { chords: "Do", lyrics: "Salta y canta. (9)" }
+        ]
+    },
+    {
+        id: 230,
+        title: "230. Estamos De Fiesta",
+        category: "Alabanza",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Estamos de fiesta con Jesús" },
+            { chords: "Re", lyrics: "Y al Padre queremos ir" },
+            { chords: "Do", lyrics: "Y todos reunidos en la mesa" },
+            { chords: "Sol", lyrics: "Es Cristo quien va a servir. (2)" },
+            { chords: "Re", lyrics: "Poderoso es nuestro Dios. (4)" },
+            { chords: "Do", lyrics: "//Poderoso (3) Es nuestro Dios//" },
+            { chords: "Sol", lyrics: "Poderoso es nuestro Dios. (4)" }
+        ]
+    },
+    {
+        id: 231,
+        title: "231. Alábalo Que Vive",
+        category: "Alabanza",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Jesús es el Señor, ¡alábalo que vive!" },
+            { chords: "La7", lyrics: "Jesús es el maestro, ¡alábalo que vive!" },
+            { chords: "Sol", lyrics: "Alábalo, alábalo, alábalo que vive. (2)" },
+            { chords: "Re", lyrics: "Y padre del cielo, ¡alábalo que vive!" },
+            { chords: "La7", lyrics: "Al Hijo redentor, ¡alábalo que vive!" },
+            { chords: "Sol", lyrics: "Al Espíritu Santo, ¡alábalo que vive!" },
+            { chords: "Re", lyrics: "Nuestro consolador, ¡alábalo que vive!" }
+        ]
+    },
+    {
+        id: 232,
+        title: "232. Mira Que Lindo Se Ve",
+        category: "Carismáticos",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Mira qué lindo se ve El pueblo que alaba a Dios. (2)" },
+            { chords: "Sol", lyrics: "Así, así, así, así Así se alaba a Dios." },
+            { chords: "Fa", lyrics: "Y es que Cristo va para arriba" },
+            { chords: "Sol Do", lyrics: "Y el diablo va para abajo. (2)" }
+        ]
+    },
+    {
+        id: 233,
+        title: "233. Pasa Por Aquí",
+        category: "Espíritu Santo",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Pasa por aquí Señor, pasa por aquí. (2)" },
+            { chords: "Re", lyrics: "Oh Señor, pasa por aquí. (2)" },
+            { chords: "Do", lyrics: "Espíritu Santo, pasa por aquí. (2)" },
+            { chords: "Sol", lyrics: "Oh Señor, pasa por aquí. (2)" },
+            { chords: "Re", lyrics: "Lléname de ti Señor, lléname de ti. (2)" },
+            { chords: "Sol", lyrics: "Oh Señor, pasa por aquí. (2)" }
+        ]
+    },
+    {
+        id: 234,
+        title: "234. Mi Dios Está Vivo",
+        category: "Alabanza",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Mi Dios está vivo, Él no está muerto" },
+            { chords: "La7", lyrics: "Mi Dios está vivo, en mi corazón." },
+            { chords: "Sol", lyrics: "Mi Dios está vivo, ha Resucitado" },
+            { chords: "Re", lyrics: "Lo siento en mis manos, Lo siento en mis pies," },
+            { chords: "La7 Re", lyrics: "Lo siento en mi alma y en mi ser." },
+            { chords: "Sol", lyrics: "Oh, oh, oh, oh hay que nacer del agua" },
+            { chords: "Re", lyrics: "Oh, oh, oh, oh hay que nacer Del Espíritu de Dios." },
+            { chords: "Sol", lyrics: "Oh, oh, oh, oh hay que nacer del agua Y del Espíritu, de Dios" },
+            { chords: "La7 Re", lyrics: "Hay que nacer del Señor. (2)" },
+            { chords: "Sol", lyrics: "Prepárate para que sientas (3) El Espíritu de Dios." },
+            { chords: "La7 Re", lyrics: "Déjalo que se mueva (3) Dentro de tu corazón." }
+        ]
+    },
+    {
+        id: 235,
+        title: "235. Yo Tengo Un Gozo En El Alma",
+        category: "Carismáticos",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Yo tengo un gozo en el alma, ¡Grande! (3)" },
+            { chords: "Sol", lyrics: "Y en mi ser, aleluya, gloria a Dios." },
+            { chords: "Fa", lyrics: "Es como un rio de agua viva, ¡Viva! (3) En mi ser." },
+            { chords: "Sol", lyrics: "Ama a tu hermano y alaba a tu señor. (2)" },
+            { chords: "Do", lyrics: "Da gloria a Dios, Gloria a Dios, gloria a Él," },
+            { chords: "Sol Do", lyrics: "Ama a tu hermano y alaba a tu Señor." },
+            { chords: "Sol", lyrics: "No te avergüences y alaba a tu Señor. (2)" },
+            { chords: "Do", lyrics: "Da gloria a Dios, Gloria a Dios, gloria a Él," },
+            { chords: "Sol Do", lyrics: "No te avergüences y alaba a tu Señor." },
+            { chords: "Sol", lyrics: "Ama a María y alaba a tu Señor. (2)" },
+            { chords: "Do", lyrics: "Da gloria a Dios, Gloria a Dios, gloria a Él," },
+            { chords: "Sol Do", lyrics: "Ama a María y alaba a tu Señor." }
+        ]
+    },
+    {
+        id: 236,
+        title: "236. Fuego De Dios",
+        category: "Espíritu Santo",
+        tone: "Lam",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Lam", lyrics: "Fuego de Dios, espíritu de amor De fuerza y alegría," },
+            { chords: "Sol", lyrics: "Guíanos tú, en la comunidad, Danos tu luz y vida." },
+            { chords: "Fa", lyrics: "Tu junto al padre estas Señor, ¡Ven Señor!" },
+            { chords: "Mi7", lyrics: "Ven pronto espíritu de amor, ¡Ven Señor!" },
+            { chords: "Lam", lyrics: "El cielo brilla con tu luz, ¡Ven Señor!" },
+            { chords: "Sol", lyrics: "El mundo vive por tu amor, ¡Ven Señor!" },
+            { chords: "Fa", lyrics: "Mi corazón te busca a Ti, ¡Ven Señor!" },
+            { chords: "Mi7 Lam", lyrics: "Tu fuego me transformará, ¡Ven Señor!" },
+            { chords: "Sol", lyrics: "Y cuando tiemblo ante el dolor, ¡Ven Señor!" },
+            { chords: "Fa", lyrics: "Tú, Espíritu me das valor, ¡Ven Señor!" },
+            { chords: "Mi7 Lam", lyrics: "En tu verdad yo marcharé, ¡Ven Señor! De ti no me avergonzaré, ¡Ven Señor! En Ti, yo me alegraré, ¡Ven Señor! Contigo yo caminaré, ¡Ven Señor!" }
+        ]
+    },
+    {
+        id: 237,
+        title: "237. Padre Abraham",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Muchos hijos tuvo el padre Abraham" },
+            { chords: "Re", lyrics: "Padre Abraham tuvo muchos hijos," },
+            { chords: "Do", lyrics: "Yo soy uno, tú también" },
+            { chords: "Sol", lyrics: "Alabemos juntos al Señor." },
+            { chords: "Re", lyrics: "Mano derecha, mano izquierda. Pie derecho, pie izquierdo. Media vuelta, vuelta entera." }
+        ]
+    },
+    {
+        id: 238,
+        title: "238. Yo Vine A Alabar A Dios",
+        category: "Alabanza",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Yo no sé lo que has venido Pero yo vine a alabar a Dios. (2)" },
+            { chords: "La7", lyrics: "Yo vine, yo vine, yo vine alabar a Dios. (2)" },
+            { chords: "Sol", lyrics: "Y los hombres, a que han venido …" },
+            { chords: "Re", lyrics: "Y las mujeres, a que han venido …" },
+            { chords: "La7 Re", lyrics: "Y los cristianos, a que han venido …" }
+        ]
+    },
+    {
+        id: 239,
+        title: "239. Deja Que Te Toque El Señor",
+        category: "Espíritu Santo",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "//Deja que te toque el Señor. (2)" },
+            { chords: "Re", lyrics: "Deja que el Espíritu Santo" },
+            { chords: "Do Sol", lyrics: "Cambie tu vida por una mejor//" },
+            { chords: "Re", lyrics: "//Solamente alábale. (3) Con el corazón. //" },
+            { chords: "Sol", lyrics: "Que te toque, que te toque, Que te toque. (3) El Espíritu de Dios." }
+        ]
+    },
+    {
+        id: 240,
+        title: "240. Hay Una Promesa En La Biblia",
+        category: "Carismáticos",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Hay una promesa en la biblia, Que es para ti, que es para mí. (2)" },
+            { chords: "Sol", lyrics: "Cielo nuevo, tierra nueva Donde iremos a vivir. (2)" },
+            { chords: "Fa", lyrics: "Saltando, hermanos saltando. (3) Como corderos de la Manada." },
+            { chords: "Sol Do", lyrics: "Así (3) así se alaba a Dios. Pero que lindo que es. ¡El pueblo de Dios!" },
+            { chords: "Sol", lyrics: "Maravilloso se ve. ¡El pueblo de Dios! Pero que chévere que es. ¡El pueblo de Dios!" },
+            { chords: "Fa Sol Do", lyrics: "Y dando la media vueltita. (3) La vuelta de la victoria." }
+        ]
+    },
+    {
+        id: 241,
+        title: "241. La Alfarería",
+        category: "Carismáticos",
+        tone: "Lam",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Lam", lyrics: "Las mujeres tienen que entrar En la alfarería de Dios. (2)" },
+            { chords: "Sol", lyrics: "Bajar como un vaso, viejo y quebrado Subir como un vaso nuevo. (2)" },
+            { chords: "Fa", lyrics: "Los hombres tienen que entrar En la alfarería de Dios. (2)" },
+            { chords: "Mi7", lyrics: "María Reina tienen que entrar En la alfarería de Dios. (2)" },
+            { chords: "Lam", lyrics: "Pompeya tienen que entrar En la alfarería de Dios. (2) El mar tiene que entrar En la alfarería de Dios. (2) La Sede tienen que entrar En la alfarería de Dios. (2)" }
+        ]
+    },
+    {
+        id: 242,
+        title: "242. Santo Es El Señor",
+        category: "Alabanza",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Mientras tenga yo una voz para cantar Al Señor elevo mi canción." },
+            { chords: "Re", lyrics: "Al nacer el sol y al anochecer Al Señor por siempre alabaré." },
+            { chords: "Do", lyrics: "Santo es el Señor, aleluya, Hace maravillas en el mundo hoy;" },
+            { chords: "Sol", lyrics: "Me dio nueva vida, aleluya, Construyendo el reino de Él estoy." },
+            { chords: "Re", lyrics: "¿Quieres tú también alabar a nuestro Dios? Ven, acude pronto, hermano, aquí." },
+            { chords: "Do Sol", lyrics: "Acepta a Jesús como único Señor, Déjalo que te transforme a ti. Todos juntos hoy, convertidos al Señor Cantemos con gozo y con paz. Por su Santo Espíritu sigamos sin temor Buscando y sembrando la verdad." }
+        ]
+    },
+    {
+        id: 243,
+        title: "243. Si Empezamos A Cantar",
+        category: "Carismáticos",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Si empezamos a cantar Este lugar tiembla," },
+            { chords: "La7", lyrics: "Si empezamos a orar Hablaremos en lenguas. (2)" },
+            { chords: "Sol", lyrics: "Elías oró y el fuego cayó Oró Josué y el sol se paró." },
+            { chords: "Re", lyrics: "Jesús lloró y al morir se entregó Y al tercer día, Dios lo resucitó." },
+            { chords: "La7 Re", lyrics: "Oró la iglesia y su marcha emprendió Oremos todos, nos bendice el Señor." }
+        ]
+    },
+    {
+        id: 244,
+        title: "244. No Sabéis, No Sabéis",
+        category: "Carismáticos",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "No sabéis, no sabéis que somos templo (3)" },
+            { chords: "Sol", lyrics: "Que somos templo del Espíritu de Dios." },
+            { chords: "Fa", lyrics: "Llenos de poder, Llenos de gloria y alabanza. (3)" },
+            { chords: "Sol Do", lyrics: "Que somos templo del Espíritu de Dios." }
+        ]
+    },
+    {
+        id: 245,
+        title: "245. Caminando Voy",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Caminando voy para Canaán. (3) Gloria a Dios, caminando voy para Canaán." },
+            { chords: "Re", lyrics: "Si tu no vas, no me impidas a mí. (3) Gloria a Dios, caminando voy para Canaán." },
+            { chords: "Sol", lyrics: "Al venir Jesús, yo me voy con Él. (3) Gloria a Dios, caminando voy para Canaán." }
+        ]
+    },
+    {
+        id: 246,
+        title: "246. Yo Pensaba",
+        category: "Alabanza",
+        tone: "Lam",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Lam", lyrics: "Yo pensaba que el hombre era grande por su poder," },
+            { chords: "Sol", lyrics: "grande por su saber, grande por su valor." },
+            { chords: "Fa", lyrics: "Yo pensaba que el hombre era grande y me equivoqué," },
+            { chords: "Mi7 Lam", lyrics: "pues grande es solo Dios." },
+            { chords: "Sol", lyrics: "Sube hasta el cielo y lo verás Que pequeñito el mundo es Sube hasta el cielo y lo verás." },
+            { chords: "Fa", lyrics: "Como un juguete de Cristal Que con cariño hay que cuidar, Sube hasta el cielo y lo verás." },
+            { chords: "Mi7 Lam", lyrics: "Muchas veces el hombre pensaba Ser como Dios, creía ser como Dios, Soñaba ser como Dios. Muchas veces el hombre soñaba Y despertó, pues grande es solo Dios." }
+        ]
+    },
+    {
+        id: 247,
+        title: "247. Cuando Cristo Venga",
+        category: "Carismáticos",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Cuando Cristo venga en gloria, Yo no me voy a quedar. (2)" },
+            { chords: "La7", lyrics: "Seremos levantados con poder. (3) Para la nueva Jerusalén." },
+            { chords: "Sol", lyrics: "Ahí que tú te vas ahí que yo también (3) Para la nueva Jerusalén." },
+            { chords: "Re", lyrics: "Hay un fuego que me está quemando Es el Espíritu Santo que está bautizando. (2)" },
+            { chords: "La7 Re", lyrics: "Aquí se canta, aquí se ora Se alaba a Cristo a toda hora. (2)" }
+        ]
+    },
+    {
+        id: 248,
+        title: "248. No Lo Hay",
+        category: "Alabanza",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "No hay un Dios tan grande como tú //No lo hay, no lo hay//" },
+            { chords: "Re Sol", lyrics: "No hay un Dios que pueda hacer las cosas Como las que haces tú. (2)" }
+        ]
+    },
+    {
+        id: 249,
+        title: "249. Hoy He Venido",
+        category: "Alabanza",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Hoy he venido para cantarle a mi Señor" },
+            { chords: "Sol", lyrics: "Quiero alabarle y darle gracias por su amor. (2)" },
+            { chords: "Fa", lyrics: "//Canta (3) baila (3) Como lo hacía el Rey David//" },
+            { chords: "Sol Do", lyrics: "Mueve tu cuerpo todo tu espíritu para Él, Grítale fuerte (2) te escuchará." }
+        ]
+    },
+    {
+        id: 250,
+        title: "250. Alzad Las Manos",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Alzad las manos y dale la gloria a Dios (2)" },
+            { chords: "Re", lyrics: "Alzad las manos Y alabadle como niños del Señor." },
+            { chords: "Do", lyrics: "Dios dijo a Noé, Construye una barca. (2) Y hazla toda ella de madera, Como niños del Señor." },
+            { chords: "Sol", lyrics: "Los animalitos, Subieron de dos en dos (2) Los pajaritos y también Los canguritos, del Señor." },
+            { chords: "Re", lyrics: "Los animalitos, subieron de dos en dos (2) Los elefantes y también Los pingüinitos, del Señor." },
+            { chords: "Sol", lyrics: "Si tú vas al cielo, primero que yo. (2) Dile a todos esos angelitos, Que también yo iré." }
+        ]
+    },
+    {
+        id: 251,
+        title: "251. El Amor De Dios",
+        category: "Alabanza",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "El amor de Dios es maravilloso. (3) Que grande es el amor de Dios." },
+            { chords: "La7", lyrics: "Tan alto que no puedo estar arriba de él," },
+            { chords: "Sol", lyrics: "Tan bajo que no puedo estar debajo de él," },
+            { chords: "Re", lyrics: "Tan ancho que no puedo estar afuera de él. Que grande es el amor de Dios." }
+        ]
+    },
+    {
+        id: 252,
+        title: "252. Alabaré A Mi Señor",
+        category: "Alabanza",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "//Alabaré, alabaré. (2) Alabaré a mi Señor//" },
+            { chords: "Sol", lyrics: "Juan vio el número, de los redimidos Y todos alababan al Señor." },
+            { chords: "Fa", lyrics: "Unos oraban, otros cantaban Y todos alababan al Señor." },
+            { chords: "Sol Do", lyrics: "Todos unidos juntos cantemos Glorias y alabanzas al Señor. Gloria al Padre, gloria al Hijo Gloria al Espíritu de amor." }
+        ]
+    },
+    {
+        id: 253,
+        title: "253. Vamos Cantando",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Vamos cantando Hasta que baje su poder. Señor. (2) Dad gloria a Él, dad gloria a Él. Vamos cantando hasta que baje su poder." },
+            { chords: "Re", lyrics: "Vamos bailando Hasta que baje su poder. Señor. (2) Dad gloria a Él, dad gloria a Él. Vamos bailando hasta que baje su poder." },
+            { chords: "Do Sol", lyrics: "Alza tus manos Y alaba a tu Señor. Jesús. (2) Dad gloria a Él, dad gloria a Él. Alza tus manos y alaba a tu Señor." }
+        ]
+    },
+    {
+        id: 254,
+        title: "254. Si La Duda Llega",
+        category: "Carismáticos",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Si la duda llega a tu corazón Y te dice “déjame entrar” (2)" },
+            { chords: "Sol", lyrics: "Dile no, no, no Cristo vive en mi Y no hay lugar para ti. (2)" },
+            { chords: "Fa", lyrics: "Si el pecado … Si el orgullo" },
+            { chords: "Do", lyrics: "Si el amor llega a tu corazón Y te dice “déjame entrar” (2)" },
+            { chords: "Sol Do", lyrics: "Dile si, si, si Cristo vive en mi Y no hay lugar para ti. (2) Si la paz … Si la alegría …" }
+        ]
+    },
+    {
+        id: 255,
+        title: "255. Hey, Me Siento Feliz",
+        category: "Alabanza",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Hey me siento feliz, sí Cristo está en mí, me llena de amor. (2)" },
+            { chords: "La7", lyrics: "Canto, canto, canto Porque me llena de gozo. (2)" },
+            { chords: "Sol", lyrics: "Cristo es el camino La verdad y la vida. (2)" },
+            { chords: "Re", lyrics: "El que tiene a Cristo Tiene la vida eterna. (2)" }
+        ]
+    },
+    {
+        id: 256,
+        title: "256. Yo Se Que Cristo Viene",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "//Pa’rriba (3) y no pa’bajo. Subiendo, subiendo Subiendo y no bajando//" },
+            { chords: "Re", lyrics: "Yo sé que Cristo viene Y espero su venida. (2) El que esté preparado, Con Él se va pa’rriba. (2)" },
+            { chords: "Do", lyrics: "Mi alma volará, mi alma volará Al son de las trompetas, mi alma volará. (2)" },
+            { chords: "Sol", lyrics: "Jesús desde una nube su pueblo ha levantado. (2) el que no esté sellado con Él no va pa’rriba. (2) //Baja el rio (3) baja el Jordán// Te voy a decir lo que va a pasar Si tu hermano, bajas al Jordán, Ahí está Jesús y también está Juan Y uno de ellos dos te va a salvar." }
+        ]
+    },
+    {
+        id: 257,
+        title: "257. Semana De Gozo",
+        category: "Carismáticos",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Yo me gozo el lunes, yo me gozo el martes Yo me gozo el miércoles. Yo me gozo el jueves, Yo me gozo el viernes, sábado también." },
+            { chords: "Sol", lyrics: "Al llegar domingo, sigo con el gozo No sé qué me pasa. Es que tengo a Cristo Que me da la dicha de gozarme en Él." },
+            { chords: "Fa", lyrics: "Fuego, fuego, la iglesia pide fuego. (2) Hermano querido, pídelo tú también. (2)" },
+            { chords: "Sol Do", lyrics: "Porque Cristo viene A llevar su iglesia a morar con Él. (2)" }
+        ]
+    },
+    {
+        id: 258,
+        title: "258. Yo Edifique Una Casa",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Yo edifique una casa. (2) Sobre la roca edifiqué." },
+            { chords: "Re", lyrics: "Y era Cristo la roca. (2) Sobre la que yo edifiqué." },
+            { chords: "Do", lyrics: "Y esa casa no se cae, Porque está sobre la roca. (2)" },
+            { chords: "Sol", lyrics: "Paséate nazareno, Nazareno paséate. (2) ¿Cómo se le alaba? ¡Con poder! ¿Cómo se bendice? ¡Con poder! ¿Quién es el que vive? ¡Cristo! ¿Y a su nombre? ¡Gloria!" }
+        ]
+    },
+    {
+        id: 259,
+        title: "259. Este Es El Pueblo",
+        category: "Carismáticos",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Este es el pueblo que alaba al Señor. (2)" },
+            { chords: "La7", lyrics: "Este es el pueblo que tiene gozo, Que tiene fe y alaba al Señor. (2)" },
+            { chords: "Sol", lyrics: "La mano arriba, la mano abajo Moviéndola de lado a lado. (2) El pie … Cabeza …" }
+        ]
+    },
+    {
+        id: 260,
+        title: "260. Jesucristo Me Dijo",
+        category: "Carismáticos",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "Jesucristo me dijo que me vaya A la derecha (3)" },
+            { chords: "Sol", lyrics: "Jesucristo me dijo que me vaya A la izquierda (3)" },
+            { chords: "Fa", lyrics: "Jesucristo me dijo que me vaya Pa’delante, voy pa’delante, voy pa allá Jesucristo me dijo que me vaya atrás Me voy pa’atrás, me voy pa’atrás." },
+            { chords: "Sol Do", lyrics: "//Arriba, abajo, a la derecha, A la izquierda, media vuelta, Saltando todos con María vamos alabando//" }
+        ]
+    },
+    {
+        id: 261,
+        title: "261. Tenemos Tanto",
+        category: "Alabanza",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Tenemos tanto(10) para estar agradecidos." },
+            { chords: "Re", lyrics: "Tenemos al Padre, tenemos al Hijo Tenemos al Espíritu, para estar agradecidos." },
+            { chords: "Do", lyrics: "Tenemos a la Iglesia, tenemos al papa, Tenemos al obispo, para estar agradecidos." },
+            { chords: "Sol", lyrics: "Tenemos a María, tenemos su presencia Tenemos su alegría, para estar agradecidos." }
+        ]
+    },
+    {
+        id: 262,
+        title: "262. Se Mueve La Mano De Dios",
+        category: "Carismáticos",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Se mueve la mano de Dios, Y su palabra es vida. (2) Se mueve, se mueve Se mueve con poder. (2) Con poder (4)" },
+            { chords: "La7", lyrics: "¿Quién vive? ¡Cristo! ¿Quién salva? ¡Cristo! ¿Libera? ¡Cristo! ¿Renueva? ¡Cristo! Su nombre, ¡Gloria! (3) Su nombre más gloria." },
+            { chords: "Sol", lyrics: "Alabandole, alabándole, Alabándole, alabándole. (2) Y con María es más fácil caminar, Y con María es más fácil caminar. (2)" },
+            { chords: "Re", lyrics: "Y con mi hermano es más fácil caminar, Y con mi hermano es más fácil caminar. (2) Y con Jesús es más fácil caminar, Y con Jesús es más fácil caminar. (2) Y con la Iglesia es más fácil caminar, Y con la Iglesia es más fácil caminar. (2)" }
+        ]
+    },
+    {
+        id: 263,
+        title: "263. Él Tiene El Poder",
+        category: "Carismáticos",
+        tone: "Lam",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Lam", lyrics: "Él tiene el poder, Él tiene el poder Él es el León de la tribu de Judá." },
+            { chords: "Sol", lyrics: "Él tiene el poder, Él tiene el poder Nos ayudará a vencer, Él tiene el poder." },
+            { chords: "Fa", lyrics: "//La dulce presencia de Dios Está aquí en este lugar, Cristo de la gloria vino Y nos quiere bautizar//" },
+            { chords: "Mi7 Lam", lyrics: "//Deja que te toque el Señor (3) Te de su gracia y su bendición Deja que el Espíritu Santo Cambie tu vida por una mejor// Recibe, recibe, recibe el poder de lo alto Y déjate bautizar por el Espíritu Santo. (2)" }
+        ]
+    },
+    {
+        id: 264,
+        title: "264. No Puede Estar triste el Corazón",
+        category: "Alabanza",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "No puede estar triste el corazón Que alaba a Cristo." },
+            { chords: "Re", lyrics: "No puede estar triste el corazón Que alaba a Dios. (Bis)" },
+            { chords: "Do", lyrics: "Por eso yo canto Yo canto Aleluya," },
+            { chords: "Sol", lyrics: "No puede estar triste el corazón Que alaba a Dios. (Bis)" }
+        ]
+    },
+    {
+        id: 265,
+        title: "265. Ven Espíritu Divino",
+        category: "Espíritu Santo",
+        tone: "Lam",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Lam", lyrics: "Ven (3) Espíritu Divino Ven (3) y quédate aquí. (Bis)" },
+            { chords: "Sol", lyrics: "Apodérate, apodérate, Apodérate de todo mi ser. (Bis)" },
+            { chords: "Fa", lyrics: "Aquí se siente la presencia de Dios. (Bis) Siente el fuego Del Espíritu Santo. (Bis)" },
+            { chords: "Mi7 Lam", lyrics: "Siento gozo, siento paz siento el amor que mi Dios me da. (Bis) Aquí se siente la presencia de Dios. (Bis)" }
+        ]
+    },
+    {
+        id: 266,
+        title: "266. David danzaba",
+        category: "Carismáticos",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "David (5) danzaba. (Bis) Y su esposa, se enojaba ¿Por qué?" },
+            { chords: "La7 Re", lyrics: "Porque (5) danzaba. (Bis)" }
+        ]
+    },
+    {
+        id: 267,
+        title: "267. Cuando el pueblo alaba a Dios",
+        category: "Carismáticos",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Cuando el pueblo alaba a Dios Suceden cosas (2) maravillosas. (Bis)" },
+            { chords: "Re", lyrics: "Hay sanación, liberación Y se siente la bendición. (Bis)" },
+            { chords: "Do", lyrics: "Cuando alabamos al Señor Suceden cosas (2) maravillosas. (Bis)" },
+            { chords: "Sol", lyrics: "Hay Santidad, fraternidad Y se siente la libertad." }
+        ]
+    },
+    {
+        id: 268,
+        title: "268. En el principio",
+        category: "Espíritu Santo",
+        tone: "Do",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do", lyrics: "En el principio el Espíritu de Dios Aleteaba sobre las aguas. (Bis)" },
+            { chords: "Sol", lyrics: "Pero ahora, se está moviendo Se está moviendo dentro De mi corazón. (Bis)" }
+        ]
+    },
+    {
+        id: 269,
+        title: "269. Los que esperan",
+        category: "Alabanza",
+        tone: "Re",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re", lyrics: "Los que esperan (2) en Jesús. (Bis) Como las águilas, como las águilas" },
+            { chords: "La7", lyrics: "Sus alas levantarán. (Bis) Caminarán y no se cansarán" },
+            { chords: "Sol", lyrics: "Y correrán, no se fatigarán. Nueva vida tendrán (2)" },
+            { chords: "Re", lyrics: "Los que esperan (2) en Jesús. (Bis)" }
+        ]
+    },
+    {
+        id: 270,
+        title: "270. Jesús lloró",
+        category: "Carismáticos",
+        tone: "Lam",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Lam", lyrics: "Jesús lloró Entrando en Jerusalén (2) Jesús lloró. (Bis)" },
+            { chords: "Sol", lyrics: "El vino, para los judíos No lo recibieron, ahora es mío (Bis)" },
+            { chords: "Fa", lyrics: "Que bueno (2) que ahora es mío Jesús es mío. (Bis)" },
+            { chords: "Mi7", lyrics: "Ayer estuvimos de fiesta Y esta noche (día) también. (Bis) Sentía que bajaba, El espíritu Santo. (Bis) Pero me está, me está quemando. (Bis) Canta y baila, Gózate en las promesas. (Bis) Joel lo profetizó Y Cristo lo confirmó. (Bis) Este poder, se derramará (4). (Bis)" }
+        ]
+    },
+    {
+        id: 271,
+        title: "271. No, no pasará",
+        category: "Alabanza",
+        tone: "Sol",
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "Santo (3) los cielos te proclaman, Santo (3) es nuestro Rey Yahvé." },
+            { chords: "Re", lyrics: "Santo (3) es el que nos redime. Porque mi Dios es Santo La tierra llena de su gloria es. (Bis)" },
+            { chords: "Do", lyrics: "Cielo y tierra pasarán, Más tus palabras no pasarán. (Bis) No (5) no pasarán. (Bis)" },
+            { chords: "Sol", lyrics: "Bendito el que viene en nombre del Señor, La gloria a Jesucristo El Hijo de David. Hosanna en las alturas A nuestro Salvador. Bendito el que viene En nombre del Señor. (Bis)" }
+        ]
+    }
+];
+
+let currentFilter = 'todos';
+let currentLetter = 'todos';
+let selectedSongId = null;
+let currentTransposeOffset = 0;
+let chordsVisible = true;
+
+const spanishChromaticScale = ["Do", "Do#", "Re", "Re#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"];
+const spanishFlatScale = ["Do", "Reb", "Re", "Mib", "Mi", "Fa", "Solb", "Sol", "Lab", "La", "Sib", "Si"];
+
+function initAlphabet() {
+    const grid = document.getElementById('alphabetGrid');
+    grid.innerHTML = '';
+    
+    const allBtn = document.createElement('button');
+    allBtn.className = 'letter-btn btn-todos active';
+    allBtn.id = 'btnLetterTodos';
+    allBtn.innerText = 'Todos';
+    allBtn.onclick = () => setLetter('todos', allBtn);
+    grid.appendChild(allBtn);
+
+    const alphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split('');
+    alphabet.forEach(letter => {
+        const btn = document.createElement('button');
+        btn.className = 'letter-btn';
+        btn.innerText = letter;
+        btn.onclick = () => setLetter(letter, btn);
+        grid.appendChild(btn);
+    });
+}
+
+function customAlert(msg) {
+    const box = document.createElement('div');
+    box.style.cssText = 'position:fixed; top:20px; right:20px; background:var(--bg-card); color:var(--text-main); border:1px solid var(--accent); padding:12px 20px; border-radius:8px; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.3); font-size:13px;';
+    box.innerText = msg;
+    document.body.appendChild(box);
+    setTimeout(() => box.remove(), 3000);
+}
+
+function changeTheme(themeName) {
+    document.documentElement.setAttribute('data-theme', themeName);
+}
+
+function renderSongList(filteredSongs) {
+    const listContainer = document.getElementById('songListContainer');
+    listContainer.innerHTML = '';
+    
+    if (filteredSongs.length === 0) {
+        listContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted); font-size: 13px;">No se encontraron cantos</div>';
+        return;
+    }
+
+    filteredSongs.forEach(song => {
+        const item = document.createElement('div');
+        item.className = 'song-item' + (selectedSongId === song.id ? ' selected' : '');
+        item.onclick = () => selectSong(song.id, item);
+        item.innerHTML = `
+            <div class="song-item-title">${song.title}</div>
+            <div class="song-item-meta">
+                <span class="badge-cat">${song.category}</span>
+                <span class="badge-tone">Tono: ${song.tone}</span>
+            </div>
+        `;
+        listContainer.appendChild(item);
+    });
+    
+    document.getElementById('countDisplay').innerText = `${filteredSongs.length} cantos`;
+}
+
+function setFilter(category, element) {
+    currentFilter = category;
+    document.querySelectorAll('.filters-section .tag').forEach(t => t.classList.remove('active'));
+    element.classList.add('active');
+    filterSongs();
+}
+
+function setLetter(letter, element) {
+    currentLetter = letter;
+    document.querySelectorAll('.alphabet-grid .letter-btn').forEach(b => b.classList.remove('active'));
+    element.classList.add('active');
+    filterSongs();
+}
+
+function filterSongs() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = songs.filter(song => {
+        const matchesCategory = currentFilter === 'todos' || song.category.toLowerCase() === currentFilter.toLowerCase();
+        const cleanTitle = song.title.replace(/^\d+[\.\-\s]*/, '').trim().toUpperCase();
+        const matchesLetter = currentLetter === 'todos' || cleanTitle.startsWith(currentLetter.toUpperCase());
+        const fullText = song.title + ' ' + song.lines.map(l => l.chords + ' ' + l.lyrics).join(' ');
+        const matchesQuery = fullText.toLowerCase().includes(query);
+        return matchesCategory && matchesLetter && matchesQuery;
+    });
+    renderSongList(filtered);
+}
+
+function getSpanishNoteIndex(noteStr) {
+    if (!noteStr) return 0;
+    let clean = noteStr.charAt(0).toUpperCase() + noteStr.slice(1).toLowerCase();
+    let idx = spanishChromaticScale.indexOf(clean);
+    if (idx !== -1) return idx;
+    idx = spanishFlatScale.indexOf(clean);
+    if (idx !== -1) return idx;
+    return 0;
+}
+
+function transposeSpanishChord(chord, semitones) {
+    const match = chord.match(/^(Do|Re|Mi|Fa|Sol|La|Si)([#b]?)(.*)$/i);
+    if (!match) return chord;
+    
+    let baseNote = match[1].charAt(0).toUpperCase() + match[1].slice(1).toLowerCase() + match[2];
+    let suffix = match[3];
+    
+    let baseIdx = getSpanishNoteIndex(baseNote);
+    let newIdx = (baseIdx + semitones + 12) % 12;
+    let newRoot = spanishChromaticScale[newIdx];
+    
+    return newRoot + suffix;
+}
+
+function transposeLineChords(chordLine, semitones) {
+    if (!chordLine) return '';
+    return chordLine.replace(/(Do|Re|Mi|Fa|Sol|La|Si)[#b]?[a-zA-Z0-9]*/gi, (match) => {
+        return transposeSpanishChord(match, semitones);
+    });
+}
+
+function selectSong(id, itemElement) {
+    selectedSongId = id;
+    currentTransposeOffset = 0;
+    
+    document.querySelectorAll('.song-item').forEach(el => el.classList.remove('selected'));
+    if (itemElement) {
+        itemElement.classList.add('selected');
+    } else {
+        const items = document.querySelectorAll('.song-item');
+        items.forEach(it => {
+            if (it.innerHTML.includes(songs.find(s=>s.id===id)?.title)) {
+                it.classList.add('selected');
+            }
+        });
+    }
+    
+    const song = songs.find(s => s.id === id);
+    if (!song) return;
+    
+    renderSongView(song);
+}
+
+function toggleChords() {
+    chordsVisible = !chordsVisible;
+    const chordElements = document.querySelectorAll('.chord-line');
+    const toggleBtn = document.getElementById('toggleChordsBtn');
+    
+    chordElements.forEach(el => {
+        if (chordsVisible) {
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
+    });
+    
+    if (toggleBtn) {
+        toggleBtn.innerText = chordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+    }
+}
+
+function renderSongView(song) {
+    const contentPanel = document.getElementById('contentPanel');
+    let displayedTone = transposeSpanishChord(song.tone, currentTransposeOffset);
+
+    let lyricsHTML = '';
+    song.lines.forEach(line => {
+        let displayChords = transposeLineChords(line.chords, currentTransposeOffset);
+        let hiddenClass = chordsVisible ? '' : ' hidden';
+        lyricsHTML += `
+            <div class="song-line">
+                <div class="chord-line${hiddenClass}">${displayChords}</div>
+                <div class="lyric-line">${line.lyrics}</div>
+            </div>
+        `;
+    });
+
+    let baseOriginalIdx = getSpanishNoteIndex(song.tone);
+    let optionsHTML = '';
+    
+    for (let i = 0; i < 12; i++) {
+        let targetOffset = (i - baseOriginalIdx + 12) % 12;
+        let noteName = spanishChromaticScale[i];
+        let label = (targetOffset === 0) ? `Tono original (${noteName})` : `Transportar a ${noteName}`;
+        let selectedAttr = (targetOffset === currentTransposeOffset) ? 'selected' : '';
+        optionsHTML += `<option value="${targetOffset}" ${selectedAttr}>${label}</option>`;
+    }
+
+    let ytEmbedHtml = '';
+    if (song.youtube) {
+        let ytId = extractYoutubeId(song.youtube);
+        if (ytId) {
+            ytEmbedHtml = `<iframe class="youtube-embed" src="https://www.youtube.com/embed/${ytId}" frameborder="0" allowfullscreen></iframe>`;
+        } else {
+            ytEmbedHtml = `<a href="${song.youtube}" target="_blank" class="btn">🔗 Ver video en YouTube</a>`;
+        }
+    }
+
+    let audioHtml = '';
+    if (song.audio) {
+        audioHtml = `<audio controls><source src="${song.audio}" type="audio/mpeg">Tu navegador no soporta audio.</audio>`;
+    }
+
+    let mediaSectionHTML = '';
+    if (song.youtube || song.audio) {
+        mediaSectionHTML = `
+            <div class="media-section">
+                <div style="font-size: 13px; font-weight: bold; color: var(--accent);">Multimedia / Referencia:</div>
+                <div class="media-container">
+                    ${ytEmbedHtml}
+                    ${audioHtml}
+                </div>
+            </div>
+        `;
+    }
+
+    let toggleBtnText = chordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+
+    contentPanel.innerHTML = `
+        <div class="song-display">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h2 style="margin:0; border:none; padding:0;">${song.title}</h2>
+                <div class="transposer-toolbar">
+                    <span>Tono: <strong>${displayedTone}</strong></span>
+                    <label>Nota:</label>
+                    <select id="transposeSelect" onchange="changeTranspose(this.value)">
+                        ${optionsHTML}
+                    </select>
+                    <button class="btn" id="toggleChordsBtn" style="padding: 5px 10px; font-size: 12px;" onclick="toggleChords()">${toggleBtnText}</button>
+                    <button class="btn" style="padding: 5px 10px; font-size: 12px;" onclick="openSongModal(${song.id})">✏️ Editar</button>
+                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;" onclick="openFullscreenWindow()">🖨️ Proyectar</button>
+                </div>
+            </div>
+            <div class="nav-menu-bar">
+                <span>Categoría: ${song.category}</span>
+                <span>Tono Original: ${song.tone}</span>
+            </div>
+            <div class="song-lyrics-container">
+                ${lyricsHTML}
+            </div>
+            ${mediaSectionHTML}
+        </div>
+    `;
+}
+
+function extractYoutubeId(url) {
+    let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    let match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
+function changeTranspose(val) {
+    currentTransposeOffset = parseInt(val);
+    const song = songs.find(s => s.id === selectedSongId);
+    if (song) {
+        renderSongView(song);
+    }
+}
+
+function openSongModal(songId = null) {
+    const modal = document.getElementById('songModal');
+    const modalTitle = document.getElementById('modalTitle');
+    
+    document.getElementById('editSongId').value = '';
+    document.getElementById('inputTitle').value = '';
+    document.getElementById('inputCategory').value = 'Carismáticos';
+    document.getElementById('inputTone').value = 'Do';
+    document.getElementById('inputYoutube').value = '';
+    document.getElementById('inputAudio').value = '';
+    document.getElementById('inputRawLyrics').value = '';
+
+    if (songId) {
+        const song = songs.find(s => s.id === songId);
+        if (song) {
+            modalTitle.innerText = 'Editar Canción';
+            document.getElementById('editSongId').value = song.id;
+            document.getElementById('inputTitle').value = song.title;
+            document.getElementById('inputCategory').value = song.category;
+            document.getElementById('inputTone').value = song.tone;
+            document.getElementById('inputYoutube').value = song.youtube || '';
+            document.getElementById('inputAudio').value = song.audio || '';
+            
+            let rawText = song.lines.map(l => (l.chords ? l.chords + '\n' : '') + l.lyrics).join('\n');
+            document.getElementById('inputRawLyrics').value = rawText;
+        }
+    } else {
+        modalTitle.innerText = 'Nueva Canción';
+    }
+
+    modal.classList.add('active');
+}
+
+function closeSongModal() {
+    document.getElementById('songModal').classList.remove('active');
+}
+
+function saveSong() {
+    const editId = document.getElementById('editSongId').value;
+    const title = document.getElementById('inputTitle').value.trim();
+    const category = document.getElementById('inputCategory').value;
+    const tone = document.getElementById('inputTone').value.trim() || 'Do';
+    const youtube = document.getElementById('inputYoutube').value.trim();
+    const audio = document.getElementById('inputAudio').value.trim();
+    const rawLyrics = document.getElementById('inputRawLyrics').value;
+
+    if (!title) {
+        alert('Por favor ingresa un título para la canción.');
+        return;
+    }
+
+    let parsedLines = [];
+    let textLines = rawLyrics.split('\n');
+    for (let i = 0; i < textLines.length; i += 2) {
+        let chordLine = textLines[i] || '';
+        let lyricLine = textLines[i+1] || '';
+        parsedLines.push({ chords: chordLine, lyrics: lyricLine });
+    }
+
+    if (editId) {
+        let song = songs.find(s => s.id == editId);
+        if (song) {
+            song.title = title;
+            song.category = category;
+            song.tone = tone;
+            song.youtube = youtube;
+            song.audio = audio;
+            song.lines = parsedLines;
+        }
+        customAlert('¡Canto actualizado con éxito!');
+    } else {
+        let newId = songs.length > 0 ? Math.max(...songs.map(s => s.id)) + 1 : 211;
+        let newSong = {
+            id: newId,
+            title: title,
+            category: category,
+            tone: tone,
+            youtube: youtube,
+            audio: audio,
+            lines: parsedLines
+        };
+        songs.push(newSong);
+        selectedSongId = newId;
+        customAlert('¡Nuevo canto añadido con éxito!');
+    }
+
+    closeSongModal();
+    filterSongs();
+    if (selectedSongId) {
+        const updatedSong = songs.find(s => s.id === selectedSongId);
+        if (updatedSong) renderSongView(updatedSong);
+    }
+}
+
+function openFullscreenWindow() {
+    const song = songs.find(s => s.id === selectedSongId);
+    if (!song) return;
+
+    let displayedTone = transposeSpanishChord(song.tone, currentTransposeOffset);
+    let lyricsHTML = '';
+    song.lines.forEach(line => {
+        let displayChords = transposeLineChords(line.chords, currentTransposeOffset);
+        let chordStyle = chordsVisible ? "color: #f59e0b; font-weight: bold; font-family: 'Courier New', monospace; white-space: pre; font-size: 20px;" : "display: none;";
+        lyricsHTML += `
+            <div style="margin-bottom: 18px; text-align: center;">
+                <div class="print-chord-line" style="${chordStyle}">${displayChords || '&nbsp;'}</div>
+                <div style="color: #f8fafc; font-family: 'Courier New', monospace; white-space: pre-wrap; font-size: 22px;">${line.lyrics || '&nbsp;'}</div>
+            </div>
+        `;
+    });
+
+    let newWindow = window.open('', '_blank', 'width=1000,height=800');
+    newWindow.document.write(`
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>${song.title} - Vista Presentación</title>
+            <style>
+                body {
+                    background-color: #0f172a;
+                    color: #f8fafc;
+                    font-family: 'Segoe UI', Arial, sans-serif;
+                    padding: 30px;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .top-bar {
+                    width: 100%;
+                    max-width: 900px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-bottom: 2px solid #334155;
+                    padding-bottom: 15px;
+                    margin-bottom: 30px;
+                }
+                .btn-group {
+                    display: flex;
+                    gap: 10px;
+                }
+                button {
+                    background: #334155;
+                    color: #f8fafc;
+                    border: 1px solid #475569;
+                    padding: 8px 14px;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    font-size: 13px;
+                }
+                button:hover { background: #475569; }
+                button.primary {
+                    background: #f59e0b;
+                    color: #0f172a;
+                    border: none;
+                }
+                h1 { color: #f59e0b; font-size: 26px; margin: 0; text-align: center; }
+                .meta { color: #94a3b8; font-size: 14px; text-align: center; margin-top: 5px; }
+                .song-container {
+                    width: 100%;
+                    max-width: 900px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                }
+                @media print {
+                    body { background: white; color: black; }
+                    .top-bar { display: none; }
+                    .print-chord-line { color: #b45309 !important; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="top-bar">
+                <button onclick="window.close()">← Volver</button>
+                <div class="btn-group">
+                    <button id="printToggleChords" onclick="togglePrintChords()">🎸 Ocultar Acordes</button>
+                    <button class="primary" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+                    <button onclick="toggleFullScreen()">⛶ Pantalla Completa</button>
+                </div>
+            </div>
+            
+            <div class="song-container">
+                <div style="margin-bottom: 25px; text-align: center;">
+                    <h1>${song.title}</h1>
+                    <div class="meta">Tono actual: <strong>${displayedTone}</strong> (Original: ${song.tone}) | ${song.category}</div>
+                </div>
+                <div style="width: 100%;">
+                    ${lyricsHTML}
+                </div>
+            </div>
+
+            <script>
+                let printChordsVisible = ${chordsVisible};
+                function togglePrintChords() {
+                    printChordsVisible = !printChordsVisible;
+                    const lines = document.querySelectorAll('.print-chord-line');
+                    const btn = document.getElementById('printToggleChords');
+                    lines.forEach(l => {
+                        l.style.display = printChordsVisible ? 'block' : 'none';
+                    });
+                    btn.innerText = printChordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+                }
+
+                function toggleFullScreen() {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().catch(err => {
+                            alert("No se pudo activar la pantalla completa: " + err.message);
+                        });
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        }
+                    }
+                }
+            <\/script>
+        </body>
+        </html>
+    `);
+    newWindow.document.close();
+}
+
+window.onload = function() {
+    initAlphabet();
+    filterSongs();
+};
+</script>
+</body>
+</html>

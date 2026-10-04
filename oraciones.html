@@ -1,0 +1,544 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancionero Litúrgico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        [data-theme="light"] {
+            --primary-color: #1b365d;
+            --secondary-color: #c5a059;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+            --text-muted: #6c757d;
+            --border-color: #eee;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #8ab4f8;
+            --secondary-color: #fdd663;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e3e3e3;
+            --text-muted: #aaa;
+            --border-color: #333;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="sepia"] {
+            --primary-color: #5f4b32;
+            --secondary-color: #b8860b;
+            --bg-color: #f4ecd8;
+            --card-bg: #fdfaf3;
+            --text-color: #4a3b32;
+            --text-muted: #8c7b6e;
+            --border-color: #e6dcce;
+            --shadow: 0 4px 20px rgba(95, 75, 50, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding: 20px;
+        }
+
+        /* Selector de Tema Flotante */
+        .theme-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .theme-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 4px 8px;
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.15);
+        }
+
+        /* Botón flotante para agregar oraciones */
+        .fab-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .fab-btn:hover {
+            transform: scale(1.1);
+            background-color: var(--secondary-color);
+        }
+
+        /* Modal / Ventana emergente para el formulario */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--primary-color);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .btn-cancel {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 20px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .index-container {
+            max-width: 800px;
+            margin: 20px auto 40px auto;
+            background: var(--card-bg);
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .index-container h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .index-container ol {
+            padding-left: 20px;
+        }
+
+        .index-container li {
+            margin-bottom: 8px;
+        }
+
+        .index-container a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .index-container a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .prayer-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 25px 30px;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .prayer-card h2 a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+        }
+
+        .prayer-card h2 a:hover {
+            color: var(--secondary-color);
+        }
+
+        .hint {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        footer.main-footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .index-container, .prayer-card { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Selector de Temas -->
+    <div class="theme-selector" title="Cambiar tema de fondo">
+        <button class="theme-btn" onclick="setTheme('light')" title="Modo Claro">☀️</button>
+        <button class="theme-btn" onclick="setTheme('sepia')" title="Modo Sepia">📜</button>
+        <button class="theme-btn" onclick="setTheme('dark')" title="Modo Oscuro">🌙</button>
+    </div>
+
+    <!-- Botón Flotante para Agregar -->
+    <button class="fab-btn" onclick="toggleModal(true)" title="Agregar nueva oración">➕</button>
+
+    <!-- Modal Formulario -->
+    <div class="modal-overlay" id="modalForm">
+        <div class="modal-content">
+            <h3>Agregar Nueva Oración</h3>
+            <form id="formNuevaOracion" onsubmit="guardarOracion(event)">
+                <div class="form-group">
+                    <label for="nuevoTitulo">Título (ej. 9. Oración a San José):</label>
+                    <input type="text" id="nuevoTitulo" required placeholder="Ej: 9. Oración a San José">
+                </div>
+                <div class="form-group">
+                    <label for="nuevoTexto">Texto de la oración:</label>
+                    <textarea id="nuevoTexto" required placeholder="Escribe aquí el contenido..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="toggleModal(false)">Cancelar</button>
+                    <button type="submit" class="btn-submit">Guardar Oración</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <header>
+<a href="index.html" class="btn">🏠 Volver al Inicio</a>
+        <h1>Devocionario Litúrgico</h1>
+        <p>Cancionero y Oraciones</p>
+    </header>
+
+    <!-- Índice Dinámico -->
+    <nav class="index-container">
+        <h3>Índice General</h3>
+        <ol id="indiceLista"></ol>
+    </nav>
+
+    <!-- Tarjetas Dinámicas -->
+    <main class="container" id="tarjetasContainer"></main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Cancionero Litúrgico</p>
+    </footer>
+
+    <script>
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('theme', themeName);
+        }
+
+        function toggleModal(abrir) {
+            const modal = document.getElementById('modalForm');
+            if (abrir) {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+            cargarContenido();
+        });
+
+        const baseOracionesDefault = {
+            1: {
+                titulo: "1. Oración inicial mes de María",
+                texto: `¡Oh María!, durante el bello mes que te está consagrado, todo resuena con tu nombre y alabanza. Tu santuario resplandece con nuevo brillo, y nuestras manos te han elevado un trono de gracia y de amor, desde donde presides nuestras fiestas y escuchas nuestras oraciones y votos.\n\nPara honrarte, hemos esparcido frescas flores a tus pies, y adornado tu frente con guirnaldas y coronas. Mas, ¡oh María!, no te das por satisfecha con estos homenajes. Hay flores cuya frescura y lozanía jamás pasan y coronas que no se marchitan.\n\nÉstas son las que Tú esperas de tus hijos, porque el más hermoso adorno de una madre es la piedad de sus hijos, y la más bella corona que pueden poner a sus pies, es la de sus virtudes.\n\nSí, los lirios que Tú nos pides son la inocencia de nuestros corazones. Nos esforzaremos, pues, durante el curso de este mes consagrado a tu gloria, ¡Oh Virgen Santa!, en conservar nuestras almas puras y sin manchas, y en separar de nuestros pensamientos, deseos y miradas aun la sombra misma del mal.\n\nLa rosa, cuyo brillo agrada a tus ojos, es la caridad, el amor a Dios y a nuestros hermanos. Nos amaremos, pues, los unos a los otros, como hijos de una misma familia, cuya Madre eres, viviendo todos en la dulzura de una concordia fraternal.\n\nEn este mes bendito, procuraremos cultivar en nuestros corazones la humildad, modesta flor que te es tan querida, y con tu auxilio llegaremos a ser puros, humildes, caritativos, pacientes y esperanzados.\n\n¡Oh María!, haz producir en el fondo de nuestros corazones todas estas amables virtudes; que ellas broten, florezcan y den al fin frutos de gracia, para poder ser algún día dignos hijos de la más Santa y la mejor de las Madres.\n\nAmén.`,
+                pie: "CANCIONERO LITÚRGICO - 1"
+            },
+            2: {
+                titulo: "2. Oración Final Mes de María",
+                texto: `¡Oh María, Madre de Jesús, nuestro Salvador y nuestra buena Madre! Nosotros venimos a ofrecerte, con estos obsequios que colocamos a tus pies, nuestros corazones deseosos de agradarte, y a solicitar de tu bondad un nuevo ardor en tu santo servicio.\n\nDígnate presentarnos a tu Divino Hijo, que en vista de sus méritos y a nombre de su Santa Madre, dirija nuestros pasos por el sendero de la virtud.\n\nQue haga lucir con nuevo esplendor la luz de la fe sobre los infortunados pueblos que gimen por tanto tiempo en las tinieblas del error.\n\nQue vuelvan hacia Él, y cambien tantos corazones rebeldes, cuya penitencia regocijará su corazón y el tuyo.\n\nQue convierta a los enemigos de su Iglesia y que, en fin, encienda por todas partes el fuego de su ardiente caridad, que nos colme de alegría en medio de las tribulaciones de esta vida y dé esperanzas para el porvenir.\n\nAmén.`,
+                pie: "CANCIONERO LITÚRGICO - 2"
+            },
+            3: {
+                titulo: "3. Oración por Chile",
+                texto: `Virgen del Carmen, María Santísima, Dios te escogió como Madre de su Hijo, del Señor Jesús que nos trae el amor y la paz.\n\nMadre de Chile, a Ti honraron los Padres de la Patria y los más valientes de la historia; desde los comienzos nos diste bendición. Hoy te confiamos lo que somos y tenemos; nuestros hogares, escuelas y oficinas; nuestras fábricas, estadios y rutas; el campo, las pampas, las minas y el mar.\n\nProtégenos de terremotos y guerras, sálvanos de la discordia; asiste a nuestros gobernantes; concede tu amparo a nuestros hombres de armas; enséñanos a conquistar el verdadero progreso, que es construir una gran nación de hermanos donde cada uno tenga pan, respeto y alegría.\n\nVirgen del Carmen, Estrella de Chile, en la bandera presides nuestros días y en las noches tormentosas sabiamente alumbras el camino.\n\nMadre de la Iglesia, Tú recibes y nos entregas a Cristo; contigo nos ofrecemos a Él, para que sobre Chile extienda los brazos salvadores de su Cruz y la esperanza de su resurrección.\n\nAmén.`,
+                pie: "CANCIONERO LITÚRGICO - 3"
+            },
+            4: {
+                titulo: "4. Oración “Comunidad María Reina”",
+                texto: `María, Reina de nuestra comunidad de los lobos viejos\nHoy queremos llegar hasta Ti\nComo hijos del mismo Padre y hermanos de Jesús.\nTe saludamos en este día\nEn que te queremos recordar como Reina del mundo.\nHaz que todos tus hijos alcancemos la salvación.\n\nComo comunidad cristiana, queremos aprender a decir que sí\nA la voluntad del Padre.\nQueremos ser humildes y sencillos\nFormando así una gran fraternidad.\n\nEn este sector de nuestra parroquia,\nQueremos ser misioneros y evangelizadores,\nY llevar el evangelio del Reino\nA todos nuestros vecinos.\n\nMaría Reina,\nAyúdanos a estar presentes en medio de los niños, jóvenes y ancianos,\nDe los pobres y olvidados de nuestra población.\nSé tú la Reina de nuestra comunidad\nMuéstranos el camino de la obediencia,\nAyúdanos a descubrirnos como hermanos\nPara dar así testimonio de nuestra fe cristiana.\n\nMaría, Reina de los lobos viejos\nSeñora de los cerros\nRuega por nosotros, Santa Madre de Dios\nPara que seamos dignos de alcanzar\nLas promesas y gracias\nDe nuestro Señor Jesucristo.\nAmén`,
+                pie: "CANCIONERO LITÚRGICO - 4"
+            },
+            5: {
+                titulo: "5. Oración “Comunidad Nuestra Señora del Rosario de Pompeya”",
+                texto: `Santísima Virgen del rosario de Pompeya\nA ti acudimos, como hijos del mismo Padre\nPara darte gracias por ser la patrona de nuestra comunidad.\n\nQueremos ponernos bajo tu amparo\nPara realizar la misión que Jesús nos encomendó\nDe servir siempre contento a los niños, jóvenes, adultos\nY ancianos de nuestro sector.\n\nEn este cerro, queremos ser sal y luz para todos nuestros vecinos,\nAquí queremos dar testimonio de nuestra vida cristiana\nHaciendo presente a nuestra querida Iglesia.\nAyúdanos a ser serviciales y humildes\nAsumiendo la labor del Buen Pastor,\nQue conoce y ama a cada una de sus ovejas.\n\nQueremos, con tu ayuda, Madre querida\nSer una comunidad fraterna y solidaria\nEspecialmente con los más pobres de nuestro sector.\nHaz que la oración del Rosario,\nSea nuestra fuerza y consuelo.\n\nAcoge nuestras súplicas,\nQue te presentamos por nuestra comunidad,\nLlévanos por el buen camino\nPara que podamos crecer cada día en unidad y amor.\n\nSanta María, Madre de Dios\nRuega por nosotros\nY por todos los pecadores\nAhora y en la hora de nuestra muerte.\nAmén.`,
+                pie: "CANCIONERO LITÚRGICO - 5"
+            },
+            6: {
+                titulo: "6. Oración “comunidad Nuestra Señora del Mar”",
+                texto: `Nuestra Señora del Mar\nMadre de Jesús y Madre de esta comunidad,\nA ti acudimos con nuestra oración\nY te damos gracias por ser nuestra patrona.\nTú eres la estrella que ilumina a los pescadores\nEn las noches tormentosas.\n\nIlumina a nuestra comunidad para echar las redes\nY conquistar a los hombres y mujeres para Cristo.\nQueremos, como Pedro, ser hermanos y apóstoles de Jesús.\nQueremos dar testimonio de la vida de fe\nen este sector.\n\nQueremos echar las redes y llenarlas de peces, grandes y chicos\nY formar así una gran comunidad de hermanos y hermanas.\nQueremos con la ayuda del Espíritu Santo, que todo lo recrea,\nComprometernos más con la vida comunitaria.\n\nTu Hijo le pide a esta comunidad, remar mar adentro.\nAyúdanos a cumplir con esta misión\nEn medio de los niños, jóvenes, adultos y ancianos de nuestro sector.\n\nNuestra Señora del mar y de los cerros madre de la nueva evangelización\nCúbrenos con tu manto protector\nPara poder realizar una nueva evangelización\nY ser al mismo tiempo verdaderos discípulos y misioneros de tu Hijo.\n\nRuega por nosotros y por todos los pecadores\nAhora y en la hora de nuestra muerte.\nAmén.`,
+                pie: "CANCIONERO LITÚRGICO - 6"
+            },
+            7: {
+                titulo: "7. Oración parroquial",
+                texto: `Padre Dios, gracias por tu bondad y misericordia,\nPor hacernos cada día más hermanos\nReconociéndote como único y verdadero Dios,\nEn unidad a tu Hijo Jesucristo y al Espíritu Santo que es amor.\n\nTe damos gracias por haber plantado tu tienda en medio nuestro\nDesde los primeros años de historia.\nGracias por permitirnos crecer como familia.\n\nPerdona nuestros desencuentros y todos los desalientos al caminar.\nFortalece nuestro espíritu para que caminemos siempre unidos a Ti.\nDanos sed de tu Reino de amor,\nQue nos permite ser sal y luz.\n\nY que, en este tercer milenio,\nCon actitud misionera y evangelizadora,\nSirvamos siempre contentos a los niños, jóvenes, adultos y ancianos.\n\nBajo tu regazo maternal guía nuestro caminar hacia Dios.\nAmén`,
+                pie: "CANCIONERO LITÚRGICO - 7"
+            },
+            8: {
+                titulo: "8. Oración a San Arcángel Miguel",
+                texto: `San Miguel Arcángel,\nDefiéndenos en la lucha.\nSé nuestro amparo contra la perversidad\nY acechanzas del demonio.\nQue Dios manifieste sobre él su poder,\nEs nuestra humilde súplica.\n\nY tú, oh Príncipe de la Milicia Celestial,\nCon el poder que Dios te ha conferido,\nArroja al infierno a Satanás\nY a los demás espíritus malignos\nQue vagan por el mundo\nPara la perdición de las almas.\nAmén`,
+                pie: "CANCIONERO LITÚRGICO - 8"
+            }
+        };
+
+        function obtenerOraciones() {
+            const guardadas = localStorage.getItem('mis_oraciones_liturgicas');
+            if (guardadas) {
+                return JSON.parse(guardadas);
+            } else {
+                localStorage.setItem('mis_oraciones_liturgicas', JSON.stringify(baseOracionesDefault));
+                return baseOracionesDefault;
+            }
+        }
+
+        function cargarContenido() {
+            const oraciones = obtenerOraciones();
+            const indiceLista = document.getElementById('indiceLista');
+            const tarjetasContainer = document.getElementById('tarjetasContainer');
+            
+            indiceLista.innerHTML = '';
+            tarjetasContainer.innerHTML = '';
+
+            for (const id in oraciones) {
+                const item = oraciones[id];
+
+                const li = document.createElement('li');
+                li.innerHTML = `<a onclick="abrirOracion('${id}')">${item.titulo}</a>`;
+                indiceLista.appendChild(li);
+
+                const card = document.createElement('div');
+                card.className = 'prayer-card';
+                card.innerHTML = `
+                    <h2><a onclick="abrirOracion('${id}')">${item.titulo}</a></h2>
+                    <div class="hint">Clic para ver en ventana completa e imprimir</div>
+                `;
+                tarjetasContainer.appendChild(card);
+            }
+        }
+
+        function guardarOracion(event) {
+            event.preventDefault();
+            const titulo = document.getElementById('nuevoTitulo').value.trim();
+            const texto = document.getElementById('nuevoTexto').value.trim();
+
+            let oraciones = obtenerOraciones();
+            const nuevoId = Object.keys(oraciones).length + 1;
+
+            oraciones[nuevoId] = {
+                titulo: titulo,
+                texto: texto,
+                pie: `CANCIONERO LITÚRGICO - ${nuevoId}`
+            };
+
+            localStorage.setItem('mis_oraciones_liturgicas', JSON.stringify(oraciones));
+
+            document.getElementById('formNuevaOracion').reset();
+            toggleModal(false);
+            cargarContenido();
+        }
+
+        function abrirOracion(id) {
+            const oraciones = obtenerOraciones();
+            const data = oraciones[id];
+            if (!data) return;
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const ventana = window.open('', '_blank', 'width=850,height=750,scrollbars=yes');
+            
+            ventana.document.write(`
+                <!DOCTYPE html>
+                <html lang="es" data-theme="${currentTheme}">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>${data.titulo}</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+                    <style>
+                        [data-theme="light"] { --primary-color: #1b365d; --secondary-color: #c5a059; --bg-color: #f8f9fa; --card-bg: #ffffff; --text-color: #2c3e50; --text-muted: #6c757d; --border-color: #eee; }
+                        [data-theme="dark"] { --primary-color: #8ab4f8; --secondary-color: #fdd663; --bg-color: #121212; --card-bg: #1e1e1e; --text-color: #e3e3e3; --text-muted: #aaa; --border-color: #333; }
+                        [data-theme="sepia"] { --primary-color: #5f4b32; --secondary-color: #b8860b; --bg-color: #f4ecd8; --card-bg: #fdfaf3; --text-color: #4a3b32; --text-muted: #8c7b6e; --border-color: #e6dcce; }
+                        * { box-sizing: border-box; margin: 0; padding: 0; }
+                        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+                        .card { background: var(--card-bg); width: 100%; max-width: 750px; padding: 40px; border-radius: 12px; box-shadow: 0 4px 25px rgba(0,0,0,0.15); border-top: 5px solid var(--primary-color); border: 1px solid var(--border-color); position: relative; }
+                        .top-actions { position: absolute; top: 20px; right: 20px; display: flex; gap: 8px; }
+                        .icon-btn { background: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; }
+                        .icon-btn:hover { background-color: var(--primary-color); color: #fff; }
+                        h1 { font-family: 'Playfair Display', serif; color: var(--primary-color); font-size: 1.6rem; margin-bottom: 25px; padding-right: 140px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+                        .contenido { font-size: 1.1rem; white-space: pre-line; line-height: 1.8; margin-bottom: 30px; }
+                        .pie { font-size: 0.85rem; color: var(--text-muted); text-align: right; font-style: italic; border-top: 1px dashed var(--border-color); padding-top: 15px; }
+                        @media print { body { background: white; padding: 0; color: black; } .card { box-shadow: none; border: none; padding: 0; max-width: 100%; } .top-actions { display: none; } }
+                    </style>
+                </head>
+                <body>
+                    <div class="card">
+                        <div class="top-actions">
+                            <button class="icon-btn" onclick="window.print()" title="Imprimir">🖨️</button>
+                            <button class="icon-btn" onclick="toggleFullScreen()" title="Pantalla Completa">⛶</button>
+                            <button class="icon-btn" onclick="window.close()" title="Cerrar">✕</button>
+                        </div>
+                        <h1>${data.titulo}</h1>
+                        <div class="contenido">${data.texto}</div>
+                        <div class="pie">${data.pie}</div>
+                    </div>
+                    <script>
+                        function toggleFullScreen() {
+                            if (!document.fullscreenElement) { document.documentElement.requestFullscreen().catch(() => {}); }
+                            else { if (document.exitFullscreen) { document.exitFullscreen(); } }
+                        }
+                    <\/script>
+                </body>
+                </html>
+            `);
+            ventana.document.close();
+        }
+    </script>
+</body>
+</html>

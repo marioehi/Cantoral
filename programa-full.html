@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Mirrored from https://cancionerocatolico.cl/programa-full.html by HTTrack Website Copier/3.x [XR&CO], Fri, 25 Sep 2026 12:40:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<title>Programa de misa - Cancionero Católico</title>
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+<meta name="robots" content="noindex">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="scripts/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/cancionero.css">
+<script src="scripts/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+  <script>
+    $(function(){
+      $("#nav-placeholder").load("navbar.html");
+    });
+  </script> 
+
+  <div class="navigation-buttons">
+    <button id="anterior" class="btn btn-outline-primary">Anterior</button>
+    <button id="siguiente" class="btn btn-outline-primary">Siguiente</button>
+  </div>
+
+  <div id="programa-container"></div>
+
+<script>
+  const programa = JSON.parse(localStorage.getItem('programaMisa'));
+  if (!programa) {
+    alert('No hay un programa de misa guardado.');
+    window.location.href = 'crear-programa.html';
+  }
+
+  const canciones = programa.map(item => item.cancion);
+  let currentIndex = 0;
+
+  async function cargarCancion(ruta) {
+    try {
+      console.log(`Cargando canción desde: ${ruta}`);
+      const response = await fetch(ruta);
+      if (!response.ok) {
+        throw new Error('Error al cargar la canción');
+      }
+      const contenido = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(contenido, 'text/html');
+      const bodyContent = doc.querySelector('body').innerHTML;
+
+      // Crear un contenedor temporal para manipular el contenido
+      const tempContainer = document.createElement('div');
+      tempContainer.innerHTML = bodyContent;
+
+      // Eliminar el navbar si está presente
+      const navbar = tempContainer.querySelector('#nav-placeholder');
+      if (navbar) {
+        navbar.remove();
+      }
+
+        // ← NUEVO: aplicar el capo del programa antes de que corra el transpositor
+        const itemActual = programa[currentIndex];
+        const preLetra = tempContainer.querySelector('pre#letra');
+        if (preLetra && itemActual.capo !== undefined && itemActual.capo !== null) {
+          preLetra.setAttribute('data-capo', itemActual.capo);
+        }
+
+      document.getElementById('programa-container').innerHTML = tempContainer.innerHTML;
+
+      // Ajustar rutas de los scripts y ejecutarlos
+      const scripts = tempContainer.querySelectorAll('script');
+      scripts.forEach(script => {
+        const newScript = document.createElement('script');
+        if (script.src) {
+          let src = script.src;
+          if (src.startsWith('../')) src = src.replace('../', '/');
+          newScript.src = src;
+        } else {
+          newScript.textContent = script.textContent;
+        }
+        document.body.appendChild(newScript);
+      });
+
+      // Esperar un momento para que el script de transposición cargue y cree los botones
+      setTimeout(() => {
+        aplicarTono(programa[currentIndex]);
+      }, 500);
+
+    } catch (error) {
+      console.error('Error:', error);
+      document.getElementById('programa-container').innerHTML =
+        '<p>Error al cargar la canción. Inténtalo de nuevo más tarde.</p>';
+    }
+  }
+
+  // 🔹 Nueva función: aplicar el tono según el programa
+  function aplicarTono(item) {
+    try {
+      const pre = document.querySelector('#letra');
+      if (!pre) return;
+
+      const tonoOriginal = pre.getAttribute('data-key')?.trim() || '';
+      const tonoDeseado = item.tono?.trim() || '';
+
+      if (!tonoDeseado || tonoDeseado === tonoOriginal) return;
+
+      console.log(`Aplicando transposición de ${tonoOriginal} → ${tonoDeseado}`);
+
+      // Asegurar que el plugin existe
+      if (typeof $ === 'undefined' || typeof $.fn.transpose !== 'function') {
+        console.warn('Plugin transpose no disponible aún.');
+        return;
+      }
+
+      const $pre = $(pre);
+      if (!$pre.prev('.transpose-keys').length) {
+        // inicializa la interfaz del plugin si aún no está creada
+        $pre.transpose();
+      }
+
+      // Buscar el enlace del tono deseado
+      const claveObjetivo = tonoDeseado.replace(/m$/i, '');
+      const $keysBlock = $pre.prev('.transpose-keys');
+      const $link = $keysBlock.find('a').filter(function () {
+        return $(this).text().toUpperCase() === claveObjetivo.toUpperCase();
+      }).first();
+
+      if ($link.length) {
+        $link.trigger('click');
+      } else {
+        console.warn('No se encontró el tono deseado en los botones del plugin.');
+      }
+    } catch (err) {
+      console.error('Error al aplicar tono:', err);
+    }
+  }
+
+  function mostrarCancion(index) {
+    currentIndex = index;
+    cargarCancion(programa[index].cancion);
+  }
+
+  document.getElementById('anterior').addEventListener('click', function () {
+    if (currentIndex > 0) mostrarCancion(currentIndex - 1);
+  });
+
+  document.getElementById('siguiente').addEventListener('click', function () {
+    if (currentIndex < programa.length - 1) mostrarCancion(currentIndex + 1);
+  });
+
+  // Mostrar la primera canción al cargar la página
+  mostrarCancion(currentIndex);
+</script>
+</body>
+
+<!-- Mirrored from https://cancionerocatolico.cl/programa-full.html by HTTrack Website Copier/3.x [XR&CO], Fri, 25 Sep 2026 12:40:20 GMT -->
+</html>

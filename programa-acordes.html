@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Mirrored from https://cancionerocatolico.cl/programa-acordes.html by HTTrack Website Copier/3.x [XR&CO], Fri, 25 Sep 2026 12:40:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<title>Programa con Acordes - Cancionero Católico</title>
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="scripts/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/cancionero.css">
+<script src="scripts/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar.html");
+});
+</script>
+
+<div class="container text-center mt-5">
+  <h1 id="displayNombreMisa" style="color: #004a99; font-weight: bold; text-transform: uppercase;"></h1>
+</div>
+
+<div id="programa-acordes-container" class="d-flex flex-column mt-5"></div>
+
+<script>
+// --- Lee el programa desde localStorage ---
+const programa = JSON.parse(localStorage.getItem('programaMisa'));
+const nombreMisa = localStorage.getItem('nombreMisaActual');
+
+if (!programa || programa.length === 0) {
+  alert('No hay un programa de misa guardado.');
+  window.location.href = 'crear-programa.html';
+}
+
+// --- Mostrar Título de la Misa ---
+if (nombreMisa) {
+  document.getElementById('displayNombreMisa').textContent = nombreMisa;
+  document.title = nombreMisa + " - Acordes";
+}
+
+// --- Helper: cargar un script solo una vez ---
+function cargarScript(src) {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector(`script[src="${src}"]`)) return resolve();
+    const s = document.createElement("script");
+    s.src = src;
+    s.onload = resolve;
+    s.onerror = () => reject(new Error('Error cargando ' + src));
+    document.head.appendChild(s);
+  });
+}
+
+// --- Cargar y obtener title + contenido del <pre id="letra"> ---
+async function fetchCancionData(ruta) {
+  const res = await fetch(ruta);
+  if (!res.ok) throw new Error('Error al cargar ' + ruta);
+  const text = await res.text();
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, 'text/html');
+
+  const titleEl = doc.querySelector('title');
+  const title = titleEl ? titleEl.innerText : 'Sin título';
+
+  // 1º prioridad: <pre id="letra"> (canciones con acordes) → flujo de siempre
+  const pre = doc.querySelector('pre#letra');
+  if (pre) {
+    return {
+      title,
+      contenido: pre.innerHTML,
+      dataKey: pre.getAttribute('data-key') || '',
+      dataCapo: pre.getAttribute('data-capo'),
+      esPre: true
+    };
+  }
+
+  // ← 2º opción: oraciones en texto libre
+  const oracion = doc.querySelector('#oracion');
+  if (oracion) {
+    return {
+      title,
+      contenido: oracion.innerHTML,
+      dataKey: '',
+      dataCapo: null,
+      esPre: false
+    };
+  }
+
+  throw new Error('No se encontró #letra ni #oracion en ' + ruta);
+}
+
+
+// --- Insertar canción en el DOM y aplicar transposición ---
+async function insertarYCambiarSiCorresponde(container, ruta, tonoDeseado, capoDeseado) {
+  try {
+    const { title, contenido, dataKey: tonoOriginal, dataCapo, esPre } = await fetchCancionData(ruta);
+
+    const col = document.createElement("div");
+    col.className = "col-12 col-md-8 col-lg-4 align-self-center";
+
+    const article = document.createElement("div");
+    article.className = "d-flex justify-content-center cancion-content mb-4";
+
+    const h2 = document.createElement("h2");
+    h2.textContent = title;
+    h2.className = "col-12 text-center";
+    article.appendChild(h2);
+
+    if (esPre) {
+      // === CANCIONES CON ACORDES: mismo flujo de siempre, sin cambios ===
+      const pre = document.createElement("pre");
+      pre.className = "letra";
+      pre.setAttribute("data-key", tonoOriginal);
+
+      const capoFinal = (capoDeseado !== undefined && capoDeseado !== null)
+        ? capoDeseado
+        : (parseInt(dataCapo) || 0);
+      pre.setAttribute("data-capo", capoFinal);
+
+      pre.innerHTML = contenido;
+      article.appendChild(pre);
+
+      col.appendChild(article);
+      container.appendChild(col);
+
+      await cargarScript("../ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js");
+      await cargarScript("scripts/transpositor.js");
+      await new Promise((r) => setTimeout(r, 100));
+
+      if (window.jQuery && typeof jQuery.fn.transpose === "function") {
+        const $pre = jQuery(pre);
+        $pre.transpose();
+
+        if (tonoDeseado && tonoDeseado !== tonoOriginal) {
+          const claveObjetivo = tonoDeseado.replace(/m$/i, "");
+          const $keysBlock = $pre.prev(".transpose-keys");
+          const $link = $keysBlock.find("a").filter(function () {
+            return (jQuery(this).data('original-note') || jQuery(this).text()).toUpperCase() === claveObjetivo.toUpperCase();
+          }).first();
+
+          if ($link.length) {
+            $link.trigger("click");
+          } else {
+            console.warn("No se encontró enlace de tono", claveObjetivo, "para", ruta);
+          }
+        }
+      } else {
+        console.warn("⚠️ Plugin transpose no disponible aún");
+      }
+
+    } else {
+      // ← NUEVO: === ORACIONES / TEXTO LIBRE: se muestra tal cual, sin transpositor ===
+      const divTexto = document.createElement("div");
+      divTexto.className = "oracion  px-3 text-center col-12"; // clase opcional, por si algún día quieres darle estilos propios
+      divTexto.style.marginTop = "2rem";  // ← Espacio entre título y contenido
+      divTexto.innerHTML = contenido;
+      article.appendChild(divTexto);
+
+      col.appendChild(article);
+      container.appendChild(col);
+    }
+  } catch (err) {
+    console.warn("⚠️ Error al cargar:", ruta, err.message);
+  }
+}
+
+
+
+
+// --- Mostrar todas las canciones del programa ---
+async function mostrarProgramaConAcordes() {
+  const container = document.getElementById('programa-acordes-container');
+
+  const $controles = $('<div class="container text-center mt-5 mb-1"></div>');
+  const $btnNotacion = $('<button id="toggleNotationButton" class="btn btn-acordes btn-sm" data-format="Solfeo">Notación ABC</button>');
+
+  $controles.append($btnNotacion);
+  $(container).before($controles);
+
+  $btnNotacion.on('click', function () {
+    const isABC = $(this).data('format') === 'ABC';
+    $(this).data('format', isABC ? 'Solfeo' : 'ABC')
+      .text(isABC ? 'Notación ABC' : 'Notación DoReMi');
+
+    if (typeof window.refreshNotation === "function") {
+      window.refreshNotation();
+    }
+  });
+
+  for (const item of programa) {
+    await insertarYCambiarSiCorresponde(container, item.cancion, item.tono, item.capo); // ← NUEVO: pasa item.capo
+  }
+}
+
+mostrarProgramaConAcordes();
+</script>
+</body>
+
+<!-- Mirrored from https://cancionerocatolico.cl/programa-acordes.html by HTTrack Website Copier/3.x [XR&CO], Fri, 25 Sep 2026 12:40:20 GMT -->
+</html>

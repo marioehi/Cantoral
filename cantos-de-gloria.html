@@ -1,0 +1,1339 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANTOS DE GLORIA - Cancionero Litúrgico</title>
+<style>
+:root[data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-hover: #334155;
+    --accent: #f59e0b;
+    --accent-hover: #d97706;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+}
+:root[data-theme="light"] {
+    --bg-main: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-hover: #e2e8f0;
+    --accent: #d97706;
+    --accent-hover: #b45309;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border: #cbd5e1;
+}
+:root[data-theme="sepia"] {
+    --bg-main: #fbf0d9;
+    --bg-card: #f5e6cc;
+    --bg-hover: #e6d3b3;
+    --accent: #a0522d;
+    --accent-hover: #8b4513;
+    --text-main: #3e2723;
+    --text-muted: #6d4c41;
+    --border: #d7ccc8;
+}
+:root[data-theme="blue"] {
+    --bg-main: #0a192f;
+    --bg-card: #172a45;
+    --bg-hover: #303c55;
+    --accent: #64ffda;
+    --accent-hover: #4cdbc2;
+    --text-main: #e6f1ff;
+    --text-muted: #8892b0;
+    --border: #233554;
+}
+:root[data-theme="green"] {
+    --bg-main: #064e3b;
+    --bg-card: #065f46;
+    --bg-hover: #047857;
+    --accent: #34d399;
+    --accent-hover: #10b981;
+    --text-main: #ecfdf5;
+    --text-muted: #a7f3d0;
+    --border: #047857;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s, color 0.3s;
+}
+
+header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.logo-icon {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.header-titles h1 {
+    font-size: 20px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.badge-parroquia {
+    font-size: 11px;
+    background: var(--bg-main);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    font-weight: normal;
+}
+.header-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.btn {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+.btn:hover { opacity: 0.9; }
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--bg-main);
+    font-weight: 600;
+    border: none;
+}
+.theme-selector {
+    background: var(--bg-main);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    flex: 1;
+    height: calc(100vh - 78px);
+    overflow: hidden;
+}
+@media (max-width: 900px) {
+    .main-container { grid-template-columns: 1fr; height: auto; overflow: visible; }
+}
+.sidebar {
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+.sidebar-search {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+}
+.search-input {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px 10px 36px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2394a3b8" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0 z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 12px center;
+}
+.search-input:focus { border-color: var(--accent); }
+
+.filters-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+}
+.filter-title {
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.tag {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+}
+.tag.active {
+    background: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+.alphabet-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+}
+.alphabet-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.letter-btn {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.letter-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-main);
+}
+.letter-btn.active {
+    background: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+}
+.letter-btn.btn-todos {
+    width: auto;
+    padding: 0 8px;
+}
+
+.song-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+.song-item {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    transition: all 0.2s;
+}
+.song-item:hover { background: var(--bg-hover); }
+.song-item.selected {
+    background: var(--bg-hover);
+    border-color: var(--accent);
+}
+.song-item-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+.song-item-meta {
+    display: flex;
+    gap: 8px;
+    font-size: 11px;
+}
+.badge-cat {
+    background: var(--bg-main);
+    color: var(--text-muted);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+.badge-tone {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.content-panel {
+    background-color: var(--bg-main);
+    padding: 30px;
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.welcome-screen {
+    text-align: center;
+    margin: auto;
+    color: var(--text-muted);
+    max-width: 400px;
+}
+.welcome-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    background: var(--bg-card);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    color: var(--accent);
+}
+.song-display {
+    width: 100%;
+    max-width: 800px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.transposer-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-main);
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    flex-wrap: wrap;
+}
+.transposer-toolbar select {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+.nav-menu-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.nav-menu-bar span {
+    font-size: 11px;
+    padding: 4px 8px;
+    background: var(--bg-main);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+}
+
+.song-lyrics-container {
+    font-family: "Courier New", Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.song-line {
+    margin-bottom: 8px;
+}
+.chord-line {
+    color: var(--accent);
+    font-weight: bold;
+    white-space: pre;
+    transition: display 0.2s;
+}
+.chord-line.hidden {
+    display: none !important;
+}
+.lyric-line {
+    color: var(--text-main);
+    white-space: pre-wrap;
+}
+
+/* Modal Estilos */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+.modal-overlay.active { display: flex; }
+.modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+.modal-header h3 { color: var(--accent); font-size: 18px; }
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+.form-control {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+}
+.form-control:focus { border-color: var(--accent); }
+textarea.form-control {
+    font-family: monospace;
+    resize: vertical;
+    height: 120px;
+}
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <div class="logo-icon">🌿</div>
+        <div class="header-titles">
+            <h1>CANTOS DE GLORIA <span class="badge-parroquia">Parroquia.</span></h1>
+            <div class="header-sub">John Ramos Arévalo</div>
+        </div>
+    </div>
+    <div class="header-actions">
+        <a href="index.html" class="btn">🏠 Volver al Inicio</a>
+        <select class="theme-selector" id="themeSelect" onchange="changeTheme(this.value)">
+            <option value="dark">🌙 Oscuro</option>
+            <option value="light">☀ Claro</option>
+            <option value="sepia">📜 Sepia</option>
+            <option value="blue">🌊 Azul Litúrgico</option>
+            <option value="green">🌿 Verde Litúrgico</option>
+        </select>
+        <button class="btn btn-primary" onclick="openSongModal()">+ Nuevo Canto</button>
+    </div>
+</header>
+
+<div class="main-container">
+    <div class="sidebar">
+        <div class="sidebar-search">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar canto por número o título..." onkeyup="filterSongs()">
+        </div>
+        <div class="filters-section">
+            <div class="filter-title"><span>Categoría:</span> <span id="countDisplay">0 cantos</span></div>
+            <div class="filter-tags">
+                <span class="tag active" onclick="setFilter('todos', this)">Todos</span>
+                <span class="tag" onclick="setFilter('Glorias', this)">Glorias</span>
+            </div>
+        </div>
+        <div class="alphabet-section">
+            <div class="filter-title"><span>Buscar por letra:</span></div>
+            <div class="alphabet-grid" id="alphabetGrid"></div>
+        </div>
+        <div class="song-list" id="songListContainer"></div>
+    </div>
+
+    <div class="content-panel" id="contentPanel">
+        <div class="welcome-screen">
+            <div class="welcome-icon">🎵</div>
+            <h3>Selecciona un canto del repertorio</h3>
+            <p style="font-size: 13px; margin-top: 8px;">Haz clic en cualquiera de los cantos de la izquierda para visualizar su contenido completo, tonos, letra y opciones.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Crear / Editar Canto -->
+<div class="modal-overlay" id="songModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">Nuevo Canto</h3>
+            <button class="btn" style="padding: 4px 8px;" onclick="closeSongModal()">✕</button>
+        </div>
+        <input type="hidden" id="editSongId">
+        <div class="form-group">
+            <label>Título del Canto (Ej: -1- CANTOS DE GLORIA)</label>
+            <input type="text" id="inputTitle" class="form-control" placeholder="Número y Título">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="form-group">
+                <label>Categoría</label>
+                <select id="inputCategory" class="form-control">
+                    <option value="Glorias">Glorias</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tono Original (Ej: Do, Re, Mim)</label>
+                <input type="text" id="inputTone" class="form-control" value="Do">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Enlace de YouTube (URL completa o de video)</label>
+            <input type="text" id="inputYoutube" class="form-control" placeholder="https://www.youtube.com/watch?v=...">
+        </div>
+        <div class="form-group">
+            <label>Enlace de Audio MP3 (Opcional)</label>
+            <input type="text" id="inputAudio" class="form-control" placeholder="https://ejemplo.com/audio.mp3">
+        </div>
+        <div class="form-group">
+            <label>Letra y Acordes (Formato: Alternar línea de Acordes y línea de Letra)</label>
+            <textarea id="inputRawLyrics" class="form-control" placeholder="Do Sol Fa Do&#10;Gloria a Dios en el cielo"></textarea>
+            <small style="color: var(--text-muted); font-size: 11px;">Nota: Ingresa las líneas alternando acordes y letra.</small>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeSongModal()">Cancelar</button>
+            <button class="btn btn-primary" onclick="saveSong()">Guardar Canto</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let songs = [
+    {
+        id: 1,
+        title: "-1- Gloria a Dios en el Cielo",
+        category: "Glorias",
+        tone: "Do",
+        youtubeUrl: "",
+        audioUrl: "",
+        lines: [
+            { chords: "Do Fa Do Fa", lyrics: "Gloria a Dios en el Cielo, y en la tierra paz a" },
+            { chords: "Sol Do rem Sol 7", lyrics: "Los hombres que ama el Señor." },
+            { chords: "Fa Sol Do lam", lyrics: "Por tu inmensa gloria te alabamos," },
+            { chords: "rem Sol Do 7 Fa", lyrics: "Te bendecimos; te adoramos, te glorificamos," },
+            { chords: "Sol Do lam", lyrics: "Te damos gracias." },
+            { chords: "Re Do RE", lyrics: "Señor Dios, Rey celestial, Dios Padre" },
+            { chords: "7 Sol Do Fa Sol Do", lyrics: "Todopoderoso, Señor Hijo único Jesucristo." },
+            { chords: "Fa Do Fa Sol", lyrics: "Señor Dios Cordero de Dios, Hijo del Padre." },
+            { chords: "Fa Sol Do lam", lyrics: "Tu que quitas el pecado del mundo," },
+            { chords: "rem Sol Do", lyrics: "Ten piedad de nosotros" },
+            { chords: "La7 rem mim La7", lyrics: "Tu que quitas el pecado del mundo atiende nuestra" },
+            { chords: "rem Fa Sol Do", lyrics: "Súplica. Tu que estás sentado a la Derecha del Padre," },
+            { chords: "Fa Do Sol Fa Do", lyrics: "Ten piedad de nosotros." },
+            { chords: "Sol 7 Do Fa Do", lyrics: "Porque sólo tu eres santo, sólo Tú, Señor. Sólo tú altísimo" },
+            { chords: "Fa Do 7 Fa Sol Do lam rem", lyrics: "Jesucristo con el Espíritu Santo, en la Gloria" },
+            { chords: "Sol Do 7", lyrics: "De Dios Padre." },
+            { chords: "Fa Sol Do lam rem Sol Do", lyrics: "Aaaaa men Aaaaamén." }
+        ]
+    },
+    {
+        id: 2,
+        title: "-2- Gloria a Dios en el cielo (Sol)",
+        category: "Glorias",
+        tone: "Sol",
+        youtubeUrl: "",
+        audioUrl: "",
+        lines: [
+            { chords: "Sol Mim Do", lyrics: "Gloria a Dios en el cielo y en la tierra" },
+            { chords: "Re Sol mim", lyrics: "Paz a los hombres que ama el Señor." },
+            { chords: "Do Re Sol", lyrics: "Por tu inmensa gloria te alabamos," },
+            { chords: "mim Do", lyrics: "Te bendecimos, te adoramos," },
+            { chords: "Re Sol mim Do Re", lyrics: "Te glorificamos, te damos gracias," },
+            { chords: "La Mi", lyrics: "Señor Dios Rey Celestial" },
+            { chords: "Re Mi", lyrics: "Dios Padre Todopoderoso" },
+            { chords: "La Mi Re Mi", lyrics: "Señor Hijo único Jesucristo." },
+            { chords: "fam# dom# Re Mi", lyrics: "Señor Dios Cordero de Dios Hijo del Padre" },
+            { chords: "Do Sol", lyrics: "Tú que quitas el pecado del mundo" },
+            { chords: "Fa Sol", lyrics: "Ten piedad de nosotros" },
+            { chords: "Do Sol", lyrics: "Tú que quitas el pecado del mundo" },
+            { chords: "Fa Sol", lyrics: "Atiende nuestra súplica" },
+            { chords: "Do Sol Fa", lyrics: "Tú que estás sentado a la diestra del Padre," },
+            { chords: "Sol Mi7", lyrics: "Ten piedad de nosotros." },
+            { chords: "lam Re", lyrics: "Porque Tú eres Santo, sólo Tú Señor," },
+            { chords: "Sol Mim", lyrics: "Sólo Tú Altísimo Jesucristo." },
+            { chords: "dom Sol Re La", lyrics: "Con el espíritu Santo en la gloria de" },
+            { chords: "mim Sol Re La Sol mim", lyrics: "Dios Padre, en la gloria de Dios Padre." },
+            { chords: "La Re", lyrics: "Aaaamén." }
+        ]
+    },
+    {
+        id: 3,
+        title: "-3- Gloria a Dios en el Cielo (La)",
+        category: "Glorias",
+        tone: "La",
+        youtubeUrl: "",
+        audioUrl: "",
+        lines: [
+            { chords: "La Re La", lyrics: "Gloria a Dios en el Cielo," },
+            { chords: "Mi", lyrics: "Y en la tierra paz" },
+            { chords: "La Mi La", lyrics: "A los hombres que ama el Señor." },
+            { chords: "La Re La", lyrics: "Por tu inmensa gloria te alabamos," },
+            { chords: "Mi La", lyrics: "Te bendecimos, te adoramos," },
+            { chords: "7 Re Mi", lyrics: "Te glorificamos, te damos gracias." },
+            { chords: "La", lyrics: "Señor Dios, Rey celestial," },
+            { chords: "Re La", lyrics: "Dios Padre Todopoderoso," },
+            { chords: "Mi La", lyrics: "Señor Hijo único Jesucristo." },
+            { chords: "7", lyrics: "Señor Dios, Cordero de Dios," },
+            { chords: "Re Mí", lyrics: "Hijo del Padre." },
+            { chords: "La", lyrics: "Tu que quitas el pecado del mundo," },
+            { chords: "Re La", lyrics: "Ten piedad de nosotros" },
+            { chords: "Mi", lyrics: "Tú que quitas el pecado del mundo" },
+            { chords: "La", lyrics: "Atiende nuestra súplica." },
+            { chords: "7", lyrics: "Tu que estás sentado a la Derecha del Padre," },
+            { chords: "Re Mí", lyrics: "Ten piedad de nosotros." },
+            { chords: "La Re La", lyrics: "Porque sólo tú eres santo, sólo Tú, Señor." },
+            { chords: "Mi La", lyrics: "Sólo tu altísimo Jesucristo" },
+            { chords: "", lyrics: "Con el Espíritu Santo" },
+            { chords: "Re Mi", lyrics: "En la Gloria de Dios Padre." },
+            { chords: "RE LA", lyrics: "(FINAL) Amén" }
+        ]
+    },
+    {
+        id: 4,
+        title: "-4- LA MESA DE TODOS (Sol)",
+        category: "Glorias",
+        tone: "Sol",
+        youtubeUrl: "",
+        audioUrl: "",
+        lines: [
+            { chords: "Sol Re mim Re Do Re", lyrics: "Gloria a Dios en el cielo" },
+            { chords: "Do Sol Re", lyrics: "Y en la tierra paz" },
+            { chords: "Sol Do Re Sol", lyrics: "A los hombres que ama el Señor." },
+            { chords: "Sol Do Sol Do lam Re", lyrics: "Por tu inmensa gloria te alabamos," },
+            { chords: "Do Re Sol Do Re", lyrics: "Te bendecimos, te adoramos," },
+            { chords: "mim Re mim Do lam Re", lyrics: "Te glorificamos, te damos gracias." },
+            { chords: "mim Re Sol", lyrics: "Señor Dios Rey celestial," },
+            { chords: "Do lam Re", lyrics: "Dios Padre poderoso." },
+            { chords: "Sol Do Sol Do lam Re", lyrics: "Hijo único, Jesucristo, Señor, nuestro Dios" },
+            { chords: "Do Re Sol Do Re", lyrics: "Cordero de Dios, Hijo del Padre" },
+            { chords: "mim Re mim", lyrics: "Tú, que quitas el pecado del mundo" },
+            { chords: "Do lam Re", lyrics: "Ten piedad de nosotros," },
+            { chords: "mim Re Sol", lyrics: "Tú, que quitas el pecado del mundo" },
+            { chords: "Do lam Re", lyrics: "Atiende nuestra súplica." },
+            { chords: "Sol Do Sol Do lam Re", lyrics: "Tú, que estás sentado a la diestra del Padre" },
+            { chords: "Do Re Sol Do Re", lyrics: "Ten piedad de nosotros, porque tú eres santo" },
+            { chords: "mim Re mim Do lam Re", lyrics: "Sólo tú, Señor, Altísimo Jesucristo" },
+            { chords: "mim Re Sol", lyrics: "Con el Espíritu Santo" },
+            { chords: "Do lam Re", lyrics: "En la gloria de Dios Padre." }
+        ]
+    },
+    {
+        id: 5,
+        title: "-4- LA MESA DE TODOS (Re con cejilla 3°)",
+        category: "Glorias",
+        tone: "Re",
+        youtubeUrl: "",
+        audioUrl: "",
+        lines: [
+            { chords: "Re La sim La Sol La", lyrics: "Gloria a Dios en el cielo" },
+            { chords: "Sol Re La", lyrics: "Y en la tierra paz" },
+            { chords: "Re Sol La Re", lyrics: "A los hombres que ama el Señor." },
+            { chords: "Re", lyrics: "(cejillo 3° espacio)" },
+            { chords: "Sol Re Sol mim La", lyrics: "Por tu inmensa gloria te alabamos," },
+            { chords: "Sol La Re Sol La", lyrics: "Te bendecimos, te adoramos," },
+            { chords: "sim La sim Sol mim La", lyrics: "Te glorificamos, te damos gracias." },
+            { chords: "sim La Re", lyrics: "Señor Dios Rey celestial" },
+            { chords: "Sol mim La", lyrics: "Dios Padre Poderoso." },
+            { chords: "Re Sol Re Sol mim La", lyrics: "Hijo único Jesucristo, Señor Nuestro Dios," },
+            { chords: "Sol La Re Sol La", lyrics: "Cordero de Dios, hijo del Padre." },
+            { chords: "sim La sim", lyrics: "Tú que quitas el pecado del mundo" },
+            { chords: "Sol mim La", lyrics: "Ten piedad de nosotros." },
+            { chords: "sim La Re", lyrics: "Tú que quitas el pecado del mundo" },
+            { chords: "Sol mim La", lyrics: "Atiende nuestra súplica." },
+            { chords: "Re Sol Re Sol mim La", lyrics: "Tú que estás sentado a la Diestra del Padre," },
+            { chords: "Sol La Re Sol La", lyrics: "Ten piedad de nosotros. Porque tú eres Santo," },
+            { chords: "sim La sim Sol mim La", lyrics: "Solo tú, Señor, altísimo Jesucristo" },
+            { chords: "sim La Re", lyrics: "Con el Espíritu Santo" },
+            { chords: "Sol mim La", lyrics: "En la gloria de Dios Padre." }
+        ]
+    },
+    {
+        id: 6,
+        title: "-5- TROTE (Lam)",
+        category: "Glorias",
+        tone: "Lam",
+        youtubeUrl: "",
+        audioUrl: "",
+        lines: [
+            { chords: "lam MI Lam", lyrics: "Lam Mi lam" },
+            { chords: "Lam Mi lam", lyrics: "/: Gloria, gloria a Dios en el cielo" },
+            { chords: "Do Sol Mi lam", lyrics: "Y en la tierra a los hombres paz./:" },
+            { chords: "rem lam", lyrics: "Te alabamos y te bendecimos, te adoramos y" },
+            { chords: "Mi lam la 7 rem", lyrics: "Glorificamos. Y nosotros hoy te damos gracias" },
+            { chords: "Lam Mí", lyrics: "Por tu grande y eterna gloria." },
+            { chords: "", lyrics: "Gloria…" },
+            { chords: "Lam REm lam REm lam", lyrics: "Señor Dios Padre, Padre, Padre, Señor Dios Hijo," },
+            { chords: "Mi lam Mi lam", lyrics: "Piedad, Piedad, Piedad Señor." },
+            { chords: "Sol Do", lyrics: "Tú que quitas el pecado del mundo," },
+            { chords: "Mi lam", lyrics: "Escúchanos," },
+            { chords: "Mi lam Sol", lyrics: "Escúchanos, tú que estás a la derecha del" },
+            { chords: "Do", lyrics: "Padre," },
+            { chords: "Mi lam Mi lam", lyrics: "Piedad, Piedad, Piedad Señor." },
+            { chords: "lam Mi lam", lyrics: "Solo tú eres santo, solo tu Señor," },
+            { chords: "Do Sol Mi lam", lyrics: "Solo tu Altísimo Jesucristo," },
+            { chords: "Mi lam", lyrics: "Con el santo espíritu en la gloria de Dios padre." },
+            { chords: "Do Sol Mi lam", lyrics: "/: Amén, amén, aaaamén. /:" }
+        ]
+    },
+    {
+        id: 7,
+        title: "-5- TROTE (Rem)",
+        category: "Glorias",
+        tone: "Rem",
+        youtubeUrl: "",
+        audioUrl: "",
+        lines: [
+            { chords: "Rem LA7 rem", lyrics: "Rem La7 rem" },
+            { chords: "Rem La7 rem", lyrics: "/: Gloria, gloria a Dios en el cielo" },
+            { chords: "Fa Do La7 rem", lyrics: "Y en la tierra a los hombres paz./:" },
+            { chords: "Solm rem", lyrics: "Te alabamos y te bendecimos, te adoramos y" },
+            { chords: "La7 rem Re7 Solm", lyrics: "Glorificamos. Y nosotros hoy te damos gracias" },
+            { chords: "Rem La7", lyrics: "Por tu grande y eterna gloria." },
+            { chords: "", lyrics: "Gloria…" },
+            { chords: "Rem Solm rem Solm rem", lyrics: "Señor Dios Padre, Padre, Padre, Señor Dios Hijo," },
+            { chords: "La7 rem La7 rem", lyrics: "Piedad, Piedad, Piedad Señor." },
+            { chords: "Do Fa", lyrics: "Tú que quitas el pecado del mundo," },
+            { chords: "La7 rem La7 rem", lyrics: ",,,Escúchanos, escúchanos," },
+            { chords: "Do Fa", lyrics: "Tú que estás a la derecha del Padre," },
+            { chords: "La7 rem la7 rem", lyrics: "Piedad, Piedad, Piedad Señor." },
+            { chords: "Rem La7 rem", lyrics: "Solo tú eres santo, solo tu Señor," },
+            { chords: "Fa Do La7 rem", lyrics: "Solo tu Altísimo Jesucristo," },
+            { chords: "La7 rem", lyrics: "Con el santo espíritu en la gloria de Dios padre." },
+            { chords: "Fa Do La7 rem", lyrics: "/: Amén, amén, aaaamén. /:" }
+        ]
+    },
+    {
+        id: 8,
+        title: "-6- Gloria a Dios en el cielo",
+        category: "Glorias",
+        tone: "Re",
+        youtubeUrl: "",
+        audioUrl: "",
+        lines: [
+            { chords: "Re La7", lyrics: "/: Gloria a Dios en el cielo" },
+            { chords: "sim fa#m Sol Re La7", lyrics: "Y en la tierra paz a los hombres que ama el Señor/:" },
+            { chords: "fa#m sim fa#m sim", lyrics: "Por tu inmensa gloria; te alabamos," },
+            { chords: "La Re Fa# sim La", lyrics: "Te adoramos, Dios rey celestial." },
+            { chords: "fa#m sim fa#m sim", lyrics: "Señor Jesucristo, hijo del padre" },
+            { chords: "La Re Fa# sim La", lyrics: "Cordero de Dios, Ten piedad de nosotros." },
+            { chords: "fa#m sim fa#m sim", lyrics: "Solo tú eres santo, solo tú Señor" },
+            { chords: "La Re Fa# sim La", lyrics: "Con el espíritu santo, en la gloria de Dios padre" }
+        ]
+    },
+    {
+        id: 9,
+        title: "-7- A. NEBREDA",
+        category: "Glorias",
+        tone: "Do",
+        youtubeUrl: "",
+        audioUrl: "",
+        lines: [
+            { chords: "Do rem Do Fa Do rem Sol7 Do mim Fa rem Do lam Fa Sol Do", lyrics: "Intro: Do rem Do Fa Do rem Sol7 Do mim Fa rem Do lam Fa Sol Do (Moderato)" },
+            { chords: "Do rem Do Fa Do", lyrics: "Gloria a Dios en el cielo," },
+            { chords: "Rem Sol Do mim Fa rem Do lam Fa Sol7 Do", lyrics: "y en la tierra paz a los hombres que ama el Señor." },
+            { chords: "Do Sol Do", lyrics: "Por tu inmensa gloria te alabamos," },
+            { chords: "Mim Fa Sol", lyrics: "te bendecimos, te adoramos," },
+            { chords: "Sol7 Do Re7 Sol", lyrics: "te glorificamos, te damos gracias," },
+            { chords: "Sol7 Do Mi7 lam", lyrics: "Señor Dios, Rey celestial, Dios Padre todopoderoso" },
+            { chords: "Sol Fa Re7 Sol", lyrics: "Señor, Hijo único, Jesucristo." },
+            { chords: "Fa rem Sol7 lam rem Do Sol7 Do MI7", lyrics: "Señor Dios, Cordero de Dios, Hi - jo del Pa – a - dre;" },
+            { chords: "Lam rem lam", lyrics: "(Más lento) Tú que quitas el pecado del mundo, ten piedad de nosotros;" },
+            { chords: "Fa Mi7", lyrics: "tú que quitas el pecado del mundo, atiende nuestra súplica;" },
+            { chords: "Lam Sol Fa Do rem lam Sol7 Do", lyrics: "tú que estás sentado a la derecha del Padre, ten piedad de noso - tros;" },
+            { chords: "Do rem Do Fa Do", lyrics: "(Moderato) Porque sólo tú eres Santo," },
+            { chords: "Rem Sol Do mim Fa rem Do lam Fa Do Re7 Sol", lyrics: "Sólo tú Señor, sólo tú Al – tí si mo, Je su cris - to," },
+            { chords: "Do mim Fa rem Sol", lyrics: "(Solemne) Con el Espíritu Santo en la gloria de Dios Padre." },
+            { chords: "Do mim Fa Sol Fa Do rem7 Do", lyrics: "A - mén, a – a - a mén_______" }
+        ]
+    },
+    {
+        id: 10,
+        title: "-8- FOLCLORICO",
+        category: "Glorias",
+        tone: "Sol",
+        youtubeUrl: "",
+        audioUrl: "",
+        lines: [
+            { chords: "DO SOL RE7 SOL(2) RE7 SOL RE7 SOL", lyrics: "(DO SOL RE7 SOL(2) RE7 SOL RE7 SOL)" },
+            { chords: "SOL RE7 SOL RE7 SOL", lyrics: "Gloria a Dios en el cielo, gloria a Dios en el cielo(2" },
+            { chords: "LA7 RE LA7 RE", lyrics: "Y en la tierra paz a los hombres que ama el Señor" },
+            { chords: "DO SOL RE7 SOL", lyrics: "Y en la tierra paz a los hombres que ama el Señor" },
+            { chords: "DO RE7 SOL", lyrics: "Por tu inmensa gloria te alabamos" },
+            { chords: "DO RE7 SOL", lyrics: "Te bendecimos te adoramos" },
+            { chords: "DO RE7 SOL", lyrics: "Por tu inmensa gloria te alabamos" },
+            { chords: "DO RE7 SOL", lyrics: "Te glorificamos te damos gracias" },
+            { chords: "FA Sib", lyrics: "Te damos gracias por tu gloria," },
+            { chords: "RE7 SOL", lyrics: "Por tu inmensa gloria Señor (2)" },
+            { chords: "mim", lyrics: "Señor Dios rey celestial, Dios Padre Todopoderoso" },
+            { chords: "SI7mim SI7 mim SOL RE7", lyrics: "Señor hijo único Jesucristo Señor Dios cordero de" },
+            { chords: "SOL RE7", lyrics: "Dios Hijo del Padre," },
+            { chords: "DO RE7 SOL RE7", lyrics: "Tú que quitas el pecado del mundo, ten piedad," },
+            { chords: "DO RE7 SOL", lyrics: "Ten piedad de nosotros" },
+            { chords: "DO RE7 SOL RE7", lyrics: "Tú que quitas el pecado del mundo atiende nuestra" },
+            { chords: "DO RE7 SOL", lyrics: "Súplica Señor" },
+            { chords: "DO SOL DO RE7 DO RE7", lyrics: "Tú que estás sentado a la diestra de Dios Padre," },
+            { chords: "", lyrics: "ten piedad," },
+            { chords: "DO RE7 SOL RE7 DO", lyrics: "Ten piedad de nosotros. Ten piedad, ten piedad de" },
+            { chords: "Re7 Sol", lyrics: "nosotros" },
+            { chords: "DO SOL RE7 SOL(2) RE7 SOL RE7 SOL", lyrics: "(DO SOL RE7 SOL(2) RE7 SOL RE7 SOL)" },
+            { chords: "SOL RE7 SOL RE7 SOL", lyrics: "Gloria a Dios en el cielo, gloria a Dios en el cielo(2" },
+            { chords: "LA7 RE LA7 RE", lyrics: "Y en la tierra paz a los hombres que ama el Señor" },
+            { chords: "DO SOL RE7 SOL", lyrics: "Y en la tierra paz a los hombres que ama el Señor" },
+            { chords: "DO RE7 SOL", lyrics: "Porque solo tú eres santo" },
+            { chords: "DO RE7 SOL", lyrics: "Porque solo tu Señor" },
+            { chords: "DO RE7 SOL", lyrics: "Con el altísimo Jesucristo" },
+            { chords: "DO RE7 SOL", lyrics: "Con el Espíritu Santo, Santo" },
+            { chords: "FA SIB RE7", lyrics: "En la gloria de Dios Padre, la gloria de Nuestro" },
+            { chords: "SOL", lyrics: "Señor (2)" },
+            { chords: "RE7 SOL", lyrics: "Amén, Amén." }
+        ]
+    }
+];
+
+let currentFilter = 'todos';
+let currentLetter = 'todos';
+let selectedSongId = null;
+let currentTransposeOffset = 0;
+let chordsVisible = true;
+
+const spanishChromaticScale = ["Do", "Do#", "Re", "Re#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"];
+const spanishFlatScale = ["Do", "Reb", "Re", "Mib", "Mi", "Fa", "Solb", "Sol", "Lab", "La", "Sib", "Si"];
+
+function initAlphabet() {
+    const grid = document.getElementById('alphabetGrid');
+    grid.innerHTML = '';
+    
+    const allBtn = document.createElement('button');
+    allBtn.className = 'letter-btn btn-todos active';
+    allBtn.id = 'btnLetterTodos';
+    allBtn.innerText = 'Todos';
+    allBtn.onclick = () => setLetter('todos', allBtn);
+    grid.appendChild(allBtn);
+
+    const alphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split('');
+    alphabet.forEach(letter => {
+        const btn = document.createElement('button');
+        btn.className = 'letter-btn';
+        btn.innerText = letter;
+        btn.onclick = () => setLetter(letter, btn);
+        grid.appendChild(btn);
+    });
+}
+
+function customAlert(msg) {
+    const box = document.createElement('div');
+    box.style.cssText = 'position:fixed; top:20px; right:20px; background:var(--bg-card); color:var(--text-main); border:1px solid var(--accent); padding:12px 20px; border-radius:8px; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.3); font-size:13px;';
+    box.innerText = msg;
+    document.body.appendChild(box);
+    setTimeout(() => box.remove(), 3000);
+}
+
+function changeTheme(themeName) {
+    document.documentElement.setAttribute('data-theme', themeName);
+}
+
+function renderSongList(filteredSongs) {
+    const listContainer = document.getElementById('songListContainer');
+    listContainer.innerHTML = '';
+    
+    if (filteredSongs.length === 0) {
+        listContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted); font-size: 13px;">No se encontraron cantos</div>';
+        return;
+    }
+
+    filteredSongs.forEach(song => {
+        const item = document.createElement('div');
+        item.className = 'song-item' + (selectedSongId === song.id ? ' selected' : '');
+        item.onclick = () => selectSong(song.id, item);
+        item.innerHTML = `
+            <div class="song-item-title">${song.title}</div>
+            <div class="song-item-meta">
+                <span class="badge-cat">${song.category}</span>
+                <span class="badge-tone">Tono: ${song.tone}</span>
+            </div>
+        `;
+        listContainer.appendChild(item);
+    });
+    
+    document.getElementById('countDisplay').innerText = `${filteredSongs.length} cantos`;
+}
+
+function setFilter(category, element) {
+    currentFilter = category;
+    document.querySelectorAll('.filters-section .tag').forEach(t => t.classList.remove('active'));
+    element.classList.add('active');
+    filterSongs();
+}
+
+function setLetter(letter, element) {
+    currentLetter = letter;
+    document.querySelectorAll('.alphabet-grid .letter-btn').forEach(b => b.classList.remove('active'));
+    element.classList.add('active');
+    filterSongs();
+}
+
+function filterSongs() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = songs.filter(song => {
+        const matchesCategory = currentFilter === 'todos' || song.category.toLowerCase() === currentFilter.toLowerCase();
+        let cleanTitle = song.title.replace(/^([-\d]+[\.\-\s]*)/i, '').trim().toUpperCase();
+        if (!cleanTitle) cleanTitle = song.title.toUpperCase();
+        const matchesLetter = currentLetter === 'todos' || cleanTitle.startsWith(currentLetter.toUpperCase());
+        const fullText = song.title + ' ' + song.lines.map(l => l.chords + ' ' + l.lyrics).join(' ');
+        const matchesQuery = fullText.toLowerCase().includes(query);
+        return matchesCategory && matchesLetter && matchesQuery;
+    });
+    renderSongList(filtered);
+}
+
+function getSpanishNoteIndex(noteStr) {
+    if (!noteStr) return 0;
+    let clean = noteStr.charAt(0).toUpperCase() + noteStr.slice(1).toLowerCase();
+    let idx = spanishChromaticScale.indexOf(clean);
+    if (idx !== -1) return idx;
+    idx = spanishFlatScale.indexOf(clean);
+    if (idx !== -1) return idx;
+    return 0;
+}
+
+function transposeSpanishChord(chord, semitones) {
+    const match = chord.match(/^(Do|Re|Mi|Fa|Sol|La|Si)([#b]?)(.*)$/i);
+    if (!match) return chord;
+    
+    let baseNote = match[1].charAt(0).toUpperCase() + match[1].slice(1).toLowerCase() + match[2];
+    let suffix = match[3];
+    
+    let baseIdx = getSpanishNoteIndex(baseNote);
+    let newIdx = (baseIdx + semitones + 12) % 12;
+    let newRoot = spanishChromaticScale[newIdx];
+    
+    return newRoot + suffix;
+}
+
+function transposeLineChords(chordLine, semitones) {
+    if (!chordLine) return '';
+    return chordLine.replace(/(Do|Re|Mi|Fa|Sol|La|Si)[#b]?[a-zA-Z0-9]*/gi, (match) => {
+        return transposeSpanishChord(match, semitones);
+    });
+}
+
+function selectSong(id, itemElement) {
+    selectedSongId = id;
+    currentTransposeOffset = 0;
+    
+    document.querySelectorAll('.song-item').forEach(el => el.classList.remove('selected'));
+    if (itemElement) {
+        itemElement.classList.add('selected');
+    } else {
+        const items = document.querySelectorAll('.song-item');
+        items.forEach(it => {
+            if (it.innerHTML.includes(songs.find(s=>s.id===id)?.title)) {
+                it.classList.add('selected');
+            }
+        });
+    }
+    
+    const song = songs.find(s => s.id === id);
+    if (!song) return;
+    
+    renderSongView(song);
+}
+
+function toggleChords() {
+    chordsVisible = !chordsVisible;
+    const chordElements = document.querySelectorAll('.chord-line');
+    const toggleBtn = document.getElementById('toggleChordsBtn');
+    
+    chordElements.forEach(el => {
+        if (chordsVisible) {
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
+    });
+    
+    if (toggleBtn) {
+        toggleBtn.innerText = chordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+    }
+}
+
+function renderSongView(song) {
+    const contentPanel = document.getElementById('contentPanel');
+    let displayedTone = transposeSpanishChord(song.tone, currentTransposeOffset);
+
+    let lyricsHTML = '';
+    song.lines.forEach(line => {
+        let displayChords = transposeLineChords(line.chords, currentTransposeOffset);
+        let hiddenClass = chordsVisible ? '' : ' hidden';
+        lyricsHTML += `
+            <div class="song-line">
+                <div class="chord-line${hiddenClass}">${displayChords}</div>
+                <div class="lyric-line">${line.lyrics}</div>
+            </div>
+        `;
+    });
+
+    let baseOriginalIdx = getSpanishNoteIndex(song.tone);
+    let optionsHTML = '';
+    
+    for (let i = 0; i < 12; i++) {
+        let targetOffset = (i - baseOriginalIdx + 12) % 12;
+        let noteName = spanishChromaticScale[i];
+        let label = (targetOffset === 0) ? `Tono original (${noteName})` : `Transportar a ${noteName}`;
+        let selectedAttr = (targetOffset === currentTransposeOffset) ? 'selected' : '';
+        optionsHTML += `<option value="${targetOffset}" ${selectedAttr}>${label}</option>`;
+    }
+
+    let toggleBtnText = chordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+
+    let linksHTML = '';
+    if (song.youtubeUrl || song.audioUrl) {
+        linksHTML += `<div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">`;
+        if (song.youtubeUrl) {
+            linksHTML += `<a href="${song.youtubeUrl}" target="_blank" class="btn" style="background-color: #ef4444; color: #fff; border: none;">▶ Ver en YouTube</a>`;
+        }
+        if (song.audioUrl) {
+            linksHTML += `<a href="${song.audioUrl}" target="_blank" class="btn" style="background-color: #3b82f6; color: #fff; border: none;">🎧 Escuchar Audio MP3</a>`;
+        }
+        linksHTML += `</div>`;
+    }
+
+    contentPanel.innerHTML = `
+        <div class="song-display">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                    <a href="index.html" class="btn" style="padding: 5px 10px; font-size: 12px;">🏠 Inicio</a>
+                    <h2 style="margin:0; border:none; padding:0;">${song.title}</h2>
+                </div>
+                <div class="transposer-toolbar">
+                    <span>Tono: <strong>${displayedTone}</strong></span>
+                    <label>Nota:</label>
+                    <select id="transposeSelect" onchange="changeTranspose(this.value)">
+                        ${optionsHTML}
+                    </select>
+                    <button class="btn" id="toggleChordsBtn" style="padding: 5px 10px; font-size: 12px;" onclick="toggleChords()">${toggleBtnText}</button>
+                    <button class="btn" style="padding: 5px 10px; font-size: 12px;" onclick="openSongModal(${song.id})">✏️ Editar</button>
+                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;" onclick="openFullscreenWindow()">🖨️ Proyectar</button>
+                </div>
+            </div>
+            <div class="nav-menu-bar">
+                <span>Categoría: ${song.category}</span>
+                <span>Tono Original: ${song.tone}</span>
+            </div>
+            ${linksHTML}
+            <div class="song-lyrics-container" style="margin-top: 15px;">
+                ${lyricsHTML}
+            </div>
+        </div>
+    `;
+}
+
+function changeTranspose(val) {
+    currentTransposeOffset = parseInt(val);
+    const song = songs.find(s => s.id === selectedSongId);
+    if (song) {
+        renderSongView(song);
+    }
+}
+
+function openSongModal(songId = null) {
+    const modal = document.getElementById('songModal');
+    const modalTitle = document.getElementById('modalTitle');
+    
+    document.getElementById('editSongId').value = '';
+    document.getElementById('inputTitle').value = '';
+    document.getElementById('inputCategory').value = 'Glorias';
+    document.getElementById('inputTone').value = 'Do';
+    document.getElementById('inputYoutube').value = '';
+    document.getElementById('inputAudio').value = '';
+    document.getElementById('inputRawLyrics').value = '';
+
+    if (songId) {
+        const song = songs.find(s => s.id === songId);
+        if (song) {
+            modalTitle.innerText = 'Editar Canto';
+            document.getElementById('editSongId').value = song.id;
+            document.getElementById('inputTitle').value = song.title;
+            document.getElementById('inputCategory').value = song.category;
+            document.getElementById('inputTone').value = song.tone;
+            document.getElementById('inputYoutube').value = song.youtubeUrl || '';
+            document.getElementById('inputAudio').value = song.audioUrl || '';
+            
+            let rawText = song.lines.map(l => (l.chords ? l.chords + '\n' : '') + l.lyrics).join('\n');
+            document.getElementById('inputRawLyrics').value = rawText;
+        }
+    } else {
+        modalTitle.innerText = 'Nuevo Canto';
+    }
+
+    modal.classList.add('active');
+}
+
+function closeSongModal() {
+    document.getElementById('songModal').classList.remove('active');
+}
+
+function saveSong() {
+    const editId = document.getElementById('editSongId').value;
+    const title = document.getElementById('inputTitle').value.trim();
+    const category = document.getElementById('inputCategory').value;
+    const tone = document.getElementById('inputTone').value.trim() || 'Do';
+    const youtubeUrl = document.getElementById('inputYoutube').value.trim();
+    const audioUrl = document.getElementById('inputAudio').value.trim();
+    const rawLyrics = document.getElementById('inputRawLyrics').value;
+
+    if (!title) {
+        alert('Por favor ingresa un título para el canto.');
+        return;
+    }
+
+    let parsedLines = [];
+    let textLines = rawLyrics.split('\n');
+    for (let i = 0; i < textLines.length; i += 2) {
+        let chordLine = textLines[i] || '';
+        let lyricLine = textLines[i+1] || '';
+        parsedLines.push({ chords: chordLine, lyrics: lyricLine });
+    }
+
+    if (editId) {
+        let song = songs.find(s => s.id == editId);
+        if (song) {
+            song.title = title;
+            song.category = category;
+            song.tone = tone;
+            song.youtubeUrl = youtubeUrl;
+            song.audioUrl = audioUrl;
+            song.lines = parsedLines;
+        }
+        customAlert('¡Canto actualizado con éxito!');
+    } else {
+        let newId = songs.length > 0 ? Math.max(...songs.map(s => s.id)) + 1 : 1;
+        let newSong = {
+            id: newId,
+            title: title,
+            category: category,
+            tone: tone,
+            youtubeUrl: youtubeUrl,
+            audioUrl: audioUrl,
+            lines: parsedLines
+        };
+        songs.push(newSong);
+        selectedSongId = newId;
+        customAlert('¡Nuevo canto añadido con éxito!');
+    }
+
+    closeSongModal();
+    filterSongs();
+    if (selectedSongId) {
+        const updatedSong = songs.find(s => s.id === selectedSongId);
+        if (updatedSong) renderSongView(updatedSong);
+    }
+}
+
+function openFullscreenWindow() {
+    const song = songs.find(s => s.id === selectedSongId);
+    if (!song) return;
+
+    let displayedTone = transposeSpanishChord(song.tone, currentTransposeOffset);
+    let lyricsHTML = '';
+    song.lines.forEach(line => {
+        let displayChords = transposeLineChords(line.chords, currentTransposeOffset);
+        let chordStyle = chordsVisible ? "color: #f59e0b; font-weight: bold; font-family: 'Courier New', monospace; white-space: pre; font-size: 20px;" : "display: none;";
+        lyricsHTML += `
+            <div style="margin-bottom: 18px; text-align: center;">
+                <div class="print-chord-line" style="${chordStyle}">${displayChords || '&nbsp;'}</div>
+                <div style="color: #f8fafc; font-family: 'Courier New', monospace; white-space: pre-wrap; font-size: 22px;">${line.lyrics || '&nbsp;'}</div>
+            </div>
+        `;
+    });
+
+    let newWindow = window.open('', '_blank', 'width=1000,height=800');
+    newWindow.document.write(`
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>${song.title} - Vista Presentación</title>
+            <style>
+                body {
+                    background-color: #0f172a;
+                    color: #f8fafc;
+                    font-family: 'Segoe UI', Arial, sans-serif;
+                    padding: 30px;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .top-bar {
+                    width: 100%;
+                    max-width: 900px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-bottom: 2px solid #334155;
+                    padding-bottom: 15px;
+                    margin-bottom: 30px;
+                }
+                .btn-group {
+                    display: flex;
+                    gap: 10px;
+                }
+                button {
+                    background: #334155;
+                    color: #f8fafc;
+                    border: 1px solid #475569;
+                    padding: 8px 14px;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    font-size: 13px;
+                }
+                button:hover { background: #475569; }
+                button.primary {
+                    background: #f59e0b;
+                    color: #0f172a;
+                    border: none;
+                }
+                h1 { color: #f59e0b; font-size: 26px; margin: 0; text-align: center; }
+                .meta { color: #94a3b8; font-size: 14px; text-align: center; margin-top: 5px; }
+                .song-container {
+                    width: 100%;
+                    max-width: 900px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                }
+                @media print {
+                    body { background: white; color: black; }
+                    .top-bar { display: none; }
+                    .print-chord-line { color: #b45309 !important; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="top-bar">
+                <button onclick="window.close()">← Volver</button>
+                <div class="btn-group">
+                    <button id="printToggleChords" onclick="togglePrintChords()">🎸 Ocultar Acordes</button>
+                    <button class="primary" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+                    <button onclick="toggleFullScreen()">⛶ Pantalla Completa</button>
+                </div>
+            </div>
+            
+            <div class="song-container">
+                <div style="margin-bottom: 25px; text-align: center;">
+                    <h1>${song.title}</h1>
+                    <div class="meta">Tono actual: <strong>${displayedTone}</strong> (Original: ${song.tone}) | ${song.category}</div>
+                </div>
+                <div style="width: 100%;">
+                    ${lyricsHTML}
+                </div>
+            </div>
+
+            <script>
+                let printChordsVisible = ${chordsVisible};
+                function togglePrintChords() {
+                    printChordsVisible = !printChordsVisible;
+                    const lines = document.querySelectorAll('.print-chord-line');
+                    const btn = document.getElementById('printToggleChords');
+                    lines.forEach(l => {
+                        l.style.display = printChordsVisible ? 'block' : 'none';
+                    });
+                    btn.innerText = printChordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+                }
+
+                function toggleFullScreen() {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().catch(err => {
+                            alert("No se pudo activar la pantalla completa: " + err.message);
+                        });
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        }
+                    }
+                }
+            <\/script>
+        </body>
+        </html>
+    `);
+    newWindow.document.close();
+}
+
+window.onload = function() {
+    initAlphabet();
+    filterSongs();
+};
+</script>
+</body>
+</html>

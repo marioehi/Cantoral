@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cancionero Litúrgico - Virgen del Carmen</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    /* Fondo con imagen de la Virgen del Carmen y un filtro de color café/carmelo cálido y solemne */
+    background: linear-gradient(rgba(45, 25, 20, 0.8), rgba(30, 15, 10, 0.9)), 
+                url('https://upload.wikimedia.org/wikipedia/commons/4/4e/Virgen_del_Carmen_de_Chile.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: "Garamond", "Times New Roman", serif;
+    color: #2c221e;
+}
+.pergamino {
+    max-width: 850px;
+    margin: 40px auto;
+    background: #fdfaf3; /* Textura color marfil/pergamino */
+    border: 4px double #8c6d33; /* Doble marco dorado antiguo */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    padding: 40px 50px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+.header-santuario {
+    text-align: center;
+    border-bottom: 2px solid #d4af37;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+.header-santuario span {
+    font-size: 28px;
+}
+h1 {
+    color: #611a21; /* Rojo carmesí/vino litúrgico */
+    margin: 10px 0 10px 0;
+    font-size: 32px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+.lema {
+    font-style: italic;
+    color: #5c4a3b;
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.4;
+}
+/* Estilo de lista tradicional y elegante */
+.seccion-indice {
+    margin-top: 20px;
+}
+.grupo-titulo {
+    font-size: 15px;
+    font-weight: bold;
+    color: #8c6d33;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 20px 0 10px 0;
+    border-bottom: 1px solid #e6dcc6;
+    padding-bottom: 4px;
+}
+.lista-enlaces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.lista-enlaces a {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #f4eee1;
+    border: 1px solid #d9ccb3;
+    border-radius: 20px;
+    color: #4a3525;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+.lista-enlaces a:hover {
+    background: #611a21;
+    color: #fff;
+    border-color: #611a21;
+}
+.lista-enlaces a.comunion {
+    background: #8c6d33;
+    color: #fff;
+    border-color: #735728;
+    font-weight: bold;
+}
+.lista-enlaces a.comunion:hover {
+    background: #611a21;
+}
+@media(max-width: 700px) {
+    .pergamino {
+        margin: 15px;
+        padding: 20px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="pergamino">
+    <div class="header-santuario">
+        <span>🌹</span>
+        <h1>Cancionero Litúrgico</h1>
+        <p class="lema">Herramienta práctica para unificar y guiar el canto comunitario durante las celebraciones religiosas y la liturgia</p>
+    </div>
+
+    <div class="seccion-indice">
+        <div class="grupo-titulo">Oraciones y Ordinario de la Misa</div>
+        <div class="lista-enlaces">
+            <a href="oraciones.html">Oraciones</a>
+            <a href="cantos-de-entrada.html">Cantos de Entrada</a>
+            <a href="cantos-de-perdon.html">Cantos de Perdón</a>
+            <a href="cantos-de-gloria.html">Cantos de Gloria</a>
+            <a href="cantos-de-aleluya.html">Cantos de Aleluya</a>
+        </div>
+
+        <div class="grupo-titulo">Liturgia Eucarística</div>
+        <div class="lista-enlaces">
+            <a href="cantos-de-ofertorio.html">Cantos de Ofertorio</a>
+            <a href="cantos-al-santo.html">Cantos al Santo</a>
+            <a href="cantos-de-amen.html">Cantos de Amén</a>
+            <a href="cantos-al-cordero.html">Cantos al Cordero</a>
+            <a href="comunion-1.html" class="comunion">Comunión 1</a>
+            <a href="comunion-2.html" class="comunion">Comunión 2</a>
+            <a href="comunion-3.html" class="comunion">Comunión 3</a>
+        </div>
+
+        <div class="grupo-titulo">Despedida y Repertorio Mariano</div>
+        <div class="lista-enlaces">
+            <a href="cantos-finales.html">Cantos Finales</a>
+            <a href="cantos-a-maria.html">Cantos a María</a>
+            <a href="otros-cantos.html">Otros Cantos</a>
+            <a href="cantos-especiales.html">Cantos Especiales</a>
+            <a href="cantos-carismaticos.html">Cantos Carismáticos</a>
+            <a href="cantos-folcloricos.html">Cantos Folclóricos</a>
+            <a href="crear-programa.html">crear </a>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

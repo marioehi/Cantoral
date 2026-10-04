@@ -1,0 +1,1385 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANTOS DE COMUNIÓN 3 - Cancionero Litúrgico</title>
+<style>
+:root[data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-hover: #334155;
+    --accent: #f59e0b;
+    --accent-hover: #d97706;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+}
+:root[data-theme="light"] {
+    --bg-main: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-hover: #e2e8f0;
+    --accent: #d97706;
+    --accent-hover: #b45309;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border: #cbd5e1;
+}
+:root[data-theme="sepia"] {
+    --bg-main: #fbf0d9;
+    --bg-card: #f5e6cc;
+    --bg-hover: #e6d3b3;
+    --accent: #a0522d;
+    --accent-hover: #8b4513;
+    --text-main: #3e2723;
+    --text-muted: #6d4c41;
+    --border: #d7ccc8;
+}
+:root[data-theme="blue"] {
+    --bg-main: #0a192f;
+    --bg-card: #172a45;
+    --bg-hover: #303c55;
+    --accent: #64ffda;
+    --accent-hover: #4cdbc2;
+    --text-main: #e6f1ff;
+    --text-muted: #8892b0;
+    --border: #233554;
+}
+:root[data-theme="green"] {
+    --bg-main: #064e3b;
+    --bg-card: #065f46;
+    --bg-hover: #047857;
+    --accent: #34d399;
+    --accent-hover: #10b981;
+    --text-main: #ecfdf5;
+    --text-muted: #a7f3d0;
+    --border: #047857;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s, color 0.3s;
+}
+
+header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.logo-icon {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.header-titles h1 {
+    font-size: 20px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.badge-parroquia {
+    font-size: 11px;
+    background: var(--bg-main);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    font-weight: normal;
+}
+.header-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.btn {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+.btn:hover { opacity: 0.9; }
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--bg-main);
+    font-weight: 600;
+    border: none;
+}
+.theme-selector {
+    background: var(--bg-main);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    flex: 1;
+    height: calc(100vh - 78px);
+    overflow: hidden;
+}
+@media (max-width: 900px) {
+    .main-container { grid-template-columns: 1fr; height: auto; overflow: visible; }
+}
+.sidebar {
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+.sidebar-search {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+}
+.search-input {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px 10px 36px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2394a3b8" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 12px center;
+}
+.search-input:focus { border-color: var(--accent); }
+
+.filters-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+}
+.filter-title {
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.tag {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+}
+.tag.active {
+    background: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+.alphabet-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+}
+.alphabet-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.letter-btn {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.letter-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-main);
+}
+.letter-btn.active {
+    background: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+}
+.letter-btn.btn-todos {
+    width: auto;
+    padding: 0 8px;
+}
+
+.song-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+.song-item {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    transition: all 0.2s;
+}
+.song-item:hover { background: var(--bg-hover); }
+.song-item.selected {
+    background: var(--bg-hover);
+    border-color: var(--accent);
+}
+.song-item-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+.song-item-meta {
+    display: flex;
+    gap: 8px;
+    font-size: 11px;
+}
+.badge-cat {
+    background: var(--bg-main);
+    color: var(--text-muted);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+.badge-tone {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.content-panel {
+    background-color: var(--bg-main);
+    padding: 30px;
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.welcome-screen {
+    text-align: center;
+    margin: auto;
+    color: var(--text-muted);
+    max-width: 400px;
+}
+.welcome-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    background: var(--bg-card);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    color: var(--accent);
+}
+.song-display {
+    width: 100%;
+    max-width: 800px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.transposer-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-main);
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    flex-wrap: wrap;
+}
+.transposer-toolbar select {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+.nav-menu-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.nav-menu-bar span {
+    font-size: 11px;
+    padding: 4px 8px;
+    background: var(--bg-main);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+}
+
+.song-lyrics-container {
+    font-family: "Courier New", Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.song-line {
+    margin-bottom: 8px;
+}
+.chord-line {
+    color: var(--accent);
+    font-weight: bold;
+    white-space: pre;
+    transition: display 0.2s;
+}
+.chord-line.hidden {
+    display: none !important;
+}
+.lyric-line {
+    color: var(--text-main);
+    white-space: pre-wrap;
+}
+
+/* Modal Estilos */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+.modal-overlay.active { display: flex; }
+.modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+.modal-header h3 { color: var(--accent); font-size: 18px; }
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+.form-control {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+}
+.form-control:focus { border-color: var(--accent); }
+textarea.form-control {
+    font-family: monospace;
+    resize: vertical;
+    height: 120px;
+}
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <div class="logo-icon">🌿</div>
+        <div class="header-titles">
+            <h1>CANTOS DE ALELUYA <span class="badge-parroquia">Parroquia.</span></h1>
+            <div class="header-sub">John Ramos Arévalo</div>
+        </div>
+    </div>
+    <div class="header-actions">
+<a href="index.html" class="btn">🏠 Volver al Inicio</a>
+        <select class="theme-selector" id="themeSelect" onchange="changeTheme(this.value)">
+            <option value="dark">🌙 Oscuro</option>
+            <option value="light">☀ Claro</option>
+            <option value="sepia">📜 Sepia</option>
+            <option value="blue">🌊 Azul Litúrgico</option>
+            <option value="green">🌿 Verde Litúrgico</option>
+        </select>
+        <button class="btn btn-primary" onclick="openSongModal()">+ Nuevo Canto</button>
+    </div>
+</header>
+
+<div class="main-container">
+    <div class="sidebar">
+        <div class="sidebar-search">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar canto por número o título..." onkeyup="filterSongs()">
+        </div>
+        <div class="filters-section">
+            <div class="filter-title"><span>Categoría:</span> <span id="countDisplay">0 cantos</span></div>
+            <div class="filter-tags">
+                <span class="tag active" onclick="setFilter('todos', this)">Todos</span>
+                <span class="tag" onclick="setFilter('Repertorio', this)">Repertorio</span>
+            </div>
+        </div>
+        <div class="alphabet-section">
+            <div class="filter-title"><span>Buscar por letra:</span></div>
+            <div class="alphabet-grid" id="alphabetGrid"></div>
+        </div>
+        <div class="song-list" id="songListContainer"></div>
+    </div>
+
+    <div class="content-panel" id="contentPanel">
+        <div class="welcome-screen">
+            <div class="welcome-icon">🎵</div>
+            <h3>Selecciona un canto del repertorio</h3>
+            <p style="font-size: 13px; margin-top: 8px;">Haz clic en cualquiera de los cantos de la izquierda para visualizar su contenido completo, tonos, letra y opciones.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Crear / Editar Canto -->
+<div class="modal-overlay" id="songModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">Nuevo Canto</h3>
+            <button class="btn" style="padding: 4px 8px;" onclick="closeSongModal()">✕</button>
+        </div>
+        <input type="hidden" id="editSongId">
+        <div class="form-group">
+            <label>Título del Canto</label>
+            <input type="text" id="inputTitle" class="form-control" placeholder="Número y Título">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="form-group">
+                <label>Categoría</label>
+                <select id="inputCategory" class="form-control">
+                    <option value="Repertorio">Repertorio</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tono Original (Ej: Do, Re, Mim)</label>
+                <input type="text" id="inputTone" class="form-control" value="Do">
+            </div>
+        </div>
+<div class="form-group">
+            <label>Enlace de YouTube (URL completa o de video)</label>
+            <input type="text" id="inputYoutube" class="form-control" placeholder="https://www.youtube.com/watch?v=...">
+        </div>
+        <div class="form-group">
+            <label>Enlace de Audio MP3 (Opcional)</label>
+            <input type="text" id="inputAudio" class="form-control" placeholder="https://... o archivo.mp3">
+        </div>
+
+        <div class="form-group">
+            <label>Letra y Acordes (Formato: Alternar línea de Acordes y línea de Letra)</label>
+            <textarea id="inputRawLyrics" class="form-control" placeholder="Do Sol Fa Do&#10;Texto de la canción"></textarea>
+            <small style="color: var(--text-muted); font-size: 11px;">Nota: Ingresa las líneas alternando acordes y letra.</small>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeSongModal()">Cancelar</button>
+            <button class="btn btn-primary" onclick="saveSong()">Guardar Canto</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let songs = [
+    {
+        id: 132,
+        title: "132. CONSOLAD",
+        category: "Repertorio",
+        tone: "Do",
+        lines: [
+            { chords: "Do Sol", lyrics: "Consolad a mi pueblo dice el Señor" },
+            { chords: "rem Sol", lyrics: "Hablad al corazón del hombre." },
+            { chords: "rem lam", lyrics: "Gritad que mi amor ha vencido" },
+            { chords: "Fa", lyrics: "Preparad el camino que viene tu" },
+            { chords: "Sol 7", lyrics: "Redentor." },
+            { chords: "Do Sol", lyrics: "Yo te he elegido para amar" },
+            { chords: "rem lam", lyrics: "Te doy mi fuerza y luz para guiar." },
+            { chords: "Do Sol", lyrics: "Yo soy consuelo en tu mirar" },
+            { chords: "rem Sol", lyrics: "Gloria a Dios." },
+            { chords: "", lyrics: "Consolad a mi pueblo dice el Señor\nSacad de la ceguera a mi pueblo.\nYo he sellado contigo\nAlianza perpetua yo soy el único Dios.\nConsolad a mi pueblo dice el Señor\nMostradles el camino de libertad.\nYo os daré fuertes alas\nTransformaré tus pisadas en sendas de\neternidad." }
+        ]
+    },
+    {
+        id: 133,
+        title: "133. DONDE IREMOS SEÑOR",
+        category: "Repertorio",
+        tone: "lam",
+        lines: [
+            { chords: "lam Fa Sol lam", lyrics: "¿Dónde iremos Señor? La hora se acerca," },
+            { chords: "Fa Sol Do 7", lyrics: "Solo Tú puedes dar palabras de vida eterna." },
+            { chords: "Fa Sol lam", lyrics: "¿Dónde iremos Señor? Ya la noche es más fuerte" },
+            { chords: "rem lam Mi", lyrics: "Y la muerte prepara tu muerte." },
+            { chords: "rem lam", lyrics: "Si la semilla no muere, el grano queda infecundo," },
+            { chords: "Do Sol Fa Mi", lyrics: "Yo para eso he venido, para dar vida al mundo." },
+            { chords: "", lyrics: "¿Qué daremos Señor, al mundo que mira?\nNo tenemos sin ti, el pan de vida.\nY no alcanza Señor, para tantos que esperan,\nCinco panes, dos peces que nos quedan.\nMi alimento es hacer, la voluntad de mi Padre,\nBusquen primero su reino y tendrán lo inalcanzable.\nTe buscamos Señor, entre los muertos,\nSin saber que Tú estás en medio del tiempo\nY en nosotros Señor, está vivo tu reino\nPor los siglos de amor eterno.\nSi alguno me ama, guardará mi palabra,\nProclamando en el mundo esta nueva esperanza.\n¿Dónde iremos Señor?" }
+        ]
+    },
+    {
+        id: 134,
+        title: "134. SUMERGEME",
+        category: "Repertorio",
+        tone: "Do",
+        lines: [
+            { chords: "Do mim", lyrics: "Cansado del camino, sediento de ti" },
+            { chords: "Fa", lyrics: "Un desierto he cruzado, Sin fuerzas he" },
+            { chords: "Sol", lyrics: "Quedado, vengo a Ti." },
+            { chords: "Do Mim", lyrics: "Luché como un soldado, a veces sufrí." },
+            { chords: "Fa", lyrics: "Pero la lucha he ganado, mi armadura he" },
+            { chords: "Sol", lyrics: "Desgastado, vengo a ti." },
+            { chords: "Do Mim", lyrics: "Sumérgeme, en el rio de tu espíritu." },
+            { chords: "Fa", lyrics: "Necesito refrescar este seco corazón" },
+            { chords: "Sol", lyrics: "Sediento de ti (bis)" }
+        ]
+    },
+    {
+        id: 135,
+        title: "135. BAUTISMO",
+        category: "Repertorio",
+        tone: "Re",
+        lines: [
+            { chords: "Re La Sol", lyrics: "Jesús, Jesús mi amigo, estás conmigo" },
+            { chords: "Re La", lyrics: "Desde que el cielo se abrió para mí," },
+            { chords: "Re", lyrics: "En mi bautismo." },
+            { chords: "sim La", lyrics: "Me hundo en el agua del perdón" },
+            { chords: "Sol fa#m sim", lyrics: "Y renazco para dios" },
+            { chords: "La Re", lyrics: "En la cruz de salvación" },
+            { chords: "Sol La", lyrics: "Inicio mi resurrección." },
+            { chords: "", lyrics: "Unido a su cuerpo, miembro soy\nDe la iglesia en comunión,\nSeré una ofrenda viva de amor\nPara quererte aún más señor.\nEspíritu santificador\nVives en mi corazón\nNo lo dejes nunca por favor\nQue ya soy hijo de dios." }
+        ]
+    },
+    {
+        id: 136,
+        title: "136. ACLARO",
+        category: "Repertorio",
+        tone: "Do",
+        lines: [
+            { chords: "Do Fa Sol", lyrics: "Mira como aclara en la cordillera" },
+            { chords: "Do Fa Sol", lyrics: "Como florece el resplandor del sol" },
+            { chords: "Do Fa Sol", lyrics: "Como la fría mañana se entibia" },
+            { chords: "Do Fa Sol", lyrics: "Como Dios nos da un día más de amor" },
+            { chords: "Re Sol La", lyrics: "Y su luz recorre campos y florestas" },
+            { chords: "Re Sol La", lyrics: "Abarcando hasta en el último rincón" },
+            { chords: "Re Sol La", lyrics: "Penetrando por tinieblas dando vida" },
+            { chords: "Re Sol La", lyrics: "Y jamás detiene su calor." },
+            { chords: "Re sim Sol La Re", lyrics: "Y aclaró en el último rincón de mi pieza" },
+            { chords: "Re sim Sol La Re", lyrics: "Aclaró en el último rincón de mi corazón" },
+            { chords: "Re sim Sol La Re", lyrics: "Aclaró la eterna oscuridad del camino" },
+            { chords: "Re sim Sol La Re", lyrics: "Aclaró un día más de vida nos ofrece Dios" },
+            { chords: "", lyrics: "Y de nuevo despertamos a la vida\nA entregarnos por entero a la razón\nSi pudiera detener esta rutina\nY dar gracias porque existo hoy.\nCambiaría como todo cambiaría\nPor completo nuestra posición\nDe egoísmos y de falsas apariencias\nCambiaría nuestro falso amor." }
+        ]
+    },
+    {
+        id: 137,
+        title: "137. CRECERÁ LA VERDAD",
+        category: "Repertorio",
+        tone: "La",
+        lines: [
+            { chords: "La Mi", lyrics: "Crecerá la verdad," },
+            { chords: "fa#m do#m", lyrics: "Crecerá el amor En el Corazón," },
+            { chords: "Re La", lyrics: "Tú has sembrado en mi vida," },
+            { chords: "Si7 Mi", lyrics: "La Semilla mejor. (Bis)" },
+            { chords: "La Mi fa#m do#m", lyrics: "Oh Padre nuestro, Santo es tu nombre," },
+            { chords: "Re La", lyrics: "Que Tu palabra me lleve," },
+            { chords: "Si7 Mi", lyrics: "A dar vida a los hombres." },
+            { chords: "La Mi fa#m do#m", lyrics: "Oh Jesucristo crucificado" },
+            { chords: "Re La", lyrics: "Y resucitado" },
+            { chords: "Si7 Mi", lyrics: "Junto a mi te has quedado." },
+            { chords: "", lyrics: "Espíritu Santo amor divino,\nAlumbra mi camino\nDe ilusión y esperanza,\nDios uno y trino venga tu reino\nPara que en esta tierra\nSe esfume la miseria." }
+        ]
+    },
+    {
+        id: 138,
+        title: "138. TRES COSAS TIENE EL AMOR",
+        category: "Repertorio",
+        tone: "La",
+        lines: [
+            { chords: "La Re", lyrics: "Tres cosas tiene el amor (bis)" },
+            { chords: "La Re", lyrics: "Que no se pueden olvidar: (Bis)" },
+            { chords: "Si Mi", lyrics: "Que Dios nos amó primero, (Bis)" },
+            { chords: "sim Mi", lyrics: "Que hay que darse por entero (Bis)" },
+            { chords: "La Re Mi", lyrics: "Y ponerse a caminar. (4 veces)" },
+            { chords: "La Re Mi", lyrics: "En medio de su pueblo" },
+            { chords: "Re La Re Mi", lyrics: "Jesús va caminando" },
+            { chords: "La Re Mi", lyrics: "Y en todos sus hermanos" },
+            { chords: "Re La Re Mi", lyrics: "Hay señas de su paso," },
+            { chords: "Re La", lyrics: "Si escuchas el silencio" },
+            { chords: "Re Mi", lyrics: "Su amor está cantando." },
+            { chords: "", lyrics: "Señor tú me has llamado\na ser tu peregrino,\nsi un paso yo he entregado\ntu cien haces conmigo,\npara anunciar tu nueva,\nla dicha de ser hijos.\nTu mano me conduce\nde noche y de día,\nllevando tu Evangelio\nme llenas de alegría,\nme alumbra tu palabra,\nme sanas las heridas." }
+        ]
+    },
+    {
+        id: 139,
+        title: "139. SEGUIR LOS PASOS DE JESÚS",
+        category: "Repertorio",
+        tone: "Do",
+        lines: [
+            { chords: "Do Sol lam mim", lyrics: "Perder la vida, tomar la cruz" },
+            { chords: "Fa La7 rem", lyrics: "Seguir los pasos de Jesús," },
+            { chords: "Sol Do", lyrics: "Amar con su forma de amar," },
+            { chords: "Fa Do Sol Do Sol", lyrics: "Perder la vida para ser luz." },
+            { chords: "Do Sol lam", lyrics: "Darse por el que nadie amó," },
+            { chords: "mim Fa Do", lyrics: "Darse por el abandonado" },
+            { chords: "lam Sol", lyrics: "Que espera ver amanecer." },
+            { chords: "Do Sol lam", lyrics: "Prestar oído a su clamor," },
+            { chords: "mim Fa Do", lyrics: "Amar como un enamorado" },
+            { chords: "lam Sol", lyrics: "A aquél que nadie quiere ver." },
+            { chords: "", lyrics: "Gritar que Dios no está dormido\nY está dándonos su fuerza,\nQue va sembrando libertad.\nGritar que el odio no ha vencido\nY la esperanza no está muerta,\nY Dios invita a caminar.\nAndar caminos aún no andados,\nSaltar abismos y fronteras,\nIr donde nadie quiere ir.\nDarle la mano al que está solo\nY que ya todo lo ha perdido,\nDarle la fuerza de vivir." }
+        ]
+    },
+    {
+        id: 140,
+        title: "140. POSTRADO ANTE LA CRUZ",
+        category: "Repertorio",
+        tone: "rem",
+        lines: [
+            { chords: "rem", lyrics: "Postrado ante la cruz en la que has muerto" },
+            { chords: "Fa", lyrics: "En la que yo también te he condenado," },
+            { chords: "solm La", lyrics: "Sólo puedo decirte que lo siento," },
+            { chords: "rem", lyrics: "Sólo puedo decirte que hoy te amo." },
+            { chords: "rem", lyrics: "Y te pido perdón por mis errores." },
+            { chords: "Fa", lyrics: "Y te pido perdón por mis pecados." },
+            { chords: "solm La rem", lyrics: "Perdóname, Señor, hoy me arrepiento." },
+            { chords: "solm La rem", lyrics: "Perdóname, mi Dios crucificado." },
+            { chords: "", lyrics: "Yo he cargado de espinas tu cabeza\nCuando he vuelto la espalda a mis hermanos.\nYo he llenado tu cuerpo de tormentos\nCuando a un semejante he despreciado.\nY yo clavo en la cruz tus manos y tus pies\nSiempre que a mis amigos yo defraudo.\nPerdóname, Señor, hoy me arrepiento.\nPerdóname, mi Dios crucificado.\nYo he colmado tu faz de sufrimiento\nCuando he visto injusticias y he callado.\nYo he sembrado tu alma de amargura\nAl fingir siempre ser un buen cristiano.\nYo atravieso tu pecho con la lanza\nSiempre que espero amor y yo no amo.\nPerdóname, Señor, hoy me arrepiento.\nPerdóname, mi Dios crucificado." }
+        ]
+    },
+    {
+        id: 141,
+        title: "141. RENDID A YAHVÉ",
+        category: "Repertorio",
+        tone: "Mi",
+        lines: [
+            { chords: "Mi 7 La", lyrics: "Rendid a Yahvé, Santos del Señor" },
+            { chords: "Mi Si7", lyrics: "Gloria y poder al que hace la creación" },
+            { chords: "Mi 7 La", lyrics: "Rendid honor al glorioso nombre del Señor" },
+            { chords: "Mi Si7 Mi", lyrics: "Y adoradle en su santo esplendor." },
+            { chords: "La Mi", lyrics: "Sobre los mares resuena la voz de Dios" },
+            { chords: "La Si7", lyrics: "Glorioso es Dios, su voz hace temblar" },
+            { chords: "Mi La Mi", lyrics: "Que poderosa es la voz del Altísimo." },
+            { chords: "La Si7 Mi", lyrics: "¡Aleluya!" },
+            { chords: "La Si7 Mi", lyrics: "¡Aleluya!" },
+            { chords: "La Si7 Mi", lyrics: "¡Aleluya!" },
+            { chords: "La", lyrics: "¡Aleluya!" },
+            { chords: "Si7 Mi", lyrics: "Y en su Santuario gritan gloria." },
+            { chords: "", lyrics: "Sentado está Dios, sobre la tempestad\nSentado está, Yahvé cual Rey eterno\nLa fuerza da al que pone su confianza en Él\nYahvé bendice a su pueblo con paz." }
+        ]
+    },
+    {
+        id: 142,
+        title: "142. ME TOCASTE JESÚS",
+        category: "Repertorio",
+        tone: "Sol",
+        lines: [
+            { chords: "Sol Do Re Sol", lyrics: "Me tocaste Jesús y cerré mi puerta" },
+            { chords: "Do Re Sol", lyrics: "Y me hablaste Jesús con el pan y el vino" },
+            { chords: "mim Do Re", lyrics: "Y así, con tu sombra detrás," },
+            { chords: "Sol Re mim Do Re", lyrics: "Que todo alumbró, tu rostro sereno." },
+            { chords: "Sol Do Sol Do", lyrics: "Me sonrió dulce y me miró fijo," },
+            { chords: "Sol Do Sol Do", lyrics: "Yo soy tu amigo me dijo" },
+            { chords: "Sol Do Sol Do", lyrics: "Le sonreí luego y lo sentí cerca" },
+            { chords: "Sol Do Sol Do Sol", lyrics: "Tienes un nuevo amigo." },
+            { chords: "", lyrics: "Con un trozo de ayer,\nYo te esperé en mi puerta\nCon un montón de papel que jamás se\nPudo leer, y casi sin mirar me alejé Jesús\nSentí tu llamada.\nHoy he vuelto al lugar donde hay amor\nSincero. No me quiero alejar por favor\nEscucha Jesús, donde hay vida tu estarás\nQuiero ser de ti, tu hermano, amigo." }
+        ]
+    },
+    {
+        id: 143,
+        title: "143. DEN AL SEÑOR SUS ALABANZAS",
+        category: "Repertorio",
+        tone: "Sol",
+        lines: [
+            { chords: "Sol", lyrics: "Den al Señor sus alabanzas" },
+            { chords: "Mim", lyrics: "denle poder, honor y gloria" },
+            { chords: "Do Lam Re7", lyrics: "a una voz canten un himno al Señor." },
+            { chords: "Sol Mim", lyrics: "En siete días creó Dios al mundo" },
+            { chords: "Sol Mim", lyrics: "Adán pecó y perdió el Cielo" },
+            { chords: "Sol Mim", lyrics: "Jesús vino para redimirnos," },
+            { chords: "Do Re7", lyrics: "murió en la cruz y nos salvó." },
+            { chords: "", lyrics: "Dios dijo a Moisés: \"Haz mi pueblo libre\nyo seré tu guía, siempre sígueme\"\nSalidos ya de Egipto y el mar pasado,\ncantaron y bailaron, se llenaron de júbilo.\nJesús dijo a Pedro: \"Ven, te llamo\nel camino es duro más iré contigo\"\nPedro respondió: \"Soy un pescador\"\nTiró sus redes y al Señor corrió.\nEntrégate hermano al Señor Jesús\nÉl te ama, aunque seas pecador\nEl pagó el precio de tu salvación\ny ahora eres una nueva creación." }
+        ]
+    },
+    {
+        id: 144,
+        title: "144. CHILE UNA MESA PARA TODOS",
+        category: "Repertorio",
+        tone: "Sol",
+        lines: [
+            { chords: "Sol Re Do Re", lyrics: "Chile una mesa para todos," },
+            { chords: "Sol Re Do Si7 mim", lyrics: "Chile una patria donde todos podemos estar" },
+            { chords: "mim Sol mim", lyrics: "Cristo, Señor y Rey del universo," },
+            { chords: "Mim Re 7", lyrics: "del cielo y de la tierra y Chile entero." },
+            { chords: "Sol Re mim sim", lyrics: "Señor, de norte a sur, de la pampa y el mar." },
+            { chords: "", lyrics: "Cristo Señor y Rey del hombre nuevo,\nqueremos ser testigos de tu presencia.\nEl huaso, el militar, el siervo regidor.\nCristo, Señor y Rey de las montañas,\nque en el Monte Tabor nos diste gloria;\nBendice nuestra tierra y al minero en ella.\nCristo Señor y Rey de pescadores;\nque sobre el agua inquieta tú caminaste.\nProtege al pescador, bendice nuestro mar.\nCristo, Señor y Rey en el trabajo,\nHijo de hombre, Hijo de carpintero.\nBendice nuestras manos, también nuestras familias.\nCristo, Señor y Rey de nuestra historia,\nlos hijos de la patria en ti confiaron.\nHombres llenos de fe, mujeres de esperanza.\nCristo, Señor y Rey, Sacerdote eterno;\nte ofreciste en un altar de cruz.\nNos diste redención, en oblación y paz.\nCristo, Señor y Rey resucitado,\nSeñor de la esperanza y de la vida.\nTus hijos rescataste de toda oscuridad.\nCristo, Señor y Rey de un Reino eterno,\nreino de la justicia y la verdad,\nde gracia y libertad, de paz y santidad.\nVirgen del Carmen, Madre y Reina De Chile,\nDios te escogió como madre de su hijo.\nDel Señor Jesús que trae amor y paz." }
+        ]
+    },
+    {
+        id: 145,
+        title: "145. ABANDÓNATE",
+        category: "Repertorio",
+        tone: "mim",
+        lines: [
+            { chords: "mim Re", lyrics: "La vida, la muerte, la paz," },
+            { chords: "Do La9", lyrics: "El mundo, el futuro y la tranquilidad" },
+            { chords: "mim Re", lyrics: "Todo esto te pertenece" },
+            { chords: "Do La9", lyrics: "mientras no olvides que tú eres" },
+            { chords: "mim", lyrics: "De Cristo Él señor." },
+            { chords: "mim Re Do Sol Re", lyrics: "Abandónate, entrégate en sus manos déjate caer a sus pies." },
+            { chords: "mim Re Do Sol lam mim", lyrics: "Abandónate y haz su voluntad Demuéstrale a todos que nada Con Él, te faltará." },
+            { chords: "", lyrics: "Mira a tu alrededor, todo es tuyo y creado por Dios,\nDime, ¿qué más puedes necesitar?\nSólo él basta, no temas que a tu lado está.\nEspíritu, fe y comunión, son los regalos que Dios nos dejó\nTan infinito es su amor Que nos promete la vida Y la Resurrección.\nCorre a sus brazos, no tengas miedo, déjate amar, confía en el Señor." }
+        ]
+    },
+    {
+        id: 146,
+        title: "146. CELEBREMOS",
+        category: "Repertorio",
+        tone: "La",
+        lines: [
+            { chords: "La sim La Sol Re La", lyrics: "Vamos a cantar al Señor" },
+            { chords: "sim La Sol Re fa#m do#m Re La", lyrics: "un canto nuevo porque su amor es grande por nosotros" },
+            { chords: "sim do#m Re Mi", lyrics: "acerquémonos a su mesa." },
+            { chords: "La Mi sim Re La Mi sim Do# fa#m Re La Mi La", lyrics: "Celebremos al Señor de la vida al resucitado Cristo el Señor." },
+            { chords: "", lyrics: "Unamos nuestras alabanzas\nden gracias al Padre que nos regala a Jesús\nconocido por el Espíritu.\nGocemos de su presencia real\nJesús está con nosotros\nalegría, paz y amor para todos que Dios llamó." }
+        ]
+    },
+    {
+        id: 147,
+        title: "147. SALMO DE LA CREACIÓN",
+        category: "Repertorio",
+        tone: "Sol",
+        lines: [
+            { chords: "Sol mim Do Re", lyrics: "Por tu océano azul y las aguas del mar" },
+            { chords: "Sol mim Do Re", lyrics: "por todo continente y los ríos que van," },
+            { chords: "mim Do mim Do lam Re 7", lyrics: "por el fuego que dice, como arbusto ardiente por el ala del viento, quiero gritar..." },
+            { chords: "Sol Re mim Do mim Do Re", lyrics: "Mi dios, tu eres grande y hermoso, Dios viviente e inmeso, Tu eres el Dios de amor." },
+            { chords: "Sol Re mim Do mim Re Sol", lyrics: "Mi Dios, tú eres grande y hermoso, Dios viviente e inmenso Dios presente en toda creación." },
+            { chords: "", lyrics: "Y por los animales, de la tierra y el agua,\nPor el canto del ave Y el cantar de la vida;\nPor el hombre que hiciste Semejante a ti\nY por todos tus hijos, Quiero gritar...\nPor la mano tendida Que te invita a la danza,\nPor el beso que brota Al surgir la esperanza,\nPor el cielo ante Ti, Majestad esplendor...\nRe mim sim Do Sol Re Sol Ooooooooooooohhhhhhhhh" }
+        ]
+    },
+    {
+        id: 148,
+        title: "148. CONSAGRADOS A TI",
+        category: "Repertorio",
+        tone: "La",
+        lines: [
+            { chords: "La Re La", lyrics: "Confiados en tu misericordia, nos acercamos a ti, Señor," },
+            { chords: "Do Sol Re Sib Do Re Mi", lyrics: "para ofrecerte de nuevo la vida; para entregarte nuestra voluntad." },
+            { chords: "La Re La Do Sol Re Sib Fa Do Re Mi", lyrics: "Venimos con María, nuestra madre, en la presencia de tus santos, Señor. Venimos a cantar tu infinita bondad..." },
+            { chords: "La Mi sim do#m fa#m Re Mi fa#m Mi do#m sim Mi", lyrics: "Con tu amor y gracia, Señor, caminaremos. Cielo nuevo, nueva canción, Proclamaremos." },
+            { chords: "", lyrics: "Funde a fuego nuestra misión, lánzanos a la aventura.\nManos que parten pan, consagrado el andar.\nEterno Señor de todas las cosas, Seguimos tu bandera.\nHay hambre en el mundo de hoy; Hambre de pan y justicia, Señor." }
+        ]
+    },
+    {
+        id: 149,
+        title: "149. TU MODO",
+        category: "Repertorio",
+        tone: "Sol",
+        lines: [
+            { chords: "Sol Re Do Re Sol Re Do Re", lyrics: "Jesús, al contemplar en tu vida el modo que Tú tienes de tratar a los demás" },
+            { chords: "Sol Re Do Re Sol", lyrics: "me dejo interpelar por tu ternura, tu forma de amar nos mueve a amar;" },
+            { chords: "Re Do Re Sol", lyrics: "tu trato es como el agua cristalina que limpia y acompaña el caminar." },
+            { chords: "Sol Re lam Re Sol Re lam Re Sol", lyrics: "Jesús, enséñame tu modo de hacer sentir al otro más humano, que tus pasos sean mis pasos; mi modo de proceder." },
+            { chords: "", lyrics: "Jesús, hazme sentir con tus sentimientos,\nmirar con tu mirada, comprometer mi acción,\ndonarme hasta la muerte por el reino,\ndefender la vida hasta la cruz,\namar a cada uno como amigo,\ny en la oscuridad llevar tu luz." }
+        ]
+    },
+    {
+        id: 150,
+        title: "150. EL QUE MUERE POR MÍ",
+        category: "Repertorio",
+        tone: "Do",
+        lines: [
+            { chords: "Do Fa lam Sol", lyrics: "Todo empezó en una cruz Donde un hombre sufrió y un Dios se entregó" },
+            { chords: "Do Fa lam Sol", lyrics: "Silenciosa la muerte llegó Extinguiendo la luz que en un grito se ahogó" },
+            { chords: "Fa Sol lam Sol Fa Sol Do Sol", lyrics: "Siendo hombre, amigo, esclavo y maestro, Entregó hasta su cuerpo en el pan y la vid." },
+            { chords: "lam Fa Do Sol lam Fa Do Sol lam", lyrics: "Desde entonces lo he visto caminar a mi lado A ese Dios que se humilla y muere por mi" },
+            { chords: "", lyrics: "Viendo un humilde calvario Con rostro cansado soporta la cruz\nY al verme rezando a sus pies Se olvida de Él, me toma en sus brazos.\nY si ahora yo acepto esa cruz Es por esa persona ese Dios Es por Cristo Jesús." }
+        ]
+    },
+    {
+        id: 151,
+        title: "151. VIDA EN ABUNDANCIA",
+        category: "Repertorio",
+        tone: "Sol",
+        lines: [
+            { chords: "Sol Do Re Sol Do Re", lyrics: "Los lirios del campo y las aves del cielo No se preocupan porque están en mis manos" },
+            { chords: "mim Do Sol Re", lyrics: "Ten confianza en mí, aquí estoy junto a ti." },
+            { chords: "mim Do Sol Re mim Do Re", lyrics: "Yo vengo a traerte vida, Vida en abundancia En abundancia." },
+            { chords: "mim Do Sol Re mim Do Re", lyrics: "Yo soy el camino, la verdad y la vida, Vida en abundancia En abundancia." },
+            { chords: "", lyrics: "No hice al hombre para que esté solo, caminen juntos como hermanos.\nSopórtense mutuamente, ámense unos a otros.\nLa felicidad de la vida eterna empieza conmigo en la tierra\nsiéntete vivo, la fiesta del reino comienza acá." }
+        ]
+    },
+    {
+        id: 152,
+        title: "152. EN MI GETSEMANÍ",
+        category: "Repertorio",
+        tone: "Re",
+        lines: [
+            { chords: "Re La sim fa#m Sol mim La", lyrics: "Para que mi amor no sea un sentimiento Tan solo un deslumbramiento pasajero." },
+            { chords: "Re La sim fa#m Sol mim La", lyrics: "Más allá de mis miedos Más allá de mi inseguridad Quiero darte mi respuesta." },
+            { chords: "Re La sim fa#m Sol La Re", lyrics: "Aquí estoy para hacer tu voluntad Para que mi amor sea decir que si Hasta el final." },
+            { chords: "", lyrics: "Duerme su sopor y temen en el huerto Ni sus amigos acompañan al maestro.\nDame a comprender señor tu amor tan puro Amor que persevera en cruz amor perfecto.\nSolo es el amor en la cruz madurado El amor que mueve a todo el universo." }
+        ]
+    },
+    {
+        id: 153,
+        title: "153. SECUENCIA DE PENTECOSTES",
+        category: "Repertorio",
+        tone: "La",
+        lines: [
+            { chords: "La fa#m Mi La", lyrics: "Ven, oh Santo Espíritu Y envíanos tu luz" },
+            { chords: "La fa#m Mi La", lyrics: "Tú serás la claridad Que inunde el corazón." },
+            { chords: "La do#m fa#m do#m fa#m do#m Re Mi", lyrics: "Padre de los Pobres Ven a enriquecer Te lo suplicamos Todo nuestro ser." },
+            { chords: "", lyrics: "Tú eres quien consuela Amigo siempre fiel.\nTregua en el trabajo Brisa en el calor.\nTú eres el descanso La ponderación\nCuando viene el llanto; La consolación.\nSana las heridas Limpia el corazón\nDale Tú el calor Y oriéntalo." }
+        ]
+    },
+    {
+        id: 154,
+        title: "154. SECUENCIA DEL ESPIRITU SANTO",
+        category: "Repertorio",
+        tone: "Re",
+        lines: [
+            { chords: "Re La sim La sim La", lyrics: "Ven Espíritu divino, Manda tu luz desde el cielo." },
+            { chords: "Re La Re", lyrics: "Padre amoroso del pobre, Don en tus dones espléndido." },
+            { chords: "", lyrics: "Luz que penetras las almas, Fuente del mayor consuelo.\nVen, dulce huésped del alma, Descanso de nuestro esfuerzo.\nTregua en el duro trabajo, Brisa en las horas de fuego.\nGozo que enjuga las lágrimas Y reconforta en los duelos.\nEntra hasta el fondo del alma Divina luz y enriquécenos.\nLa Re Amén." }
+        ]
+    }
+];
+
+let currentFilter = 'todos';
+let currentLetter = 'todos';
+let selectedSongId = null;
+let currentTransposeOffset = 0;
+let chordsVisible = true;
+
+const spanishChromaticScale = ["Do", "Do#", "Re", "Re#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"];
+const spanishFlatScale = ["Do", "Reb", "Re", "Mib", "Mi", "Fa", "Solb", "Sol", "Lab", "La", "Sib", "Si"];
+
+function initAlphabet() {
+    const grid = document.getElementById('alphabetGrid');
+    grid.innerHTML = '';
+    
+    const allBtn = document.createElement('button');
+    allBtn.className = 'letter-btn btn-todos active';
+    allBtn.id = 'btnLetterTodos';
+    allBtn.innerText = 'Todos';
+    allBtn.onclick = () => setLetter('todos', allBtn);
+    grid.appendChild(allBtn);
+
+    const alphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split('');
+    alphabet.forEach(letter => {
+        const btn = document.createElement('button');
+        btn.className = 'letter-btn';
+        btn.innerText = letter;
+        btn.onclick = () => setLetter(letter, btn);
+        grid.appendChild(btn);
+    });
+}
+
+function customAlert(msg) {
+    const box = document.createElement('div');
+    box.style.cssText = 'position:fixed; top:20px; right:20px; background:var(--bg-card); color:var(--text-main); border:1px solid var(--accent); padding:12px 20px; border-radius:8px; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.3); font-size:13px;';
+    box.innerText = msg;
+    document.body.appendChild(box);
+    setTimeout(() => box.remove(), 3000);
+}
+
+function changeTheme(themeName) {
+    document.documentElement.setAttribute('data-theme', themeName);
+}
+
+function renderSongList(filteredSongs) {
+    const listContainer = document.getElementById('songListContainer');
+    listContainer.innerHTML = '';
+    
+    if (filteredSongs.length === 0) {
+        listContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted); font-size: 13px;">No se encontraron cantos</div>';
+        return;
+    }
+
+    filteredSongs.forEach(song => {
+        const item = document.createElement('div');
+        item.className = 'song-item' + (selectedSongId === song.id ? ' selected' : '');
+        item.onclick = () => selectSong(song.id, item);
+        item.innerHTML = `
+            <div class="song-item-title">${song.title}</div>
+            <div class="song-item-meta">
+                <span class="badge-cat">${song.category}</span>
+                <span class="badge-tone">Tono: ${song.tone}</span>
+            </div>
+        `;
+        listContainer.appendChild(item);
+    });
+    
+    document.getElementById('countDisplay').innerText = `${filteredSongs.length} cantos`;
+}
+
+function setFilter(category, element) {
+    currentFilter = category;
+    document.querySelectorAll('.filters-section .tag').forEach(t => t.classList.remove('active'));
+    element.classList.add('active');
+    filterSongs();
+}
+
+function setLetter(letter, element) {
+    currentLetter = letter;
+    document.querySelectorAll('.alphabet-grid .letter-btn').forEach(b => b.classList.remove('active'));
+    element.classList.add('active');
+    filterSongs();
+}
+
+function filterSongs() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = songs.filter(song => {
+        const matchesCategory = currentFilter === 'todos' || song.category.toLowerCase() === currentFilter.toLowerCase();
+        let cleanTitle = song.title.replace(/^([-\d]+[\.\-\s]*|Aclamación\s*[\-\d]*[\.\-\s]*)/i, '').trim().toUpperCase();
+        if (!cleanTitle) cleanTitle = song.title.toUpperCase();
+        const matchesLetter = currentLetter === 'todos' || cleanTitle.startsWith(currentLetter.toUpperCase());
+        const fullText = song.title + ' ' + song.lines.map(l => l.chords + ' ' + l.lyrics).join(' ');
+        const matchesQuery = fullText.toLowerCase().includes(query);
+        return matchesCategory && matchesLetter && matchesQuery;
+    });
+    renderSongList(filtered);
+}
+
+function getSpanishNoteIndex(noteStr) {
+    if (!noteStr) return 0;
+    let clean = noteStr.charAt(0).toUpperCase() + noteStr.slice(1).toLowerCase();
+    let idx = spanishChromaticScale.indexOf(clean);
+    if (idx !== -1) return idx;
+    idx = spanishFlatScale.indexOf(clean);
+    if (idx !== -1) return idx;
+    return 0;
+}
+
+function transposeSpanishChord(chord, semitones) {
+    const match = chord.match(/^(Do|Re|Mi|Fa|Sol|La|Si)([#b]?)(.*)$/i);
+    if (!match) return chord;
+    
+    let baseNote = match[1].charAt(0).toUpperCase() + match[1].slice(1).toLowerCase() + match[2];
+    let suffix = match[3];
+    
+    let baseIdx = getSpanishNoteIndex(baseNote);
+    let newIdx = (baseIdx + semitones + 12) % 12;
+    let newRoot = spanishChromaticScale[newIdx];
+    
+    return newRoot + suffix;
+}
+
+function transposeLineChords(chordLine, semitones) {
+    if (!chordLine) return '';
+    return chordLine.replace(/(Do|Re|Mi|Fa|Sol|La|Si)[#b]?[a-zA-Z0-9]*/gi, (match) => {
+        return transposeSpanishChord(match, semitones);
+    });
+}
+
+function selectSong(id, itemElement) {
+    selectedSongId = id;
+    currentTransposeOffset = 0;
+    
+    document.querySelectorAll('.song-item').forEach(el => el.classList.remove('selected'));
+    if (itemElement) {
+        itemElement.classList.add('selected');
+    } else {
+        const items = document.querySelectorAll('.song-item');
+        items.forEach(it => {
+            if (it.innerHTML.includes(songs.find(s=>s.id===id)?.title)) {
+                it.classList.add('selected');
+            }
+        });
+    }
+    
+    const song = songs.find(s => s.id === id);
+    if (!song) return;
+    
+    renderSongView(song);
+}
+
+function toggleChords() {
+    chordsVisible = !chordsVisible;
+    const chordElements = document.querySelectorAll('.chord-line');
+    const toggleBtn = document.getElementById('toggleChordsBtn');
+    
+    chordElements.forEach(el => {
+        if (chordsVisible) {
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
+    });
+    
+    if (toggleBtn) {
+        toggleBtn.innerText = chordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+    }
+}
+
+function renderSongView(song) {
+    const contentPanel = document.getElementById('contentPanel');
+    let displayedTone = transposeSpanishChord(song.tone, currentTransposeOffset);
+
+    let lyricsHTML = '';
+    song.lines.forEach(line => {
+        let displayChords = transposeLineChords(line.chords, currentTransposeOffset);
+        let hiddenClass = chordsVisible ? '' : ' hidden';
+        lyricsHTML += `
+            <div class="song-line">
+                <div class="chord-line${hiddenClass}">${displayChords}</div>
+                <div class="lyric-line">${line.lyrics}</div>
+            </div>
+        `;
+    });
+
+    let baseOriginalIdx = getSpanishNoteIndex(song.tone);
+    let optionsHTML = '';
+    
+    for (let i = 0; i < 12; i++) {
+        let targetOffset = (i - baseOriginalIdx + 12) % 12;
+        let noteName = spanishChromaticScale[i];
+        let label = (targetOffset === 0) ? `Tono original (${noteName})` : `Transportar a ${noteName}`;
+        let selectedAttr = (targetOffset === currentTransposeOffset) ? 'selected' : '';
+        optionsHTML += `<option value="${targetOffset}" ${selectedAttr}>${label}</option>`;
+    }
+
+    let toggleBtnText = chordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+
+    contentPanel.innerHTML = `
+        <div class="song-display">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h2 style="margin:0; border:none; padding:0;">${song.title}</h2>
+                <div class="transposer-toolbar">
+                    <span>Tono: <strong>${displayedTone}</strong></span>
+                    <label>Nota:</label>
+                    <select id="transposeSelect" onchange="changeTranspose(this.value)">
+                        ${optionsHTML}
+                    </select>
+                    <button class="btn" id="toggleChordsBtn" style="padding: 5px 10px; font-size: 12px;" onclick="toggleChords()">${toggleBtnText}</button>
+                    <button class="btn" style="padding: 5px 10px; font-size: 12px;" onclick="openSongModal(${song.id})">✏️ Editar</button>
+                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;" onclick="openFullscreenWindow()">🖨️ Proyectar</button>
+                </div>
+            </div>
+            <div class="nav-menu-bar">
+                <span>Categoría: ${song.category}</span>
+                <span>Tono Original: ${song.tone}</span>
+            </div>
+            <div class="song-lyrics-container">
+                ${lyricsHTML}
+            </div>
+        </div>
+    `;
+}
+
+function changeTranspose(val) {
+    currentTransposeOffset = parseInt(val);
+    const song = songs.find(s => s.id === selectedSongId);
+    if (song) {
+        renderSongView(song);
+    }
+}
+
+function openSongModal(songId = null) {
+    const modal = document.getElementById('songModal');
+    const modalTitle = document.getElementById('modalTitle');
+    
+    document.getElementById('editSongId').value = '';
+    document.getElementById('inputTitle').value = '';
+    document.getElementById('inputCategory').value = 'Repertorio';
+    document.getElementById('inputTone').value = 'Do';
+    document.getElementById('inputRawLyrics').value = '';
+
+    if (songId) {
+        const song = songs.find(s => s.id === songId);
+        if (song) {
+            modalTitle.innerText = 'Editar Canto';
+            document.getElementById('editSongId').value = song.id;
+            document.getElementById('inputTitle').value = song.title;
+            document.getElementById('inputCategory').value = song.category;
+            document.getElementById('inputTone').value = song.tone;
+            
+            let rawText = song.lines.map(l => (l.chords ? l.chords + '\n' : '') + l.lyrics).join('\n');
+            document.getElementById('inputRawLyrics').value = rawText;
+        }
+    } else {
+        modalTitle.innerText = 'Nuevo Canto';
+    }
+
+    modal.classList.add('active');
+}
+
+function closeSongModal() {
+    document.getElementById('songModal').classList.remove('active');
+}
+
+function saveSong() {
+    const editId = document.getElementById('editSongId').value;
+    const title = document.getElementById('inputTitle').value.trim();
+    const category = document.getElementById('inputCategory').value;
+    const tone = document.getElementById('inputTone').value.trim() || 'Do';
+    const rawLyrics = document.getElementById('inputRawLyrics').value;
+
+    if (!title) {
+        alert('Por favor ingresa un título para el canto.');
+        return;
+    }
+
+    let parsedLines = [];
+    let textLines = rawLyrics.split('\n');
+    for (let i = 0; i < textLines.length; i += 2) {
+        let chordLine = textLines[i] || '';
+        let lyricLine = textLines[i+1] || '';
+        parsedLines.push({ chords: chordLine, lyrics: lyricLine });
+    }
+
+    if (editId) {
+        let song = songs.find(s => s.id == editId);
+        if (song) {
+            song.title = title;
+            song.category = category;
+            song.tone = tone;
+            song.lines = parsedLines;
+        }
+        customAlert('¡Canto actualizado con éxito!');
+    } else {
+        let newId = songs.length > 0 ? Math.max(...songs.map(s => s.id)) + 1 : 1;
+        let newSong = {
+            id: newId,
+            title: title,
+            category: category,
+            tone: tone,
+            lines: parsedLines
+        };
+        songs.push(newSong);
+        selectedSongId = newId;
+        customAlert('¡Nuevo canto añadido con éxito!');
+    }
+
+    closeSongModal();
+    filterSongs();
+    if (selectedSongId) {
+        const updatedSong = songs.find(s => s.id === selectedSongId);
+        if (updatedSong) renderSongView(updatedSong);
+    }
+}
+
+function openFullscreenWindow() {
+    const song = songs.find(s => s.id === selectedSongId);
+    if (!song) return;
+
+    let displayedTone = transposeSpanishChord(song.tone, currentTransposeOffset);
+    let lyricsHTML = '';
+    song.lines.forEach(line => {
+        let displayChords = transposeLineChords(line.chords, currentTransposeOffset);
+        let chordStyle = chordsVisible ? "color: #f59e0b; font-weight: bold; font-family: 'Courier New', monospace; white-space: pre; font-size: 20px;" : "display: none;";
+        lyricsHTML += `
+            <div style="margin-bottom: 18px; text-align: center;">
+                <div class="print-chord-line" style="${chordStyle}">${displayChords || '&nbsp;'}</div>
+                <div style="color: #f8fafc; font-family: 'Courier New', monospace; white-space: pre-wrap; font-size: 22px;">${line.lyrics || '&nbsp;'}</div>
+            </div>
+        `;
+    });
+
+    let newWindow = window.open('', '_blank', 'width=1000,height=800');
+    newWindow.document.write(`
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>${song.title} - Vista Presentación</title>
+            <style>
+                body {
+                    background-color: #0f172a;
+                    color: #f8fafc;
+                    font-family: 'Segoe UI', Arial, sans-serif;
+                    padding: 30px;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .top-bar {
+                    width: 100%;
+                    max-width: 900px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-bottom: 2px solid #334155;
+                    padding-bottom: 15px;
+                    margin-bottom: 30px;
+                }
+                .btn-group {
+                    display: flex;
+                    gap: 10px;
+                }
+                button {
+                    background: #334155;
+                    color: #f8fafc;
+                    border: 1px solid #475569;
+                    padding: 8px 14px;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    font-size: 13px;
+                }
+                button:hover { background: #475569; }
+                button.primary {
+                    background: #f59e0b;
+                    color: #0f172a;
+                    border: none;
+                }
+                h1 { color: #f59e0b; font-size: 26px; margin: 0; text-align: center; }
+                .meta { color: #94a3b8; font-size: 14px; text-align: center; margin-top: 5px; }
+                .song-container {
+                    width: 100%;
+                    max-width: 900px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                }
+                @media print {
+                    body { background: white; color: black; }
+                    .top-bar { display: none; }
+                    .print-chord-line { color: #b45309 !important; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="top-bar">
+                <button onclick="window.close()">← Volver</button>
+                <div class="btn-group">
+                    <button id="printToggleChords" onclick="togglePrintChords()">🎸 Ocultar Acordes</button>
+                    <button class="primary" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+                    <button onclick="toggleFullScreen()">⛶ Pantalla Completa</button>
+                </div>
+            </div>
+            
+            <div class="song-container">
+                <div style="margin-bottom: 25px; text-align: center;">
+                    <h1>${song.title}</h1>
+                    <div class="meta">Tono actual: <strong>${displayedTone}</strong> (Original: ${song.tone}) | ${song.category}</div>
+                </div>
+                <div style="width: 100%;">
+                    ${lyricsHTML}
+                </div>
+            </div>
+
+            <script>
+                let printChordsVisible = ${chordsVisible};
+                function togglePrintChords() {
+                    printChordsVisible = !printChordsVisible;
+                    const lines = document.querySelectorAll('.print-chord-line');
+                    const btn = document.getElementById('printToggleChords');
+                    lines.forEach(l => {
+                        l.style.display = printChordsVisible ? 'block' : 'none';
+                    });
+                    btn.innerText = printChordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+                }
+
+                function toggleFullScreen() {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().catch(err => {
+                            alert("No se pudo activar la pantalla completa: " + err.message);
+                        });
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        }
+                    }
+                }
+            <\/script>
+        </body>
+        </html>
+    `);
+    newWindow.document.close();
+}
+
+window.onload = function() {
+    initAlphabet();
+    filterSongs();
+};
+</script>
+</body>
+</html>

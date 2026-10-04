@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANTOS AL CORDERO - Cancionero Litúrgico</title>
+<style>
+:root[data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-hover: #334155;
+    --accent: #f59e0b;
+    --accent-hover: #d97706;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --danger: #ef4444;
+}
+:root[data-theme="light"] {
+    --bg-main: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-hover: #e2e8f0;
+    --accent: #d97706;
+    --accent-hover: #b45309;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border: #cbd5e1;
+    --danger: #dc2626;
+}
+:root[data-theme="sepia"] {
+    --bg-main: #fbf0d9;
+    --bg-card: #f5e6cc;
+    --bg-hover: #e6d3b3;
+    --accent: #a0522d;
+    --accent-hover: #8b4513;
+    --text-main: #3e2723;
+    --text-muted: #6d4c41;
+    --border: #d7ccc8;
+    --danger: #b91c1c;
+}
+:root[data-theme="blue"] {
+    --bg-main: #0a192f;
+    --bg-card: #172a45;
+    --bg-hover: #303c55;
+    --accent: #64ffda;
+    --accent-hover: #4cdbc2;
+    --text-main: #e6f1ff;
+    --text-muted: #8892b0;
+    --border: #233554;
+    --danger: #ff6b6b;
+}
+:root[data-theme="green"] {
+    --bg-main: #064e3b;
+    --bg-card: #065f46;
+    --bg-hover: #047857;
+    --accent: #34d399;
+    --accent-hover: #10b981;
+    --text-main: #ecfdf5;
+    --text-muted: #a7f3d0;
+    --border: #047857;
+    --danger: #f87171;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s, color 0.3s;
+}
+
+header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.logo-icon {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.header-titles h1 {
+    font-size: 20px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.badge-parroquia {
+    font-size: 11px;
+    background: var(--bg-main);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    font-weight: normal;
+}
+.header-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.btn {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+.btn:hover { opacity: 0.9; }
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--bg-main);
+    font-weight: 600;
+    border: none;
+}
+.btn-danger {
+    background-color: var(--danger);
+    color: #ffffff;
+    border: none;
+}
+.theme-selector {
+    background: var(--bg-main);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 300px 1fr; 
+    flex: 1;
+    height: calc(100vh - 78px);
+    overflow: hidden;
+}
+@media (max-width: 900px) {
+    .main-container { grid-template-columns: 1fr; height: auto; overflow: visible; }
+}
+.sidebar {
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+.sidebar-search {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.search-input {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px 8px 32px;
+    color: var(--text-main);
+    font-size: 12px;
+    outline: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2394a3b8" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+.search-input:focus { border-color: var(--accent); }
+
+.filters-section {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+}
+.filter-title {
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.tag {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    cursor: pointer;
+}
+.tag.active {
+    background: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+.alphabet-section {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+}
+.alphabet-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+.letter-btn {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.letter-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-main);
+}
+.letter-btn.active {
+    background: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+}
+.letter-btn.btn-todos {
+    width: auto;
+    padding: 0 6px;
+}
+
+.song-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+}
+.song-item {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 3px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+}
+.song-item:hover { background: var(--bg-hover); }
+.song-item.selected {
+    background: var(--bg-hover);
+    border-color: var(--accent);
+}
+.song-item-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+}
+.song-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    flex-shrink: 0;
+}
+.badge-cat {
+    background: var(--bg-main);
+    color: var(--text-muted);
+    padding: 1px 5px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+.badge-tone {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.content-panel {
+    background-color: var(--bg-main);
+    padding: 30px;
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.welcome-screen {
+    text-align: center;
+    margin: auto;
+    color: var(--text-muted);
+    max-width: 400px;
+}
+.welcome-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    background: var(--bg-card);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    color: var(--accent);
+}
+.song-display {
+    width: 100%;
+    max-width: 800px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.transposer-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-main);
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 12px;
+    flex-wrap: wrap;
+}
+.transposer-toolbar select {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+}
+
+.media-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.media-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+audio {
+    width: 100%;
+    max-width: 350px;
+    height: 35px;
+}
+.youtube-embed {
+    width: 100%;
+    max-width: 400px;
+    height: 225px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.song-lyrics-container {
+    font-family: "Courier New", Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.25;
+}
+.song-line {
+    margin-bottom: 6px;
+}
+.chord-line {
+    color: var(--accent);
+    font-weight: bold;
+    white-space: pre;
+    min-height: 1.1em;
+    font-size: 14px;
+}
+.chord-line.hidden {
+    display: none !important;
+}
+.lyric-line {
+    color: var(--text-main);
+    white-space: pre-wrap;
+    font-size: 14px;
+}
+
+.projection-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: var(--bg-main);
+    z-index: 2000;
+    display: none;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+}
+.projection-overlay.active {
+    display: flex;
+}
+.projection-topbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+    gap: 15px;
+}
+.projection-body {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.projection-title {
+    color: var(--accent);
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    justify-self: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.projection-lyrics {
+    font-family: "Courier New", Consolas, monospace;
+    text-align: left;
+    display: inline-block;
+}
+.projection-line {
+    margin-bottom: 6px;
+}
+.projection-chord {
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 18px;
+    white-space: pre;
+    line-height: 1.1;
+    min-height: 1.1em;
+}
+.projection-text {
+    color: var(--text-main);
+    font-size: 20px;
+    white-space: pre;
+    line-height: 1.25;
+}
+
+:fullscreen .projection-topbar .transposer-toolbar,
+:-webkit-full-screen .projection-topbar .transposer-toolbar,
+.projection-overlay.is-fullscreen .projection-topbar .transposer-toolbar {
+    display: none !important;
+}
+:fullscreen .projection-topbar,
+:-webkit-full-screen .projection-topbar,
+.projection-overlay.is-fullscreen .projection-topbar {
+    border-bottom: none;
+    margin-bottom: 5px;
+    justify-content: space-between;
+}
+:fullscreen .projection-body,
+:-webkit-full-screen .projection-body,
+.projection-overlay.is-fullscreen .projection-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+}
+.projection-overlay.is-fullscreen .projection-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.projection-overlay.is-fullscreen .projection-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+}
+:fullscreen .projection-text,
+:-webkit-full-screen .projection-text,
+.projection-overlay.is-fullscreen .projection-text {
+    font-size: 24px;
+}
+:fullscreen .projection-chord,
+:-webkit-full-screen .projection-chord,
+.projection-overlay.is-fullscreen .projection-chord {
+    font-size: 22px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    padding: 20px;
+}
+.modal-overlay.active { display: flex; }
+.modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+.modal-header h3 { color: var(--accent); font-size: 18px; }
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+.form-control {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+}
+.form-control:focus { border-color: var(--accent); }
+textarea.form-control {
+    font-family: monospace;
+    resize: vertical;
+    height: 120px;
+}
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+}
+
+@media print {
+    header, .sidebar, .transposer-toolbar, .media-section, .projection-overlay, .modal-overlay, .btn {
+        display: none !important;
+    }
+    body, .main-container, .content-panel {
+        background: #ffffff !important;
+        color: #000000 !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .song-display {
+        border: none !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 10px !important;
+    }
+    .chord-line { color: #b45309 !important; font-weight: bold !important; }
+    .lyric-line { color: #000000 !important; }
+}
+
+@media (max-width: 600px) {
+    header { padding: 10px 14px; }
+    .header-titles h1 { font-size: 16px; }
+    .logo-icon { width: 36px; height: 36px; font-size: 18px; }
+    .transposer-toolbar { width: 100%; justify-content: space-between; gap: 6px; }
+    .btn { padding: 6px 10px; font-size: 11px; }
+    .song-lyrics-container { font-size: 13px; }
+    .chord-line, .lyric-line { font-size: 13px; }
+    .projection-text { font-size: 18px; }
+    .projection-chord { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <a href="index.html" class="btn" title="Volver al inicio">← Volver</a>
+        <div class="logo-icon">📖</div>
+        <div class="header-titles">
+            <h1>CANTOS AL CORDERO <span class="badge-parroquia">Varias.</span></h1>
+            <div class="header-sub">Cancionero Litúrgico</div>
+        </div>
+    </div>
+    <div class="header-actions">
+        <select class="theme-selector" id="themeSelect" onchange="changeTheme(this.value)">
+            <option value="dark">🌙 Oscuro</option>
+            <option value="light">☀ Claro</option>
+            <option value="sepia">📜 Sepia</option>
+            <option value="blue">🌊 Azul Litúrgico</option>
+            <option value="green">🌿 Verde Litúrgico</option>
+        </select>
+        <button class="btn btn-primary" onclick="openSongModal()">+ Nueva Canción</button>
+    </div>
+</header>
+
+<div class="main-container">
+    <div class="sidebar">
+        <div class="sidebar-search">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar canto por título o número..." onkeyup="filterSongs()">
+        </div>
+        <div class="filters-section">
+            <div class="filter-title"><span>Tiempo Litúrgico:</span> <span id="countDisplay">0 cantos</span></div>
+            <div class="filter-tags">
+                <span class="tag active" onclick="setFilter('todos', this)">Todos</span>
+                <span class="tag" onclick="setFilter('Ordinario', this)">Ordinario</span>
+                <span class="tag" onclick="setFilter('Pascual', this)">Pascual</span>
+                <span class="tag" onclick="setFilter('Navidad', this)">Navidad</span>
+                <span class="tag" onclick="setFilter('Cuaresma', this)">Cuaresma</span>
+                <span class="tag" onclick="setFilter('Taizé', this)">Taizé</span>
+                <span class="tag" onclick="setFilter('Aclamaciones', this)">Aclamaciones</span>
+            </div>
+        </div>
+        <div class="alphabet-section">
+            <div class="filter-title"><span>Buscar por letra:</span></div>
+            <div class="alphabet-grid" id="alphabetGrid"></div>
+        </div>
+        <div class="song-list" id="songListContainer"></div>
+    </div>
+
+    <div class="content-panel" id="contentPanel">
+        <div class="welcome-screen">
+            <div class="welcome-icon">🎵</div>
+            <h3>Selecciona una canción del repertorio</h3>
+            <p style="font-size: 13px; margin-top: 8px;">Haz clic en cualquiera de los cantos de la izquierda para visualizar su contenido completo, tonos y letra.</p>
+        </div>
+    </div>
+</div>
+
+<div class="projection-overlay" id="projectionOverlay"></div>
+
+<div class="modal-overlay" id="songModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">Nueva Canción</h3>
+            <button class="btn" style="padding: 4px 8px;" onclick="closeSongModal()">✕</button>
+        </div>
+        <input type="hidden" id="editSongId">
+        <div class="form-group">
+            <label>Título del Canto (Ej: -1- Cordero de Dios)</label>
+            <input type="text" id="inputTitle" class="form-control" placeholder="Número y Título">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="form-group">
+                <label>Tiempo Litúrgico / Categoría</label>
+                <select id="inputCategory" class="form-control">
+                    <option value="Ordinario">Ordinario</option>
+                    <option value="Pascual">Pascual</option>
+                    <option value="Navidad">Navidad</option>
+                    <option value="Cuaresma">Cuaresma</option>
+                    <option value="Taizé">Taizé</option>
+                    <option value="Aclamaciones">Aclamaciones</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tono Original (Ej: Re, Sol, Lam, Rem)</label>
+                <input type="text" id="inputTone" class="form-control" value="Do">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Enlace de YouTube (URL completa o de video)</label>
+            <input type="text" id="inputYoutube" class="form-control" placeholder="https://www.youtube.com/watch?v=...">
+        </div>
+        <div class="form-group">
+            <label>Enlace de Audio MP3 (Opcional)</label>
+            <input type="text" id="inputAudio" class="form-control" placeholder="https://ejemplo.com/audio.mp3">
+        </div>
+        <div class="form-group">
+            <label>Letra y Acordes (Formato: Alternar línea de Acordes y línea de Letra)</label>
+            <textarea id="inputRawLyrics" class="form-control" placeholder="Do   Sol   Fa&#10;Aleluya aleluya"></textarea>
+            <small style="color: var(--text-muted); font-size: 11px;">Nota: Ingresa líneas alternadas. La línea impar contiene los acordes y la par la letra.</small>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="btnDeleteSong" style="display:none;" onclick="deleteCurrentSong()">🗑️ Borrar Canto</button>
+            <div style="display: flex; gap: 10px; margin-left: auto;">
+                <button type="button" class="btn" onclick="closeSongModal()">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveSong()">Guardar Canto</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// --- BASE DE DATOS LOCAL (LocalStorage) ---
+const DB_KEY = 'cantos_al_cordero_db_v1';
+
+const defaultSongs = [
+    { 
+        id: 1, 
+        title: "-1- Cordero de Dios", 
+        category: "Ordinario", 
+        tone: "Re", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re         La7", lyrics: "Cordero de Dios que quitas el" },
+            { chords: "Sim   Sol   Re   La7", lyrics: "pecado, ten piedad Señor, ten" },
+            { chords: "Re   Si7", lyrics: "piedad. (2)" },
+            { chords: "Mi         Si7", lyrics: "Cordero de Dios que quitas el" },
+            { chords: "Do#m  La    Mi   Si7", lyrics: "pecado, danos la paz Señor," },
+            { chords: "Si7  Mi", lyrics: "danos la paz." }
+        ]
+    },
+    { 
+        id: 2, 
+        title: "-2- Cordero de Dios", 
+        category: "Ordinario", 
+        tone: "Sol", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol  Re  Mim  Do  Re  Sol", lyrics: "Intro: Sol Re Mim Do Re Sol" },
+            { chords: "Sol            Do   Re   Do  Re", lyrics: "Cordero de Dios, Cordero de Dios," },
+            { chords: "Sol            Do   Re   Do", lyrics: "tú que quitas el pecado" },
+            { chords: "Re   Do                  Sol", lyrics: "del mundo, ten piedad de nosotros. (2)" },
+            { chords: "Sol            Do   Re   Do  Re", lyrics: "Cordero de Dios, Cordero de Dios," },
+            { chords: "Sol            Do   Re   Do", lyrics: "tú que quitas el pecado" },
+            { chords: "Re   Do   Re   Sol  Re  Mim", lyrics: "del mundo, danos la paz," },
+            { chords: "Do   Re   Sol", lyrics: "danos la paz." }
+        ]
+    },
+    { 
+        id: 3, 
+        title: "-3- Cordero de Dios", 
+        category: "Ordinario", 
+        tone: "Do", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do         Sol       Fa", lyrics: "Cordero de Dios que quitas el" },
+            { chords: "Sol     Mi          Lam  Fa  Sol", lyrics: "pecado del mundo, ten piedad, ten piedad. (2)" },
+            { chords: "Do         Sol       Fa", lyrics: "Cordero de Dios que quitas el" },
+            { chords: "Sol     Mi          Lam  Fa  Sol  Do", lyrics: "pecado del mundo, danos la paz, danos la paz." }
+        ]
+    },
+    { 
+        id: 4, 
+        title: "-4- Cordero de Dios", 
+        category: "Ordinario", 
+        tone: "Do", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do            Mim Fa", lyrics: "Cordero de Dios, que quitas el" },
+            { chords: "Sol    Do   Mim  Lam  Fa  Sol   Do", lyrics: "pecado del mundo, ten piedad de nosotros. (2)" },
+            { chords: "Do            Mim Fa", lyrics: "Cordero de Dios, que quitas el" },
+            { chords: "Sol    Do   Mim  Lam  Fa  Sol   Do  Mim  Lam", lyrics: "pecado del mundo, danos la paz," },
+            { chords: "Fa   Sol Fa  Fam Do", lyrics: "danos la paz." }
+        ]
+    },
+    { 
+        id: 5, 
+        title: "-5- Cordero de Dios", 
+        category: "Ordinario", 
+        tone: "Rem", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do7 Fa La7 Rem (2) La7 Rem", lyrics: "Intro: Do7 Fa La7 Rem (2) La7 Rem" },
+            { chords: "Rem     La7    Rem Do  Fa", lyrics: "Cordero de Dios, Cordero de Dios," },
+            { chords: "La7                  Rem", lyrics: "que quitas el pecado del mundo," },
+            { chords: "Sib  La7     Rem", lyrics: "ten piedad de nosotros. (2)" },
+            { chords: "Rem     La7    Rem Do  Fa", lyrics: "Cordero de Dios, Cordero de Dios," },
+            { chords: "La7                  Rem", lyrics: "que quitas el pecado del mundo," },
+            { chords: "Sib  La7     Rem  Sib  La7  Rem", lyrics: "danos la paz, danos la paz." }
+        ]
+    },
+    { 
+        id: 6, 
+        title: "-6- Cordero de Dios", 
+        category: "Ordinario", 
+        tone: "Lam", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Lam            Mim Re", lyrics: "Cordero de Dios, tú que" },
+            { chords: "Do       Sol         Lam Si7", lyrics: "quitas el pecado del mundo, ten piedad de nosotros." },
+            { chords: "Sol            Re  Lam", lyrics: "Cordero de Dios, tú que" },
+            { chords: "Mim      Re          Sol Re7", lyrics: "quitas el pecado del mundo, ten piedad de nosotros." },
+            { chords: "Sol            Sim Lam", lyrics: "Cordero de Dios, tú que" },
+            { chords: "Mim      Re          Sol Re Do Re Sol", lyrics: "quitas el pecado del mundo, danos la paz, danos la paz." }
+        ]
+    },
+    { 
+        id: 7, 
+        title: "-7- Cordero de Dios", 
+        category: "Ordinario", 
+        tone: "Sol", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol            Re  Lam", lyrics: "Cordero de Dios, tú que" },
+            { chords: "Do       Sol", lyrics: "quitas el pecado del mundo," },
+            { chords: "Do   Sol     Re", lyrics: "ten piedad de nosotros. (2)" },
+            { chords: "Do   Sol     Re", lyrics: "Cordero de Dios, tú que" },
+            { chords: "Lam      Do", lyrics: "quitas el pecado del mundo," },
+            { chords: "Re       Sol", lyrics: "danos la paz." }
+        ]
+    },
+    { 
+        id: 8, 
+        title: "-8- Cordero de Dios", 
+        category: "Ordinario", 
+        tone: "Mim", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Mim", lyrics: "Cordero de Dios, que quitas el pecado del" },
+            { chords: "Lam  Si7", lyrics: "mundo, ten piedad de nosotros. (bis)" },
+            { chords: "Sol  Sim  Do  Re", lyrics: "Cordero de Dios, que quitas el pecado del" },
+            { chords: "Sol  Do  Re  Do  Re  Sol", lyrics: "danos la paz." }
+        ]
+    },
+    { 
+        id: 9, 
+        title: "-9- Cordero de Dios (FOLCLORICO)", 
+        category: "Ordinario", 
+        tone: "Lam", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Lam          Sol   Do", lyrics: "Cordero de Dios que del mundo" },
+            { chords: "La7          Rem", lyrics: "quitas todos los pecados," },
+            { chords: "Sol          Do    Lam", lyrics: "ten piedad de nosotros," },
+            { chords: "Mi           Lam (La7)", lyrics: "ten piedad de nosotros. (2)" },
+            { chords: "La           Re    La", lyrics: "Cordero de Dios, Cordero de Dios," },
+            { chords: "Re   La      Mi    La", lyrics: "danos la paz Señor, danos la paz. (2)" }
+        ]
+    },
+    { 
+        id: 10, 
+        title: "-10- Cordero de Dios (Laurita)", 
+        category: "Ordinario", 
+        tone: "Mim", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Mim     Do       Re7  Sol", lyrics: "Cordero de Dios, que quitas el pecado," },
+            { chords: "Do  Re7    Sol Si7 Mim", lyrics: "que quitas el pecado del mundo," },
+            { chords: "Do               Mim", lyrics: "ten piedad de nosotros. (bis)" },
+            { chords: "Mim     Do       Re7  Sol", lyrics: "Cordero de Dios, que quitas el pecado," },
+            { chords: "Do  Re7    Sol Si7 Mim", lyrics: "que quitas el pecado del mundo," },
+            { chords: "Do   Mim    Do   Mim", lyrics: "danos la paz, danos la paz." }
+        ]
+    },
+    { 
+        id: 11, 
+        title: "-11- Cordero de Dios (Mejía)", 
+        category: "Ordinario", 
+        tone: "Mim", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Mim Lam Do Re Mim", lyrics: "Intro: Mim Lam Do Re Mim" },
+            { chords: "Mim     La           Do  Re  Mim", lyrics: "Cordero de Dios que quitas el pecado del mundo," },
+            { chords: "Lam  Re   Sol Mim    Lam Si7 Mim", lyrics: "ten piedad de nosotros, ten piedad de nosotros; (bis)" },
+            { chords: "Mim     La           Do  Re  Mim", lyrics: "Cordero de Dios que quitas el pecado del mundo," },
+            { chords: "Do   Lam  Re  Sol", lyrics: "danos la paz, danos la paz," },
+            { chords: "Lam  Re  Sol Do  Lam Si7 Mim", lyrics: "danos, danos, danos la paz," },
+            { chords: "Lam  Re  Sol Do  Lam Si7 Mi", lyrics: "danos, danos, danos la paz." }
+        ]
+    }
+];
+
+function getSongsFromDB() {
+    const data = localStorage.getItem(DB_KEY);
+    if (!data) {
+        localStorage.setItem(DB_KEY, JSON.stringify(defaultSongs));
+        return defaultSongs;
+    }
+    try {
+        return JSON.parse(data);
+    } catch (e) {
+        return defaultSongs;
+    }
+}
+
+function saveSongsToDB(songsArray) {
+    localStorage.setItem(DB_KEY, JSON.stringify(songsArray));
+}
+
+let songs = getSongsFromDB();
+
+let currentFilter = 'todos';
+let currentLetter = 'todos';
+let selectedSongId = null;
+let currentTransposeOffset = 0;
+let chordsVisible = true;
+let projChordsVisible = true;
+
+const spanishChromaticScale = ["Do", "Do#", "Re", "Re#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"];
+const spanishFlatScale = ["Do", "Reb", "Re", "Mib", "Mi", "Fa", "Solb", "Sol", "Lab", "La", "Sib", "Si"];
+
+function parseSpanishNote(noteStr) {
+    if (!noteStr) return { root: "Do", suffix: "", index: 0 };
+    const match = noteStr.trim().match(/^(Do|Re|Mi|Fa|Sol|La|Si)([#b]?)(.*)$/i);
+    if (!match) return { root: "Do", suffix: "", index: 0 };
+    
+    let root = match[1].charAt(0).toUpperCase() + match[1].slice(1).toLowerCase() + match[2];
+    let suffix = match[3] || "";
+    
+    let idx = spanishChromaticScale.indexOf(root);
+    if (idx === -1) idx = spanishFlatScale.indexOf(root);
+    if (idx === -1) idx = 0;
+    
+    return { root, suffix, index: idx };
+}
+
+function transposeSpanishChord(chord, semitones) {
+    return chord.replace(/(Do|Re|Mi|Fa|Sol|La|Si)[#b]?[a-zA-Z0-9]*/gi, (match) => {
+        const parsed = parseSpanishNote(match);
+        let newIdx = (parsed.index + semitones + 12) % 12;
+        let newRoot = spanishChromaticScale[newIdx];
+        return newRoot + parsed.suffix;
+    });
+}
+
+function transposeToneName(toneStr, semitones) {
+    const parsed = parseSpanishNote(toneStr);
+    let newIdx = (parsed.index + semitones + 12) % 12;
+    let newRoot = spanishChromaticScale[newIdx];
+    return newRoot + parsed.suffix;
+}
+
+function transposeLineChords(chordLine, semitones) {
+    if (!chordLine) return '';
+    return transposeSpanishChord(chordLine, semitones);
+}
+
+function stepTranspose(delta) {
+    currentTransposeOffset = (currentTransposeOffset + delta + 12) % 12;
+    const song = songs.find(s => s.id === selectedSongId);
+    if (song) {
+        renderSongView(song);
+        if (document.getElementById('projectionOverlay').classList.contains('active')) {
+            renderProjectionContent(song);
+        }
+    }
+}
+
+function changeTranspose(val) {
+    currentTransposeOffset = parseInt(val) || 0;
+    const song = songs.find(s => s.id === selectedSongId);
+    if (song) {
+        renderSongView(song);
+        if (document.getElementById('projectionOverlay').classList.contains('active')) {
+            renderProjectionContent(song);
+        }
+    }
+}
+
+function initAlphabet() {
+    const grid = document.getElementById('alphabetGrid');
+    grid.innerHTML = '';
+    
+    const allBtn = document.createElement('button');
+    allBtn.className = 'letter-btn btn-todos active';
+    allBtn.id = 'btnLetterTodos';
+    allBtn.innerText = 'Todos';
+    allBtn.onclick = () => setLetter('todos', allBtn);
+    grid.appendChild(allBtn);
+
+    const alphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split('');
+    alphabet.forEach(letter => {
+        const btn = document.createElement('button');
+        btn.className = 'letter-btn';
+        btn.innerText = letter;
+        btn.onclick = () => setLetter(letter, btn);
+        grid.appendChild(btn);
+    });
+}
+
+function customAlert(msg) {
+    const box = document.createElement('div');
+    box.style.cssText = 'position:fixed; top:20px; right:20px; background:var(--bg-card); color:var(--text-main); border:1px solid var(--accent); padding:12px 20px; border-radius:8px; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.3); font-size:13px;';
+    box.innerText = msg;
+    document.body.appendChild(box);
+    setTimeout(() => box.remove(), 3000);
+}
+
+function changeTheme(themeName) {
+    document.documentElement.setAttribute('data-theme', themeName);
+}
+
+function filterSongs() {
+    const searchInput = document.getElementById('searchInput');
+    const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    
+    let filtered = songs.filter(song => {
+        const matchesCategory = (currentFilter === 'todos') || (song.category === currentFilter);
+        let cleanTitle = song.title.replace(/^-\d+-?\s*/, '').trim().toUpperCase();
+        const matchesLetter = (currentLetter === 'todos') || (cleanTitle.startsWith(currentLetter));
+        const matchesSearch = !searchVal || 
+            song.title.toLowerCase().includes(searchVal) || 
+            song.category.toLowerCase().includes(searchVal) ||
+            song.tone.toLowerCase().includes(searchVal) ||
+            song.lines.some(l => l.lyrics.toLowerCase().includes(searchVal) || l.chords.toLowerCase().includes(searchVal));
+
+        return matchesCategory && matchesLetter && matchesSearch;
+    });
+
+    renderSongList(filtered);
+}
+
+function setFilter(category, el) {
+    currentFilter = category;
+    document.querySelectorAll('.filter-tags .tag').forEach(tag => tag.classList.remove('active'));
+    if (el) el.classList.add('active');
+    filterSongs();
+}
+
+function setLetter(letter, el) {
+    currentLetter = letter;
+    document.querySelectorAll('.letter-btn').forEach(btn => btn.classList.remove('active'));
+    if (el) el.classList.add('active');
+    filterSongs();
+}
+
+function toggleChords() {
+    chordsVisible = !chordsVisible;
+    const song = songs.find(s => s.id === selectedSongId);
+    if (song) renderSongView(song);
+}
+
+function closeProjection() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen().catch(err => console.log(err));
+    }
+    const overlay = document.getElementById('projectionOverlay');
+    if (overlay) {
+        overlay.classList.remove('active');
+        overlay.classList.remove('is-fullscreen');
+    }
+}
+
+function toggleFullScreenProjection() {
+    const overlay = document.getElementById('projectionOverlay');
+    if (!document.fullscreenElement) {
+        if (overlay.requestFullscreen) {
+            overlay.requestFullscreen().then(() => {
+                overlay.classList.add('is-fullscreen');
+            }).catch(err => console.error(err));
+        } else if (overlay.webkitRequestFullscreen) {
+            overlay.webkitRequestFullscreen();
+            overlay.classList.add('is-fullscreen');
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+
+document.addEventListener('fullscreenchange', () => {
+    const overlay = document.getElementById('projectionOverlay');
+    if (overlay) {
+        if (!document.fullscreenElement) {
+            overlay.classList.remove('is-fullscreen');
+        } else {
+            overlay.classList.add('is-fullscreen');
+        }
+    }
+});
+
+function renderSongList(filteredSongs) {
+    const listContainer = document.getElementById('songListContainer');
+    listContainer.innerHTML = '';
+    
+    if (filteredSongs.length === 0) {
+        listContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted); font-size: 13px;">No se encontraron cantos</div>';
+        return;
+    }
+
+    filteredSongs.forEach(song => {
+        const item = document.createElement('div');
+        item.className = 'song-item' + (selectedSongId === song.id ? ' selected' : '');
+        item.onclick = () => selectSong(song.id, item, false);
+        item.innerHTML = `
+            <span class="song-item-title" title="${song.title}">${song.title}</span>
+            <div class="song-item-meta">
+                <span class="badge-cat">${song.category}</span>
+                <span class="badge-tone">${song.tone}</span>
+            </div>
+        `;
+        listContainer.appendChild(item);
+    });
+    
+    document.getElementById('countDisplay').innerText = `${filteredSongs.length} cantos`;
+}
+
+function selectSong(id, itemElement, autoProject = false) {
+    selectedSongId = id;
+    currentTransposeOffset = 0;
+    
+    document.querySelectorAll('.song-item').forEach(el => el.classList.remove('selected'));
+    if (itemElement) {
+        itemElement.classList.add('selected');
+    } else {
+        const items = document.querySelectorAll('.song-item');
+        items.forEach(it => {
+            const songObj = songs.find(s => s.id === id);
+            if (songObj && it.innerHTML.includes(songObj.title)) {
+                it.classList.add('selected');
+            }
+        });
+    }
+    
+    const song = songs.find(s => s.id === id);
+    if (!song) return;
+    
+    renderSongView(song);
+    if (autoProject) {
+        projectNow();
+    }
+}
+
+function renderSongView(song) {
+    const contentPanel = document.getElementById('contentPanel');
+    let displayedTone = transposeToneName(song.tone, currentTransposeOffset);
+
+    let lyricsHTML = '';
+    song.lines.forEach(line => {
+        let displayChords = transposeLineChords(line.chords, currentTransposeOffset);
+        let hiddenClass = chordsVisible ? '' : ' hidden';
+        lyricsHTML += `
+            <div class="song-line">
+                <div class="chord-line${hiddenClass}">${displayChords || '&nbsp;'}</div>
+                <div class="lyric-line">${line.lyrics || '&nbsp;'}</div>
+            </div>
+        `;
+    });
+
+    let parsedTone = parseSpanishNote(song.tone);
+    let baseOriginalIdx = parsedTone.index;
+    let optionsHTML = '';
+    
+    for (let i = 0; i < 12; i++) {
+        let targetOffset = (i - baseOriginalIdx + 12) % 12;
+        let noteName = spanishChromaticScale[i] + parsedTone.suffix;
+        let label = (targetOffset === 0) ? `Tono orig. (${noteName})` : `${noteName}`;
+        let selectedAttr = (targetOffset === currentTransposeOffset) ? 'selected' : '';
+        optionsHTML += `<option value="${targetOffset}" ${selectedAttr}>${label}</option>`;
+    }
+
+    let ytEmbedHtml = '';
+    if (song.youtube) {
+        let ytId = extractYoutubeId(song.youtube);
+        if (ytId) {
+            ytEmbedHtml = `<iframe class="youtube-embed" src="https://www.youtube.com/embed/${ytId}" frameborder="0" allowfullscreen></iframe>`;
+        } else {
+            ytEmbedHtml = `<a href="${song.youtube}" target="_blank" class="btn">🔗 Ver video en YouTube</a>`;
+        }
+    }
+
+    let audioHtml = '';
+    if (song.audio) {
+        audioHtml = `<audio controls><source src="${song.audio}" type="audio/mpeg">Tu navegador no soporta audio.</audio>`;
+    }
+
+    let mediaSectionHTML = '';
+    if (song.youtube || song.audio) {
+        mediaSectionHTML = `
+            <div class="media-section">
+                <div style="font-size: 13px; font-weight: bold; color: var(--accent);">Multimedia / Referencia:</div>
+                <div class="media-container">
+                    ${ytEmbedHtml}
+                    ${audioHtml}
+                </div>
+            </div>
+        `;
+    }
+
+    let toggleBtnText = chordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+
+    contentPanel.innerHTML = `
+        <div class="song-display">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h2 style="margin:0; border:none; padding:0; font-size:18px;">${song.title}</h2>
+                <div class="transposer-toolbar">
+                    <button class="btn" style="padding: 4px 8px; font-weight: bold;" onclick="stepTranspose(-1)" title="Bajar medio tono">-</button>
+                    <span>🎵 Tono: <strong>${displayedTone}</strong></span>
+                    <button class="btn" style="padding: 4px 8px; font-weight: bold;" onclick="stepTranspose(1)" title="Subir medio tono">+</button>
+                    <select id="transposeSelect" onchange="changeTranspose(this.value)" title="Seleccionar nota">
+                        ${optionsHTML}
+                    </select>
+                    <button class="btn" id="toggleChordsBtn" style="padding: 5px 9px; font-size: 11px;" onclick="toggleChords()">${toggleBtnText}</button>
+                    <button class="btn" style="padding: 5px 9px; font-size: 11px;" onclick="openSongModal(${song.id})">✏️ Editar Canto</button>
+                    <button class="btn" style="padding: 5px 9px; font-size: 11px;" onclick="window.print()">🖨️ Imprimir</button>
+                    <button class="btn btn-primary" style="padding: 5px 11px; font-size: 11px;" onclick="projectNow()">📽️ Proyectar Al Tiro</button>
+                </div>
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px; display: flex; gap: 15px;">
+                <span>Tiempo Litúrgico: <strong>${song.category}</strong></span>
+                <span>Tono Original: <strong>${song.tone}</strong></span>
+            </div>
+            <div class="song-lyrics-container">
+                ${lyricsHTML}
+            </div>
+            ${mediaSectionHTML}
+        </div>
+    `;
+}
+
+function projectNow() {
+    const song = songs.find(s => s.id === selectedSongId);
+    if (!song) return;
+
+    projChordsVisible = chordsVisible;
+    renderProjectionContent(song);
+    
+    const overlay = document.getElementById('projectionOverlay');
+    overlay.classList.add('active');
+}
+
+function renderProjectionContent(song) {
+    let displayedTone = transposeToneName(song.tone, currentTransposeOffset);
+    let parsedTone = parseSpanishNote(song.tone);
+    let baseOriginalIdx = parsedTone.index;
+    
+    let optionsHTML = '';
+    for (let i = 0; i < 12; i++) {
+        let targetOffset = (i - baseOriginalIdx + 12) % 12;
+        let noteName = spanishChromaticScale[i] + parsedTone.suffix;
+        let label = (targetOffset === 0) ? `Tono orig. (${noteName})` : `${noteName}`;
+        let selectedAttr = (targetOffset === currentTransposeOffset) ? 'selected' : '';
+        optionsHTML += `<option value="${targetOffset}" ${selectedAttr}>${label}</option>`;
+    }
+
+    let lyricsHTML = '';
+    song.lines.forEach(line => {
+        let displayChords = transposeLineChords(line.chords, currentTransposeOffset);
+        let chordDisplay = projChordsVisible ? (displayChords || '&nbsp;') : '';
+        lyricsHTML += `
+            <div class="projection-line">
+                ${projChordsVisible ? `<div class="projection-chord">${chordDisplay}</div>` : ''}
+                <div class="projection-text">${line.lyrics || '&nbsp;'}</div>
+            </div>
+        `;
+    });
+
+    let toggleBtnText = projChordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+
+    const overlay = document.getElementById('projectionOverlay');
+    overlay.innerHTML = `
+        <div class="projection-topbar">
+            <button class="btn" onclick="closeProjection()">← Volver</button>
+            <div class="projection-title">${song.title}</div>
+            <div class="transposer-toolbar">
+                <button class="btn" style="padding: 4px 8px; font-weight: bold;" onclick="stepTranspose(-1)" title="Bajar medio tono">-</button>
+                <span>🎵 Tono: <strong>${displayedTone}</strong></span>
+                <button class="btn" style="padding: 4px 8px; font-weight: bold;" onclick="stepTranspose(1)" title="Subir medio tono">+</button>
+                <select onchange="changeTranspose(this.value)">
+                    ${optionsHTML}
+                </select>
+                <button class="btn" id="projChordsBtn" onclick="toggleProjectionChords()">${toggleBtnText}</button>
+                <button class="btn" onclick="openSongModal(${song.id})">✏️ Editar</button>
+                <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+                <button class="btn btn-primary" onclick="toggleFullScreenProjection()">⛶ Pantalla Completa</button>
+            </div>
+        </div>
+        <div class="projection-body">
+            <div class="projection-lyrics">
+                ${lyricsHTML}
+            </div>
+        </div>
+    `;
+}
+
+function toggleProjectionChords() {
+    projChordsVisible = !projChordsVisible;
+    const song = songs.find(s => s.id === selectedSongId);
+    if (song) renderProjectionContent(song);
+}
+
+function extractYoutubeId(url) {
+    let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    let match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
+function openSongModal(songId = null) {
+    const modal = document.getElementById('songModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const btnDelete = document.getElementById('btnDeleteSong');
+    
+    document.getElementById('editSongId').value = '';
+    document.getElementById('inputTitle').value = '';
+    document.getElementById('inputCategory').value = 'Ordinario';
+    document.getElementById('inputTone').value = 'Do';
+    document.getElementById('inputYoutube').value = '';
+    document.getElementById('inputAudio').value = '';
+    document.getElementById('inputRawLyrics').value = '';
+
+    if (songId) {
+        const song = songs.find(s => s.id === songId);
+        if (song) {
+            modalTitle.innerText = 'Editar Canción';
+            btnDelete.style.display = 'inline-flex';
+            document.getElementById('editSongId').value = song.id;
+            document.getElementById('inputTitle').value = song.title;
+            document.getElementById('inputCategory').value = song.category;
+            document.getElementById('inputTone').value = song.tone;
+            document.getElementById('inputYoutube').value = song.youtube || '';
+            document.getElementById('inputAudio').value = song.audio || '';
+            
+            let rawText = song.lines.map(l => (l.chords ? l.chords + '\n' : '\n') + l.lyrics).join('\n');
+            document.getElementById('inputRawLyrics').value = rawText;
+        }
+    } else {
+        modalTitle.innerText = 'Nueva Canción';
+        btnDelete.style.display = 'none';
+        
+        let maxNum = 0;
+        songs.forEach(s => {
+            let match = s.title.match(/^-?(\d+)-?/);
+            if (match) {
+                let n = parseInt(match[1], 10);
+                if (n > maxNum) maxNum = n;
+            }
+        });
+        let nextNum = maxNum + 1;
+        document.getElementById('inputTitle').value = `-${nextNum}- `;
+    }
+
+    modal.classList.add('active');
+}
+
+function closeSongModal() {
+    document.getElementById('songModal').classList.remove('active');
+}
+
+function saveSong() {
+    const editId = document.getElementById('editSongId').value;
+    const title = document.getElementById('inputTitle').value.trim();
+    const category = document.getElementById('inputCategory').value;
+    const tone = document.getElementById('inputTone').value.trim() || 'Do';
+    const youtube = document.getElementById('inputYoutube').value.trim();
+    const audio = document.getElementById('inputAudio').value.trim();
+    const rawLyrics = document.getElementById('inputRawLyrics').value;
+
+    if (!title) {
+        customAlert('Por favor ingresa un título para la canción.');
+        return;
+    }
+
+    let parsedLines = [];
+    let textLines = rawLyrics.split('\n');
+    for (let i = 0; i < textLines.length; i += 2) {
+        let chordLine = textLines[i] || '';
+        let lyricLine = textLines[i+1] || '';
+        parsedLines.push({ chords: chordLine, lyrics: lyricLine });
+    }
+
+    if (editId) {
+        let song = songs.find(s => s.id == editId);
+        if (song) {
+            song.title = title;
+            song.category = category;
+            song.tone = tone;
+            song.youtube = youtube;
+            song.audio = audio;
+            song.lines = parsedLines;
+        }
+        customAlert('¡Canto actualizado y guardado en la base de datos!');
+    } else {
+        let newId = songs.length > 0 ? Math.max(...songs.map(s => s.id)) + 1 : 1;
+        let newSong = {
+            id: newId,
+            title: title,
+            category: category,
+            tone: tone,
+            youtube: youtube,
+            audio: audio,
+            lines: parsedLines
+        };
+        songs.push(newSong);
+        selectedSongId = newId;
+        customAlert('¡Nuevo canto creado y guardado en la base de datos!');
+    }
+
+    saveSongsToDB(songs);
+    closeSongModal();
+    filterSongs();
+    if (selectedSongId) {
+        const updatedSong = songs.find(s => s.id === selectedSongId);
+        if (updatedSong) {
+            renderSongView(updatedSong);
+            if (document.getElementById('projectionOverlay').classList.contains('active')) {
+                renderProjectionContent(updatedSong);
+            }
+        }
+    }
+}
+
+function deleteCurrentSong() {
+    const editId = document.getElementById('editSongId').value;
+    if (!editId) return;
+
+    if (confirm('¿Estás seguro de que deseas borrar este canto de la base de datos?')) {
+        songs = songs.filter(s => s.id != editId);
+        saveSongsToDB(songs);
+        closeSongModal();
+        filterSongs();
+        
+        const contentPanel = document.getElementById('contentPanel');
+        if (songs.length > 0) {
+            selectSong(songs[0].id, null, false);
+        } else {
+            selectedSongId = null;
+            contentPanel.innerHTML = `
+                <div class="welcome-screen">
+                    <div class="welcome-icon">🎵</div>
+                    <h3>No hay canciones en el repertorio</h3>
+                    <p style="font-size: 13px; margin-top: 8px;">Usa el botón "+ Nueva Canción" para agregar la primera.</p>
+                </div>
+            `;
+        }
+        customAlert('Canto eliminado correctamente.');
+    }
+}
+
+window.onload = function() {
+    initAlphabet();
+    filterSongs();
+    if (songs.length > 0) {
+        selectSong(songs[0].id, null, false);
+    }
+};
+</script>
+</body>
+</html>

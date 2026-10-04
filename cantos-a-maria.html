@@ -1,0 +1,2783 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANTOS A MARÍA - Cancionero Litúrgico</title>
+<style>
+:root[data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-hover: #334155;
+    --accent: #f59e0b;
+    --accent-hover: #d97706;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+}
+:root[data-theme="light"] {
+    --bg-main: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-hover: #e2e8f0;
+    --accent: #d97706;
+    --accent-hover: #b45309;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border: #cbd5e1;
+}
+:root[data-theme="sepia"] {
+    --bg-main: #fbf0d9;
+    --bg-card: #f5e6cc;
+    --bg-hover: #e6d3b3;
+    --accent: #a0522d;
+    --accent-hover: #8b4513;
+    --text-main: #3e2723;
+    --text-muted: #6d4c41;
+    --border: #d7ccc8;
+}
+:root[data-theme="blue"] {
+    --bg-main: #0a192f;
+    --bg-card: #172a45;
+    --bg-hover: #303c55;
+    --accent: #64ffda;
+    --accent-hover: #4cdbc2;
+    --text-main: #e6f1ff;
+    --text-muted: #8892b0;
+    --border: #233554;
+}
+:root[data-theme="green"] {
+    --bg-main: #064e3b;
+    --bg-card: #065f46;
+    --bg-hover: #047857;
+    --accent: #34d399;
+    --accent-hover: #10b981;
+    --text-main: #ecfdf5;
+    --text-muted: #a7f3d0;
+    --border: #047857;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s, color 0.3s;
+}
+
+header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.logo-icon {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.header-titles h1 {
+    font-size: 20px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.badge-parroquia {
+    font-size: 11px;
+    background: var(--bg-main);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    font-weight: normal;
+}
+.header-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.btn {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+.btn:hover { opacity: 0.9; }
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--bg-main);
+    font-weight: 600;
+    border: none;
+}
+.theme-selector {
+    background: var(--bg-main);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    flex: 1;
+    height: calc(100vh - 78px);
+    overflow: hidden;
+}
+@media (max-width: 900px) {
+    .main-container { grid-template-columns: 1fr; height: auto; overflow: visible; }
+}
+.sidebar {
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+.sidebar-search {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+}
+.search-input {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px 10px 36px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2394a3b8" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 12px center;
+}
+.search-input:focus { border-color: var(--accent); }
+
+.filters-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+}
+.filter-title {
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.tag {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+}
+.tag.active {
+    background: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+.alphabet-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+}
+.alphabet-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.letter-btn {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.letter-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-main);
+}
+.letter-btn.active {
+    background: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+}
+.letter-btn.btn-todos {
+    width: auto;
+    padding: 0 8px;
+}
+
+.song-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+.song-item {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    transition: all 0.2s;
+}
+.song-item:hover { background: var(--bg-hover); }
+.song-item.selected {
+    background: var(--bg-hover);
+    border-color: var(--accent);
+}
+.song-item-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+.song-item-meta {
+    display: flex;
+    gap: 8px;
+    font-size: 11px;
+}
+.badge-cat {
+    background: var(--bg-main);
+    color: var(--text-muted);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+.badge-tone {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.content-panel {
+    background-color: var(--bg-main);
+    padding: 30px;
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.welcome-screen {
+    text-align: center;
+    margin: auto;
+    color: var(--text-muted);
+    max-width: 400px;
+}
+.welcome-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    background: var(--bg-card);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    color: var(--accent);
+}
+.song-display {
+    width: 100%;
+    max-width: 800px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.transposer-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-main);
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    flex-wrap: wrap;
+}
+.transposer-toolbar select {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+.nav-menu-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.nav-menu-bar span {
+    font-size: 11px;
+    padding: 4px 8px;
+    background: var(--bg-main);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+}
+
+.media-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.media-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+audio {
+    width: 100%;
+    max-width: 350px;
+    height: 35px;
+}
+.youtube-embed {
+    width: 100%;
+    max-width: 400px;
+    height: 225px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.song-lyrics-container {
+    font-family: "Courier New", Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.song-line {
+    margin-bottom: 8px;
+}
+.chord-line {
+    color: var(--accent);
+    font-weight: bold;
+    white-space: pre;
+    transition: display 0.2s;
+}
+.chord-line.hidden {
+    display: none !important;
+}
+.lyric-line {
+    color: var(--text-main);
+    white-space: pre-wrap;
+}
+
+/* Modal Estilos */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+.modal-overlay.active { display: flex; }
+.modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+.modal-header h3 { color: var(--accent); font-size: 18px; }
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+.form-control {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+}
+.form-control:focus { border-color: var(--accent); }
+textarea.form-control {
+    font-family: monospace;
+    resize: vertical;
+    height: 120px;
+}
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-left">
+        <div class="logo-icon">📖</div>
+        <div class="header-titles">
+            <h1>CANTOS A MARÍA <span class="badge-parroquia">Varias.</span></h1>
+            <div class="header-sub">Cancionero Litúrgico </div>
+        </div>
+    </div>
+    <div class="header-actions">
+        <a href="index.html" class="btn">🏠 Volver al Inicio</a>
+        <select class="theme-selector" id="themeSelect" onchange="changeTheme(this.value)">
+            <option value="dark">🌙 Oscuro</option>
+            <option value="light">☀ Claro</option>
+            <option value="sepia">📜 Sepia</option>
+            <option value="blue">🌊 Azul Litúrgico</option>
+            <option value="green">🌿 Verde Litúrgico</option>
+        </select>
+        <button class="btn btn-primary" onclick="openSongModal()">+ Nueva Canción</button>
+    </div>
+    <div class="header-left">
+        <div class="logo-icon">📖</div>
+        <div class="header-titles">
+            <h1>CANTOS A MARÍA <span class="badge-parroquia">Varias.</span></h1>
+            <div class="header-sub">Cancionero Litúrgico </div>
+        </div>
+    </div>
+    
+</header>
+
+<div class="main-container">
+    <div class="sidebar">
+        <div class="sidebar-search">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar canto por título o número..." onkeyup="filterSongs()">
+        </div>
+        <div class="filters-section">
+            <div class="filter-title"><span>Tiempo Litúrgico:</span> <span id="countDisplay">0 cantos</span></div>
+            <div class="filter-tags">
+                <span class="tag active" onclick="setFilter('todos', this)">Todos</span>
+                <span class="tag" onclick="setFilter('Mariano', this)">Mariano</span>
+                <span class="tag" onclick="setFilter('Adviento', this)">Adviento</span>
+                <span class="tag" onclick="setFilter('Pascual', this)">Pascual</span>
+            </div>
+        </div>
+        <div class="alphabet-section">
+            <div class="filter-title"><span>Buscar por letra:</span></div>
+            <div class="alphabet-grid" id="alphabetGrid"></div>
+        </div>
+        <div class="song-list" id="songListContainer"></div>
+    </div>
+
+    <div class="content-panel" id="contentPanel">
+        <div class="welcome-screen">
+            <div class="welcome-icon">🎵</div>
+            <h3>Selecciona una canción del repertorio</h3>
+            <p style="font-size: 13px; margin-top: 8px;">Haz clic en cualquiera de los cantos de la izquierda para visualizar su contenido completo, tonos y letra.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Crear / Editar Canción -->
+<div class="modal-overlay" id="songModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">Nueva Canción</h3>
+            <button class="btn" style="padding: 4px 8px;" onclick="closeSongModal()">✕</button>
+        </div>
+        <input type="hidden" id="editSongId">
+        <div class="form-group">
+            <label>Título del Canto (Ej: 162. Cántico de María)</label>
+            <input type="text" id="inputTitle" class="form-control" placeholder="Número y Título">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="form-group">
+                <label>Tiempo Litúrgico / Categoría</label>
+                <select id="inputCategory" class="form-control">
+                    <option value="Mariano">Mariano</option>
+                    <option value="Adviento">Adviento</option>
+                    <option value="Pascual">Pascual</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tono Original (Ej: Do, Sol, Lam)</label>
+                <input type="text" id="inputTone" class="form-control" value="Do">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Enlace de YouTube (URL completa o de video)</label>
+            <input type="text" id="inputYoutube" class="form-control" placeholder="https://www.youtube.com/watch?v=...">
+        </div>
+        <div class="form-group">
+            <label>Enlace de Audio MP3 (Opcional)</label>
+            <input type="text" id="inputAudio" class="form-control" placeholder="https://ejemplo.com/audio.mp3">
+        </div>
+        <div class="form-group">
+            <label>Letra y Acordes (Formato: Alternar línea de Acordes y línea de Letra)</label>
+            <textarea id="inputRawLyrics" class="form-control" placeholder="Do   Sol   Fa&#10;Aleluya aleluya"></textarea>
+            <small style="color: var(--text-muted); font-size: 11px;">Nota: Puedes ingresar múltiples líneas. Las líneas impares se detectarán como acordes y las pares como letra.</small>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeSongModal()">Cancelar</button>
+            <button class="btn btn-primary" onclick="saveSong()">Guardar Canto</button>
+        </div>
+    </div>
+</div>
+<script>
+let songs = [
+    { 
+        id: 1, 
+        title: "162. CÁNTICO DE MARIA", 
+        category: "Mariano", 
+        tone: "Mi", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Mi Si7 Mi 7", lyrics: "" },
+            { chords: "", lyrics: "Yo canto al Señor porque es grande" },
+            { chords: "La Si7 Mi 7", lyrics: "" },
+            { chords: "", lyrics: "Me alegro en el Dios que me salva" },
+            { chords: "La Si7 Mi", lyrics: "" },
+            { chords: "", lyrics: "Feliz me dirán las naciones" },
+            { chords: "Si7", lyrics: "" },
+            { chords: "", lyrics: "En mí descansó su mirada." },
+            { chords: "Mi La Mi 7", lyrics: "" },
+            { chords: "", lyrics: "Unidos a todos los pueblos" },
+            { chords: "La Mi Si7 Mi", lyrics: "" },
+            { chords: "", lyrics: "Cantemos al Dios que nos salva." },
+            { chords: "", lyrics: "El hizo en mí obras grandes," },
+            { chords: "", lyrics: "Su amor es más fuerte que el tiempo," },
+            { chords: "", lyrics: "Triunfó sobre el mal de este mundo," },
+            { chords: "", lyrics: "Derriba a los hombres soberbios." },
+            { chords: "", lyrics: "No quiere el poder de unos pocos," },
+            { chords: "", lyrics: "Del polvo a los hombres levanta," },
+            { chords: "", lyrics: "Dio pan a los hombres hambrientos," },
+            { chords: "", lyrics: "Dejando a los ricos sin nada." },
+            { chords: "", lyrics: "Libera a todos los hombres," },
+            { chords: "", lyrics: "Cumpliendo la eterna promesa" },
+            { chords: "", lyrics: "Que hizo en favor de su pueblo:" },
+            { chords: "", lyrics: "Los pueblos de toda la tierra." }
+        ]
+    },
+    { 
+        id: 2, 
+        title: "163. MI ALMA GLORIFICA", 
+        category: "Mariano", 
+        tone: "Do", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do mim", lyrics: "" },
+            { chords: "", lyrics: "Mi alma glorifica al Señor, mi Dios," },
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "Gózase mi espíritu en mi salvador." },
+            { chords: "Fa Sol Do mim lam", lyrics: "" },
+            { chords: "", lyrics: "Él es mi alegría, es mi plenitud," },
+            { chords: "Fa Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Él es todo para mí." },
+            { chords: "lam Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Ha mirado la bajeza de su sierva" },
+            { chords: "Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Muy dichosa me dirán todos los pueblos" },
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "Porque en mí ha hecho grandes" },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "Maravillas" },
+            { chords: "lam Mi lam Sol", lyrics: "" },
+            { chords: "", lyrics: "El que todo puede cuyo nombre es santo." },
+            { chords: "", lyrics: "Su clemencia se derrama por los siglos" },
+            { chords: "", lyrics: "sobre aquellos que le temen y le aman" },
+            { chords: "", lyrics: "desplegó el gran poder de su derecha" },
+            { chords: "", lyrics: "dispersó a los que piensan que son algo." },
+            { chords: "", lyrics: "Derribó a los potentados de sus tronos" },
+            { chords: "", lyrics: "ensalzó a los humildes y a los pobres" },
+            { chords: "", lyrics: "los hambrientos se saciaron de sus bienes" },
+            { chords: "", lyrics: "y alejó de sí vacíos a los ricos." },
+            { chords: "", lyrics: "Acogió a Israel, su humilde siervo," },
+            { chords: "", lyrics: "Acordándose de su misericordia," },
+            { chords: "", lyrics: "Como había prometido a nuestros padres" },
+            { chords: "", lyrics: "A Abraham y descendencia, para siempre." }
+        ]
+    },
+    { 
+        id: 3, 
+        title: "164. NUESTRA SEÑORA DE AMERICA", 
+        category: "Mariano", 
+        tone: "Lam", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "lam Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Madre de los pobres, de los peregrinos" },
+            { chords: "rem lam Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Te pedimos por América Latina," },
+            { chords: "Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Tierra que visitas con los pies descalzos," },
+            { chords: "rem lam Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Apretando fuerte un niño en tus brazos." },
+            { chords: "lam Sol", lyrics: "" },
+            { chords: "", lyrics: "América, despierta:" },
+            { chords: "Fa", lyrics: "" },
+            { chords: "", lyrics: "Sobre tus cerros despunta" },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "La luz de una mañana nueva," },
+            { chords: "Sol Fa", lyrics: "" },
+            { chords: "", lyrics: "Día de la salvación que ya se acerca;" },
+            { chords: "Mi", lyrics: "" },
+            { chords: "", lyrics: "Sobre los pueblos que están en" },
+            { chords: "lam Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Tinieblas, ha brillado una gran luz." },
+            { chords: "", lyrics: "Luz de un niño frágil" },
+            { chords: "", lyrics: "Que nos hace fuertes;" },
+            { chords: "", lyrics: "Luz de un niño pobre que nos hace ricos." },
+            { chords: "", lyrics: "Luz de un niño esclavo" },
+            { chords: "", lyrics: "Que nos hace libres," },
+            { chords: "", lyrics: "Esa luz que un día nos diste en Belén." },
+            { chords: "", lyrics: "Madre de los pobres: hay mucha miseria," },
+            { chords: "", lyrics: "Porque falta siempre" },
+            { chords: "", lyrics: "El pan en muchas casas," },
+            { chords: "", lyrics: "El pan de la verdad" },
+            { chords: "", lyrics: "Falta en muchas mentes," },
+            { chords: "", lyrics: "El pan del amor" },
+            { chords: "", lyrics: "Que falta en muchos hombres." },
+            { chords: "", lyrics: "Conoces la pobreza porque la viviste," },
+            { chords: "", lyrics: "Alivia la miseria" },
+            { chords: "", lyrics: "de los cuerpos que sufren;" },
+            { chords: "", lyrics: "Arranca el egoísmo que nos empobrece" },
+            { chords: "", lyrics: "Para compartir y avanzar hacia el Padre." }
+        ]
+    },
+    { 
+        id: 4, 
+        title: "165. VIRGEN DEL CARMEN BELLA", 
+        category: "Mariano", 
+        tone: "Re", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re sim mim La7", lyrics: "" },
+            { chords: "", lyrics: "Virgen del Carmen, bella," },
+            { chords: "Re sim mim La7", lyrics: "" },
+            { chords: "", lyrics: "Madre del Salvador," },
+            { chords: "Re Si7 mim", lyrics: "" },
+            { chords: "", lyrics: "//De tus amantes hijos" },
+            { chords: "Sol La Re", lyrics: "" },
+            { chords: "", lyrics: "Oye el cantar de amor//" },
+            { chords: "Re Si7 mim", lyrics: "" },
+            { chords: "", lyrics: "Dios te salve María," },
+            { chords: "Sol La Re", lyrics: "" },
+            { chords: "", lyrics: "Del Carmen bella flor." },
+            { chords: "Re Si7 mim", lyrics: "" },
+            { chords: "", lyrics: "//Estrella que nos guía," },
+            { chords: "Sol La Re", lyrics: "" },
+            { chords: "", lyrics: "Hacia el sol del Señor//" },
+            { chords: "", lyrics: "Junto a ti nos reúnes" },
+            { chords: "", lyrics: "Nos llamas con tu voz" },
+            { chords: "", lyrics: "//Quieres formar de Chile" },
+            { chords: "", lyrics: "Un pueblo para Dios//" },
+            { chords: "", lyrics: "Somos un pueblo en marcha" },
+            { chords: "", lyrics: "En busca de la luz:" },
+            { chords: "", lyrics: "//Guíanos, Madre nuestra," },
+            { chords: "", lyrics: "Llévanos a Jesús//" },
+            { chords: "", lyrics: "Haznos cristianos, Madre," },
+            { chords: "", lyrics: "Cristianos de verdad:" },
+            { chords: "", lyrics: "//hombres de fe sincera," },
+            { chords: "", lyrics: "De viva caridad//" }
+        ]
+    },
+    { 
+        id: 5, 
+        title: "166. MADRE DEL SILENCIO", 
+        category: "Mariano", 
+        tone: "Lam", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "lam Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Como una tarde tranquila," },
+            { chords: "rem Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Como un suave atardecer," },
+            { chords: "rem lam rem lam", lyrics: "" },
+            { chords: "", lyrics: "Era tu vida sencilla en el pobre Nazaret;" },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Y en medio de aquel silencio," },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Dios te hablaba al corazón." },
+            { chords: "lam Mi lam La7", lyrics: "" },
+            { chords: "", lyrics: "Virgen María, Madre del Señor:" },
+            { chords: "rem lam", lyrics: "" },
+            { chords: "", lyrics: "Danos tu silencio y paz" },
+            { chords: "Mi lam La7", lyrics: "" },
+            { chords: "", lyrics: "Para escuchar su voz." },
+            { chords: "rem lam", lyrics: "" },
+            { chords: "", lyrics: "Danos tu silencio y paz" },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Para escuchar su voz." },
+            { chords: "", lyrics: "Enséñanos, Madre buena," },
+            { chords: "", lyrics: "Como se debe escuchar" },
+            { chords: "", lyrics: "Al Señor cuando nos habla" },
+            { chords: "", lyrics: "En una noche estrellada," },
+            { chords: "", lyrics: "En la tierra que, dormida," },
+            { chords: "", lyrics: "Hoy descansa en su bondad." },
+            { chords: "", lyrics: "Y sobre todo, María," },
+            { chords: "", lyrics: "Cuando nos habla en los hombres:" },
+            { chords: "", lyrics: "En el hermano que sufre," },
+            { chords: "", lyrics: "En la sonrisa del niño," },
+            { chords: "", lyrics: "En la mano del amigo," },
+            { chords: "", lyrics: "En la paz de una oración." }
+        ]
+    },
+    { 
+        id: 6, 
+        title: "167. SANTA MARÍA DE LA ESPERANZA", 
+        category: "Adviento", 
+        tone: "Lam", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "lam rem lam", lyrics: "" },
+            { chords: "", lyrics: "Santa maría de la esperanza:" },
+            { chords: "rem (Fa) (Mi) Mi (lam)", lyrics: "" },
+            { chords: "", lyrics: "//mantén el ritmo de nuestra espera//" },
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "Nos diste al esperado de los tiempos," },
+            { chords: "rem lam", lyrics: "" },
+            { chords: "", lyrics: "Mil veces prometido en los profetas;" },
+            { chords: "rem lam", lyrics: "" },
+            { chords: "", lyrics: "Y nosotros de nuevo deseamos" },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Que vuelva a repetirnos sus promesas." },
+            { chords: "", lyrics: "Viviste con la cruz de la esperanza," },
+            { chords: "", lyrics: "tensando en el amor la larga espera;" },
+            { chords: "", lyrics: "y nosotros buscamos con los hombres" },
+            { chords: "", lyrics: "el nuevo amanecer de nuestra tierra." }
+        ]
+    },
+    { 
+        id: 7, 
+        title: "168. OH MARÍA, MADRE MÍA", 
+        category: "Mariano", 
+        tone: "Re", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re sim La7", lyrics: "" },
+            { chords: "", lyrics: "¡Oh María, Madre mía," },
+            { chords: "Sim Mi La 7", lyrics: "" },
+            { chords: "", lyrics: "Oh consuelo del mortal," },
+            { chords: "Re Sim La", lyrics: "" },
+            { chords: "", lyrics: "Amparadme y guiadme" },
+            { chords: "Sol Re La7 Re", lyrics: "" },
+            { chords: "", lyrics: "A la Patria Celestial!" },
+            { chords: "", lyrics: "Con el Ángel de María," },
+            { chords: "", lyrics: "Las grandezas celebrad;" },
+            { chords: "", lyrics: "Transportados de alegría," },
+            { chords: "", lyrics: "Sus finezas publicad." },
+            { chords: "", lyrics: "Quien a Ti ferviente clama" },
+            { chords: "", lyrics: "Halla gloria en el pesar," },
+            { chords: "", lyrics: "Pues tu nombre luz derrama," },
+            { chords: "", lyrics: "Gozo y bálsamo sin par." },
+            { chords: "", lyrics: "De sus gracias tesorera," },
+            { chords: "", lyrics: "La nombró nuestro Señor;" },
+            { chords: "", lyrics: "Con tal Madre y medianera," },
+            { chords: "", lyrics: "Nada temas, pecador." },
+            { chords: "", lyrics: "Oh María, madre nuestra." },
+            { chords: "", lyrics: "Madre del pueblo de Dios," },
+            { chords: "", lyrics: "Tú nos guías en la marcha" },
+            { chords: "", lyrics: "Hacia el reino del Señor." }
+        ]
+    },
+    { 
+        id: 8, 
+        title: "169. MADRE DE NUESTRO PUEBLO", 
+        category: "Mariano", 
+        tone: "La", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "La", lyrics: "" },
+            { chords: "", lyrics: "Madre de nuestro pueblo" },
+            { chords: "Mi La 7", lyrics: "" },
+            { chords: "", lyrics: "Los hombres abren el corazón:" },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "//Quieren llamarte madre," },
+            { chords: "Mi La (7)", lyrics: "" },
+            { chords: "", lyrics: "En sus palabras y en su canción//" },
+            { chords: "La Mi La", lyrics: "" },
+            { chords: "", lyrics: "Madre te llaman los pobres," },
+            { chords: "Mi La", lyrics: "" },
+            { chords: "", lyrics: "Pobres sin pan ni calor," },
+            { chords: "Re", lyrics: "" },
+            { chords: "", lyrics: "Pobres sin libros en las manos," },
+            { chords: "Mi", lyrics: "" },
+            { chords: "", lyrics: "Pobres sin una ilusión." },
+            { chords: "", lyrics: "Madre te llama este pueblo," },
+            { chords: "", lyrics: "Pueblo nacido en la cruz," },
+            { chords: "", lyrics: "Pueblo que marcha hacia el cielo," },
+            { chords: "", lyrics: "Madre del pueblo eres tú." }
+        ]
+    },
+    { 
+        id: 9, 
+        title: "170. MADRE DE LOS POBRES", 
+        category: "Mariano", 
+        tone: "Do", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do lam", lyrics: "" },
+            { chords: "", lyrics: "Madre de los pobres," },
+            { chords: "rem Sol", lyrics: "" },
+            { chords: "", lyrics: "Los humildes y sencillos," },
+            { chords: "Do lam", lyrics: "" },
+            { chords: "", lyrics: "De los tristes y los niños" },
+            { chords: "Fa Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Que confían siempre en Dios." },
+            { chords: "Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Tú, la más pobre porque nada" },
+            { chords: "Do", lyrics: "" },
+            { chords: "", lyrics: "Ambicionaste." },
+            { chords: "Fa Sol", lyrics: "" },
+            { chords: "", lyrics: "Tú, perseguida vas huyendo de Belén." },
+            { chords: "Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Tú, que un pesebre ofreciste al Rey del" },
+            { chords: "Do", lyrics: "" },
+            { chords: "", lyrics: "Cielo," },
+            { chords: "lam Fa Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Toda tu riqueza fue tenerlo sólo a Él." },
+            { chords: "", lyrics: "Tú, que en sus manos sin temor te" },
+            { chords: "", lyrics: "Abandonaste." },
+            { chords: "", lyrics: "Tú, que aceptaste, ser la esclava del" },
+            { chords: "", lyrics: "Señor," },
+            { chords: "", lyrics: "Vas entonando un poema de alegría:" },
+            { chords: "", lyrics: "“Canta alma mía, porque Dios me" },
+            { chords: "", lyrics: "Engrandeció”." },
+            { chords: "", lyrics: "Tú, que has vivido el dolor y la pobreza." },
+            { chords: "", lyrics: "Tú, que has sufrido en la noche sin" },
+            { chords: "", lyrics: "Hogar." },
+            { chords: "", lyrics: "Tú, que eres Madre, de los pobres y" },
+            { chords: "", lyrics: "Olvidados," },
+            { chords: "", lyrics: "Eres el consuelo del que reza en su llorar." }
+        ]
+    },
+    { 
+        id: 10, 
+        title: "171. MILES DE JÓVENES", 
+        category: "Mariano", 
+        tone: "Sol", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol 7", lyrics: "" },
+            { chords: "", lyrics: "Miles de jóvenes llevan" },
+            { chords: "Do Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Tu nombre bonito, María." },
+            { chords: "", lyrics: "Miles de jóvenes lucen" },
+            { chords: "Do Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Tu encanto, que es flor y alegría." },
+            { chords: "Do", lyrics: "" },
+            { chords: "", lyrics: "Y toda su vida se llena" },
+            { chords: "Re Sol", lyrics: "" },
+            { chords: "", lyrics: "De gracia, que es vida de Dios:" },
+            { chords: "Do Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Te llevan, María, en el nombre," },
+            { chords: "Re Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Te llevan en el corazón." },
+            { chords: "Do Sol Do Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Ave María, Ave María. (Bis)" },
+            { chords: "", lyrics: "Miles de pájaros cantan" },
+            { chords: "", lyrics: "Al día que está amaneciendo;" },
+            { chords: "", lyrics: "Estrellas que encienden la noche," },
+            { chords: "", lyrics: "El mar, la sonrisa y el viento." },
+            { chords: "", lyrics: "Son muchas las cosas hermosas" },
+            { chords: "", lyrics: "Que hizo el poder del Señor;" },
+            { chords: "", lyrics: "Tú eres la flor más bonita," },
+            { chords: "", lyrics: "La estrella que brilla mejor." }
+        ]
+    },
+    { 
+        id: 11, 
+        title: "172. HOY HE VUELTO", 
+        category: "Mariano", 
+        tone: "Do", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Cuántas veces siendo niño te recé," },
+            { chords: "Fa Sol", lyrics: "" },
+            { chords: "", lyrics: "Con mis besos te decía que te amaba." },
+            { chords: "Fa Sol Do lam", lyrics: "" },
+            { chords: "", lyrics: "Poco a poco con el tiempo oalejandome de ti" },
+            { chords: "Do Sol Do", lyrics: "" },
+            { chords: "", lyrics: "//Por caminos que se alejan me perdí//" },
+            { chords: "Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Hoy he vuelto, Madre, a recordar" },
+            { chords: "Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Cuántas cosas dije ante tu altar" },
+            { chords: "7 Fa", lyrics: "" },
+            { chords: "", lyrics: "Y al rezarte puedo comprender" },
+            { chords: "Do Sol", lyrics: "" },
+            { chords: "", lyrics: "//Que una Madre no se cansa de" },
+            { chords: "Do", lyrics: "" },
+            { chords: "", lyrics: "Esperar//" },
+            { chords: "", lyrics: "Al regreso, me encendías una luz," },
+            { chords: "", lyrics: "Sonriendo desde lejos me esperabas." },
+            { chords: "", lyrics: "En la mesa, la comida aún caliente y el" },
+            { chords: "", lyrics: "Mantel" },
+            { chords: "", lyrics: "//Y tu abrazo es mi alegría de volver//" },
+            { chords: "", lyrics: "Aunque el hijo se alejara del hogar," },
+            { chords: "", lyrics: "una madre siempre espera su regreso." },
+            { chords: "", lyrics: "Que el regalo más hermoso que a los hijos" },
+            { chords: "", lyrics: "da el Señor" },
+            { chords: "", lyrics: "//Es su madre y el milagro de su amor//" }
+        ]
+    },
+    { 
+        id: 12, 
+        title: "173. MADRE DE LOS JÓVENES", 
+        category: "Mariano", 
+        tone: "Rem", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "Madre óyeme, mi plegaria es un grito en" },
+            { chords: "La7", lyrics: "" },
+            { chords: "", lyrics: "La noche," },
+            { chords: "", lyrics: "Madre mírame, en la noche de mí" },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "Juventud," },
+            { chords: "Fa", lyrics: "" },
+            { chords: "", lyrics: "Madre sálvame, mil peligros acechan mi" },
+            { chords: "Do", lyrics: "" },
+            { chords: "", lyrics: "Vida," },
+            { chords: "La7", lyrics: "" },
+            { chords: "", lyrics: "Madre lléname de esperanza de amor y" },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "De fe," },
+            { chords: "Fa", lyrics: "" },
+            { chords: "", lyrics: "Madre guíame, en la sombra no" },
+            { chords: "Do", lyrics: "" },
+            { chords: "", lyrics: "Encuentro el camino," },
+            { chords: "La7", lyrics: "" },
+            { chords: "", lyrics: "Madre llévame, que a tu lado feliz" },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "Cantaré." },
+            { chords: "Fa (La7) Do (rem)", lyrics: "" },
+            { chords: "", lyrics: "La – ra, la – ra –la, la – lalara (Bis)" },
+            { chords: "", lyrics: "Madre una flor, una flor con espinas que" },
+            { chords: "", lyrics: "es bella," },
+            { chords: "", lyrics: "Madre un amor, un amor que ha empezado" },
+            { chords: "", lyrics: "a crecer," },
+            { chords: "", lyrics: "Madre sonreír, sonreír aun que llore en el" },
+            { chords: "", lyrics: "alma," },
+            { chords: "", lyrics: "Madre construir, caminar aun que vuelva a" },
+            { chords: "", lyrics: "caer," },
+            { chords: "", lyrics: "Madre solo soy, el anhelo y la carne que" },
+            { chords: "", lyrics: "luchan," },
+            { chords: "", lyrics: "Madre tuyo soy, en tus manos me vuelvo a" },
+            { chords: "", lyrics: "poner." }
+        ]
+    },
+    { 
+        id: 13, 
+        title: "174. TU SECRETO, MARÍA", 
+        category: "Mariano", 
+        tone: "Mi", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Mi 7", lyrics: "" },
+            { chords: "", lyrics: "Fue el Señor quien te hizo así," },
+            { chords: "La MI", lyrics: "" },
+            { chords: "", lyrics: "Pura como luz de primavera;" },
+            { chords: "Si7 Mi", lyrics: "" },
+            { chords: "", lyrics: "Dios en persona te dio su verdad." },
+            { chords: "", lyrics: "Tu Señor te quiso así," },
+            { chords: "", lyrics: "Fue la libertad tu compañera" },
+            { chords: "", lyrics: "Y fue tu cuna la humildad." },
+            { chords: "Mi Si7", lyrics: "" },
+            { chords: "", lyrics: "Hoy tu secreto María yo vengo a" },
+            { chords: "Mi", lyrics: "" },
+            { chords: "", lyrics: "Cantar" },
+            { chords: "Si7", lyrics: "" },
+            { chords: "", lyrics: "Y en el mar de tu alegría quiero" },
+            { chords: "Mi", lyrics: "" },
+            { chords: "", lyrics: "Navegar." },
+            { chords: "Si7", lyrics: "" },
+            { chords: "", lyrics: "Y si lograra que el mundo quisiera" },
+            { chords: "Mi", lyrics: "" },
+            { chords: "", lyrics: "Escuchar," },
+            { chords: "Si7", lyrics: "" },
+            { chords: "", lyrics: "Tus maravillas, María," },
+            { chords: "Mi (Si7)", lyrics: "" },
+            { chords: "", lyrics: "//le iría a contar// (Bis 5)" },
+            { chords: "", lyrics: "El Señor te hizo mujer" },
+            { chords: "", lyrics: "Y en tu corazón sembró ternura;" },
+            { chords: "", lyrics: "Y en él nacieron mil frutos de paz." },
+            { chords: "", lyrics: "En tus manos el Señor" },
+            { chords: "", lyrics: "Puso el renacer de la esperanza" },
+            { chords: "", lyrics: "Y el resplandor de la humanidad." }
+        ]
+    },
+    { 
+        id: 14, 
+        title: "175. MARÍA ES ESA MUJER", 
+        category: "Mariano", 
+        tone: "Mi", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Mi La Mi", lyrics: "" },
+            { chords: "", lyrics: "¿Quién será la mujer que a tantos inspiró" },
+            { chords: "La Mi", lyrics: "" },
+            { chords: "", lyrics: "Poemas bellos de amor?" },
+            { chords: "La Si7 Mi do#m", lyrics: "" },
+            { chords: "", lyrics: "Le rinden honor la música y la luz," },
+            { chords: "La Si7 Mi", lyrics: "" },
+            { chords: "", lyrics: "El mármol, la palabra y el color." },
+            { chords: "", lyrics: "¿Quién será la mujer que el rey y el" },
+            { chords: "", lyrics: "Labrador" },
+            { chords: "", lyrics: "Invocan en su dolor?" },
+            { chords: "", lyrics: "El sabio, el ignorante, el pobre y el señor," },
+            { chords: "", lyrics: "El santo al igual que el pecador" },
+            { chords: "Mi 7 La", lyrics: "" },
+            { chords: "", lyrics: "María es esa mujer" },
+            { chords: "Si7 Mi", lyrics: "" },
+            { chords: "", lyrics: "Que desde siempre el señor se preparó," },
+            { chords: "La", lyrics: "" },
+            { chords: "", lyrics: "Para nacer como una flor" },
+            { chords: "Si7 Mi", lyrics: "" },
+            { chords: "", lyrics: "En el jardín que a Dios enamoró." },
+            { chords: "", lyrics: "¿Quién será la mujer" },
+            { chords: "", lyrics: "Radiante como el Sol" },
+            { chords: "", lyrics: "Vestida de resplandor?" },
+            { chords: "", lyrics: "La luna a sus pies, el cielo en derredor," },
+            { chords: "", lyrics: "Y ángeles cantándole su amor" },
+            { chords: "", lyrics: "¿Quién será la mujer humilde que vivió" },
+            { chords: "", lyrics: "En un pequeño taller?" },
+            { chords: "", lyrics: "Amando sin milagros, viviendo de su fe," },
+            { chords: "", lyrics: "La esposa siempre alegre de José" }
+        ]
+    },
+    { 
+        id: 15, 
+        title: "176. SANTA MARIA DEL CAMINO", 
+        category: "Mariano", 
+        tone: "Do", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Do Fa Do", lyrics: "" },
+            { chords: "", lyrics: "Mientras recorres la vida," },
+            { chords: "Sol Do 7", lyrics: "" },
+            { chords: "", lyrics: "Tú nunca solo estás," },
+            { chords: "Fa Do mim lam", lyrics: "" },
+            { chords: "", lyrics: "Contigo por el camino," },
+            { chords: "Rem Sol7 Do 7", lyrics: "" },
+            { chords: "", lyrics: "Santa María va." },
+            { chords: "Fa Do mim lam", lyrics: "" },
+            { chords: "", lyrics: "Ven con nosotros a caminar," },
+            { chords: "Sol Do (7)", lyrics: "" },
+            { chords: "", lyrics: "Santa maría ven. (2)" },
+            { chords: "", lyrics: "Aunque te digan algunos" },
+            { chords: "", lyrics: "Que nada puede cambiar," },
+            { chords: "", lyrics: "Lucha por un mundo nuevo," },
+            { chords: "", lyrics: "Lucha por la verdad." },
+            { chords: "", lyrics: "Si por el mundo los hombres" },
+            { chords: "", lyrics: "Sin conocerse van," },
+            { chords: "", lyrics: "No niegues nunca tu mano" },
+            { chords: "", lyrics: "Al que contigo está." },
+            { chords: "", lyrics: "Aunque parezcan tus pasos" },
+            { chords: "", lyrics: "Inútil caminar," },
+            { chords: "", lyrics: "Tú vas haciendo el camino" },
+            { chords: "", lyrics: "Otros lo seguirán." }
+        ]
+    },
+    { 
+        id: 16, 
+        title: "177. QUIERO DECIR QUE SI", 
+        category: "Mariano", 
+        tone: "La", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "La 7 Re", lyrics: "" },
+            { chords: "", lyrics: "Quiero decir que sí." },
+            { chords: "Mi La", lyrics: "" },
+            { chords: "", lyrics: "Como Tú, María," },
+            { chords: "fa#m Re Mi La", lyrics: "" },
+            { chords: "", lyrics: "Como Tú un día, como Tú, María." },
+            { chords: "", lyrics: "Quiero negarme a mí." },
+            { chords: "", lyrics: "Quiero entregarme a Él." },
+            { chords: "", lyrics: "Quiero cantarle a Dios." },
+            { chords: "", lyrics: "Quiero escucharle a Él." },
+            { chords: "", lyrics: "Quiero vivir la fe." },
+            { chords: "", lyrics: "Quiero servir al Rey." }
+        ]
+    },
+    { 
+        id: 17, 
+        title: "178.VENID Y VAMOS TODOS", 
+        category: "Mariano", 
+        tone: "Sol", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Venid y vamos todos" },
+            { chords: "Re", lyrics: "" },
+            { chords: "", lyrics: "Con flores a María," },
+            { chords: "Sol Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Con flores a María," },
+            { chords: "La7 Re", lyrics: "" },
+            { chords: "", lyrics: "Que Madre nuestra es." },
+            { chords: "7 Sol", lyrics: "" },
+            { chords: "", lyrics: "Venid y vamos todos" },
+            { chords: "Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Con flores a María," },
+            { chords: "7 Do", lyrics: "" },
+            { chords: "", lyrics: "Con flores a María," },
+            { chords: "La7 Re", lyrics: "" },
+            { chords: "", lyrics: "Con flores a María," },
+            { chords: "Do La7", lyrics: "" },
+            { chords: "", lyrics: "Con flores a María," },
+            { chords: "Do Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Que Madre nuestra es." },
+            { chords: "Re", lyrics: "" },
+            { chords: "", lyrics: "De nuevo aquí nos tienes," },
+            { chords: "La Sol Re", lyrics: "" },
+            { chords: "", lyrics: "Purísima doncella," },
+            { chords: "", lyrics: "Más que la luna, bella," },
+            { chords: "La Re", lyrics: "" },
+            { chords: "", lyrics: "//Postrados a tus pies//" },
+            { chords: "", lyrics: "A ofrecerte venimos" },
+            { chords: "", lyrics: "Flores del bajo suelo," },
+            { chords: "", lyrics: "con tanto amor y anhelo," },
+            { chords: "", lyrics: "Señora, tú lo ves." },
+            { chords: "", lyrics: "Por ellas te rogamos," },
+            { chords: "", lyrics: "Si cándidas te placen," },
+            { chords: "", lyrics: "Las que en la gloria nacen," },
+            { chords: "", lyrics: "En cambio, tú nos des." }
+        ]
+    },
+    { 
+        id: 18, 
+        title: "179. AVE MARIA", 
+        category: "Mariano", 
+        tone: "Re", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re La Re", lyrics: "" },
+            { chords: "", lyrics: "Vamos a cantar \"ave\" noche y día;" },
+            { chords: "La Re 7", lyrics: "" },
+            { chords: "", lyrics: "Y el \"ave María\" no cese jamás" },
+            { chords: "Sol Re La Re (7)", lyrics: "" },
+            { chords: "", lyrics: "Ave, ave, ave María. (Bis)" },
+            { chords: "", lyrics: "El mismo saludo que el ángel te dio" },
+            { chords: "", lyrics: "Repiten tus hijos cantando a una voz." },
+            { chords: "", lyrics: "La buena noticia que Él te anunció" },
+            { chords: "", lyrics: "Nos llena de gozo y enciende de amor." },
+            { chords: "", lyrics: "Tú eres la estrella que anuncia el sol," },
+            { chords: "", lyrics: "La pronta venida del Dios Salvador." },
+            { chords: "", lyrics: "Alegre viviste tu entrega total" },
+            { chords: "", lyrics: "En manos del Padre, con fe sin igual." },
+            { chords: "", lyrics: "Tú eres la Madre del pueblo de Dios." },
+            { chords: "", lyrics: "Tú le das su vida: la fe y el amor." },
+            { chords: "", lyrics: "Tu amor lo probaste al pie de la cruz:" },
+            { chords: "", lyrics: "En todo quisiste ser como Jesús." },
+            { chords: "", lyrics: "Tú eres primicia de resurrección:" },
+            { chords: "", lyrics: "Tu cuerpo está vivo junto al del Señor." },
+            { chords: "", lyrics: "Tú, Madre bendita, nos llenas de luz;" },
+            { chords: "", lyrics: "Reflejas sin mancha a Dios, a Jesús." }
+        ]
+    },
+    { 
+        id: 19, 
+        title: "180. AVE MARIA", 
+        category: "Mariano", 
+        tone: "Re", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re sim mim La Re", lyrics: "" },
+            { chords: "", lyrics: "Ave, María; ave María; ave, María. (Bis)" },
+            { chords: "Re", lyrics: "" },
+            { chords: "", lyrics: "Un día (un día)" },
+            { chords: "sim", lyrics: "" },
+            { chords: "", lyrics: "Del cielo un ángel (del cielo un ángel)" },
+            { chords: "mim La", lyrics: "" },
+            { chords: "", lyrics: "A una (a una)" },
+            { chords: "Re", lyrics: "" },
+            { chords: "", lyrics: "Virgen habló (virgen habló)." },
+            { chords: "", lyrics: "Le dijo (uh, uh uh) si aceptaba (ave María)" },
+            { chords: "", lyrics: "Ser madre (uh, uh) del mismo Dios." },
+            { chords: "", lyrics: "La Virgen (la virgen)" },
+            { chords: "", lyrics: "Dijo humilde (la virgen)" },
+            { chords: "", lyrics: "Esclava (la virgen)" },
+            { chords: "", lyrics: "Soy del Señor (soy del señor)." },
+            { chords: "", lyrics: "Y Dios (y Dios) se hizo hombre (ave María)" },
+            { chords: "", lyrics: "Y el hombre (y el hombre) se hizo Dios." },
+            { chords: "De pie (de pie)", lyrics: "" },
+            { chords: "En el Calvario (en el calvario),", lyrics: "" },
+            { chords: "María (María)", lyrics: "" },
+            { chords: "A su hijo ofreció (a su hijo ofreció).", lyrics: "" },
+            { chords: "", lyrics: "Y a todos (uh, uh, uh)" },
+            { chords: "", lyrics: "Los redimidos (uh, uh)" },
+            { chords: "", lyrics: "Por hijos (uh, uh) ella aceptó." },
+            { chords: "", lyrics: "Y así (y así) surgió la Iglesia (la virgen)," },
+            { chords: "", lyrics: "Y así (y así) surgió el amor(surgió el amor)" },
+            { chords: "", lyrics: "Y así (y así) surgió la Iglesia (ave María)," },
+            { chords: "", lyrics: "Y así (y así) surgió el amor." },
+            { chords: "Un día (un día)", lyrics: "" },
+            { chords: "En cuerpo y alma (en cuerpo y alma)", lyrics: "" },
+            { chords: "María (María)", lyrics: "" },
+            { chords: "Al cielo subió (al cielo subió),", lyrics: "" },
+            { chords: "", lyrics: "Llevada (uh, uh, uh) por el deseo (uh, uh)" },
+            { chords: "", lyrics: "De ver (uh, uh) a su Hijo y Señor." },
+            { chords: "Los ángeles (la virgen)", lyrics: "" },
+            { chords: "Se conmovieron (la virgen)", lyrics: "" },
+            { chords: "Al verla (la virgen)", lyrics: "" },
+            { chords: "Tan cerca de Dios (tan cerca de Dios).", lyrics: "" },
+            { chords: "Por (por eso)", lyrics: "" },
+            { chords: "Eso en todo el mundo (ave María)", lyrics: "" },
+            { chords: "Le cantan (le cantan) de corazón.", lyrics: "" }
+        ]
+    },
+    { 
+        id: 20, 
+        title: "181. DIOS TE SALVE, MARIA", 
+        category: "Mariano", 
+        tone: "Lam", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "Dios te salve María," },
+            { chords: "Mi lam 7", lyrics: "" },
+            { chords: "", lyrics: "Llena eres de gracia" },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "El Señor es contigo" },
+            { chords: "Sol Do Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Bendita tu eres entre todas la mujeres" },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Y bendito el fruto de tu vientre Jesús." },
+            { chords: "lam Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Santa María, madre de Dios" },
+            { chords: "Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Ruega por nosotros" },
+            { chords: "rem Mi 7", lyrics: "" },
+            { chords: "", lyrics: "Pecadores." },
+            { chords: "Lam Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Santa María, madre de Dios" },
+            { chords: "Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Ruega por nosotros" },
+            { chords: "rem Mi 7", lyrics: "" },
+            { chords: "", lyrics: "Pecadores." },
+            { chords: "rem lam Mi lam 7", lyrics: "" },
+            { chords: "", lyrics: "Ahora y en la hora de nuestra muerte" },
+            { chords: "rem lam Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Ahora y en la hora de nuestra muerte." }
+        ]
+    },
+    { 
+        id: 21, 
+        title: "182. OH MARIA*", 
+        category: "Mariano", 
+        tone: "Sol", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol", lyrics: "" },
+            { chords: "", lyrics: "Qué difícil es," },
+            { chords: "Re Do Si7 mim", lyrics: "" },
+            { chords: "", lyrics: "Llevar una vida sin tu presencia" },
+            { chords: "Do Re", lyrics: "" },
+            { chords: "", lyrics: "Qué difícil es comparar tu imagen con la" },
+            { chords: "Si7 mim", lyrics: "" },
+            { chords: "", lyrics: "Mía." },
+            { chords: "Do Re Sol Re7", lyrics: "" },
+            { chords: "", lyrics: "Sin tu amor, sin tu luz, que sería de mí." },
+            { chords: "Sol Si7", lyrics: "" },
+            { chords: "", lyrics: "Oh María, madre mía" },
+            { chords: "mim Do", lyrics: "" },
+            { chords: "", lyrics: "No me dejes solo, que moriría." },
+            { chords: "Re Si7", lyrics: "" },
+            { chords: "", lyrics: "Oh María, madre mía, en ti confió," },
+            { chords: "mim Do", lyrics: "" },
+            { chords: "", lyrics: "Mis penas y alegrías, no me dejes" },
+            { chords: "Re Sol (Re7)", lyrics: "" },
+            { chords: "", lyrics: "Que de ti depende mi vida." }
+        ]
+    },
+    { 
+        id: 22, 
+        title: "183. LA ELEGIDA", 
+        category: "Mariano", 
+        tone: "Re", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "Una entre todas fue la escogida," },
+            { chords: "sim fa#m", lyrics: "" },
+            { chords: "", lyrics: "Fuiste tú María, la elegida." },
+            { chords: "Sol Re mim La 7", lyrics: "" },
+            { chords: "", lyrics: "Madre del Señor, Madre del Salvador." },
+            { chords: "Re sim Sol La Re sim", lyrics: "" },
+            { chords: "", lyrics: "María, llena de gracia y consuelo," },
+            { chords: "Sol La Re sim", lyrics: "" },
+            { chords: "", lyrics: "Ven a caminar con el pueblo," },
+            { chords: "Sol La Re sim Sol La", lyrics: "" },
+            { chords: "", lyrics: "Nuestra madre eres tú." },
+            { chords: "", lyrics: "Ruega por nosotros, pecadores en la tierra," },
+            { chords: "", lyrics: "Ruega por el pueblo que en su Dios espera," },
+            { chords: "", lyrics: "Madre del Señor, Madre del Salvador." }
+        ]
+    },
+    { 
+        id: 23, 
+        title: "184. MADRE DEL REDENTOR*", 
+        category: "Mariano", 
+        tone: "Re", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Re Sol Mi La", lyrics: "" },
+            { chords: "", lyrics: "Dios Padre te eligió, antes de la creación" },
+            { chords: "Re Sol Mi La", lyrics: "" },
+            { chords: "", lyrics: "Para realizar en ti, su plan de salvación." },
+            { chords: "Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Tú creíste en su amor," },
+            { chords: "Mi La", lyrics: "" },
+            { chords: "", lyrics: "Fuiste fiel a su palabra," },
+            { chords: "fa#m sim", lyrics: "" },
+            { chords: "", lyrics: "Y el Hijo de Dios" },
+            { chords: "Sol La", lyrics: "" },
+            { chords: "", lyrics: "Te quiso como madre suya." },
+            { chords: "Sol La Re fa#m sim", lyrics: "" },
+            { chords: "", lyrics: "Y el Espíritu Santo, de gracia te colmó" },
+            { chords: "La", lyrics: "" },
+            { chords: "", lyrics: "Y con su amor te dio su bondad." },
+            { chords: "Re sim", lyrics: "" },
+            { chords: "", lyrics: "Madre del Redentor:" },
+            { chords: "Sol La", lyrics: "" },
+            { chords: "", lyrics: "La Iglesia te proclama" },
+            { chords: "Re sim", lyrics: "" },
+            { chords: "", lyrics: "Bienaventurada;" },
+            { chords: "Sol La Re", lyrics: "" },
+            { chords: "", lyrics: "Vuélvenos tu mirada amorosa" },
+            { chords: "Sol La", lyrics: "" },
+            { chords: "", lyrics: "Y fortalece a cuantos sufren" },
+            { chords: "Re", lyrics: "" },
+            { chords: "", lyrics: "Por la fe." },
+            { chords: "", lyrics: "Madre de los hombres:" },
+            { chords: "", lyrics: "Guía a la humanidad" },
+            { chords: "", lyrics: "Por caminos de libertad" },
+            { chords: "", lyrics: "Y justicia para todos." },
+            { chords: "", lyrics: "Guía nuestros pasos" },
+            { chords: "", lyrics: "Por la senda de la paz;" },
+            { chords: "", lyrics: "Que encuentren en Cristo" },
+            { chords: "", lyrics: "El camino, la verdad y la vida." },
+            { chords: "", lyrics: "Apoya, oh María nuestra peregrinación." },
+            { chords: "", lyrics: "Y nos alcance la salvación." }
+        ]
+    },
+    { 
+        id: 24, 
+        title: "185. ARCILLA ENTRE TUS MANOS*", 
+        category: "Mariano", 
+        tone: "La", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "La", lyrics: "" },
+            { chords: "", lyrics: "Eres madre muy sencilla," },
+            { chords: "Mi fa#m", lyrics: "" },
+            { chords: "", lyrics: "Criatura del Señor," },
+            { chords: "Re", lyrics: "" },
+            { chords: "", lyrics: "Virgen pobre, Madre mía," },
+            { chords: "Mi", lyrics: "" },
+            { chords: "", lyrics: "Llena de gracia y de amor," },
+            { chords: "La", lyrics: "" },
+            { chords: "", lyrics: "Fuiste arcilla entre sus manos" },
+            { chords: "Mi fa#m", lyrics: "" },
+            { chords: "", lyrics: "Y el Señor te modelo," },
+            { chords: "Re", lyrics: "" },
+            { chords: "", lyrics: "Aceptaste ser su esclava," },
+            { chords: "La", lyrics: "" },
+            { chords: "", lyrics: "Siempre dócil a su voz." },
+            { chords: "7 Re Mi", lyrics: "" },
+            { chords: "", lyrics: "Yo quiero ser, arcilla entre sus manos," },
+            { chords: "La Re Mi", lyrics: "" },
+            { chords: "", lyrics: "Yo quiero ser, vasija de su amor." },
+            { chords: "Re La Mi Re La", lyrics: "" },
+            { chords: "", lyrics: "Quiero dejar lo mío pare Él, para Él." },
+            { chords: "", lyrics: "No entendías sus palabras," },
+            { chords: "", lyrics: "Pero respondes con fe," },
+            { chords: "", lyrics: "Dejas que su amor te guie," },
+            { chords: "", lyrics: "Confiando siempre en Él." },
+            { chords: "", lyrics: "Por su espíritu de vida" },
+            { chords: "", lyrics: "Te dejaste transformar," },
+            { chords: "", lyrics: "Te abandonas en sus manos" },
+            { chords: "", lyrics: "Para hacer su voluntad." }
+        ]
+    },
+    { 
+        id: 25, 
+        title: "186. MARIA MIRAME*", 
+        category: "Mariano", 
+        tone: "Sol", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol7 Do Sol lam mim", lyrics: "" },
+            { chords: "", lyrics: "María mírame, María mírame," },
+            { chords: "Do Fa Sol", lyrics: "" },
+            { chords: "", lyrics: "Si tú me miras, Él también me mirará" },
+            { chords: "7 lam Fa", lyrics: "" },
+            { chords: "", lyrics: "Madre mía mírame, de la mano" },
+            { chords: "Do", lyrics: "" },
+            { chords: "", lyrics: "Llévame," },
+            { chords: "Fa Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Tan cerca de Él, que ahí me quiero" },
+            { chords: "Do Sol7", lyrics: "" },
+            { chords: "", lyrics: "Quedar" },
+            { chords: "Do Sol lam", lyrics: "" },
+            { chords: "", lyrics: "María cúbreme con tu manto" },
+            { chords: "Fa Sol Do 7", lyrics: "" },
+            { chords: "", lyrics: "Que tengo miedo, no sé rezar" },
+            { chords: "Fa Sol lam", lyrics: "" },
+            { chords: "", lyrics: "Que por tus ojos misericordiosos," },
+            { chords: "Fa Do Sol Do Sol7", lyrics: "" },
+            { chords: "", lyrics: "Tendré la fuerza, tendré la paz" },
+            { chords: "", lyrics: "Madre consuélame de mis penas," },
+            { chords: "", lyrics: "Es que no quiero, ofenderle más" },
+            { chords: "", lyrics: "Que por tus ojos misericordiosos," },
+            { chords: "", lyrics: "Quiero ir al cielo, y verlos ya." }
+        ]
+    },
+    { 
+        id: 26, 
+        title: "187. MARAVILLAS.", 
+        category: "Mariano", 
+        tone: "La", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "La do#m", lyrics: "" },
+            { chords: "", lyrics: "Maravillas hizo en mí" },
+            { chords: "Re Mi", lyrics: "" },
+            { chords: "", lyrics: "Mi alma canta de gozo" },
+            { chords: "fa#m do#m", lyrics: "" },
+            { chords: "", lyrics: "Pues al ver mi pequeñez" },
+            { chords: "Re Mi", lyrics: "" },
+            { chords: "", lyrics: "Se detuvieron sus ojos" },
+            { chords: "fa#m do#m", lyrics: "" },
+            { chords: "", lyrics: "Y Él que es santo y poderoso" },
+            { chords: "Re sim", lyrics: "" },
+            { chords: "", lyrics: "Hoy aguarda por mi sí." },
+            { chords: "La do#m", lyrics: "" },
+            { chords: "", lyrics: "Mi alma canta de gozo" },
+            { chords: "Re Mi La", lyrics: "" },
+            { chords: "", lyrics: "Maravillas hizo en mí." },
+            { chords: "La do#m", lyrics: "" },
+            { chords: "", lyrics: "Maravillas hizo en mí" },
+            { chords: "Re Mi", lyrics: "" },
+            { chords: "", lyrics: "Del alma brota mi canto" },
+            { chords: "fa#m do#m", lyrics: "" },
+            { chords: "", lyrics: "El Señor me ha amado" },
+            { chords: "Re Mi", lyrics: "" },
+            { chords: "", lyrics: "Más que a los lirios del campo" },
+            { chords: "fa#m do#m", lyrics: "" },
+            { chords: "", lyrics: "Por el Espíritu Santo" },
+            { chords: "Re sim", lyrics: "" },
+            { chords: "", lyrics: "El habita hoy en mí" },
+            { chords: "La do#m", lyrics: "" },
+            { chords: "", lyrics: "No cese nunca mi canto" },
+            { chords: "Re Mi La", lyrics: "" },
+            { chords: "", lyrics: "Maravillas hizo en mí." }
+        ]
+    },
+    { 
+        id: 27, 
+        title: "188. MARÍA, MADRE DEL CAMINO ARDIENTE", 
+        category: "Mariano", 
+        tone: "Sol", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Sol mim Do lam", lyrics: "" },
+            { chords: "", lyrics: "María, madre del camino ardiente." },
+            { chords: "Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Tú nos libras del fuego de las pasiones," },
+            { chords: "Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Con el roció de tu intercesión." },
+            { chords: "Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Tú nos libras del fuego de las pasiones" },
+            { chords: "Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Con el roció de tu intercesión." },
+            { chords: "mim Do lam Re", lyrics: "" },
+            { chords: "", lyrics: "Humilde María, toda inmaculada," },
+            { chords: "Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Ángel de la guarda del tercer milenio;" },
+            { chords: "Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Lugar de todas las gracias," },
+            { chords: "Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Imagen de la virtud," },
+            { chords: "Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Tu belleza canta la Jerusalén celeste." },
+            { chords: "mim Do lam", lyrics: "" },
+            { chords: "", lyrics: "Tú, nos has mostrado el camino," },
+            { chords: "Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Bajo la cruz nos has recibido," },
+            { chords: "Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Madre del camino ardiente," },
+            { chords: "Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Bajo la cruz nos has recibido," },
+            { chords: "Re Sol", lyrics: "" },
+            { chords: "", lyrics: "Como decir que no a tu hijo sufriente." }
+        ]
+    },
+    { 
+        id: 28, 
+        title: "189. MARIA, PEQUEÑA MARIA", 
+        category: "Mariano", 
+        tone: "La", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "La do#m", lyrics: "" },
+            { chords: "", lyrics: "María, pequeña María," },
+            { chords: "Re Mi", lyrics: "" },
+            { chords: "", lyrics: "Tú eres la brisa suave de Elías," },
+            { chords: "7 La", lyrics: "" },
+            { chords: "", lyrics: "El susurro del Espíritu de Dios." },
+            { chords: "do#m", lyrics: "" },
+            { chords: "", lyrics: "Tú eres la zarza ardiente de Moisés" },
+            { chords: "Re Mi 7", lyrics: "" },
+            { chords: "", lyrics: "Que llevas al Señor y no te consumes." },
+            { chords: "La do#m", lyrics: "" },
+            { chords: "", lyrics: "Tú eres el lugar junto a mí" },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "Que mostró el Señor a Moisés," },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "Tú eres la hendidura de la roca" },
+            { chords: "Mi", lyrics: "" },
+            { chords: "", lyrics: "Que Dios cubre con su mano" },
+            { chords: "Re Mi La", lyrics: "" },
+            { chords: "", lyrics: "Mientras que pasa su gloria." },
+            { chords: "do#m", lyrics: "" },
+            { chords: "", lyrics: "Venga el Señor con nosotros," },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "Si hemos hallado gracia a sus ojos;" },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "Es cierto que somos pecadores," },
+            { chords: "Mi", lyrics: "" },
+            { chords: "", lyrics: "Más ruega tú por nosotros," },
+            { chords: "Re Mi La", lyrics: "" },
+            { chords: "", lyrics: "Y seremos su pueblo y su heredad." },
+            { chords: "", lyrics: "María, pequeña María," },
+            { chords: "", lyrics: "Hija de Jerusalén," },
+            { chords: "", lyrics: "Madre de todos los pueblos," },
+            { chords: "", lyrics: "Virgen de Nazaret." },
+            { chords: "", lyrics: "Tú eres la nube del desierto" },
+            { chords: "", lyrics: "Que protege la marcha de Israel," },
+            { chords: "", lyrics: "Tú eres la tienda de la reunión," },
+            { chords: "", lyrics: "El arca que lleva la alianza," },
+            { chords: "", lyrics: "El Santuario de la gloria del Señor." }
+        ]
+    },
+    { 
+        id: 29, 
+        title: "190. HÁGASE EN MÍ", 
+        category: "Mariano", 
+        tone: "Do", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "Domaj MIsus4", lyrics: "INTRO: DOmaj MIsus4 (Bis)" },
+            { chords: "Domaj Misus4", lyrics: "" },
+            { chords: "", lyrics: "Hágase en mí." },
+            { chords: "Domaj Misus4", lyrics: "" },
+            { chords: "", lyrics: "Hágase en mí" },
+            { chords: "rem Sol", lyrics: "" },
+            { chords: "", lyrics: "Según lo que quieras de mí." },
+            { chords: "Fa", lyrics: "" },
+            { chords: "", lyrics: "Hágase en mí." },
+            { chords: "Sol", lyrics: "" },
+            { chords: "", lyrics: "Hágase en mí." },
+            { chords: "lam mim", lyrics: "" },
+            { chords: "", lyrics: "Hágase en mí según Tú quieras." },
+            { chords: "Fa Domaj", lyrics: "" },
+            { chords: "", lyrics: "Hágase en mí a Tu manera." },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "Hágase en mí como Tú quieras." },
+            { chords: "Fa Sol", lyrics: "" },
+            { chords: "", lyrics: "Hágase en mi lo que Tú quieras." },
+            { chords: "Domaj MIsus4", lyrics: "" },
+            { chords: "", lyrics: "Hágase en mi." },
+            { chords: "rem Sol", lyrics: "" },
+            { chords: "", lyrics: "Hágase en mi." },
+            { chords: "mim lam", lyrics: "" },
+            { chords: "", lyrics: "Hágase en mi lo que Tú más quieras." },
+            { chords: "Fa Sol", lyrics: "" },
+            { chords: "", lyrics: "Cueste lo que cueste, hágase en mi." },
+            { chords: "Domaj MIsus4", lyrics: "INTRO: DOmaj MIsus4 (Bis)" },
+            { chords: "", lyrics: "Hágase en mí" },
+            { chords: "", lyrics: "Según tu palabra," },
+            { chords: "", lyrics: "Según tu palabra," },
+            { chords: "", lyrics: "Según tu voluntad." },
+            { chords: "", lyrics: "Hágase en mí," },
+            { chords: "", lyrics: "Hágase en mí." }
+        ]
+    },
+    { 
+        id: 30, 
+        title: "191. MADRE DE DIOS", 
+        category: "Mariano", 
+        tone: "Lam", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "He conocido una mujer" },
+            { chords: "Sol", lyrics: "" },
+            { chords: "", lyrics: "Bella perfecta y cristalina" },
+            { chords: "Fa Sol", lyrics: "" },
+            { chords: "", lyrics: "Y en su mirada tiene paz" },
+            { chords: "Fa Sol Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Que el mundo entero necesita." },
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "Dicen que viene desde el monte" },
+            { chords: "Sol", lyrics: "" },
+            { chords: "", lyrics: "Con los aromas de olivar" },
+            { chords: "Fa Sol", lyrics: "" },
+            { chords: "", lyrics: "Y que la luz de su presencia" },
+            { chords: "Fa Sol Mi La", lyrics: "" },
+            { chords: "", lyrics: "Brillan las almas en la oscuridad." },
+            { chords: "La Sol", lyrics: "" },
+            { chords: "", lyrics: "Madre de Dios mi Carmelita" },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "Eres para mí pueblo mujer bendita" },
+            { chords: "La Sol", lyrics: "" },
+            { chords: "", lyrics: "Madre de Dios mi cofradía" },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "Vienen a venerarte Virgen María." },
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "Traes contigo bendiciones" },
+            { chords: "Sol", lyrics: "" },
+            { chords: "", lyrics: "Y mil plegarias de salvación" },
+            { chords: "Fa Sol", lyrics: "" },
+            { chords: "", lyrics: "Para los hombres de estas tierras" },
+            { chords: "Fa Sol Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Las buenas nuevas de tu hijo Dios." },
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "Dicen que viene desde el monte" },
+            { chords: "Sol", lyrics: "" },
+            { chords: "", lyrics: "Con los aromas del olivar" },
+            { chords: "Fa Sol", lyrics: "" },
+            { chords: "", lyrics: "Y que la luz de su presencia" },
+            { chords: "Fa Sol Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Brillan las almas en la oscuridad." }
+        ]
+    },
+    { 
+        id: 31, 
+        title: "192. DIOS TE SALVE MARIA", 
+        category: "Mariano", 
+        tone: "La", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "La 7", lyrics: "" },
+            { chords: "", lyrics: "Dios te salve, María, Sagrada María," },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "Señora de nuestro camino." },
+            { chords: "fa#m do#m", lyrics: "" },
+            { chords: "", lyrics: "Llena eres de gracia, llamada entre todas" },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "A ser, la Madre de Dios." },
+            { chords: "", lyrics: "El Señor es contigo y tú eres la sierva," },
+            { chords: "", lyrics: "Dispuesta a cumplir su misión." },
+            { chords: "", lyrics: "Y bendita tú eres, dichosa te llaman a ti," },
+            { chords: "", lyrics: "La escogida de Dios." },
+            { chords: "Re", lyrics: "" },
+            { chords: "", lyrics: "Y bendito es el fruto que crece en tu" },
+            { chords: "La Mi", lyrics: "" },
+            { chords: "", lyrics: "Vientre, el Mesías, del pueblo de Dios." },
+            { chords: "La Re", lyrics: "" },
+            { chords: "", lyrics: "Al que tanto esperamos que nazca" },
+            { chords: "Mi La", lyrics: "" },
+            { chords: "", lyrics: "Y que sea nuestro Rey." },
+            { chords: "La 7", lyrics: "" },
+            { chords: "", lyrics: "María he mirado hacia el cielo, pensando" },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "Entre nubes, tú rostro encontrar." },
+            { chords: "fa#m Re", lyrics: "" },
+            { chords: "", lyrics: "Y al fin te encontré en un establo," },
+            { chords: "La Mi", lyrics: "" },
+            { chords: "", lyrics: "Entregando la vida a Jesús Salvador." },
+            { chords: "La 7", lyrics: "" },
+            { chords: "", lyrics: "María he querido sentirte entre tantos" },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "Milagros que cuentan de ti," },
+            { chords: "fa#m do#m", lyrics: "" },
+            { chords: "", lyrics: "Y al fin te encontré en mi camino," },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "En la misma vereda que yo." },
+            { chords: "", lyrics: "Tenías tu cuerpo cansado," },
+            { chords: "", lyrics: "A un niño en Los brazos," },
+            { chords: "", lyrics: "Durmiendo en tu paz." },
+            { chords: "La Re Mi", lyrics: "" },
+            { chords: "", lyrics: "María Mujer, que regalas la vida" },
+            { chords: "La", lyrics: "" },
+            { chords: "", lyrics: "Sin fin." },
+            { chords: "", lyrics: "Tú eres Santa, María," },
+            { chords: "", lyrics: "Eres nuestra Señora," },
+            { chords: "", lyrics: "Porque haces tan nuestro al Señor," },
+            { chords: "", lyrics: "Eres Madre de Dios, eres Virgen la Madre" },
+            { chords: "", lyrics: "Y madre de la humanidad." },
+            { chords: "", lyrics: "Te pedimos que ruegues por todos" },
+            { chords: "", lyrics: "nosotros, heridos por tanto pecar," },
+            { chords: "", lyrics: "Desde hoy hasta el día final de este" },
+            { chords: "", lyrics: "peregrinar." },
+            { chords: "", lyrics: "María he buscado tu imagen, serena" },
+            { chords: "", lyrics: "vestida entre mantos de luz," },
+            { chords: "", lyrics: "Y al fin te encontré dolorosa, llorando de" },
+            { chords: "", lyrics: "pena los pies de la cruz." },
+            { chords: "La 7", lyrics: "" },
+            { chords: "", lyrics: "Dios te salve María, sagrada María," },
+            { chords: "Re La", lyrics: "" },
+            { chords: "", lyrics: "Señora de nuestro camino." }
+        ]
+    },
+    { 
+        id: 32, 
+        title: "193. VIRGEN SANTA DEL CARMELO", 
+        category: "Mariano", 
+        tone: "Lam", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "Virgen Santa del Carmelo" },
+            { chords: "", lyrics: "Tú reinas en nuestra patria" },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "Los copihues por corona" },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "La espuma del mar tu capa." },
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "En San Vicente, María" },
+            { chords: "", lyrics: "Tienes un trono de Reina," },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "Hasta allí llegan tus hijos" },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Te llaman de gracia llena." },
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "Fe, esperanza y alegría" },
+            { chords: "", lyrics: "Metes en el corazón." },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "‘’Haced lo que mi Hijo diga’’" },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Y Él nos dice ‘’quiero amor’’." },
+            { chords: "", lyrics: "Vienes como nube blanca" },
+            { chords: "", lyrics: "Por vez primera al Carmelo," },
+            { chords: "", lyrics: "Traes del cielo esperanza" },
+            { chords: "", lyrics: "Riega nuestro árido suelo." },
+            { chords: "", lyrics: "Te recibimos por Madre" },
+            { chords: "", lyrics: "En la cumbre del Calvario." },
+            { chords: "", lyrics: "Que todo Chile se una" },
+            { chords: "", lyrics: "Atados a tu escapulario." },
+            { chords: "", lyrics: "Los Hijos de esta Parroquia" },
+            { chords: "", lyrics: "Necesitan nuestra entrega." },
+            { chords: "", lyrics: "Servidora siempre fuiste" },
+            { chords: "", lyrics: "En los gozos y en las penas." },
+            { chords: "", lyrics: "Siempre el corazón abierto" },
+            { chords: "", lyrics: "Atentos siempre al hermano." },
+            { chords: "", lyrics: "Esa gracia te pedimos" },
+            { chords: "", lyrics: "Los hijos de Talcahuano." }
+        ]
+    },
+    { 
+        id: 33, 
+        title: "194. AHÍ TIENES A TU MADRE", 
+        category: "Mariano", 
+        tone: "Lam", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "lam Mi", lyrics: "" },
+            { chords: "", lyrics: "Si se acaba el vino en tu vida hoy," },
+            { chords: "lam", lyrics: "" },
+            { chords: "", lyrics: "Ahí tienes a tu Madre." },
+            { chords: "Mi", lyrics: "" },
+            { chords: "", lyrics: "Si solo hay tinajas pero no hay amor," },
+            { chords: "Do", lyrics: "" },
+            { chords: "", lyrics: "Ahí tienes a tu Madre." },
+            { chords: "Sol", lyrics: "" },
+            { chords: "", lyrics: "Si estás buscando acercarte a Dios," },
+            { chords: "lam Mi", lyrics: "" },
+            { chords: "", lyrics: "Ahí tienes a tu Madre, ahí tienes a tu Madre." },
+            { chords: "Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Ahí tienes a tu madre," },
+            { chords: "rem lam", lyrics: "" },
+            { chords: "", lyrics: "Ahí tienes a tu Madre." },
+            { chords: "Fa Do", lyrics: "" },
+            { chords: "", lyrics: "Ahí tienes a tu Madre," },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "Ahí tienes a tu Madre." },
+            { chords: "Mi", lyrics: "" },
+            { chords: "", lyrics: "Ahí tienes a tu Madre." },
+            { chords: "", lyrics: "Si no sabes cómo hacer una oración," },
+            { chords: "", lyrics: "Ahí tienes a tu Madre." },
+            { chords: "", lyrics: "Si la cruz te pesa para caminar," },
+            { chords: "", lyrics: "ahí tienes a tu Madre." },
+            { chords: "", lyrics: "Si no hay Pentecostés en tu corazón," },
+            { chords: "", lyrics: "ahí tienes a tu Madre, ahí tienes a tu Madre." },
+            { chords: "", lyrics: "Si estás viviendo fuerte la hora del dolor," },
+            { chords: "", lyrics: "ahí tienes a tu Madre." },
+            { chords: "", lyrics: "Si estás padeciendo alguna enfermedad," },
+            { chords: "", lyrics: "ahí tienes a tu Madre." },
+            { chords: "", lyrics: "Si te encuentras sumido en desesperación," },
+            { chords: "", lyrics: "ahí tienes a tu Madre, ahí tienes a tu Madre." }
+        ]
+    },
+    { 
+        id: 34, 
+        title: "195. MIRARTE A TÍ", 
+        category: "Mariano", 
+        tone: "La", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "sim Mi", lyrics: "" },
+            { chords: "", lyrics: "Mirarte a ti es sentir" },
+            { chords: "La", lyrics: "" },
+            { chords: "", lyrics: "A Dios muy cerca de mí," },
+            { chords: "Mi fa#m", lyrics: "" },
+            { chords: "", lyrics: "Mirarte a ti es volar." },
+            { chords: "sim Mi", lyrics: "" },
+            { chords: "", lyrics: "Mirarte a ti es soñar" },
+            { chords: "La", lyrics: "" },
+            { chords: "", lyrics: "Que puedo volar sobre el mar," },
+            { chords: "Mi fa#m", lyrics: "" },
+            { chords: "", lyrics: "Mirarte a ti es encontrar la paz." },
+            { chords: "sim Mi", lyrics: "" },
+            { chords: "", lyrics: "Mirarte a ti es perder la razón" },
+            { chords: "Do# fa#m", lyrics: "" },
+            { chords: "", lyrics: "Y enloquecerse con tanto amor" },
+            { chords: "Re sim Mi 7", lyrics: "" },
+            { chords: "", lyrics: "Al ver en tus ojos a tu Hijo, Cristo Jesús." },
+            { chords: "La Mi fa#m Re", lyrics: "" },
+            { chords: "", lyrics: "María, dame un poco de tu serenidad," },
+            { chords: "rem La", lyrics: "" },
+            { chords: "", lyrics: "Un poco de tu paciencia," },
+            { chords: "sim Mi 7", lyrics: "" },
+            { chords: "", lyrics: "Un poco de tu fidelidad." },
+            { chords: "La Mi", lyrics: "" },
+            { chords: "", lyrics: "María, enciende mi fuego," },
+            { chords: "fa#m Re rem", lyrics: "" },
+            { chords: "", lyrics: "Enciéndeme con tu luz," },
+            { chords: "La fa#m", lyrics: "" },
+            { chords: "", lyrics: "Yo quiero arder por Cristo" },
+            { chords: "sim Mi La sim", lyrics: "" },
+            { chords: "", lyrics: "Con el fervor que tienes tú." },
+            { chords: "", lyrics: "Mirarte a ti es tener" },
+            { chords: "", lyrics: "El alma dispuesta a creer," },
+            { chords: "", lyrics: "Mirarte a ti es orar." },
+            { chords: "", lyrics: "Mirarte a ti es cantar," },
+            { chords: "", lyrics: "Que amo a Dios sin dudar," },
+            { chords: "", lyrics: "Mirarte a ti es no tener final." },
+            { chords: "", lyrics: "Mirarte a ti es vencer el temor" },
+            { chords: "", lyrics: "Y entregarse en un “si” de amor" },
+            { chords: "", lyrics: "Al ver tus ojos la calma de un cielo azul." },
+            { chords: "La Mi fa#m Re", lyrics: "" },
+            { chords: "", lyrics: "María, dame un poco de tu serenidad," },
+            { chords: "rem La", lyrics: "" },
+            { chords: "", lyrics: "Un poco de tu paciencia," },
+            { chords: "sim Mi 7", lyrics: "" },
+            { chords: "", lyrics: "Un poco de tu fidelidad." },
+            { chords: "La Mi", lyrics: "" },
+            { chords: "", lyrics: "María, enciende mi fuego," },
+            { chords: "fa#m Re rem", lyrics: "" },
+            { chords: "", lyrics: "Enciéndeme con tu luz," },
+            { chords: "La fa#m", lyrics: "" },
+            { chords: "", lyrics: "Yo quiero arder por Cristo" },
+            { chords: "sim Mi La sim", lyrics: "" },
+            { chords: "", lyrics: "Con el fervor que tienes tú." },
+            { chords: "(Mi) fa#m Re", lyrics: "" },
+            { chords: "", lyrics: "Me alcance tu corazón," },
+            { chords: "La Mi", lyrics: "" },
+            { chords: "", lyrics: "Inmaculado y puro en amor," },
+            { chords: "fa#m Mi", lyrics: "" },
+            { chords: "", lyrics: "Me llene de tu ternura," },
+            { chords: "Si Mi", lyrics: "" },
+            { chords: "", lyrics: "Eterna dulzura, Madre de Dios." },
+            { chords: "La Mi fa#m Re", lyrics: "" },
+            { chords: "", lyrics: "María, dame un poco de tu serenidad," },
+            { chords: "rem La", lyrics: "" },
+            { chords: "", lyrics: "Un poco de tu paciencia," },
+            { chords: "sim Mi 7", lyrics: "" },
+            { chords: "", lyrics: "Un poco de tu fidelidad." },
+            { chords: "La Mi", lyrics: "" },
+            { chords: "", lyrics: "María, enciende mi fuego," },
+            { chords: "fa#m Re rem", lyrics: "" },
+            { chords: "", lyrics: "Enciéndeme con tu luz," },
+            { chords: "La fa#m", lyrics: "" },
+            { chords: "", lyrics: "Yo quiero arder por Cristo" },
+            { chords: "sim Mi La", lyrics: "" },
+            { chords: "", lyrics: "Con el fervor que tienes tú." }
+        ]
+    },
+    { 
+        id: 35, 
+        title: "196. LA FÉ DE MARÍA", 
+        category: "Mariano", 
+        tone: "Rem", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "rem Do Sib (2)", lyrics: "Intro: rem Do Sib (2)" },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "Que hubiese pasado" },
+            { chords: "Sib Do Fa", lyrics: "" },
+            { chords: "", lyrics: "Si ella hubiese dicho que no," },
+            { chords: "rem Sib", lyrics: "" },
+            { chords: "", lyrics: "O ignorado o dilatado," },
+            { chords: "Do Fa Do", lyrics: "" },
+            { chords: "", lyrics: "El anuncio que tú ángel de amor" },
+            { chords: "rem Fa", lyrics: "" },
+            { chords: "", lyrics: "En cambio creyó, en tu palabra" },
+            { chords: "Sib", lyrics: "" },
+            { chords: "", lyrics: "Y se hizo tu esclava en un acto" },
+            { chords: "Fa Do", lyrics: "" },
+            { chords: "", lyrics: "Perfecto y de fe" },
+            { chords: "rem 7", lyrics: "" },
+            { chords: "", lyrics: "Y hoy quiero ser como ella" },
+            { chords: "Sib Fa Sib", lyrics: "" },
+            { chords: "", lyrics: "Y amarte aunque duelan, las espinas" },
+            { chords: "Do Fa", lyrics: "" },
+            { chords: "", lyrics: "Y el camino de la cruz." },
+            { chords: "Sib Do Fa Do rem", lyrics: "" },
+            { chords: "", lyrics: "Dame la fe Señor, la fe de María" },
+            { chords: "Sib Do Fa Do rem", lyrics: "" },
+            { chords: "", lyrics: "Para decirte sí, un sí sin medidas" },
+            { chords: "Sib Do Fa Do rem", lyrics: "" },
+            { chords: "", lyrics: "Dame la fe Señor, la fe de María" },
+            { chords: "Sib Do rem", lyrics: "" },
+            { chords: "", lyrics: "Para renunciar a mí y entregarte mi vida." },
+            { chords: "rem", lyrics: "" },
+            { chords: "", lyrics: "Aunque traspasaron" },
+            { chords: "Sib Do Fa", lyrics: "" },
+            { chords: "", lyrics: "Con una espada su corazón" },
+            { chords: "Rem 7", lyrics: "" },
+            { chords: "", lyrics: "Y su alma lloro, el dolor de tus heridas" },
+            { chords: "Sib Do Fa", lyrics: "" },
+            { chords: "", lyrics: "A los pies del madero se quedó" },
+            { chords: "Do rem 7 Fa", lyrics: "" },
+            { chords: "", lyrics: "Y hoy, ella es nuestra reina y señora" },
+            { chords: "Sib", lyrics: "" },
+            { chords: "", lyrics: "Y tú nos incorporas" },
+            { chords: "Do", lyrics: "" },
+            { chords: "", lyrics: "A tu eterna familia de amor" },
+            { chords: "rem 7", lyrics: "" },
+            { chords: "", lyrics: "Y yo, en tu amor quiero permanecer" },
+            { chords: "Sib", lyrics: "" },
+            { chords: "", lyrics: "Postrado a tus pies" },
+            { chords: "Fa Do Fa", lyrics: "" },
+            { chords: "", lyrics: "Es lo único que un día llevaré." }
+        ]
+    },
+    { 
+        id: 36, 
+        title: "197. MAGNIFICAT", 
+        category: "Mariano", 
+        tone: "Rem", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "rem Sib Do rem", lyrics: "" },
+            { chords: "", lyrics: "Proclama mi alma, la grandeza del Señor." },
+            { chords: "Sib Do rem", lyrics: "" },
+            { chords: "", lyrics: "Se alegra mi Espíritu en Dios mi salvador" },
+            { chords: "Sib Do rem", lyrics: "" },
+            { chords: "", lyrics: "Porque ha mirado la humillación de su sierva" },
+            { chords: "Sib Do rem", lyrics: "" },
+            { chords: "", lyrics: "Porque ha mirado mi pequeñez." },
+            { chords: "Sib Do rem", lyrics: "" },
+            { chords: "", lyrics: "Las Generaciones me felicitarán" },
+            { chords: "Sib", lyrics: "" },
+            { chords: "", lyrics: "Porque el poderoso ha hecho obras" },
+            { chords: "Do rem", lyrics: "" },
+            { chords: "", lyrics: "Grandes por mí." },
+            { chords: "Sib Do rem", lyrics: "" },
+            { chords: "", lyrics: "Su nombre es Santo y su misericordia" },
+            { chords: "La7 rem La7 rem", lyrics: "" },
+            { chords: "", lyrics: "Llega a sus fieles de generación," },
+            { chords: "La7 rem", lyrics: "" },
+            { chords: "", lyrics: "En generación." },
+            { chords: "Sib Do rem Sib Do rem", lyrics: "" },
+            { chords: "", lyrics: "Proclama mi alma, proclama mi alma." },
+            { chords: "", lyrics: "Él hace proezas con su brazo," },
+            { chords: "", lyrics: "Dispersa a los soberbios de corazón." },
+            { chords: "", lyrics: "Derriba del trono a los poderosos" },
+            { chords: "", lyrics: "Y enaltece a los humildes." },
+            { chords: "", lyrics: "A los hambrientos los colma de bienes" },
+            { chords: "", lyrics: "Y a los ricos los despide vacíos," },
+            { chords: "", lyrics: "Los despide vacíos." },
+            { chords: "", lyrics: "Auxilia a Israel, su siervo," },
+            { chords: "", lyrics: "Acordándose de la misericordia." },
+            { chords: "", lyrics: "Como lo había prometido a nuestros padres" },
+            { chords: "", lyrics: "En favor de Abraham y su descendencia," },
+            { chords: "", lyrics: "Por siempre." }
+        ]
+    },
+    { 
+        id: 37, 
+        title: "198. MI ALMA CANTA", 
+        category: "Mariano", 
+        tone: "Lam", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "lam Do", lyrics: "" },
+            { chords: "", lyrics: "Mi alma canta," },
+            { chords: "Fa Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Canta la grandeza del Señor" },
+            { chords: "lam Sol", lyrics: "" },
+            { chords: "", lyrics: "Y mi espíritu" },
+            { chords: "lam mim lam", lyrics: "" },
+            { chords: "", lyrics: "Se estremece de gozo en Dios," },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Mi Salvador." },
+            { chords: "Do Sol lam", lyrics: "" },
+            { chords: "", lyrics: "Porque miró con bondad" },
+            { chords: "Do Sol lam", lyrics: "" },
+            { chords: "", lyrics: "La pequeñez de su servidora," },
+            { chords: "Do Sol lam", lyrics: "" },
+            { chords: "", lyrics: "Porque miró con bondad" },
+            { chords: "Do Sol lam", lyrics: "" },
+            { chords: "", lyrics: "La pequeñez de su servidora," },
+            { chords: "Sol lam", lyrics: "" },
+            { chords: "", lyrics: "En adelante toda la gente" },
+            { chords: "Sol lam Do Sol", lyrics: "" },
+            { chords: "", lyrics: "Me llamaran feliz, me llamaran feliz," },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Me llamaran feliz." },
+            { chords: "Fa Do", lyrics: "" },
+            { chords: "", lyrics: "Derribó del trono a los poderosos" },
+            { chords: "Fa Do", lyrics: "" },
+            { chords: "", lyrics: "y elevó a los humildes," },
+            { chords: "Fa Do", lyrics: "" },
+            { chords: "", lyrics: "colmó de bienes a los hambrientos" },
+            { chords: "Fa Do", lyrics: "" },
+            { chords: "", lyrics: "y despidió a los ricos con las manos vacías." },
+            { chords: "Fa Do", lyrics: "" },
+            { chords: "", lyrics: "Mi alma canta la grandeza del Señor" },
+            { chords: "Fa Do Sol lam", lyrics: "" },
+            { chords: "", lyrics: "Y mi espíritu se estremece de gozo en Dios" },
+            { chords: "Mi lam", lyrics: "" },
+            { chords: "", lyrics: "Mi salvador." }
+        ]
+    },
+    { 
+        id: 38, 
+        title: "199. HASTA QUE EL MUNDO ARDA POR ÉL", 
+        category: "Mariano", 
+        tone: "Mim", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "mim Do Sol Re", lyrics: "" },
+            { chords: "", lyrics: "Maria toma todo lo que tengo" },
+            { chords: "mim Do Sol Re", lyrics: "" },
+            { chords: "", lyrics: "Y soy, te ofrezco mi corazón." },
+            { chords: "mim Do Sol Re", lyrics: "" },
+            { chords: "", lyrics: "Como aquel niño que hoy se acerca" },
+            { chords: "mim Do Sol Re", lyrics: "" },
+            { chords: "", lyrics: "ante ti, y te habla de su canción." },
+            { chords: "mim Do Sol Re", lyrics: "" },
+            { chords: "", lyrics: "Gota a gota mi sangre te entrego" },
+            { chords: "mim Do Sol Re Do", lyrics: "" },
+            { chords: "", lyrics: "día a día a vivir su misión." },
+            { chords: "mim Do Re", lyrics: "" },
+            { chords: "", lyrics: "Hazme una antorcha que arda" },
+            { chords: "Sol Re", lyrics: "" },
+            { chords: "", lyrics: "por cristo" },
+            { chords: "mim Do Sol Re", lyrics: "" },
+            { chords: "", lyrics: "incendiar el corazón ser hogar," },
+            { chords: "Si7 mim Re La 7", lyrics: "" },
+            { chords: "", lyrics: "como el sol que esparce su luz." },
+            { chords: "lam Sol Fa Sol", lyrics: "" },
+            { chords: "", lyrics: "Hasta que el mundo arda por él." },
+            { chords: "lam Sol Do", lyrics: "" },
+            { chords: "", lyrics: "Hasta que el mundo arda por él." },
+            { chords: "solm Fa", lyrics: "" },
+            { chords: "", lyrics: "Maria quiero soñar" },
+            { chords: "rem solm Fa Re#", lyrics: "" },
+            { chords: "", lyrics: "nuevos caminos alcanzar" },
+            { chords: "Re7 Sol Fa lam", lyrics: "" },
+            { chords: "", lyrics: "Quiero ser santo y si debo morir," },
+            { chords: "solm Fa Do Re", lyrics: "" },
+            { chords: "", lyrics: "mi vida quiero entregar." }
+        ]
+    },
+    { 
+        id: 39, 
+        title: "200. REGINA COELI", 
+        category: "Pascual", 
+        tone: "Mim", 
+        youtube: "",
+        audio: "",
+        lines: [
+            { chords: "mim", lyrics: "" },
+            { chords: "", lyrics: "Regína caeli, laetáre. Aleluia, aleluia." },
+            { chords: "mim sim", lyrics: "" },
+            { chords: "", lyrics: "Reina del Cielo, alégrate:" },
+            { chords: "Do sol Re mi", lyrics: "" },
+            { chords: "", lyrics: "Aleluia, aleluia." },
+            { chords: "sim", lyrics: "" },
+            { chords: "", lyrics: "Porque al que tú portabas:" },
+            { chords: "Do Sol Re lam", lyrics: "" },
+            { chords: "", lyrics: "Aleluia, aleluia." },
+            { chords: "mim", lyrics: "" },
+            { chords: "", lyrics: "Resucitó, como dijo:" },
+            { chords: "Do Sol Re lam", lyrics: "" },
+            { chords: "", lyrics: "Aleluia, aleluia." },
+            { chords: "mim", lyrics: "" },
+            { chords: "", lyrics: "Ruega a Dios por nosotros:" },
+            { chords: "Do Sol Re", lyrics: "" },
+            { chords: "", lyrics: "Aleluia, aleluia." },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "Goza y alégrate, Virgen María," },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "por la verdadera resurrección del Señor." },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "Goza y alégrate, Reina del Cielo:" },
+            { chords: "lam Re mim", lyrics: "" },
+            { chords: "", lyrics: "Aleluia, aleluia." },
+            { chords: "mim sim", lyrics: "" },
+            { chords: "", lyrics: "Dios Padre, que por la resurrección" },
+            { chords: "Do Sol Re mim", lyrics: "" },
+            { chords: "", lyrics: "de tu Hijo, Nuestro Señor Jesús," },
+            { chords: "sim", lyrics: "" },
+            { chords: "", lyrics: "te dignaste dar al mundo" },
+            { chords: "Do Sol Re", lyrics: "" },
+            { chords: "", lyrics: "alegría," },
+            { chords: "lam mim", lyrics: "" },
+            { chords: "", lyrics: "concédenos por tu Madre," },
+            { chords: "Do Sol Re", lyrics: "" },
+            { chords: "", lyrics: "por la Virgen María," },
+            { chords: "lam mim Do Sol Re", lyrics: "" },
+            { chords: "", lyrics: "alcanzar el gozo, de la Vida Eterna." },
+            { chords: "Lam sim Re", lyrics: "" },
+            { chords: "", lyrics: "Por Jesucristo, nuestro Señor." },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "Goza y alégrate, Virgen María," },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "por la verdadera resurrección del Señor." },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "Goza y alégrate, Reina del Cielo:" },
+            { chords: "lam Re", lyrics: "" },
+            { chords: "", lyrics: "Aleluia." },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "Regína caeli, laetáre, (Aleluia)" },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "Quia quem meruísti portáre, (Aleluia)" },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "Resurréxit, sicut dixit, (Aleluia)" },
+            { chords: "lam Re", lyrics: "" },
+            { chords: "", lyrics: "Ora pro nobis Deum. (Aleluia)" },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "Goza y alégrate, Virgen María," },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "por la verdadera resurrección del Señor." },
+            { chords: "Sol Re lam Do", lyrics: "" },
+            { chords: "", lyrics: "Goza y alégrate, Reina del Cielo:" },
+            { chords: "lam Re mim", lyrics: "" },
+            { chords: "", lyrics: "Aleluia, aleluia." }
+        ]
+    }
+];
+
+
+let currentFilter = 'todos';
+let currentLetter = 'todos';
+let selectedSongId = null;
+let currentTransposeOffset = 0;
+let chordsVisible = true;
+
+const spanishChromaticScale = ["Do", "Do#", "Re", "Re#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"];
+const spanishFlatScale = ["Do", "Reb", "Re", "Mib", "Mi", "Fa", "Solb", "Sol", "Lab", "La", "Sib", "Si"];
+
+function initAlphabet() {
+    const grid = document.getElementById('alphabetGrid');
+    grid.innerHTML = '';
+    
+    const allBtn = document.createElement('button');
+    allBtn.className = 'letter-btn btn-todos active';
+    allBtn.id = 'btnLetterTodos';
+    allBtn.innerText = 'Todos';
+    allBtn.onclick = () => setLetter('todos', allBtn);
+    grid.appendChild(allBtn);
+
+    const alphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split('');
+    alphabet.forEach(letter => {
+        const btn = document.createElement('button');
+        btn.className = 'letter-btn';
+        btn.innerText = letter;
+        btn.onclick = () => setLetter(letter, btn);
+        grid.appendChild(btn);
+    });
+}
+
+function customAlert(msg) {
+    const box = document.createElement('div');
+    box.style.cssText = 'position:fixed; top:20px; right:20px; background:var(--bg-card); color:var(--text-main); border:1px solid var(--accent); padding:12px 20px; border-radius:8px; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.3); font-size:13px;';
+    box.innerText = msg;
+    document.body.appendChild(box);
+    setTimeout(() => box.remove(), 3000);
+}
+
+function changeTheme(themeName) {
+    document.documentElement.setAttribute('data-theme', themeName);
+}
+
+function renderSongList(filteredSongs) {
+    const listContainer = document.getElementById('songListContainer');
+    listContainer.innerHTML = '';
+    
+    if (filteredSongs.length === 0) {
+        listContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted); font-size: 13px;">No se encontraron cantos</div>';
+        return;
+    }
+
+    filteredSongs.forEach(song => {
+        const item = document.createElement('div');
+        item.className = 'song-item' + (selectedSongId === song.id ? ' selected' : '');
+        item.onclick = () => selectSong(song.id, item);
+        item.innerHTML = `
+            <div class="song-item-title">${song.title}</div>
+            <div class="song-item-meta">
+                <span class="badge-cat">${song.category}</span>
+                <span class="badge-tone">Tono: ${song.tone}</span>
+            </div>
+        `;
+        listContainer.appendChild(item);
+    });
+    
+    document.getElementById('countDisplay').innerText = `${filteredSongs.length} cantos`;
+}
+
+function setFilter(category, element) {
+    currentFilter = category;
+    document.querySelectorAll('.filters-section .tag').forEach(t => t.classList.remove('active'));
+    element.classList.add('active');
+    filterSongs();
+}
+
+function setLetter(letter, element) {
+    currentLetter = letter;
+    document.querySelectorAll('.alphabet-grid .letter-btn').forEach(b => b.classList.remove('active'));
+    element.classList.add('active');
+    filterSongs();
+}
+
+function filterSongs() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = songs.filter(song => {
+        const matchesCategory = currentFilter === 'todos' || song.category.toLowerCase() === currentFilter.toLowerCase();
+        const cleanTitle = song.title.replace(/^\d+[\.\-\s]*/, '').trim().toUpperCase();
+        const matchesLetter = currentLetter === 'todos' || cleanTitle.startsWith(currentLetter.toUpperCase());
+        const fullText = song.title + ' ' + song.lines.map(l => l.chords + ' ' + l.lyrics).join(' ');
+        const matchesQuery = fullText.toLowerCase().includes(query);
+        return matchesCategory && matchesLetter && matchesQuery;
+    });
+    renderSongList(filtered);
+}
+
+function getSpanishNoteIndex(noteStr) {
+    if (!noteStr) return 0;
+    let clean = noteStr.charAt(0).toUpperCase() + noteStr.slice(1).toLowerCase();
+    let idx = spanishChromaticScale.indexOf(clean);
+    if (idx !== -1) return idx;
+    idx = spanishFlatScale.indexOf(clean);
+    if (idx !== -1) return idx;
+    return 0;
+}
+
+function transposeSpanishChord(chord, semitones) {
+    const match = chord.match(/^(Do|Re|Mi|Fa|Sol|La|Si)([#b]?)(.*)$/i);
+    if (!match) return chord;
+    
+    let baseNote = match[1].charAt(0).toUpperCase() + match[1].slice(1).toLowerCase() + match[2];
+    let suffix = match[3];
+    
+    let baseIdx = getSpanishNoteIndex(baseNote);
+    let newIdx = (baseIdx + semitones + 12) % 12;
+    let newRoot = spanishChromaticScale[newIdx];
+    
+    return newRoot + suffix;
+}
+
+function transposeLineChords(chordLine, semitones) {
+    if (!chordLine) return '';
+    return chordLine.replace(/(Do|Re|Mi|Fa|Sol|La|Si)[#b]?[a-zA-Z0-9]*/gi, (match) => {
+        return transposeSpanishChord(match, semitones);
+    });
+}
+
+function selectSong(id, itemElement) {
+    selectedSongId = id;
+    currentTransposeOffset = 0;
+    
+    document.querySelectorAll('.song-item').forEach(el => el.classList.remove('selected'));
+    if (itemElement) {
+        itemElement.classList.add('selected');
+    } else {
+        const items = document.querySelectorAll('.song-item');
+        items.forEach(it => {
+            if (it.innerHTML.includes(songs.find(s=>s.id===id)?.title)) {
+                it.classList.add('selected');
+            }
+        });
+    }
+    
+    const song = songs.find(s => s.id === id);
+    if (!song) return;
+    
+    renderSongView(song);
+}
+
+function toggleChords() {
+    chordsVisible = !chordsVisible;
+    const chordElements = document.querySelectorAll('.chord-line');
+    const toggleBtn = document.getElementById('toggleChordsBtn');
+    
+    chordElements.forEach(el => {
+        if (chordsVisible) {
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
+    });
+    
+    if (toggleBtn) {
+        toggleBtn.innerText = chordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+    }
+}
+
+function renderSongView(song) {
+    const contentPanel = document.getElementById('contentPanel');
+    let displayedTone = transposeSpanishChord(song.tone, currentTransposeOffset);
+
+    let lyricsHTML = '';
+    song.lines.forEach(line => {
+        let displayChords = transposeLineChords(line.chords, currentTransposeOffset);
+        let hiddenClass = chordsVisible ? '' : ' hidden';
+        lyricsHTML += `
+            <div class="song-line">
+                <div class="chord-line${hiddenClass}">${displayChords}</div>
+                <div class="lyric-line">${line.lyrics}</div>
+            </div>
+        `;
+    });
+
+    let baseOriginalIdx = getSpanishNoteIndex(song.tone);
+    let optionsHTML = '';
+    
+    for (let i = 0; i < 12; i++) {
+        let targetOffset = (i - baseOriginalIdx + 12) % 12;
+        let noteName = spanishChromaticScale[i];
+        let label = (targetOffset === 0) ? `Tono original (${noteName})` : `Transportar a ${noteName}`;
+        let selectedAttr = (targetOffset === currentTransposeOffset) ? 'selected' : '';
+        optionsHTML += `<option value="${targetOffset}" ${selectedAttr}>${label}</option>`;
+    }
+
+    let ytEmbedHtml = '';
+    if (song.youtube) {
+        let ytId = extractYoutubeId(song.youtube);
+        if (ytId) {
+            ytEmbedHtml = `<iframe class="youtube-embed" src="https://www.youtube.com/embed/${ytId}" frameborder="0" allowfullscreen></iframe>`;
+        } else {
+            ytEmbedHtml = `<a href="${song.youtube}" target="_blank" class="btn">🔗 Ver video en YouTube</a>`;
+        }
+    }
+
+    let audioHtml = '';
+    if (song.audio) {
+        audioHtml = `<audio controls><source src="${song.audio}" type="audio/mpeg">Tu navegador no soporta audio.</audio>`;
+    }
+
+    let mediaSectionHTML = '';
+    if (song.youtube || song.audio) {
+        mediaSectionHTML = `
+            <div class="media-section">
+                <div style="font-size: 13px; font-weight: bold; color: var(--accent);">Multimedia / Referencia:</div>
+                <div class="media-container">
+                    ${ytEmbedHtml}
+                    ${audioHtml}
+                </div>
+            </div>
+        `;
+    }
+
+    let toggleBtnText = chordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+
+    contentPanel.innerHTML = `
+        <div class="song-display">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h2 style="margin:0; border:none; padding:0;">${song.title}</h2>
+                <div class="transposer-toolbar">
+                    <span>Tono: <strong>${displayedTone}</strong></span>
+                    <label>Nota:</label>
+                    <select id="transposeSelect" onchange="changeTranspose(this.value)">
+                        ${optionsHTML}
+                    </select>
+                    <button class="btn" id="toggleChordsBtn" style="padding: 5px 10px; font-size: 12px;" onclick="toggleChords()">${toggleBtnText}</button>
+                    <button class="btn" style="padding: 5px 10px; font-size: 12px;" onclick="openSongModal(${song.id})">✏️ Editar</button>
+                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;" onclick="openFullscreenWindow()">🖨️ Proyectar</button>
+                </div>
+            </div>
+            <div class="nav-menu-bar">
+                <span>Tiempo Litúrgico: ${song.category}</span>
+                <span>Tono Original: ${song.tone}</span>
+            </div>
+            <div class="song-lyrics-container">
+                ${lyricsHTML}
+            </div>
+            ${mediaSectionHTML}
+        </div>
+    `;
+}
+
+function extractYoutubeId(url) {
+    let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    let match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
+function changeTranspose(val) {
+    currentTransposeOffset = parseInt(val);
+    const song = songs.find(s => s.id === selectedSongId);
+    if (song) {
+        renderSongView(song);
+    }
+}
+
+function openSongModal(songId = null) {
+    const modal = document.getElementById('songModal');
+    const modalTitle = document.getElementById('modalTitle');
+    
+    document.getElementById('editSongId').value = '';
+    document.getElementById('inputTitle').value = '';
+    document.getElementById('inputCategory').value = 'Mariano';
+    document.getElementById('inputTone').value = 'Do';
+    document.getElementById('inputYoutube').value = '';
+    document.getElementById('inputAudio').value = '';
+    document.getElementById('inputRawLyrics').value = '';
+
+    if (songId) {
+        const song = songs.find(s => s.id === songId);
+        if (song) {
+            modalTitle.innerText = 'Editar Canción';
+            document.getElementById('editSongId').value = song.id;
+            document.getElementById('inputTitle').value = song.title;
+            document.getElementById('inputCategory').value = song.category;
+            document.getElementById('inputTone').value = song.tone;
+            document.getElementById('inputYoutube').value = song.youtube || '';
+            document.getElementById('inputAudio').value = song.audio || '';
+            
+            let rawText = song.lines.map(l => (l.chords ? l.chords + '\n' : '') + l.lyrics).join('\n');
+            document.getElementById('inputRawLyrics').value = rawText;
+        }
+    } else {
+        modalTitle.innerText = 'Nueva Canción';
+    }
+
+    modal.classList.add('active');
+}
+
+function closeSongModal() {
+    document.getElementById('songModal').classList.remove('active');
+}
+
+function saveSong() {
+    const editId = document.getElementById('editSongId').value;
+    const title = document.getElementById('inputTitle').value.trim();
+    const category = document.getElementById('inputCategory').value;
+    const tone = document.getElementById('inputTone').value.trim() || 'Do';
+    const youtube = document.getElementById('inputYoutube').value.trim();
+    const audio = document.getElementById('inputAudio').value.trim();
+    const rawLyrics = document.getElementById('inputRawLyrics').value;
+
+    if (!title) {
+        alert('Por favor ingresa un título para la canción.');
+        return;
+    }
+
+    let parsedLines = [];
+    let textLines = rawLyrics.split('\n');
+    for (let i = 0; i < textLines.length; i += 2) {
+        let chordLine = textLines[i] || '';
+        let lyricLine = textLines[i+1] || '';
+        parsedLines.push({ chords: chordLine, lyrics: lyricLine });
+    }
+
+    if (editId) {
+        let song = songs.find(s => s.id == editId);
+        if (song) {
+            song.title = title;
+            song.category = category;
+            song.tone = tone;
+            song.youtube = youtube;
+            song.audio = audio;
+            song.lines = parsedLines;
+        }
+        customAlert('¡Canto actualizado con éxito!');
+    } else {
+        let newId = songs.length > 0 ? Math.max(...songs.map(s => s.id)) + 1 : 1;
+        let newSong = {
+            id: newId,
+            title: title,
+            category: category,
+            tone: tone,
+            youtube: youtube,
+            audio: audio,
+            lines: parsedLines
+        };
+        songs.push(newSong);
+        selectedSongId = newId;
+        customAlert('¡Nuevo canto añadido con éxito!');
+    }
+
+    closeSongModal();
+    filterSongs();
+    if (selectedSongId) {
+        const updatedSong = songs.find(s => s.id === selectedSongId);
+        if (updatedSong) renderSongView(updatedSong);
+    }
+}
+
+function openFullscreenWindow() {
+    const song = songs.find(s => s.id === selectedSongId);
+    if (!song) return;
+
+    let displayedTone = transposeSpanishChord(song.tone, currentTransposeOffset);
+    let lyricsHTML = '';
+    song.lines.forEach(line => {
+        let displayChords = transposeLineChords(line.chords, currentTransposeOffset);
+        let chordStyle = chordsVisible ? "color: #f59e0b; font-weight: bold; font-family: 'Courier New', monospace; white-space: pre; font-size: 20px;" : "display: none;";
+        lyricsHTML += `
+            <div style="margin-bottom: 18px; text-align: center;">
+                <div class="print-chord-line" style="${chordStyle}">${displayChords || '&nbsp;'}</div>
+                <div style="color: #f8fafc; font-family: 'Courier New', monospace; white-space: pre-wrap; font-size: 22px;">${line.lyrics || '&nbsp;'}</div>
+            </div>
+        `;
+    });
+
+    let newWindow = window.open('', '_blank', 'width=1000,height=800');
+    newWindow.document.write(`
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>${song.title} - Vista Presentación</title>
+            <style>
+                body {
+                    background-color: #0f172a;
+                    color: #f8fafc;
+                    font-family: 'Segoe UI', Arial, sans-serif;
+                    padding: 30px;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .top-bar {
+                    width: 100%;
+                    max-width: 900px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-bottom: 2px solid #334155;
+                    padding-bottom: 15px;
+                    margin-bottom: 30px;
+                }
+                .btn-group {
+                    display: flex;
+                    gap: 10px;
+                }
+                button {
+                    background: #334155;
+                    color: #f8fafc;
+                    border: 1px solid #475569;
+                    padding: 8px 14px;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    font-size: 13px;
+                }
+                button:hover { background: #475569; }
+                button.primary {
+                    background: #f59e0b;
+                    color: #0f172a;
+                    border: none;
+                }
+                h1 { color: #f59e0b; font-size: 26px; margin: 0; text-align: center; }
+                .meta { color: #94a3b8; font-size: 14px; text-align: center; margin-top: 5px; }
+                .song-container {
+                    width: 100%;
+                    max-width: 900px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                }
+                @media print {
+                    body { background: white; color: black; }
+                    .top-bar { display: none; }
+                    .print-chord-line { color: #b45309 !important; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="top-bar">
+                <button onclick="window.close()">← Volver</button>
+                <div class="btn-group">
+                    <button id="printToggleChords" onclick="togglePrintChords()">🎸 Ocultar Acordes</button>
+                    <button class="primary" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+                    <button onclick="toggleFullScreen()">⛶ Pantalla Completa</button>
+                </div>
+            </div>
+            
+            <div class="song-container">
+                <div style="margin-bottom: 25px; text-align: center;">
+                    <h1>${song.title}</h1>
+                    <div class="meta">Tono actual: <strong>${displayedTone}</strong> (Original: ${song.tone}) | ${song.category}</div>
+                </div>
+                <div style="width: 100%;">
+                    ${lyricsHTML}
+                </div>
+            </div>
+
+            <script>
+                let printChordsVisible = ${chordsVisible};
+                function togglePrintChords() {
+                    printChordsVisible = !printChordsVisible;
+                    const lines = document.querySelectorAll('.print-chord-line');
+                    const btn = document.getElementById('printToggleChords');
+                    lines.forEach(l => {
+                        l.style.display = printChordsVisible ? 'block' : 'none';
+                    });
+                    btn.innerText = printChordsVisible ? '🎸 Ocultar Acordes' : '🎸 Mostrar Acordes';
+                }
+
+                function toggleFullScreen() {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().catch(err => {
+                            alert("No se pudo activar la pantalla completa: " + err.message);
+                        });
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        }
+                    }
+                }
+            <\/script>
+        </body>
+        </html>
+    `);
+    newWindow.document.close();
+}
+
+window.onload = function() {
+    initAlphabet();
+    filterSongs();
+};
+</script>
+</body>
+</html>
