@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANTOS AL CORDERO - Matrimonio</title>
+<style>
+:root[data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-hover: #334155;
+    --accent: #f59e0b;
+    --accent-hover: #d97706;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --danger: #ef4444;
+}
+:root[data-theme="light"] {
+    --bg-main: #fffdf7;
+    --bg-card: #ffffff;
+    --bg-hover: #eff6ff;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --text-main: #111827;
+    --text-muted: #475569;
+    --border: #dbeafe;
+    --danger: #dc2626;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.app-layout-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 860px;
+}
+
+.phone-mockup {
+    width: 420px;
+    height: 860px;
+    background-color: var(--bg-card);
+    border-radius: 40px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    border: 12px solid #111;
+}
+
+.phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 30px;
+    background-color: #111;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    z-index: 100;
+}
+
+.app-header {
+    background-color: var(--bg-card);
+    padding: 45px 16px 12px 16px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.back-arrow {
+    color: var(--text-main);
+    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.book-icon {
+    color: var(--accent);
+    font-size: 18px;
+    line-height: 1;
+}
+
+.title-container h1 {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+}
+
+.header-var {
+    background-color: #b45309; 
+    color: #ffffff;
+    font-size: 9px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+
+.header-sub {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 1px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-icon, .export-icon {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.new-song-btn {
+    background-color: var(--accent);
+    color: var(--bg-main);
+    font-size: 10px;
+    font-weight: 600;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.sidebar {
+    flex: 1;
+    background-color: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.sidebar-search {
+    padding: 12px 16px 6px 16px;
+}
+
+.search-box {
+    position: relative;
+    width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.search-input {
+    width: 100%;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px 8px 32px;
+    color: var(--text-main);
+    font-size: 12px;
+    outline: none;
+}
+.search-input:focus { border-color: var(--accent); }
+
+.filters-section {
+    padding: 0 16px 8px 16px;
+}
+
+.filter-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.tag {
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    color: var(--text-muted);
+    background-color: var(--bg-card);
+}
+
+.tag.active {
+    background-color: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+/* Estilos para Búsqueda Alfabética */
+.alphabet-section {
+    padding: 0 16px 10px 16px;
+}
+
+.alphabet-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    justify-content: center;
+}
+
+.alpha-btn {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+}
+
+.alpha-btn:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+}
+
+.alpha-btn.active {
+    background-color: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
+}
+
+.song-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 16px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.song-item {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: left ;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.song-number { color: var(--text-muted); font-weight: 700; }
+.song-number { color: var(--text-muted); font-weight: 700; }
+.song-item:hover {
+    background-color: var(--bg-hover);
+}
+
+.song-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.song-meta {
+    display: flex;
+    gap: 6px;
+    font-size: 10px;
+    color: var(--text-muted);
+    align-items: center;
+}
+.badge-tone {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* Pantalla de Proyección Integrada */
+.projection-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-main);
+    z-index: 200;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+.projection-overlay.active {
+    display: flex;
+}
+.projection-topbar {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 10px 8px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.projection-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Panel Multimedia Exterior a la Derecha del Teléfono */
+.external-media-sidebar {
+    width: 300px;
+    height: 100%;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+.external-media-sidebar.active {
+    display: flex;
+}
+.external-media-sidebar h3 {
+    font-size: 13px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+}
+.media-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.media-box label {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: bold;
+}
+.media-box iframe {
+    width: 100%;
+    height: 180px;
+    border: none;
+    border-radius: 8px;
+}
+.media-box audio {
+    width: 100%;
+    height: 36px;
+}
+
+.song-lyrics-container {
+    font-family: "Courier New", Consolas, monospace;
+    font-size: var(--lyrics-font-size, 13px);
+    line-height: 1.4;
+    text-align: left;
+    width: 100%;
+    max-width: 480px;
+}
+.song-line {
+    margin-bottom: 10px;
+    text-align: left;
+}
+.song-line.blank-line { margin-bottom: 4px; }
+.chord-line {
+    color: var(--accent);
+    font-weight: bold;
+    white-space: pre-wrap;
+    min-height: 1em;
+    text-align: left;
+}
+.chord-line.hidden {
+    display: none !important;
+}
+.lyric-line {
+    color: var(--text-main);
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+.transposer-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: var(--bg-main);
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-size: 10px;
+    flex-wrap: wrap;
+}
+
+.app-footer {
+    background-color: var(--bg-card);
+    border-top: 1px solid var(--border);
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.footer-item.active {
+    color: var(--accent);
+}
+
+.footer-icon {
+    font-size: 16px;
+}
+
+.home-indicator {
+    width: 140px;
+    height: 5px;
+    background-color: var(--text-main);
+    border-radius: 100px;
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+}
+
+/* Modal configurado para ocupar 3/4 de la pantalla */
+.modal-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.9);
+    z-index: 300;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+.modal-overlay.active { display: flex; }
+.modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    width: 75%;         
+    max-width: 600px;   
+    height: 75%;        
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+.form-row { display: flex; gap: 10px; }
+.form-group { flex: 1; margin-bottom: 6px; }
+.form-group label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+.form-control { width: 100%; background: var(--bg-main); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; color: var(--text-main); font-size: 12px; outline: none; }
+.btn { background: var(--bg-hover); color: var(--text-main); border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; text-decoration: none; }
+.btn-primary { background: var(--accent); color: var(--bg-main); font-weight: bold; border: none; }
+.btn-danger { background: var(--danger); color: #fff; border: none; }
+
+/* Estilos para impresión */
+@media print {
+    body { background: white; color: black; height: auto; overflow: auto; display: block; }
+    .app-layout-wrapper { display: block; height: auto; }
+    .phone-mockup { width: 100%; height: auto; border: none; border-radius: 0; box-shadow: none; background: white; }
+    .phone-notch, .app-header, .app-footer, .home-indicator, .projection-topbar, .sidebar, .modal-overlay, .external-media-sidebar { display: none !important; }
+    .projection-overlay { position: static; display: flex !important; background: white; color: black; padding: 0; }
+    .song-lyrics-container { font-size: 14px; color: black; text-align: left; }
+    .chord-line { color: #b45309 !important; text-align: left; }
+    .lyric-line { color: black !important; text-align: left; }
+}
+
+/* Corrección de lectura: interlineado simple y canciones compactas */
+.song-lyrics-container { line-height: 1 !important; text-align: left !important; }
+.song-line { margin-bottom: 0 !important; line-height: 1 !important; text-align: left !important; }
+.song-line.blank-line { margin-bottom: 0 !important; line-height: 1 !important; min-height: .45em; }
+.lyric-line, .chord-line { line-height: 1 !important; text-align: left !important; }
+
+
+/* ===== Adaptación móvil añadida: teléfonos y tabletas ===== */
+html { width: 100%; min-width: 0; -webkit-text-size-adjust: 100%; }
+body { min-width: 0; max-width: 100%; }
+img, video, iframe, canvas, svg { max-width: 100%; }
+button, .btn, a, input, select, textarea { touch-action: manipulation; }
+@media screen and (max-width: 700px) {
+  html, body { width: 100% !important; min-width: 0 !important; margin: 0 !important; }
+  body { overflow-x: hidden !important; }
+  .app-layout-wrapper { width: 100% !important; max-width: 100% !important; min-width: 0 !important; height: 100dvh !important; min-height: 100dvh !important; margin: 0 !important; padding: 0 !important; }
+  .phone-mockup { width: 100% !important; max-width: 100% !important; min-width: 0 !important; height: 100dvh !important; min-height: 100dvh !important; margin: 0 !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
+  .phone-notch, .home-indicator { display: none !important; }
+  .app-layout, .app-container, .main-content, .content, .song-list, .songs-container { max-width: 100% !important; min-width: 0 !important; }
+  .app-header { padding: 10px 12px !important; gap: 8px !important; }
+  .app-header h1, .app-header .title { font-size: clamp(16px, 5vw, 21px) !important; line-height: 1.2 !important; }
+  .app-header button, .app-header .btn, button, .btn { min-height: 40px; }
+  .sidebar { width: min(84vw, 300px) !important; max-width: 84vw !important; }
+  .song-item, .song-card, .song-row, .song-list-item { max-width: 100% !important; min-width: 0 !important; }
+  .song-lyrics-container { width: 100% !important; max-width: 100% !important; overflow-wrap: anywhere !important; word-break: normal !important; white-space: normal !important; font-size: 16px !important; line-height: 1.35 !important; padding: 10px !important; text-align: left !important; }
+  .song-line, .lyric-line, .chord-line { max-width: 100% !important; overflow-wrap: anywhere !important; white-space: pre-wrap !important; line-height: 1.35 !important; text-align: left !important; }
+  .projection-overlay { max-width: 100vw !important; overflow-x: hidden !important; }
+  .projection-content, .projection-panel, .modal-content { width: 100% !important; max-width: 100% !important; min-width: 0 !important; }
+  .modal-overlay { position: fixed !important; inset: 0 !important; padding: 8px !important; overflow-y: auto !important; }
+  .modal-content { height: auto !important; max-height: 92dvh !important; overflow-y: auto !important; padding: 14px !important; }
+  .form-row { flex-wrap: wrap !important; }
+  .form-group { min-width: 0 !important; }
+  input, select, textarea { max-width: 100% !important; font-size: 16px !important; }
+  table { display: block; max-width: 100%; overflow-x: auto; }
+}
+@media screen and (max-width: 380px) {
+  .app-header { padding: 8px !important; }
+  .song-lyrics-container { font-size: 15px !important; padding: 7px !important; text-align: left !important; }
+  .btn { padding: 8px !important; }
+}
+
+/* Pantalla completa limpia: solo cerrar, título y canción completa */
+#fullscreenCloseBtn{display:none;position:fixed;top:8px;right:10px;z-index:2147483647;width:auto;height:auto;padding:3px 5px;border:0!important;border-radius:0!important;background:transparent!important;color:inherit!important;font-size:10px!important;line-height:1.2;box-shadow:none!important;cursor:pointer;opacity:.65}
+.projection-overlay:fullscreen,.projection-overlay.active:fullscreen{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;max-width:none!important;max-height:none!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;background:#211936!important;color:#f3e8ff!important;padding:0!important}
+.projection-overlay:fullscreen .projection-topbar,.projection-overlay.active:fullscreen .projection-topbar{display:none!important}
+.projection-overlay:fullscreen #fullscreenCloseBtn,.projection-overlay.active:fullscreen #fullscreenCloseBtn{display:block!important}
+.projection-overlay:fullscreen .projection-body,.projection-overlay.active:fullscreen .projection-body{display:block!important;flex:1 1 auto!important;width:100%!important;height:auto!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;box-sizing:border-box!important;padding:78px 5vw 32px!important}
+.projection-overlay:fullscreen #projSongTitle,.projection-overlay.active:fullscreen #projSongTitle{display:block!important;width:100%!important;max-width:100%!important;font-size:clamp(22px,3vw,38px)!important;line-height:1.2!important;margin:0 auto 22px!important;padding:0 48px 12px!important;box-sizing:border-box!important;color:#f3e8ff!important;text-align:left!important}
+.projection-overlay:fullscreen #projLyricsContainer,.projection-overlay.active:fullscreen #projLyricsContainer{width:100%!important;max-width:1100px!important;margin:0 auto!important;font-size:clamp(19px,2.2vw,30px)!important;line-height:1.35!important;text-align:left!important;overflow:visible!important}
+.projection-overlay:fullscreen .song-line,.projection-overlay:fullscreen .lyric-line,.projection-overlay:fullscreen .chord-line{line-height:1.35!important;margin-bottom:0!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;text-align:left!important}
+.projection-overlay:fullscreen .youtube-quick-link{display:none!important}
+/* Al ocultar acordes, mantener interlineado simple y sin huecos */
+.chord-line.hidden{display:none!important}.song-lyrics-container.chords-hidden,.chords-hidden .song-line{line-height:1!important;margin-bottom:0!important}
+
+/* Corrección contraste y título en proyección a pantalla completa */
+.projection-overlay:fullscreen,.projection-overlay.active:fullscreen{background:#211936!important;color:#f3e8ff!important}
+.projection-overlay:fullscreen #fullscreenCloseBtn,.projection-overlay.active:fullscreen #fullscreenCloseBtn{top:12px!important;right:14px!important;left:auto!important;background:#f3e8ff!important;color:#211936!important;border:1px solid #d9c8f0!important}
+.projection-overlay:fullscreen .projection-body,.projection-overlay.active:fullscreen .projection-body{padding:76px 5vw 32px!important;color:#f3e8ff!important}
+.projection-overlay:fullscreen #projSongTitle,.projection-overlay.active:fullscreen #projSongTitle{position:relative!important;z-index:1!important;padding:0 64px 12px!important;margin:0 auto 22px!important;color:#f3e8ff!important;text-align:left!important}
+.projection-overlay:fullscreen #projLyricsContainer,.projection-overlay.active:fullscreen #projLyricsContainer{color:#f3e8ff!important;text-align:left!important}
+.projection-overlay:fullscreen #projLyricsContainer *,.projection-overlay.active:fullscreen #projLyricsContainer *{color:#f3e8ff!important;text-align:left!important}
+.projection-overlay:fullscreen #projLyricsContainer .chord-line,.projection-overlay.active:fullscreen #projLyricsContainer .chord-line{color:#ffbf38!important;text-align:left!important}
+.projection-overlay:fullscreen .song-line,.projection-overlay:fullscreen .lyric-line,.projection-overlay.active:fullscreen .song-line,.projection-overlay.active:fullscreen .lyric-line{color:#f3e8ff!important;text-align:left!important}
+
+</style>
+<style id="paleta-religiosa-y-acordes">
+/* Paletas religiosas para el fondo y colores de acordes */
+:root[data-palette="marfil"]{--bg-main:#f8f4e8;--bg-card:#fffdf7;--bg-hover:#eee5d1;--text-main:#302a22;--text-muted:#716657;--border:#d8c7a2;--accent:#087f78;--accent-hover:#06645f;--bg:#f8f4e8;--panel:#fffdf7;--panel2:#eee5d1;--line:#d8c7a2;--ink:#302a22;--muted:#716657}
+:root[data-palette="azul-mariano"]{--bg-main:#eaf2fb;--bg-card:#f8fbff;--bg-hover:#d8e7f7;--text-main:#172d4a;--text-muted:#526c8a;--border:#a8c2e2;--accent:#1465a8;--accent-hover:#0e4f86;--bg:#eaf2fb;--panel:#f8fbff;--panel2:#d8e7f7;--line:#a8c2e2;--ink:#172d4a;--muted:#526c8a}
+:root[data-palette="borgona"]{--bg-main:#351522;--bg-card:#4a1d30;--bg-hover:#61283f;--text-main:#fff4e8;--text-muted:#e0bdc8;--border:#875268;--accent:#e6c06a;--accent-hover:#f0d58e;--bg:#351522;--panel:#4a1d30;--panel2:#61283f;--line:#875268;--ink:#fff4e8;--muted:#e0bdc8}
+:root[data-palette="verde-liturgico"]{--bg-main:#102d24;--bg-card:#194033;--bg-hover:#245746;--text-main:#f1f8ef;--text-muted:#bfd6c7;--border:#467963;--accent:#e3c76b;--accent-hover:#f2d982;--bg:#102d24;--panel:#194033;--panel2:#245746;--line:#467963;--ink:#f1f8ef;--muted:#bfd6c7}
+:root[data-palette="violeta"]{--bg-main:#251c3b;--bg-card:#342750;--bg-hover:#463666;--text-main:#faf5ff;--text-muted:#d0c3e6;--border:#66558b;--accent:#e6c7ff;--accent-hover:#f0ddff;--bg:#251c3b;--panel:#342750;--panel2:#463666;--line:#66558b;--ink:#faf5ff;--muted:#d0c3e6}
+:root[data-palette="oscuro"]{--bg-main:#0f172a;--bg-card:#1e293b;--bg-hover:#334155;--text-main:#f8fafc;--text-muted:#94a3b8;--border:#334155;--accent:#40e0d0;--accent-hover:#20b8aa;--bg:#07111d;--panel:#101e30;--panel2:#14263a;--line:#28566a;--ink:#eaf7fa;--muted:#abc6ce}
+/* Los acordes/notas musicales siempre se distinguen de la letra */
+.chord-line,.chord,.music-note,.song-chords{color:#d97706!important;font-weight:800!important;text-shadow:0 0 1px rgba(0,0,0,.12);text-align:left!important}
+:root[data-palette="borgona"] .chord-line,:root[data-palette="verde-liturgico"] .chord-line,:root[data-palette="violeta"] .chord-line{color:#f4d16e!important}
+.palette-tools{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:8px 12px;margin:8px auto;border:1px solid var(--border,#d8c7a2);border-radius:12px;background:var(--bg-card,#fffdf7);color:var(--text-main,#302a22);max-width:900px;font:600 13px/1.4 system-ui,sans-serif}
+.palette-tools label{font-weight:700}.palette-tools select{max-width:100%;padding:7px 10px;border-radius:8px;border:1px solid var(--border,#d8c7a2);background:var(--bg-main,#f8f4e8);color:var(--text-main,#302a22);font:inherit}
+/* Lectura completa en proyección; desplazamiento si la letra es larga */
+.projection-overlay.active .projection-content,.projection-overlay.active .projection-body,.projection-overlay.active .proj-lyrics-container{overflow:auto!important;overscroll-behavior:contain}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+
+<style id="marco-cancion-80-por-ciento">
+/* Ventana de lectura amplia al abrir una canción */
+body.song-focus{min-height:100vh;padding:0!important;margin:0!important;max-width:none!important;display:block!important;overflow-x:hidden}
+body.song-focus .pagina{width:80vw!important;max-width:80vw!important;min-height:80vh!important;margin:10vh auto!important;padding:clamp(20px,3vw,44px)!important;box-sizing:border-box!important;border:2px solid var(--border,#b77b19)!important;border-radius:18px!important;box-shadow:0 18px 55px #0008!important}
+body.song-focus .appbar{width:80vw;max-width:80vw;margin:0 auto 12px;box-sizing:border-box;border-radius:0 0 14px 14px}
+body.song-focus .pagina pre{white-space:pre-wrap;overflow-wrap:anywhere;text-align:left!important}
+@media(max-width:700px){body.song-focus .pagina{width:94vw!important;max-width:94vw!important;min-height:82vh!important;margin:3vh auto!important;padding:16px!important;border-radius:14px!important}body.song-focus .appbar{width:94vw;max-width:94vw}}
+</style>
+
+<style id="ventana-cancion-80vw-fix">
+/* Al seleccionar una canción, abrirla como ventana amplia centrada (80% de pantalla). */
+.projection-overlay.active{
+  position:fixed!important; inset:10vh auto auto 10vw!important;
+  width:80vw!important; height:80vh!important;
+  max-width:none!important; box-sizing:border-box!important;
+  display:flex!important; flex-direction:column!important;
+  overflow:hidden!important; z-index:9999!important;
+  background:var(--bg-card,#fff)!important;
+  color:var(--text-main,#222)!important;
+  border:2px solid var(--accent,#c58b20)!important;
+  border-radius:18px!important;
+  box-shadow:0 0 0 100vmax rgba(0,0,0,.68),0 18px 55px rgba(0,0,0,.45)!important;
+}
+.projection-overlay.active .projection-topbar{
+  flex:0 0 auto!important; padding:12px!important;
+  background:var(--bg-card,#fff)!important;
+}
+.projection-overlay.active .projection-body{
+  flex:1 1 auto!important; min-height:0!important; width:100%!important;
+  box-sizing:border-box!important; overflow-y:auto!important; padding:18px 24px!important;
+}
+.projection-overlay.active #projSongTitle{max-width:100%!important;font-size:clamp(18px,2vw,28px)!important;text-align:left!important}
+.projection-overlay.active .song-lyrics-container{width:100%!important;max-width:none!important;font-size:var(--lyrics-font-size,clamp(16px,1.5vw,24px))!important;line-height:1.6!important;text-align:left!important}
+@media(max-width:700px){
+ .projection-overlay.active{inset:3vh 3vw auto 3vw!important;width:94vw!important;height:94vh!important;border-radius:14px!important}
+ .projection-overlay.active .projection-topbar{padding:8px!important}
+ .projection-overlay.active .projection-body{padding:12px!important}
+ .projection-overlay.active .transposer-toolbar{gap:5px!important}
+ .projection-overlay.active .btn{padding:8px!important;font-size:12px!important}
+}
+@media print{.projection-overlay.active{position:static!important;width:100%!important;height:auto!important;box-shadow:none!important;border:0!important}}
+</style>
+
+
+<style id="correcciones-listado-edicion-notas">
+/* Listado sencillo: canciones claramente separadas */
+.song-list{gap:8px!important;padding:10px 16px 18px!important}
+.song-item{min-height:44px!important;border:1px solid var(--border)!important;border-bottom:2px solid var(--border)!important;border-radius:7px!important;padding:10px 12px!important;gap:12px!important}
+.song-title{font-size:14px!important;line-height:1.35!important}
+.song-meta{font-size:12px!important;gap:10px!important;white-space:nowrap}
+/* La ventana de edición se superpone a la canción y al celular */
+#songModal.modal-overlay{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;padding:3vh 3vw!important;background:rgba(0,0,0,.78)!important;z-index:20000!important;display:none;align-items:center!important;justify-content:center!important;box-sizing:border-box!important}
+#songModal.modal-overlay.active{display:flex!important}
+#songModal .modal-content{position:relative!important;width:94vw!important;max-width:1100px!important;height:90vh!important;max-height:94vh!important;overflow:auto!important;padding:22px!important;box-sizing:border-box!important;z-index:20001!important}
+#songModal .form-row{flex-wrap:wrap!important}
+#songModal #inputRawLyrics{min-height:35vh!important;resize:vertical!important;font-size:16px!important;line-height:1.5!important}
+/* Tamaño de letra inicial normal (100%); A+/A- siguen funcionando */
+.projection-overlay.active .song-lyrics-container{font-size:var(--lyrics-font-size,18px)!important;line-height:1.6!important;text-align:left!important}
+.projection-overlay.active .chord-line{font-size:1em!important;font-weight:700!important;text-align:left!important}
+.projection-overlay.active .lyric-line{font-size:1em!important;text-align:left!important}
+@media(max-width:700px){#songModal .modal-content{width:96vw!important;height:94vh!important;padding:14px!important}#songModal .form-row{display:block!important}}
+</style>
+
+
+<style id="ajuste-final-pantalla-completa-interlineado-simple">
+/* Interlineado simple entre acordes y letra */
+.song-lyrics-container, .song-line, .lyric-line, .chord-line, .projection-body { line-height: 1.1 !important; text-align: left !important; }
+.song-line { margin-top: 0 !important; margin-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; text-align: left !important; }
+.song-line.blank-line { min-height: .45em !important; height: .45em !important; margin: 0 !important; }
+.projection-overlay.active .song-lyrics-container { line-height: 1.1 !important; margin-left: 0 !important; margin-right: auto !important; text-align: left !important; }
+.projection-overlay:fullscreen, .projection-overlay.active:fullscreen { width: 100vw !important; height: 100vh !important; inset: 0 !important; border: 0 !important; border-radius: 0 !important; display: flex !important; flex-direction: column !important; align-items: stretch !important; justify-content: stretch !important; background: var(--bg-card,#fff) !important; }
+.projection-overlay:fullscreen .projection-body, .projection-overlay.active:fullscreen .projection-body { flex: 1 1 auto !important; min-height: 0 !important; overflow: auto !important; display: flex !important; align-items: flex-start !important; justify-content: flex-start !important; text-align: left !important; padding: 3vh 4vw !important; box-sizing: border-box !important; }
+.projection-overlay:fullscreen .song-lyrics-container, .projection-overlay.active:fullscreen .song-lyrics-container { width: min(100%, 1100px) !important; max-width: 1100px !important; margin: 0 !important; line-height: 1.1 !important; font-size: var(--lyrics-font-size, 18px) !important; text-align: left !important; }
+.projection-overlay:fullscreen .song-line, .projection-overlay:fullscreen .lyric-line, .projection-overlay:fullscreen .chord-line { line-height: 1.1 !important; text-align: left !important; }
+@media print { .song-lyrics-container, .song-line, .lyric-line, .chord-line { line-height: 1.1 !important; text-align: left !important; } }
+
+/* AJUSTE FINAL: ventana de canción, edición superpuesta y proyección alineada */
+.projection-overlay.active{
+ position:fixed!important; inset:3vh 3vw!important; width:94vw!important; height:94vh!important;
+ max-width:none!important; max-height:none!important; z-index:99990!important;
+ display:flex!important; flex-direction:column!important; overflow:hidden!important;
+ border:1px solid var(--accent,#d7a640)!important; border-radius:16px!important;
+ box-shadow:0 0 0 100vmax rgba(0,0,0,.72),0 18px 70px rgba(0,0,0,.4)!important;
+}
+.projection-overlay.active .projection-topbar{
+ position:sticky!important; top:0!important; z-index:3!important; flex:0 0 auto!important;
+ display:flex!important; justify-content:center!important; align-items:center!important;
+ padding:10px 12px!important; gap:8px!important; background:var(--bg-card,#19263a)!important;
+ border-bottom:1px solid var(--border,#40516b)!important; box-sizing:border-box!important;
+}
+.projection-overlay.active .projection-body{
+ flex:1 1 auto!important; min-height:0!important; width:100%!important; overflow:auto!important;
+ display:flex!important; flex-direction:column!important; align-items:flex-start!important; justify-content:flex-start!important;
+ text-align:left!important; padding:clamp(12px,3vh,32px) clamp(12px,4vw,48px)!important; box-sizing:border-box!important;
+}
+.projection-overlay.active #projSongTitle{flex:0 0 auto!important;width:min(100%,1100px)!important;max-width:1100px!important;font-size:clamp(20px,2.2vw,32px)!important;line-height:1.15!important;margin:0 0 14px 0!important;text-align:left!important;}
+.projection-overlay.active .song-lyrics-container{
+ width:min(100%,1100px)!important; max-width:1100px!important; margin:0!important;
+ text-align:left!important; font-size:var(--lyrics-font-size,18px)!important; line-height:1.1!important;
+}
+.projection-overlay.active .song-line,.projection-overlay.active .chord-line,.projection-overlay.active .lyric-line{line-height:1.1!important;text-align:left!important;}
+.projection-overlay.active .chord-line{font-weight:700!important;text-align:left!important;}
+.projection-overlay.active .transposer-toolbar{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;gap:7px!important;}
+.projection-overlay.active .btn{flex:0 0 auto!important;min-height:36px!important;}
+#songModal.active,.modal-overlay.active{z-index:100000!important;}
+#songModal,.modal-overlay{position:fixed!important;inset:0!important;}
+@media(max-width:650px){
+ .projection-overlay.active{inset:1vh 1vw!important;width:98vw!important;height:98vh!important;border-radius:10px!important;}
+ .projection-overlay.active .projection-topbar{padding:7px!important;}
+ .projection-overlay.active .projection-body{padding:12px!important;justify-content:flex-start!important;}
+ .projection-overlay.active .transposer-toolbar{gap:5px!important;}
+ .projection-overlay.active .btn{padding:7px 9px!important;font-size:12px!important;}
+}
+.projection-overlay:fullscreen,.projection-overlay.active:fullscreen{inset:0!important;width:100vw!important;height:100vh!important;max-width:none!important;max-height:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:var(--bg-main,#101827)!important;}
+.projection-overlay:fullscreen .projection-topbar,.projection-overlay.active:fullscreen .projection-topbar{position:sticky!important;top:0!important;flex-shrink:0!important;}
+.projection-overlay:fullscreen .projection-body,.projection-overlay.active:fullscreen .projection-body{flex:1 1 auto!important;min-height:0!important;overflow:auto!important;align-items:flex-start!important;justify-content:flex-start!important;text-align:left!important;}
+.projection-overlay:fullscreen .song-lyrics-container,.projection-overlay.active:fullscreen .song-lyrics-container{width:min(100%,1100px)!important;max-width:1100px!important;margin:0!important;line-height:1.1!important;text-align:left!important;}
+@media print{.projection-overlay.active{position:static!important;inset:auto!important;width:100%!important;height:auto!important;box-shadow:none!important;border:0!important;overflow:visible!important}.projection-overlay.active .projection-topbar{display:none!important}.projection-overlay.active .projection-body{overflow:visible!important;display:block!important}.projection-overlay.active .song-lyrics-container{width:100%!important;max-width:none!important;text-align:left!important}}
+
+</style>
+
+<style id="mostrar-titulo-y-canto-completo">
+/* MEJORA: al seleccionar un canto se ve su título y la letra completa */
+.projection-overlay.active{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;max-width:none!important;max-height:none!important;margin:0!important;border-radius:0!important;z-index:99999!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;box-sizing:border-box!important}
+.projection-overlay.active .projection-body{flex:1 1 auto!important;min-height:0!important;height:auto!important;overflow-y:auto!important;overflow-x:hidden!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;padding:clamp(12px,2vw,28px)!important;scrollbar-gutter:stable}
+.projection-overlay.active .projection-body>*,.projection-overlay.active .song-display,.projection-overlay.active .song-content{max-width:1200px!important;width:100%!important}
+.projection-overlay.active #projSongTitle{display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;max-width:1200px!important;text-align:left!important;font-size:clamp(22px,3vw,38px)!important;line-height:1.25!important;white-space:normal!important;overflow-wrap:anywhere!important;margin:10px 0 22px 0!important;padding:10px 0!important;flex:0 0 auto!important}
+.projection-overlay.active #projLyricsContainer{display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;max-width:1200px!important;height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important;white-space:normal!important;line-height:1.55!important;padding:8px 4px 36px!important;margin:0!important;flex:0 0 auto!important;text-align:left!important}
+.projection-overlay.active #projLyricsContainer .song-line{display:block!important;height:auto!important;min-height:0!important;margin:0 0 .45em!important;padding:0!important;line-height:1.45!important;break-inside:avoid;text-align:left!important}
+.projection-overlay.active #projLyricsContainer .lyric-line,.projection-overlay.active #projLyricsContainer .chord-line{display:block!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:normal!important;line-height:1.45!important;min-height:0!important;height:auto!important;margin:0!important;padding:0!important;text-align:left!important}
+.projection-overlay.active #projLyricsContainer .blank-line{min-height:.65em!important;height:auto!important;margin:0!important}
+.song-item{cursor:pointer!important}.song-item .song-title{display:block!important;white-space:normal!important;overflow-wrap:anywhere!important}
+@media(max-width:650px){.projection-overlay.active .projection-topbar{flex-wrap:wrap!important;max-height:none!important;overflow:visible!important}.projection-overlay.active .projection-body{padding:10px!important}.projection-overlay.active #projSongTitle{font-size:22px!important;margin:8px 0 16px 0!important;text-align:left!important}.projection-overlay.active #projLyricsContainer{font-size:18px!important;text-align:left!important}}
+</style>
+<style id="fix-pantalla-completa-turquesa">
+/* Ajuste global: la proyección crece con la canción y nunca recorta su contenido. */
+html, body { min-height:100% !important; height:auto !important; }
+body { overflow:auto !important; overflow-x:hidden !important; }
+.song-focus, .song-focus body { height:auto !important; min-height:100vh !important; overflow:auto !important; }
+.song-focus .phone-mockup, .song-focus .app-layout-wrapper { height:auto !important; min-height:100vh !important; max-height:none !important; overflow:visible !important; border-radius:0 !important; }
+.song-focus .pagina, .projection .pagina, body.projection .pagina { display:block !important; box-sizing:border-box !important; width:100% !important; max-width:1200px !important; height:auto !important; min-height:100vh !important; max-height:none !important; overflow:visible !important; margin:0 auto !important; padding:5vh 5vw !important; text-align:left !important; }
+.projection, body.projection { height:auto !important; min-height:100vh !important; overflow:auto !important; overflow-x:hidden !important; }
+.projection .pagina pre, body.projection .pagina pre, .song-focus .pagina pre { display:block !important; width:100% !important; max-width:1100px !important; height:auto !important; min-height:0 !important; max-height:none !important; overflow:visible !important; white-space:pre-wrap !important; overflow-wrap:anywhere !important; word-break:normal !important; margin:0 !important; text-align:left !important; line-height:1.45 !important; padding:0 0 8vh !important; }
+/* Título y letra en verde turquesa 4, legibles y alineados a la izquierda. */
+:root { --accent:#40E0D0 !important; --accent-hover:#20B2AA !important; }
+h1, h2, .song-title, .songTitle, .pagina h1, .pagina h2, .song-focus .pagina h1, .song-focus .pagina h2 { color:#40E0D0 !important; text-align:left !important; }
+.projection .pagina, body.projection .pagina, .song-focus .pagina { color:#40E0D0 !important; text-align:left !important; }
+.projection .pagina pre, body.projection .pagina pre, .song-focus .pagina pre { color:#40E0D0 !important; text-align:left !important; }
+@media (max-width:600px) { .projection .pagina, body.projection .pagina, .song-focus .pagina { padding:4vh 5vw !important; } .projection .pagina pre, body.projection .pagina pre, .song-focus .pagina pre { font-size:clamp(18px,5vw,30px) !important; line-height:1.4 !important; text-align:left !important; } }
+#projectionOverlay.active #projLyricsContainer .blank-line:has(.chord-line.hidden),
+#projectionOverlay:fullscreen #projLyricsContainer .blank-line:has(.chord-line.hidden),
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .blank-line:has(.chord-line.hidden) {
+  height: 0 !important; min-height: 0 !important;
+}
+</style>
+
+<style id="ajuste-pantalla-completa-margen-centro">
+/* Margen centrado únicamente al activar la pantalla completa */
+.projection-overlay:fullscreen .projection-body,
+.projection-overlay.active:fullscreen .projection-body,
+#projectionOverlay:fullscreen .projection-body,
+#projectionOverlay:-webkit-full-screen .projection-body {
+    padding: 60px max(10vw, calc((100vw - 900px) / 2)) 40px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.projection-overlay:fullscreen #projSongTitle,
+.projection-overlay.active:fullscreen #projSongTitle,
+#projectionOverlay:fullscreen #projSongTitle,
+#projectionOverlay:-webkit-full-screen #projSongTitle,
+.projection-overlay:fullscreen #projLyricsContainer,
+.projection-overlay.active:fullscreen #projLyricsContainer,
+#projectionOverlay:fullscreen #projLyricsContainer,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer {
+    width: 100% !important;
+    max-width: 900px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+</style>
+
+</head></style>
+<style id="cancionero-standard-projection-fix">
+/* ===== CANONIZACIÓN HTML Y PROYECCIÓN: compatible con navegadores modernos ===== */
+html{min-height:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{min-height:100vh;min-height:100dvh}
+/* Regreso fiable al índice general */
+.app-header .back-arrow{display:inline-flex;align-items:center;justify-content:center;min-width:38px;min-height:38px;border-radius:8px;background:rgba(64,224,208,.12);color:#40E0D0!important;font-size:22px;font-weight:bold;text-decoration:none;flex:0 0 auto}
+.app-header .back-arrow:hover{background:rgba(64,224,208,.24)}
+/* Proyección: título y letra completos, alineados a la izquierda y con desplazamiento cuando la canción es larga */
+.projection-overlay.active{position:fixed!important;inset:0!important;width:100%!important;height:100vh!important;height:100dvh!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;box-sizing:border-box!important;border:0!important;border-radius:0!important;overflow:hidden!important;z-index:2147483000!important;background:#07111d!important;color:#40E0D0!important;box-shadow:none!important}
+.projection-overlay.active:fullscreen{width:100vw!important;height:100vh!important;height:100dvh!important;inset:0!important;background:#07111d!important}
+.projection-overlay.active .projection-topbar{position:relative!important;top:auto!important;flex:0 0 auto!important;max-height:none!important;overflow:visible!important;z-index:2!important;background:#07111d!important;padding:8px!important}
+.projection-overlay.active .projection-body{flex:1 1 auto!important;min-height:0!important;width:100%!important;height:auto!important;overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:0!important;text-align:left!important;padding:clamp(12px,3vh,36px) clamp(12px,4vw,48px)!important;box-sizing:border-box!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important}
+.projection-overlay.active .projection-body.projection-long{justify-content:flex-start!important}
+.projection-overlay.active #projSongTitle{display:block!important;visibility:visible!important;opacity:1!important;flex:0 0 auto!important;width:100%!important;max-width:1400px!important;white-space:normal!important;overflow:visible!important;overflow-wrap:anywhere!important;text-align:left!important;color:#40E0D0!important;font-family:Constantia,Georgia,serif!important;font-size:clamp(23px,3.2vw,42px)!important;font-weight:700!important;line-height:1.25!important;margin:0 0 22px 0!important;padding:8px 6px 14px!important;border-bottom:1px solid rgba(64,224,208,.55)!important;box-sizing:border-box!important}
+.projection-overlay.active #projLyricsContainer{display:block!important;visibility:visible!important;opacity:1!important;flex:0 0 auto!important;width:100%!important;max-width:1400px!important;height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important;white-space:normal!important;text-align:left!important;color:#40E0D0!important;font-family:Constantia,Georgia,serif!important;font-size:var(--lyrics-font-size,clamp(19px,2.2vw,30px))!important;line-height:1.5!important;padding:4px 4px 36px!important;margin:0!important;box-sizing:border-box!important}
+.projection-overlay.active #projLyricsContainer .song-line{display:block!important;height:auto!important;min-height:0!important;margin:0 0 .48em 0!important;padding:0!important;line-height:1.45!important;text-align:left!important;break-inside:avoid}
+.projection-overlay.active #projLyricsContainer .lyric-line,.projection-overlay.active #projLyricsContainer .chord-line{display:block!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:normal!important;line-height:1.45!important;min-height:0!important;height:auto!important;margin:0!important;padding:0!important;text-align:left!important;color:#40E0D0!important;font-family:Constantia,Georgia,serif!important}
+.projection-overlay.active #projLyricsContainer .chord-line{font-weight:700!important;color:#40E0D0!important;text-align:left!important}
+.projection-overlay.active #projLyricsContainer .blank-line{min-height:.6em!important;height:auto!important;margin:0!important}
+@media(max-width:650px){.projection-overlay.active .projection-topbar{padding:5px!important}.projection-overlay.active .transposer-toolbar{flex-wrap:wrap!important;gap:4px!important}.projection-overlay.active .btn{min-height:34px!important;padding:6px 8px!important;font-size:12px!important}.projection-overlay.active .projection-body{padding:12px 10px!important}.projection-overlay.active #projSongTitle{font-size:clamp(21px,6vw,30px)!important;margin-bottom:14px!important;text-align:left!important}.projection-overlay.active #projLyricsContainer{font-size:var(--lyrics-font-size,20px)!important;line-height:1.4!important;text-align:left!important}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<style id="force-chord-contrast">.chord-line{color:#d97706!important;font-weight:800!important;text-align:left!important}.projection-overlay .chord-line{color:#d97706!important;text-align:left!important}@media print{.chord-line{color:#b45309!important;text-align:left!important}}</style>
+
+<style id="fix-acordes-color-youtube-visible-v2">
+:root { --chord-color: #d97706; }
+:root[data-palette="marfil"] { --chord-color:#a16207; }
+:root[data-palette="azul"] { --chord-color:#fbbf24; }
+:root[data-palette="borgona"], :root[data-palette="borgoña"] { --chord-color:#facc15; }
+:root[data-palette="verde"] { --chord-color:#fbbf24; }
+:root[data-palette="violeta"] { --chord-color:#fcd34d; }
+.chord-line, .song-lyrics-container .chord-line,
+#projLyricsContainer .chord-line, .projection-overlay .chord-line {
+  color: var(--chord-color, #d97706) !important;
+  -webkit-text-fill-color: var(--chord-color, #d97706) !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 0.01px currentColor;
+  text-align: left !important;
+}
+.lyric-line, #projLyricsContainer .lyric-line {
+  -webkit-text-fill-color: var(--text-main, inherit);
+  text-align: left !important;
+}
+.youtube-quick-link {
+ display:none; box-sizing:border-box; width:max-content; max-width:94%; margin:0 0 12px 0;
+ padding:8px 14px; border:1px solid #d97706; border-radius:999px;
+ color:#fff !important; background:#9a3412; text-decoration:none !important;
+ font-weight:800; font-size:14px; text-align:center; line-height:1.25;
+}
+.youtube-quick-link.visible { display:block; }
+@media print { .youtube-quick-link { display:none !important; } }
+</style>
+
+<style id="youtube-original-tracks-style">
+.youtube-tracks-list{display:flex;flex-direction:column;gap:12px;width:100%;min-width:0}.youtube-track-card{display:flex;flex-direction:column;gap:6px;width:100%;min-width:0;padding:10px;border:1px solid var(--border,#64748b);border-radius:10px;background:var(--bg-card,#172033);box-sizing:border-box}.youtube-track-title{font-weight:800;color:#d4a72c;text-align:center;font-size:13px;line-height:1.35}.youtube-track-card iframe{display:block;width:100%;aspect-ratio:16/9;min-height:190px;height:auto;border:0;border-radius:7px;background:#000}.youtube-track-open{display:block;text-align:center;color:#14b8a6;font-weight:700;text-decoration:none;padding:6px}.youtube-track-open:hover{text-decoration:underline}@media(max-width:600px){.youtube-track-card iframe{min-height:200px}}
+</style>
+
+<style id="original-song-video-layout-v7">
+.youtube-tracks-list{display:flex;flex-direction:column;gap:16px;width:100%;min-width:0}
+.youtube-track-card{display:flex;flex-direction:column;align-items:stretch;gap:7px;width:100%;min-width:0;padding:10px;border:1px solid var(--border,#cbd5e1);border-radius:12px;box-sizing:border-box;background:var(--bg-card,rgba(127,127,127,.06))}
+.youtube-track-title{display:block;width:100%;text-align:center;font-weight:700;font-size:15px;line-height:1.35;color:var(--text-main,#334155);padding:2px 4px}
+.youtube-track-card iframe{display:block;width:100%;aspect-ratio:16/9;height:auto;min-height:180px;max-height:420px;border:0;border-radius:8px;background:#000}
+.youtube-track-open{align-self:center;text-align:center;padding:6px 10px;font-size:13px}
+@media(max-width:700px){.youtube-track-card iframe{min-height:190px}.external-media-sidebar{width:100%;max-width:100%;box-sizing:border-box}}
+</style>
+
+<style id="correccion-distribucion-lateral-v2">
+/* Corrección visible: diseño web de escritorio, letra a la izquierda y multimedia a la derecha. */
+html, body { box-sizing:border-box !important; }
+html { width:100% !important; min-height:100% !important; }
+body { width:100% !important; height:100vh !important; height:100dvh !important; min-height:0 !important; margin:0 !important; padding:16px !important; overflow:hidden !important; display:flex !important; align-items:stretch !important; justify-content:center !important; }
+.app-layout-wrapper { display:flex !important; flex-direction:row !important; align-items:stretch !important; gap:18px !important; width:100% !important; max-width:1700px !important; height:100% !important; min-height:0 !important; margin:0 auto !important; }
+.phone-mockup { position:relative !important; flex:1 1 0 !important; width:auto !important; min-width:0 !important; max-width:none !important; height:100% !important; min-height:0 !important; max-height:none !important; border-radius:12px !important; overflow:hidden !important; }
+.phone-notch { display:none !important; }
+.external-media-sidebar { box-sizing:border-box !important; flex:0 0 clamp(300px,34vw,480px) !important; width:clamp(300px,34vw,480px) !important; min-width:280px !important; height:100% !important; min-height:0 !important; max-height:100% !important; overflow-y:auto !important; align-self:stretch !important; border-radius:12px !important; padding:18px !important; }
+.external-media-sidebar.active { display:flex !important; }
+.projection-overlay { position:absolute !important; inset:0 !important; width:100% !important; height:100% !important; }
+.projection-overlay.active { display:flex !important; }
+.projection-topbar { flex:0 0 auto !important; padding:12px 16px !important; }
+.projection-body { flex:1 1 auto !important; min-height:0 !important; overflow-y:auto !important; justify-content:flex-start !important; align-items:flex-start !important; padding:24px !important; text-align:left !important; }
+.projection-overlay.active #projSongTitle { width:100% !important; max-width:1000px !important; margin:8px 0 20px 0 !important; text-align:left !important; font-family:Constantia,Georgia,serif !important; font-size:clamp(25px,2.3vw,38px) !important; line-height:1.25 !important; }
+.projection-overlay.active #projLyricsContainer { width:100% !important; max-width:1000px !important; margin:0 !important; text-align:left !important; font-family:Constantia,Georgia,serif !important; font-size:clamp(17px,1.45vw,24px) !important; line-height:1.48 !important; overflow-wrap:anywhere !important; }
+.external-media-sidebar h3 { font-size:18px !important; }
+.external-media-sidebar iframe, .youtube-track-card iframe { width:100% !important; aspect-ratio:16/9 !important; min-height:190px !important; height:auto !important; }
+@media (max-width:760px) {
+ body { height:auto !important; min-height:100vh !important; overflow:auto !important; display:block !important; padding:8px !important; }
+ .app-layout-wrapper { flex-direction:column !important; height:auto !important; min-height:0 !important; gap:12px !important; }
+ .phone-mockup { flex:0 0 auto !important; width:100% !important; height:min(82vh,900px) !important; min-height:520px !important; }
+ .external-media-sidebar { display:none !important; flex:0 0 auto !important; width:100% !important; min-width:0 !important; height:auto !important; max-height:none !important; overflow:visible !important; }
+ .external-media-sidebar.active { display:flex !important; }
+ .projection-body { padding:18px 12px !important; text-align:left !important; }
+ .projection-overlay.active #projLyricsContainer { font-size:18px !important; text-align:left !important; }
+}
+</style>
+
+
+<style id="formato-cancionero-lateral-claro-v1">
+:root{--bg-main:#ffffff;--bg-card:#f1f8f6;--text-main:#263640;--border:#d5e8e3;--accent:#087f70;--accent-2:#0d9488}
+body{background:#fff!important;color:#263640!important}
+.app-layout-wrapper{gap:22px!important;max-width:1600px!important}
+.phone-mockup{background:#fff!important;border:1px solid #e0eeea!important;box-shadow:0 4px 22px rgba(15,80,70,.07)!important;border-radius:12px!important}
+.app-header{background:#fff!important;color:#08695e!important;border-bottom:1px solid #d5e8e3!important}
+.app-header h1,.app-header .brand,.app-header .title{color:#08695e!important}
+.external-media-sidebar{background:#f6fbf9!important;border:1px solid #dceee9!important;box-shadow:0 4px 18px rgba(15,80,70,.05)!important;color:#263640!important}
+.external-media-sidebar h3{color:#087f70!important;border-bottom:1px solid #cfe5df!important;padding-bottom:12px!important;letter-spacing:.06em!important;text-transform:uppercase!important}
+.youtube-track-card{background:#edf7f4!important;border:1px solid #d5e8e3!important;border-radius:12px!important;box-shadow:0 2px 8px rgba(15,80,70,.04)!important}
+.youtube-track-title{color:#087f70!important}
+.youtube-track-open{color:#087f70!important}
+.youtube-track-card iframe,.external-media-sidebar iframe{background:#111!important}
+.projection-overlay{background:#fff!important;color:#263640!important}
+.projection-overlay.active #projSongTitle{color:#087f70!important;text-align:left!important}
+.projection-overlay.active #projLyricsContainer{color:#263640!important;text-align:left!important}
+.projection-overlay.active #projLyricsContainer .chord,.projection-overlay.active #projLyricsContainer .acorde{color:#087f70!important;text-align:left!important}
+button,.btn,.song-item.active{accent-color:#087f70}
+@media(max-width:760px){.external-media-sidebar{display:flex!important}.app-layout-wrapper{gap:12px!important}}
+</style>
+
+
+<style id="layout-lateral-cancion-corregido-v2">
+/* CAMBIO LIMITADO A LA VISTA DE CANCIÓN Y SU MULTIMEDIA */
+.projection-overlay.active{
+ position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;
+ display:flex!important;flex-direction:column!important;overflow:hidden!important;z-index:9990!important;
+ background:var(--bg-main,#07111d)!important;
+}
+.projection-overlay.active .projection-topbar{
+ flex:0 0 auto!important;width:100%!important;box-sizing:border-box!important;
+ padding:10px 12px!important;min-height:56px!important;gap:7px!important;
+ background:var(--bg-card,#10202c)!important;
+}
+.projection-overlay.active .projection-body{
+ position:absolute!important;left:0!important;top:62px!important;bottom:0!important;
+ width:57%!important;height:auto!important;min-height:0!important;box-sizing:border-box!important;
+ overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+ justify-content:flex-start!important;padding:clamp(18px,3vh,36px) clamp(18px,3vw,44px)!important;
+ text-align:left!important;
+}
+.projection-overlay.active #projSongTitle{
+ display:block!important;width:100%!important;max-width:100%!important;flex:0 0 auto!important;
+ color:#16b8a6!important;text-align:left!important;font-size:clamp(22px,2.5vw,34px)!important;
+ line-height:1.25!important;margin:0 0 18px 0!important;padding:0 0 12px!important;
+ border-bottom:1px solid rgba(22,184,166,.55)!important;box-sizing:border-box!important;
+}
+.projection-overlay.active #projYoutubeQuickLink{display:none!important}
+.projection-overlay.active #projLyricsContainer{
+ display:block!important;width:100%!important;max-width:100%!important;flex:0 0 auto!important;
+ margin:0!important;padding:8px 0 30px!important;overflow:visible!important;
+ font-size:clamp(16px,1.35vw,21px)!important;line-height:1.6!important;text-align:left!important;
+ white-space:normal!important;overflow-wrap:anywhere!important;box-sizing:border-box!important;
+}
+.projection-overlay.active #projLyricsContainer .song-line{
+ display:block!important;height:auto!important;min-height:0!important;margin:0 0 14px!important;
+ padding:0!important;text-align:left!important;break-inside:avoid!important;
+}
+.projection-overlay.active #projLyricsContainer .chord-line{
+ color:#f59e0b!important;font-weight:700!important;white-space:pre-wrap!important;
+ line-height:1.35!important;margin:0 0 2px!important;text-align:left!important;
+}
+.projection-overlay.active #projLyricsContainer .lyric-line{
+ color:var(--text-main,#f5f5f5)!important;white-space:pre-wrap!important;
+ overflow-wrap:anywhere!important;line-height:1.55!important;text-align:left!important;
+}
+/* Panel lateral de videos, pistas y enlaces: se conserva su contenido y sus eventos */
+.external-media-sidebar.active{
+ display:flex!important;position:fixed!important;z-index:9991!important;
+ left:60%!important;right:2%!important;top:76px!important;bottom:18px!important;
+ width:auto!important;height:auto!important;min-width:0!important;max-height:none!important;
+ box-sizing:border-box!important;overflow-y:auto!important;padding:clamp(14px,2vw,26px)!important;
+ border-radius:14px!important;background:var(--bg-card,#10202c)!important;
+ border:1px solid var(--border,rgba(255,255,255,.15))!important;
+}
+.external-media-sidebar.active h3{text-align:center!important;font-size:18px!important;margin:0 0 8px!important}
+.external-media-sidebar.active .media-box{width:100%!important;max-width:none!important}
+.external-media-sidebar.active .media-box iframe{width:100%!important;height:auto!important;aspect-ratio:16/9!important;min-height:180px!important;max-height:48vh!important}
+.external-media-sidebar.active .youtube-tracks-list{width:100%!important;max-width:none!important}
+.external-media-sidebar.active .youtube-tracks-list a,
+.external-media-sidebar.active .media-box>a{display:block!important;max-width:100%!important;overflow-wrap:anywhere!important;margin:7px 0!important}
+@media(max-width:760px){
+ .projection-overlay.active{overflow-y:auto!important;height:100dvh!important}
+ .projection-overlay.active .projection-body{position:relative!important;left:auto!important;top:auto!important;bottom:auto!important;width:100%!important;height:auto!important;min-height:42vh!important;padding:18px 16px 24px!important;text-align:left!important}
+ .projection-overlay.active #projSongTitle{font-size:clamp(21px,6vw,29px)!important;text-align:left!important}
+ .external-media-sidebar.active{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:calc(100% - 24px)!important;height:auto!important;max-height:none!important;margin:12px auto 20px!important}
+ .external-media-sidebar.active .media-box iframe{max-height:none!important}
+}
+</style>
+
+
+<style id="fix-controles-impresion-v3">
+/* A+/A-: tamaño controlado por la función changeFontSize() */
+#projLyricsContainer{font-size:var(--lyrics-font-size,18px)!important;text-align:left!important;}
+#projLyricsContainer .lyric-line{font-size:inherit!important;line-height:1.35!important;text-align:left!important;}
+#projLyricsContainer .chord-line{font-size:inherit!important;line-height:1.15!important;text-align:left!important;}
+#projLyricsContainer .chord-line.hidden{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;}
+#projLyricsContainer .song-line{margin-bottom:.35em!important;line-height:normal!important;text-align:left!important;}
+/* Impresión: solo canción proyectada; mantiene u oculta acordes según la vista */
+@media print{
+  html,body{background:#fff!important;color:#000!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;margin:0!important;padding:0!important;display:block!important;}
+  body *{visibility:hidden!important;}
+  #projectionOverlay,#projectionOverlay.active{visibility:visible!important;display:block!important;position:static!important;inset:auto!important;width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;overflow:visible!important;background:#fff!important;color:#000!important;border:0!important;box-shadow:none!important;margin:0!important;padding:0!important;}
+  #projectionOverlay *{visibility:visible!important;}
+  #projectionOverlay .projection-topbar,#projectionOverlay .projection-header button,#projectionOverlay .projection-toolbar{display:none!important;}
+  #projectionOverlay .projection-body{display:block!important;position:static!important;width:100%!important;height:auto!important;overflow:visible!important;padding:0!important;margin:0!important;background:#fff!important;color:#000!important;text-align:left!important;}
+  #projSongTitle{display:block!important;text-align:left!important;color:#000!important;font-size:18pt!important;margin:0 0 12pt!important;border:0!important;}
+  #projLyricsContainer{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important;text-align:left!important;color:#000!important;font-size:var(--lyrics-font-size,18px)!important;overflow:visible!important;}
+  #projLyricsContainer .lyric-line{color:#000!important;line-height:1.35!important;text-align:left!important;}
+  #projLyricsContainer .chord-line{color:#a65d00!important;line-height:1.1!important;text-align:left!important;}
+  #projLyricsContainer .chord-line.hidden{display:none!important;visibility:hidden!important;}
+  #externalMediaSidebar,.external-media-sidebar,#youtubeContainer,#audioContainer,iframe,video,audio,.projection-overlay~*{display:none!important;visibility:hidden!important;}
+  @page{size:auto;margin:12mm;}
+}
+</style>
+
+<style id="fix-font-chords-print-v3">
+/* Fix funcional: tamaño real de letra y espaciado compacto sin acordes */
+#projLyricsContainer { --lyrics-font-size: 18px; text-align: left !important; }
+#projLyricsContainer .song-line { margin: 0 !important; padding: 0 !important; text-align: left !important; }
+#projLyricsContainer .lyric-line { font-size: var(--lyrics-font-size, 18px) !important; line-height: 1.15 !important; margin: 0 !important; padding: 0 !important; text-align: left !important; }
+#projLyricsContainer .chord-line { font-size: var(--lyrics-font-size, 18px) !important; line-height: 1.05 !important; margin: 0 !important; padding: 0 !important; min-height: 0 !important; text-align: left !important; }
+#projLyricsContainer .chord-line.hidden { display: none !important; }
+#projLyricsContainer .song-line:has(.chord-line.hidden) { display: block !important; margin: 0 !important; padding: 0 !important; line-height: 1.15 !important; text-align: left !important; }
+#projLyricsContainer .song-line:has(.chord-line.hidden) .lyric-line { display:block !important; line-height:1.15 !important; text-align: left !important; }
+#projLyricsContainer .blank-line:has(.chord-line.hidden) { height: .25em !important; min-height: .25em !important; }
+@media print {
+  @page { margin: 12mm; }
+  body * { visibility: hidden !important; }
+  #projectionOverlay, #projectionOverlay * { visibility: visible !important; }
+  #projectionOverlay { position: static !important; display: block !important; inset: auto !important; width: 100% !important; height: auto !important; max-height: none !important; overflow: visible !important; background: white !important; color: black !important; }
+  #projectionOverlay .projection-header, #projectionOverlay .projection-controls, #projectionOverlay .projection-toolbar, #externalMediaSidebar, #youtubeContainer, #audioContainer, #projYoutubeLink, #projYoutubeQuickLink, #projYoutubeTracks, #printButton, button { display: none !important; }
+  #projectionOverlay #projSongTitle { display:block !important; color:black !important; text-align:left !important; font-size:20pt !important; margin:0 0 12pt !important; }
+  #projectionOverlay #projLyricsContainer { display:block !important; width:100% !important; max-width:none !important; margin:0 !important; padding:0 !important; overflow:visible !important; color:black !important; text-align:left !important; }
+  #projLyricsContainer .lyric-line { color:black !important; font-size:var(--lyrics-font-size, 18px) !important; line-height:1.15 !important; text-align:left !important; }
+  #projLyricsContainer .chord-line { color:#a65b00 !important; text-align:left !important; }
+}
+</style>
+
+<style id="proyeccion-solo-cancion-centrada">
+/* En pantalla completa se muestra exclusivamente la canción, alineada a la izquierda. */
+#projectionOverlay:fullscreen,
+#projectionOverlay:-webkit-full-screen {
+  position: fixed !important; inset: 0 !important; width: 100vw !important;
+  height: 100vh !important; max-width: none !important; margin: 0 !important;
+  padding: 0 !important; background: var(--bg-main, #fff) !important;
+  display: flex !important; flex-direction: column !important;
+  align-items: flex-start !important; justify-content: flex-start !important;
+  overflow: auto !important;
+}
+#projectionOverlay:fullscreen .projection-topbar,
+#projectionOverlay:-webkit-full-screen .projection-topbar,
+#projectionOverlay:fullscreen .projection-controls,
+#projectionOverlay:-webkit-full-screen .projection-controls,
+#projectionOverlay:fullscreen .projection-header,
+#projectionOverlay:-webkit-full-screen .projection-header {
+  display: none !important;
+}
+#projectionOverlay:fullscreen .projection-body,
+#projectionOverlay:-webkit-full-screen .projection-body {
+  width: 100% !important; height: 100% !important; flex: 1 1 auto !important;
+  display: flex !important; align-items: flex-start !important; justify-content: flex-start !important;
+  overflow: auto !important; padding: 3vh 4vw !important; box-sizing: border-box !important; text-align: left !important;
+}
+#projectionOverlay:fullscreen #projLyricsContainer,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer {
+  width: 100% !important; max-width: 1200px !important; height: auto !important;
+  max-height: 100% !important; margin: 0 !important; padding: 0 !important;
+  display: block !important; text-align: left !important; overflow: auto !important;
+  box-sizing: border-box !important;
+}
+</style>
+
+<style id="ajuste-visual-aprobado">
+/* Secciones: encabezado compacto, listado centrado y sin controles de fondo */
+.palette-tools{display:none!important}
+header h1{font-size:clamp(14px,1.35vw,18px)!important;line-height:1.2!important}
+.header-sub{font-size:10px!important}
+.title-container{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:1px!important}
+.song-list{width:min(100% - 28px, 1040px)!important;max-width:1040px!important;margin:8px auto 18px!important;padding:10px 12px 18px!important;box-sizing:border-box!important}
+.song-item{font-size:13px!important}
+.song-title{font-size:13px!important}
+#countDisplay{font-size:10px!important;display:block!important;margin-top:2px!important;color:var(--text-muted)!important}
+.filter-label #countDisplay{display:none!important}
+</style>
+<script id="mover-cantidad-bajo-subtitulo">
+document.addEventListener('DOMContentLoaded',function(){
+ const c=document.getElementById('countDisplay');
+ const sub=document.querySelector('.title-container .header-sub');
+ if(c&&sub){sub.insertAdjacentElement('afterend',c);}
+});
+</script>
+
+<style>
+/* Pantalla completa: elimina el marco de teléfono y las barras anidadas */
+html, body { width:100%; min-height:100%; height:auto!important; margin:0!important; overflow-x:hidden!important; overflow-y:auto!important; }
+body { display:block!important; align-items:stretch!important; justify-content:flex-start!important; gap:0!important; }
+.app-layout-wrapper { display:flex!important; width:100%!important; max-width:none!important; height:100dvh!important; min-height:100vh!important; max-height:none!important; margin:0!important; gap:0!important; align-items:stretch!important; }
+.phone-mockup { width:100%!important; max-width:none!important; height:100dvh!important; min-height:100vh!important; max-height:none!important; border:0!important; border-radius:0!important; box-shadow:none!important; }
+.phone-notch, .home-indicator { display:none!important; }
+.phone-mockup > * { min-width:0; }
+.projection-overlay { overflow:auto!important; }
+.projection-overlay.active .projection-body { overflow-y:auto!important; overflow-x:hidden!important; height:auto!important; max-height:none!important; }
+.projection-overlay.active #projLyricsContainer { overflow:visible!important; max-height:none!important; height:auto!important; text-align:left!important; }
+@media(max-width:650px) {
+ .app-layout-wrapper,.phone-mockup { width:100%!important; height:100dvh!important; min-height:100dvh!important; }
+ .projection-overlay.active .projection-body { padding:8px!important; }
+}
+</style>
+<style id="fix-pantalla-y-desplazamiento-unico">
+/* Una sola zona de desplazamiento para la lectura de la canción. */
+html { min-height:100%; overflow-x:hidden!important; }
+body { overflow-x:hidden!important; }
+.projection-overlay.active {
+  position:fixed!important; inset:0!important; width:100vw!important; height:100vh!important;
+  height:100dvh!important; max-width:none!important; max-height:none!important;
+  margin:0!important; padding:0!important; overflow:hidden!important; box-sizing:border-box!important;
+}
+.projection-overlay.active .projection-content {
+  max-height:100%!important; height:100%!important; overflow-y:auto!important; overflow-x:hidden!important;
+  overscroll-behavior:contain!important; box-sizing:border-box!important;
+}
+.projection-overlay.active .projection-body,
+.projection-overlay.active .proj-lyrics-container {
+  max-height:none!important; height:auto!important; overflow:visible!important; text-align:left!important;
+}
+@media(max-width:700px) {
+  .projection-overlay.active { border-radius:0!important; }
+  .projection-overlay.active .projection-content { padding:14px!important; }
+}
+</style>
+
+<style id="correccion-movil-android-cantoral-v2">
+/* Android: mostrar el listado dentro del flujo normal de la página y permitir desplazamiento táctil. */
+html, body { width:100% !important; max-width:100% !important; min-width:0 !important; margin:0 !important; }
+@media screen and (max-width:700px) {
+  html { height:auto !important; min-height:100% !important; overflow-x:hidden !important; overflow-y:auto !important; }
+  body { display:block !important; height:auto !important; min-height:100dvh !important; min-height:100vh !important; max-height:none !important; overflow-x:hidden !important; overflow-y:auto !important; align-items:initial !important; justify-content:initial !important; padding:0 !important; }
+  .app-layout-wrapper { display:block !important; width:100% !important; height:auto !important; min-height:0 !important; max-height:none !important; margin:0 !important; padding:0 !important; }
+  .phone-mockup { display:flex !important; flex-direction:column !important; width:100% !important; height:auto !important; min-height:100dvh !important; min-height:100vh !important; max-height:none !important; overflow:visible !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; margin:0 !important; }
+  .phone-notch, .home-indicator { display:none !important; }
+  .app-header { flex:0 0 auto !important; padding:10px 12px !important; }
+  .main-content, .main-screen, .app-content, .content-area, .screen-content { display:flex !important; flex-direction:column !important; flex:0 0 auto !important; width:100% !important; height:auto !important; min-height:0 !important; max-height:none !important; overflow:visible !important; }
+  .search-section, .filters-section, .alphabet-section { flex:0 0 auto !important; width:100% !important; }
+  #songListContainer.song-list, .song-list#songListContainer { display:flex !important; flex:0 0 auto !important; flex-direction:column !important; width:100% !important; max-width:100% !important; height:auto !important; min-height:80px !important; max-height:none !important; overflow:visible !important; position:relative !important; visibility:visible !important; opacity:1 !important; padding:10px 12px 24px !important; margin:0 auto !important; }
+  #songListContainer .song-item { display:flex !important; visibility:visible !important; opacity:1 !important; width:100% !important; min-height:44px !important; flex:0 0 auto !important; }
+  .song-item { touch-action:manipulation !important; }
+  .projection-overlay.active { position:fixed !important; inset:0 !important; width:100vw !important; height:100vh !important; height:100dvh !important; max-width:none !important; max-height:none !important; overflow:hidden !important; z-index:2147483000 !important; }
+  .projection-overlay.active .projection-topbar { flex:0 0 auto !important; max-height:none !important; padding:8px !important; }
+  .projection-overlay.active .transposer-toolbar { display:flex !important; flex-wrap:wrap !important; gap:5px !important; justify-content:center !important; }
+  .projection-overlay.active .projection-body { flex:1 1 auto !important; min-height:0 !important; height:auto !important; overflow-x:hidden !important; overflow-y:auto !important; -webkit-overflow-scrolling:touch !important; justify-content:flex-start !important; padding:12px !important; text-align:left !important; }
+  .projection-overlay.active #projSongTitle, .projection-overlay.active #projLyricsContainer { width:100% !important; max-width:100% !important; height:auto !important; max-height:none !important; overflow:visible !important; overflow-wrap:anywhere !important; text-align:left !important; }
+  .projection-overlay.active #projLyricsContainer .song-line, .projection-overlay.active #projLyricsContainer .lyric-line, .projection-overlay.active #projLyricsContainer .chord-line { white-space:pre-wrap !important; overflow-wrap:anywhere !important; text-align:left !important; }
+}
+</style>
+<script id="inicializacion-segura-listado-android">
+(function(){
+  function ensureSongsVisible(){
+    try {
+      if (typeof renderAlphabet === 'function') renderAlphabet();
+      if (typeof filterSongs === 'function') filterSongs();
+      var list = document.getElementById('songListContainer');
+      var empty = document.getElementById('emptyState');
+      // If local browser data was empty/invalid, restore the embedded catalog and render again.
+      if (list && list.children.length === 0 && typeof defaultSongs !== 'undefined' && defaultSongs.length && typeof songs !== 'undefined' && songs.length === 0) {
+        songs = defaultSongs.slice();
+        if (typeof filterSongs === 'function') filterSongs();
+      }
+    } catch (e) { console.error('Error al mostrar las canciones del cantoral:', e); }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ensureSongsVisible, {once:true});
+  else ensureSongsVisible();
+  window.addEventListener('load', ensureSongsVisible, {once:true});
+})();
+</script>
+
+<style>
+/* Pantalla completa: mantener barra, título y letra dentro del área visible */
+#projectionOverlay:fullscreen,#projectionOverlay:-webkit-full-screen{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-width:none!important;max-height:none!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;box-sizing:border-box!important;background:#fff!important;color:#111!important;z-index:2147483000!important}
+#projectionOverlay:fullscreen .projection-topbar,#projectionOverlay:-webkit-full-screen .projection-topbar{flex:0 0 auto!important;padding:8px!important;position:relative!important;top:auto!important;max-height:none!important;overflow-x:auto!important;overflow-y:hidden!important}
+#projectionOverlay:fullscreen .projection-body,#projectionOverlay:-webkit-full-screen .projection-body{display:flex!important;flex:1 1 auto!important;flex-direction:column!important;min-height:0!important;height:auto!important;max-height:none!important;overflow-y:auto!important;overflow-x:hidden!important;padding:clamp(10px,2vw,28px)!important;box-sizing:border-box!important;overscroll-behavior:contain!important;text-align:left!important}
+#projectionOverlay:fullscreen #projSongTitle,#projectionOverlay:-webkit-full-screen #projSongTitle{display:block!important;position:relative!important;flex:0 0 auto!important;max-height:none!important;overflow:visible!important;white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.2!important;margin:0 0 16px!important;padding:4px 0!important;color:#111!important;text-align:left!important}
+#projectionOverlay:fullscreen .projection-lyrics,#projectionOverlay:-webkit-full-screen .projection-lyrics,#projectionOverlay:fullscreen #projSongLyrics,#projectionOverlay:-webkit-full-screen #projSongLyrics{display:block!important;flex:0 0 auto!important;min-height:min-content!important;height:auto!important;max-height:none!important;overflow:visible!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:normal!important;line-height:1.45!important;padding-bottom:30px!important;color:#111!important;text-align:left!important}
+#projectionOverlay:fullscreen .projection-body *{max-width:100%!important;box-sizing:border-box!important;text-align:left!important}
+</style>
+<style id="fix-pantalla-completa-visible-v4">
+/* Pantalla completa: fondo y letra con contraste legible, solo título y canción */
+.projection-overlay:fullscreen,.projection-overlay.active:fullscreen{background:#ffffff!important;color:#202020!important;}
+.projection-overlay:fullscreen .projection-body,.projection-overlay.active:fullscreen .projection-body{background:#ffffff!important;color:#202020!important;overflow-y:auto!important;overflow-x:hidden!important;height:100vh!important;height:100dvh!important;max-height:100vh!important;max-height:100dvh!important;padding:64px 5vw 36px!important;scrollbar-width:auto!important;text-align:left!important;}
+.projection-overlay:fullscreen #fullscreenCloseBtn,.projection-overlay.active:fullscreen #fullscreenCloseBtn{display:flex!important;align-items:center!important;justify-content:center!important;position:fixed!important;top:12px!important;right:16px!important;left:auto!important;bottom:auto!important;width:44px!important;min-width:44px!important;max-width:44px!important;height:44px!important;min-height:44px!important;max-height:44px!important;padding:0!important;border-radius:50%!important;background:#ffffff!important;color:#222222!important;border:1px solid #777!important;font-size:27px!important;line-height:1!important;z-index:2147483647!important;box-shadow:0 2px 8px #0003!important;}
+.projection-overlay:fullscreen #projSongTitle,.projection-overlay.active:fullscreen #projSongTitle{color:#202020!important;opacity:1!important;visibility:visible!important;text-align:left!important;}
+.projection-overlay:fullscreen #projLyricsContainer,.projection-overlay.active:fullscreen #projLyricsContainer,.projection-overlay:fullscreen .song-lyrics-container,.projection-overlay.active:fullscreen .song-lyrics-container{color:#202020!important;opacity:1!important;visibility:visible!important;overflow:visible!important;max-height:none!important;text-align:left!important;}
+.projection-overlay:fullscreen #projLyricsContainer *,.projection-overlay.active:fullscreen #projLyricsContainer *{opacity:1!important;visibility:visible!important;text-align:left!important;}
+.projection-overlay:fullscreen #projLyricsContainer .chord,.projection-overlay.active:fullscreen #projLyricsContainer .chord,.projection-overlay:fullscreen .chord,.projection-overlay.active:fullscreen .chord{color:#c58b00!important;text-align:left!important;}
+.projection-overlay:fullscreen #projYoutubeQuickLink,.projection-overlay.active:fullscreen #projYoutubeQuickLink{display:none!important;}
+/* Sin notas: eliminar espacios reservados para acordes y mantener interlineado sencillo */
+.projection-overlay:fullscreen #projLyricsContainer .line,.projection-overlay.active:fullscreen #projLyricsContainer .line{line-height:1.25!important;margin-top:0!important;margin-bottom:0!important;text-align:left!important;}
+</style>
+
+
+<style id="proyeccion-alto-contraste-aprobada">
+/* Proyección de canciones: azul marino, letra blanca, acordes dorados y solo botón X. */
+#projectionOverlay:fullscreen, #projectionOverlay:-webkit-full-screen, .projection-overlay:fullscreen, .projection-overlay:-webkit-full-screen, .projection-overlay.active:fullscreen {
+  position:fixed!important; inset:0!important; width:100vw!important; height:100vh!important; height:100dvh!important; max-width:none!important; max-height:none!important;
+  margin:0!important; border:0!important; border-radius:0!important; box-shadow:none!important; box-sizing:border-box!important;
+  background:#061a3a!important; color:#ffffff!important; display:flex!important; flex-direction:column!important; overflow:hidden!important;
+}
+#projectionOverlay:fullscreen .projection-topbar, #projectionOverlay:-webkit-full-screen .projection-topbar,
+#projectionOverlay:fullscreen .projection-controls, #projectionOverlay:-webkit-full-screen .projection-controls,
+#projectionOverlay:fullscreen .projection-header, #projectionOverlay:-webkit-full-screen .projection-header,
+.projection-overlay:fullscreen .projection-topbar, .projection-overlay:-webkit-full-screen .projection-topbar,
+.projection-overlay:fullscreen .projection-controls, .projection-overlay:-webkit-full-screen .projection-controls,
+.projection-overlay:fullscreen .projection-header, .projection-overlay:-webkit-full-screen .projection-header { display:none!important; }
+#projectionOverlay:fullscreen .projection-body, #projectionOverlay:-webkit-full-screen .projection-body,
+.projection-overlay:fullscreen .projection-body, .projection-overlay:-webkit-full-screen .projection-body {
+  display:block!important; position:relative!important; flex:1 1 auto!important; min-height:0!important; height:auto!important; max-height:none!important;
+  width:100%!important; overflow-y:auto!important; overflow-x:hidden!important; box-sizing:border-box!important;
+  padding:76px 5vw 36px!important; background:#061a3a!important; color:#ffffff!important; text-align:left!important;
+}
+#projectionOverlay:fullscreen #fullscreenCloseBtn, #projectionOverlay:-webkit-full-screen #fullscreenCloseBtn,
+.projection-overlay:fullscreen #fullscreenCloseBtn, .projection-overlay:-webkit-full-screen #fullscreenCloseBtn {
+  display:flex!important; align-items:center!important; justify-content:center!important; position:fixed!important;
+  top:14px!important; right:18px!important; left:auto!important; bottom:auto!important; z-index:2147483647!important;
+  width:46px!important; min-width:46px!important; max-width:46px!important; height:46px!important; min-height:46px!important; max-height:46px!important;
+  padding:0!important; border:2px solid #ffffff!important; border-radius:50%!important; background:#061a3a!important;
+  color:#ffffff!important; font-size:29px!important; font-weight:400!important; line-height:1!important; box-shadow:none!important; cursor:pointer!important;
+}
+#projectionOverlay:fullscreen #projSongTitle, #projectionOverlay:-webkit-full-screen #projSongTitle,
+.projection-overlay:fullscreen #projSongTitle, .projection-overlay:-webkit-full-screen #projSongTitle {
+  display:block!important; position:relative!important; z-index:1!important; width:100%!important; max-width:100%!important;
+  box-sizing:border-box!important; margin:0 0 26px 0!important; padding:0 68px 14px 0!important;
+  color:#ffffff!important; opacity:1!important; visibility:visible!important; text-align:left!important;
+  font-weight:800!important; line-height:1.2!important; overflow-wrap:anywhere!important;
+  border-bottom:3px solid #238bd2!important;
+}
+#projectionOverlay:fullscreen #projLyricsContainer, #projectionOverlay:-webkit-full-screen #projLyricsContainer,
+.projection-overlay:fullscreen #projLyricsContainer, .projection-overlay:-webkit-full-screen #projLyricsContainer,
+#projectionOverlay:fullscreen .song-lyrics-container, #projectionOverlay:-webkit-full-screen .song-lyrics-container {
+  width:100%!important; max-width:1250px!important; margin:0!important; color:#ffffff!important;
+  font-size:clamp(22px,2.5vw,38px)!important; line-height:1.35!important; text-align:left!important;
+  opacity:1!important; visibility:visible!important; overflow:visible!important;
+}
+#projectionOverlay:fullscreen #projLyricsContainer *, #projectionOverlay:-webkit-full-screen #projLyricsContainer *,
+.projection-overlay:fullscreen #projLyricsContainer *, .projection-overlay:-webkit-full-screen #projLyricsContainer * {
+  color:#ffffff!important; opacity:1!important; visibility:visible!important; text-shadow:none!important; text-align:left!important;
+}
+#projectionOverlay:fullscreen #projLyricsContainer .chord, #projectionOverlay:-webkit-full-screen #projLyricsContainer .chord,
+#projectionOverlay:fullscreen #projLyricsContainer .chord-line, #projectionOverlay:-webkit-full-screen #projLyricsContainer .chord-line,
+#projectionOverlay:fullscreen #projLyricsContainer .chord-name, #projectionOverlay:-webkit-full-screen #projLyricsContainer .chord-name,
+.projection-overlay:fullscreen #projLyricsContainer .chord, .projection-overlay:-webkit-full-screen #projLyricsContainer .chord,
+.projection-overlay:fullscreen #projLyricsContainer .chord-line, .projection-overlay:-webkit-full-screen #projLyricsContainer .chord-line,
+.projection-overlay:fullscreen #projLyricsContainer .chord-name, .projection-overlay:-webkit-full-screen #projLyricsContainer .chord-name,
+#projectionOverlay:fullscreen .chord, #projectionOverlay:-webkit-full-screen .chord,
+#projectionOverlay:fullscreen .chord-line, #projectionOverlay:-webkit-full-screen .chord-line,
+.projection-overlay:fullscreen .chord, .projection-overlay:-webkit-full-screen .chord,
+.projection-overlay:fullscreen .chord-line, .projection-overlay:-webkit-full-screen .chord-line { color:#ffc400!important; font-weight:800!important; text-align:left!important; }
+#projectionOverlay:fullscreen .youtube-quick-link, #projectionOverlay:-webkit-full-screen .youtube-quick-link,
+#projectionOverlay:fullscreen #projYoutubeQuickLink, #projectionOverlay:-webkit-full-screen #projYoutubeQuickLink { display:none!important; }
+#projectionOverlay:fullscreen .song-line, #projectionOverlay:-webkit-full-screen .song-line,
+#projectionOverlay:fullscreen .lyric-line, #projectionOverlay:-webkit-full-screen .lyric-line,
+.projection-overlay:fullscreen .song-line, .projection-overlay:-webkit-full-screen .song-line,
+.projection-overlay:fullscreen .lyric-line, .projection-overlay:-webkit-full-screen .lyric-line { color:#ffffff!important; line-height:1.35!important; text-align:left!important; }
+</style>
+
+<style id="correccion-desplazamiento-cancion-2026">
+/* Corrección: permitir recorrer la canción completa con rueda, barra y gesto táctil. */
+#projectionOverlay:fullscreen .projection-body,
+#projectionOverlay:-webkit-full-screen .projection-body,
+.projection-overlay:fullscreen .projection-body,
+.projection-overlay:-webkit-full-screen .projection-body {
+  display:flex!important; flex-direction:column!important; align-items:flex-start!important; justify-content:flex-start!important;
+  min-height:0!important; height:0!important; flex:1 1 auto!important; max-height:none!important;
+  overflow-y:auto!important; overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch!important; overscroll-behavior-y:contain!important; touch-action:pan-y!important;
+  scroll-behavior:auto!important; text-align:left!important;
+}
+#projectionOverlay:fullscreen #projSongTitle,
+#projectionOverlay:-webkit-full-screen #projSongTitle,
+.projection-overlay:fullscreen #projSongTitle,
+.projection-overlay:-webkit-full-screen #projSongTitle {flex:0 0 auto!important; align-self:stretch!important; margin-left:0!important; margin-right:auto!important; text-align:left!important;}
+#projectionOverlay:fullscreen #projLyricsContainer,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer,
+.projection-overlay:fullscreen #projLyricsContainer,
+.projection-overlay:-webkit-full-screen #projLyricsContainer {
+  flex:0 0 auto!important; align-self:stretch!important; margin-left:0!important; margin-right:auto!important;
+  overflow:visible!important; height:auto!important; max-height:none!important; text-align:left!important;
+}
+/* En la vista desplegada normal, el cuerpo también debe aceptar desplazamiento táctil. */
+.projection-overlay.active .projection-body {overflow-y:auto!important; -webkit-overflow-scrolling:touch!important; overscroll-behavior-y:contain!important; touch-action:pan-y!important; text-align:left!important;}
+</style>
+
+<style id="ajuste-proyeccion-tamano-equilibrado">
+/* Ajuste solicitado: letra legible y título proporcionado solo al proyectar. */
+#projectionOverlay.active #projLyricsContainer .lyric-line,
+#projectionOverlay.active #projLyricsContainer .song-line,
+#projectionOverlay.active #projLyricsContainer .chord-line,
+#projectionOverlay:fullscreen #projLyricsContainer .lyric-line,
+#projectionOverlay:fullscreen #projLyricsContainer .song-line,
+#projectionOverlay:fullscreen #projLyricsContainer .chord-line,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .lyric-line,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .song-line,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .chord-line {
+  font-size: 20px !important;
+  text-align: left !important;
+}
+#projectionOverlay.active #projLyricsContainer .chord-line,
+#projectionOverlay:fullscreen #projLyricsContainer .chord-line,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .chord-line {
+  font-size: 16px !important;
+  text-align: left !important;
+}
+#projectionOverlay.active #projSongTitle,
+#projectionOverlay:fullscreen #projSongTitle,
+#projectionOverlay:-webkit-full-screen #projSongTitle {
+  font-size: 30px !important;
+  line-height: 1.2 !important;
+  margin-top: 0 !important;
+  margin-bottom: 12px !important;
+  text-align: left !important;
+}
+@media (max-width: 650px) {
+  #projectionOverlay.active #projLyricsContainer .lyric-line,
+  #projectionOverlay:fullscreen #projLyricsContainer .lyric-line,
+  #projectionOverlay:-webkit-full-screen #projLyricsContainer .lyric-line {
+    font-size: 19px !important;
+    text-align: left !important;
+  }
+  #projectionOverlay.active #projSongTitle,
+  #projectionOverlay:fullscreen #projSongTitle,
+  #projectionOverlay:-webkit-full-screen #projSongTitle {
+    font-size: 25px !important;
+    margin-bottom: 10px !important;
+    text-align: left !important;
+  }
+}
+</style>
+
+
+<style id="correccion-proyeccion-cancion-completa">
+/* Solo afecta la vista de proyección: permite recorrer la canción completa. */
+.projection-overlay:fullscreen,
+.projection-overlay.active:fullscreen,
+#projectionOverlay:fullscreen,
+#projectionOverlay:-webkit-full-screen {
+  overflow: hidden !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+}
+.projection-overlay:fullscreen .projection-body,
+.projection-overlay.active:fullscreen .projection-body,
+#projectionOverlay:fullscreen .projection-body,
+#projectionOverlay:-webkit-full-screen .projection-body {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  display: block !important;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding: 3vh 4vw !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
+}
+.projection-overlay:fullscreen #projLyricsContainer,
+.projection-overlay.active:fullscreen #projLyricsContainer,
+#projectionOverlay:fullscreen #projLyricsContainer,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer {
+  height: auto !important;
+  min-height: min-content !important;
+  max-height: none !important;
+  overflow: visible !important;
+  margin: 0 !important;
+  text-align: left !important;
+}
+.projection-overlay:fullscreen .projection-body > *,
+#projectionOverlay:fullscreen .projection-body > *,
+#projectionOverlay:-webkit-full-screen .projection-body > * {
+  max-height: none !important;
+  text-align: left !important;
+}
+</style>
+
+<style id="correccion-proyeccion-scroll-real">
+/* Solo afecta la proyección en pantalla completa; la vista normal queda intacta */
+.projection-overlay:fullscreen,
+.projection-overlay.active:fullscreen {
+  position:fixed!important; inset:0!important;
+  width:100vw!important; height:100vh!important; height:100dvh!important;
+  max-width:none!important; max-height:none!important;
+  display:flex!important; flex-direction:column!important;
+  overflow:hidden!important; padding:0!important; border:0!important;
+}
+.projection-overlay:fullscreen .projection-topbar,
+.projection-overlay.active:fullscreen .projection-topbar { display:none!important; }
+.projection-overlay:fullscreen #fullscreenCloseBtn,
+.projection-overlay.active:fullscreen #fullscreenCloseBtn {
+  display:block!important; position:fixed!important; top:8px!important; right:10px!important;
+  z-index:2147483647!important;
+}
+.projection-overlay:fullscreen .projection-body,
+.projection-overlay.active:fullscreen .projection-body {
+  display:block!important; flex:1 1 auto!important; min-height:0!important;
+  width:100%!important; height:auto!important; max-height:none!important;
+  overflow-y:scroll!important; overflow-x:hidden!important;
+  box-sizing:border-box!important; padding:52px 5vw 64px!important;
+  margin:0!important; text-align:left!important;
+  align-items:initial!important; justify-content:initial!important;
+  scroll-behavior:auto!important;
+}
+.projection-overlay:fullscreen #projSongTitle,
+.projection-overlay.active:fullscreen #projSongTitle {
+  display:block!important; position:relative!important; top:auto!important;
+  width:100%!important; max-width:1100px!important;
+  margin:0 0 24px 0!important; padding:0 42px 0 0!important;
+  border:0!important; border-bottom:0!important; box-shadow:none!important;
+  box-sizing:border-box!important; line-height:1.2!important;
+  overflow:visible!important; text-align:left!important;
+}
+.projection-overlay:fullscreen #projLyricsContainer,
+.projection-overlay.active:fullscreen #projLyricsContainer {
+  display:block!important; position:relative!important;
+  width:100%!important; max-width:1100px!important;
+  height:auto!important; min-height:0!important; max-height:none!important;
+  margin:0!important; padding:0 0 24px 0!important;
+  overflow:visible!important; box-sizing:border-box!important;
+  line-height:1.25!important; text-align:left!important;
+}
+.projection-overlay:fullscreen .song-line,
+.projection-overlay:fullscreen .lyric-line,
+.projection-overlay:fullscreen .chord-line,
+.projection-overlay.active:fullscreen .song-line,
+.projection-overlay.active:fullscreen .lyric-line,
+.projection-overlay.active:fullscreen .chord-line {
+  line-height:1.25!important; overflow:visible!important;
+  white-space:pre-wrap!important; overflow-wrap:anywhere!important;
+  text-align:left!important;
+}
+.projection-overlay:fullscreen #projSongTitle::after,
+.projection-overlay.active:fullscreen #projSongTitle::after { content:none!important; display:none!important; }
+</style>
+
+<style id="solo-correccion-proyeccion">
+/* Corrección final: solo proyección, canción completa y sin divisor */
+.projection-overlay:fullscreen,.projection-overlay.active:fullscreen{
+  overflow:hidden!important;
+}
+.projection-overlay:fullscreen .projection-body,
+.projection-overlay.active:fullscreen .projection-body{
+  display:block!important;
+  height:100%!important;
+  min-height:0!important;
+  max-height:100dvh!important;
+  overflow-y:scroll!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain!important;
+  box-sizing:border-box!important;
+  padding:84px 5vw 56px!important;
+  scroll-padding-top:84px!important;
+  scroll-padding-bottom:56px!important;
+  text-align:left!important;
+}
+.projection-overlay:fullscreen #projSongTitle,
+.projection-overlay.active:fullscreen #projSongTitle{
+  border:0!important;
+  border-bottom:0!important;
+  box-shadow:none!important;
+  outline:0!important;
+  margin-top:0!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+  text-align:left!important;
+}
+.projection-overlay:fullscreen #projLyricsContainer,
+.projection-overlay.active:fullscreen #projLyricsContainer{
+  border:0!important;
+  margin-top:0!important;
+  padding-top:0!important;
+  padding-bottom:24px!important;
+  overflow:visible!important;
+  text-align:left!important;
+}
+</style>
+</head>
+<body>
+
+<div class="app-layout-wrapper">
+    <div class="phone-mockup">
+        <div class="phone-notch"></div>
+
+        <header class="app-header">
+            <div class="header-left">
+                <a href="index.html" class="back-arrow" title="Volver al índice general" aria-label="Volver al índice general">←</a>
+                <div class="book-icon">📖</div>
+                <div class="title-container">
+                    <h1>CANTOS AL CORDERO<span class="header-var">MATRIMONIO</span></h1>
+                    <div class="header-sub">Cancionero Litúrgico</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="export-icon" onclick="exportHTMLFile()" title="Guardar/Descargar HTML con tus cambios permanentemente">💾</button>
+                <button class="theme-icon" id="themeToggle" onclick="toggleTheme()" title="Cambiar al modo claro" aria-label="Cambiar tema">🌙</button>
+                <button class="new-song-btn" onclick="openSongModal()">+ Nueva</button>
+            </div>
+        </header>
+<div class="sidebar">
+            <div class="sidebar-search">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar por título o frase de la canción..." onkeyup="filterSongs()">
+                </div>
+            </div>
+
+            <div class="filters-section">
+                <div class="filter-label"><span>Tiempo Litúrgico:</span> <span id="countDisplay">0 cantos</span></div>
+                <div class="filter-tags">
+                    <span class="tag active" onclick="setFilter('todos', this)">Todos</span>
+                    <span class="tag" onclick="setFilter('Ordinario', this)">Ordinario</span>
+                    <span class="tag" onclick="setFilter('Pascual', this)">Pascual</span>
+                    <span class="tag" onclick="setFilter('Navidad', this)">Navidad</span>
+                    <span class="tag" onclick="setFilter('Cuaresma', this)">Cuaresma</span>
+                    <span class="tag" onclick="setFilter('Taizé', this)">Taizé</span>
+                </div>
+            </div>
+
+            <!-- Búsqueda Alfabética -->
+            <div class="alphabet-section">
+                <div class="alphabet-container" id="alphabetContainer"></div>
+            </div>
+
+            <div class="song-list" id="songListContainer"></div>
+        </div>
+
+        <!-- Pantalla de Proyección Integrada -->
+        <div class="projection-overlay" id="projectionOverlay">
+            <div class="projection-topbar">
+                <div class="transposer-toolbar">
+                    <button class="btn" onclick="location.href='index.html'" title="Volver al índice general">⌂ Índice</button>
+                    <button class="btn" onclick="closeProjection()">← Volver</button>
+                    <button class="btn" onclick="stepTranspose(-1)">-</button>
+                    <span id="displayTone" style="font-weight:bold;">Do</span>
+                    <button class="btn" onclick="stepTranspose(1)">+</button>
+                    <button class="btn" onclick="toggleChords()">🎸</button>
+                    <button class="btn" onclick="changeFontSize(-2)">A-</button>
+                    <button class="btn" onclick="changeFontSize(2)">A+</button>
+                    <button class="btn" onclick="openSongModal(selectedSongId)">✏️</button>
+                    <button class="btn" onclick="printSong()">🖨️</button>
+                    <button class="btn" onclick="toggleFullScreen()">🖥</button>
+                </div>
+            </div>
+            <div class="projection-body" id="projectionBodyContent"><button type="button" id="fullscreenCloseBtn" onclick="closeProjection()" aria-label="Cerrar pantalla completa" title="Cerrar pantalla completa">×</button>
+                <h2 id="projSongTitle" style="font-size: 14px; color: var(--accent); margin-bottom: 12px; padding-bottom: 4px; text-align: left; width: 100%; max-width: 480px; border-bottom: 1px solid var(--border);"></h2>
+<a id="projYoutubeQuickLink" class="youtube-quick-link" href="#" target="_blank" rel="noopener noreferrer">▶ Ver canción en YouTube</a>
+                <div class="song-lyrics-container" id="projLyricsContainer"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Panel Multimedia Exterior a la Derecha del Teléfono -->
+    <div class="external-media-sidebar" id="externalMediaSidebar">
+        <h3>Multimedia</h3>
+        <div class="media-box" id="youtubeContainer" style="display:none;">
+            <label id="youtubeMediaHeading">📹 YouTube</label><div id="projYoutubeTracks" class="youtube-tracks-list"></div>
+            <a id="projYoutubeLink" href="#" target="_blank" rel="noopener noreferrer" style="display:none;color:#14b8a6;font-weight:bold;padding:12px;border:1px solid #14b8a6;border-radius:8px;text-align:center;text-decoration:none">▶ Buscar / ver canción en YouTube</a> <iframe id="projYoutubeFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="media-box" id="audioContainer" style="display:none;">
+            <label>🎵 Audio</label>
+            <audio id="projAudioElement" controls></audio>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edición Ocupando 3/4 partes y Centrado -->
+<div class="modal-overlay" id="songModal">
+    <div class="modal-content">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 id="modalTitle" style="font-size:13px; color:var(--accent);">Editar / Nueva Canción</h3>
+            <button class="btn" onclick="closeSongModal()">✕</button>
+        </div>
+        <input type="hidden" id="editSongId">
+        
+        <div class="form-row">
+            <div class="form-group" style="flex: 2;">
+                <label>Título (El correlativo numérico aparece automáticamente)</label>
+                <input type="text" id="inputTitle" class="form-control" placeholder="Ej: Santo es el Señor">
+            </div>
+            <div class="form-group">
+                <label>Categoría</label>
+                <select id="inputCategory" class="form-control">
+                    <option value="Ordinario">Ordinario</option>
+                    <option value="Pascual">Pascual</option>
+                    <option value="Navidad">Navidad</option>
+                    <option value="Cuaresma">Cuaresma</option>
+                    <option value="Taizé">Taizé</option>
+                </select>
+            </div>
+            <div class="form-group" style="flex: 0.7;">
+                <label>Tono</label>
+                <input type="text" id="inputTone" class="form-control" value="Do">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>YouTube (URL o ID)</label>
+                <input type="text" id="inputYoutube" class="form-control" placeholder="Ej: dQw4w9WgXcQ o URL completa">
+            </div>
+            <div class="form-group">
+                <label>Audio</label>
+                <input type="text" id="inputAudio" class="form-control" placeholder="Ej: audio.mp3">
+            </div>
+        </div>
+
+        <div class="form-group" style="flex: 1; display: flex; flex-direction: column;">
+            <label>Letra y Acordes (Alternar líneas)</label>
+            <textarea id="inputRawLyrics" class="form-control" style="flex: 1; font-family:monospace; resize: none;"></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; margin-top:auto;">
+            <button type="button" class="btn btn-danger" id="btnDeleteSong" style="display:none;" onclick="deleteCurrentSong()">Borrar</button>
+            <div style="display:flex; gap:8px; margin-left:auto;">
+                <button type="button" class="btn" onclick="closeSongModal()">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveSong()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const DB_KEY = "cantos_cordero_unificado_v1_matrimonio";
+const defaultSongs = [{"id":1,"title":"A prometerte vengo","category":"Ordinario","tone":"LA","youtube":"https://www.youtube.com/watch?v=OhmNzsFICbk","audio":"","rawText":"LA    RE    LA    RE  MI (x4)\n\nLA     SOL      RE MI  LA              MI\nA prometerte yo vengo, ante tus Padres y Dios\nRE                 LA    FA#m           MI\nel respetarte y cuidarte como si fueras yo.\nLA      SOL     RE MI LA             MI\nTu casa será mi casa, tus hijos míos serán,\nRE               LA    FA#m       MI\ncontigo por el camino, tú vas, yo voy.\n\nLA     RE      LA\nHoy es nuestro día\n           SOL               RE\ny frente a Dios yo te doy la vida\n          MI                LA\nte doy mi canto, también mi llanto\n          MI          LA  MI\nque tu sonrisa consolará.\nLA     RE     LA\nHoy, mañana y siempre\n           SOL           RE\nmientras Jesús nos dé la vida\n       MI             LA\nmanos unidas contigo iré.\n\nLA    RE    LA    RE  MI\nLA    RE    LA    RE  MI\n\nLA     SOL      RE MI  LA              MI\nA prometerte yo vengo, ante tus Padres y Dios\nRE                LA      FA#m       MI\nel respetarte y seguirte, tú vas, yo voy.\nLA            SOL      RE MI\nComo niña hoy dejas tu casa,\nLA                MI\nhoy creces y eres mujer,\nRE           LA    FA#m             MI\nmadre de mis hijos mañana tú has de ser.","lines":[],"youtubeTracks":[{"label":"YouTube / video","url":"https://www.youtube.com/watch?v=OhmNzsFICbk","watchUrl":"https://www.youtube.com/watch?v=OhmNzsFICbk"}]},{"id":2,"title":"Alianza entre tú y yo","category":"Ordinario","tone":"DO","youtube":"https://www.youtube.com/watch?v=2J-iLQdoEGA","audio":"","rawText":"Intro: DO-FA-SOL-FA  (x2)\n\n        DO              SOL         DO  FA\nEn la pobreza o en la riqueza te amaré\n        DO                 FA           SOL\nEn la salud o en la enfermedad yo te amaré\n          LAm             SOL\nEn la tristeza o en la alegría\n         FA            DO\nEn la tormenta o en la paz\n     LAm                     SOL\nAnte todo y sobre todo te amaré.\n\nFA       DO   SOL      LAm\nTú me amarás, yo te amaré,\n FA      REm         SOL\nalianza eterna entre tú y yo.\nFA       DO   SOL      LAm\nTú me amarás, yo te amaré,\nFA                      SOL\nhasta que la muerte nos una más.\n\nDO-FA-SOL-FA  (x2)\n\n       DO              SOL         DO  FA\nEn las buenas o en las malas te amaré,\n        DO           FA          SOL\nen el pecado o en la gracia te amaré;\n      LAm           SOL\nen la noche o en el dia,\n          FA               DO\nen la fuerza o en la debilidad\n     LAm                     SOL\nante todo y sobre todo te amaré.\n\nFA       DO   SOL      LAm\nTú me amarás, yo te amaré,\n FA      REm         SOL\nalianza eterna entre tú y yo.\nFA       DO   SOL      LAm\nTú me amarás, yo te amaré,\nFA                      SOL\nhasta que la muerte nos una más.\n\nFA       DO   SOL      LAm\nTú me amarás, yo te amaré,\n FA      REm         SOL\nalianza eterna entre tú y yo.\nFA       DO   SOL      LAm\nTú me amarás, yo te amaré,\nFA                     SOL  FA  SOL  DO  FA\nhasta que la muerte nos una más,\nREm                     SOL  DO  FA  DO\nhasta que la muerte nos una más.","lines":[],"youtubeTracks":[{"label":"YouTube / video","url":"https://www.youtube.com/watch?v=2J-iLQdoEGA","watchUrl":"https://www.youtube.com/watch?v=2J-iLQdoEGA"}]},{"id":3,"title":"Apura el paso","category":"Ordinario","tone":"DO","youtube":"https://www.youtube.com/watch?v=47xR1FbTt_o","audio":"","rawText":"DO                LAm\nApura el paso que vengo a ofrecer\nFA              SOL\nmi destino y el tuyo,\nDO           LAm\nel corazón cubierto de paz\nFA               SOL\ny con fe en el futuro.\n\nDO                LAm\nApura el paso que traigo en la voz\nFA               SOL\ncantos para el camino\nDO              LAm\ny una esperanza puesta en la piel\nFA               SOL\nde ser grande contigo.\n\nFA           SOL           DO\nVen, todo es fiesta, está abierta ya\n      LAm\nla ventana al mar,\nFA             SOL\npara ver las mañanas\nFA           SOL\ny vivir todo lo que vendrá.\n\nFA           SOL           DO\nVen, todo es fiesta, está abierta ya\n      LAm\nla ventana al mar,\nFA             SOL\npara ver las mañanas\nFA           SOL\ny vivir todo lo que vendrá;\nFA           SOL  DO  LAm  FA  SOL  DO\nven, todo es fiesta.","lines":[],"youtubeTracks":[{"label":"YouTube / video","url":"https://www.youtube.com/watch?v=47xR1FbTt_o","watchUrl":"https://www.youtube.com/watch?v=47xR1FbTt_o"}]},{"id":4,"title":"Arriesguémonos","category":"Ordinario","tone":"LA","youtube":"https://www.youtube.com/watch?v=9R9U95hjKj4","audio":"","rawText":"Intro: LA  DO  SIb  LA\n\nLA                          MI\nHoy comienza una nueva vida para mí,\nFA#m                          DO#m\nHoy mis pasos caminan junto a ti,\nRE                                  LA\nnuestro amor prometimos cuidar para siempre\nMI     FA#m\nfrente a Dios,\n           DO    MI\nque hoy se une a los dos.\n\nLA                                  MI\nNuestra historia empieza a ser en común,\nFA#m                              DO#m\ntus brazos, los míos, ya son un hogar;\nRE\nya vendrán los problemas, trabajos,\n    LA    MI   FA#m        DO        MI\nlos niños y alegrías y el amor día a día.\n\nLA                         RE  DO\nArriesguémonos en esta aventura\nSIb                              MI\nel amor para siempre no es una locura\n    RE\ny vivamos de la mano de Dios\n       LA       MI        FA#m\nconstruyendo su reino de amor;\n      DO#m\ny que todos los que nos acompañan\n        RE      MI       LA  DO  SIb  LA\nsean testigos de nuestra canción.\n\n\nLA\nSi pudieras saber\nMI\nlo que siento en este momento\nFA#m                                     DO#m\ntantos sueños futuros que podemos entretejer;\nRE                           LA    MI     FA#m\nsembraremos toda la tierra de vida y algún día\n    DO                   MI\ncosechar los frutos del amor.\n\nLA                         RE DO\nArriesguémonos en esta aventura\nSIb                              MI\nel amor para siempre no es una locura\n    RE\ny vivamos de la mano de Dios\n       LA       MI        FA#m\nconstruyendo su reino de amor;\n      DO#m\ny que todos los que nos acompañan\n        RE      MI       LA  DO\nsean testigos de nuestra canción,\nSIb         LA\nde nuestro amor.","lines":[],"youtubeTracks":[{"label":"YouTube / video","url":"https://www.youtube.com/watch?v=9R9U95hjKj4","watchUrl":"https://www.youtube.com/watch?v=9R9U95hjKj4"}]},{"id":5,"title":"Camino al altar","category":"Ordinario","tone":"RE","youtube":"https://www.youtube.com/watch?v=l0ZmbVzCrtw","audio":"","rawText":"RE  LA  SIm  FA#m  SOL  RE  DO  LA\n\nRE           LA   SIm             FA#m\nBienvenida mujer, he venido a ofrecer\nSOL  LA        RE         LA        SIm\neste día que encierra nuestra nueva vida\n  SIm/LA   SOL       MI       LA\ny que consagramos junto a nuestro Dios.\nRE              DO   MIm           SIm\nBienvenido otra vez, ya escuche tu canción\nSOL  LA       RE     LA           SIm\ny me llena de vida saber que esta llama\n  SIm/LA   SOL     MI          LA   LA7\nsólo la consume tu muestra de amor.\n\n                 RE  LA          SIm  FA#m\nY aquí vamos los dos camino al altar;\n               SOL   MI          LA\nel Señor nos espera abriendo sus puertas,\n             SOL     MI     LA   LA7\nva siendo testigo de esta canción.\n                 RE  LA           SIm   FA#m\nY aquí vamos los dos camino a nuestro hogar,\n                SOL      MI       LA\nhoy llenamos la vida de amor y ternura\n          SOL             LA        RE\ny damos comienzo a una historia sin fin.\n\nRE           LA   SIm                 FA#m\nYa apareces amor, ahora estoy junto a ti,\nSOL LA       RE        LA      SIm\ntus brazos esperan mis manos ansiosas\n     SIm/LA    SOL      MI     LA\nde hacer la promesa que nos unirá.\nRE               DO  MIm              SIm\nLa dulzura en tu voz canta nuestra canción;\nSOL LA      RE        LA         SIm\nrespeto y cariño, lo adornan las notas\n  SIm/LA  SOL   MI      LA  LA7\ny la melodía de esta oración.","lines":[],"youtubeTracks":[{"label":"YouTube / video","url":"https://www.youtube.com/watch?v=l0ZmbVzCrtw","watchUrl":"https://www.youtube.com/watch?v=l0ZmbVzCrtw"}]},{"id":6,"title":"Compromiso","category":"Ordinario","tone":"SOL","youtube":"https://www.youtube.com/watch?v=diY2AGKj93w","audio":"","rawText":"1. Hombres:\nSOL     DO\nToma mi mano y ven,\nLAm  RE  SOL\ndéjame tomarte también;\nMIm        LAm\nquiero que puedas saber\nDO         MI°     SOL      MI\ncómo se vistió de amor para mí\nLAm       RE         SOL  DO9  SOL  FA\nel día en que te conocí.\n\n2. Mujeres:\nDO                      REm\nToma esta muestra que entrego hoy a ti,\nFA       SOL      DO\ntómala y guárdala dentro de ti;\nLAm                REm\nella es el símbolo de nuestra unión\nFA           RE7    DO        LA\nque hoy consagramos ante el Señor,\nREm SOL DO SIb\na-------mor.\n\n3. Mujeres:\n(Hombres simultáneamente 2a estrofa)\nFA      SOLm\nToma mi mano y ven,\nSIb  DO  FA\ndéjame tomarte también;\nREm        SOLm\nquiero que puedas saber\nSIb        SOL7    FA       RE\ncómo se vistió de amor para mí\nSOLm          DO     FA\nel día en que te conocí;\nSOLm          DO     MIb  SIb  FA\nel día en que te conocí.","lines":[],"youtubeTracks":[{"label":"YouTube / video","url":"https://www.youtube.com/watch?v=diY2AGKj93w","watchUrl":"https://www.youtube.com/watch?v=diY2AGKj93w"}]},{"id":7,"title":"Ven, amada mía","category":"Ordinario","tone":"LAm","youtube":"https://www.youtube.com/watch?v=rCnDOfjGPx4","audio":"","rawText":"LAm                             SIm7b5  MI\nEn la noche busqué al amor de mi alma\nLAm            LA7              REm\nen mi árido jardín el hizo su morada;\nSOL                                DO\ncon perlas de rocío cubrió Él mi cabeza,\nSIm7b5                            MI\nmi alma esta bella, mi bien amado llega.\n\nLA        MI   SIm    DO#7  FA#m\nVen Amada mía, ven  a mi jardín,\n                 RE                   RE#dim\nel invierno ya pasó (el invierno ya pasó)\n      LA       MI     FA#m         RE\ny las viñas en flor exhalan su frescor;\nLA  MI      LA  MI\nven a mi jardín.\n\nLAm                                  SIm7b5  MI\nHabla mi bien amado, atisba en la ventana,\nLAm             LA7                REm\nel fruto está maduro, mi alma está presta;\nSOL                           DO\nespero su llamado pidiéndome abrir,\nSIm7b5                           MI\narrulla la paloma, mi bien amado llega.","lines":[],"youtubeTracks":[{"label":"YouTube / video","url":"https://www.youtube.com/watch?v=rCnDOfjGPx4","watchUrl":"https://www.youtube.com/watch?v=rCnDOfjGPx4"}]},{"id":8,"title":"Ya no habrá soledad","category":"Ordinario","tone":"MI","youtube":"https://www.youtube.com/watch?v=h2FzyXyyBQM","audio":"","rawText":"MI                      SOL#m\nFeliz de estar contigo aquí en este lugar,\nDO#m                      RE\nel momento que esperamos acaba de llegar;\nSIm                    FA#m\nme miras a los ojos en frente del altar,\n   LA              SI7\nno sé si reír o llorar.\n\nMI                       SOL#m\nMe tomas de la mano y me cuesta respirar,\nDO#m                      RE\nes algo q me embarga, que no puedo explicar;\nSIm                      FA#m\nlas lágrimas inundan mis ojos al cantar,\n  LA                  SI7\nserán de reír o de llorar.\n\n                MI          SI7      DO#m\nYa no habrá soledad cuando quieras soñar,\n              LA       FA#m       SI7\nhoy seremos pareja y familia al andar,\n                  SOL#m               DO#m\nllegarán nuestros hijos a llenar el hogar\n                LA          SI7       MI\ndonde juntos busquemos al Señor al cantar.\n\nMI                      SOL#m\nFeliz de estar contigo aquí en este lugar,\nDO#m                        RE\nno quedan más palabras, tan sólo una señal;\nSIm                         FA#m\nla senda que hoy comienza y quiere germinar\n   LA                 SI7\nes más que vivir, es amar.\n\nMI                        SOL#m\nLa voz de tu sonrisa se escucha en mi interior,\nDO#m                     RE\nel brillo de tus ojos es más que un resplandor;\nSIm                    FA#m\nmi corazón responde y apura el caminar,\n      LA                   SOL#\nno es para vivir, es para amar.\n\n                DO#        SOL#      LA#m\nYa no habrá soledad cuando quieras soñar,\n              FA#       RE#m      SOL#\nhoy seremos pareja y familia al andar,\n                  DO#        SOL#     LA#m\nllegarán nuestros hijos a llenar el hogar\n                FA#         SOL#      DO# SOL#\ndonde juntos busquemos al Señor al cantar.\n                  DO#        SOL#     LA#m\nLlegarán nuestros hijos a llenar el hogar\n                FA#         SOL#      DO#\ndonde juntos busquemos al Señor al cantar.","lines":[],"youtubeTracks":[{"label":"YouTube / video","url":"https://www.youtube.com/watch?v=h2FzyXyyBQM","watchUrl":"https://www.youtube.com/watch?v=h2FzyXyyBQM"}]}];
+
+function normalizarCancionesGuardadas(lista) {
+    if (!Array.isArray(lista)) return lista;
+    return lista.map(song => {
+        if (!song || typeof song !== 'object') return song;
+        const arreglar = value => String(value ?? '').replace(/\b(DO|RE|MI|FA|SOL|LA|SI|C|D|E|F|G|A|B)([#b]?)-(?=\s|$|[\/,)])/gi, '$1m');
+        if (typeof song.rawText === 'string') {
+            song.rawText = song.rawText.split('\n').map(line => arreglar(line)).join('\n');
+        }
+        if (Array.isArray(song.lines)) song.lines = song.lines.map(line => typeof line === 'string' ? arreglar(line) : line);
+        return song;
+    });
+}
+function getSongs() {
+    // Android puede conservar datos locales antiguos o vacíos. Si no son válidos,
+    // mostrar siempre las canciones incluidas en este HTML sin borrar los datos originales.
+    try {
+        const data = localStorage.getItem(DB_KEY);
+        if (data) {
+            const parsed = JSON.parse(data);
+            if (Array.isArray(parsed) && parsed.length > 0) return normalizarCancionesGuardadas(parsed);
+        }
+    } catch (err) {
+        console.warn('No se pudieron leer los datos locales del cantoral; se usarán las canciones incluidas.', err);
+    }
+    return normalizarCancionesGuardadas(defaultSongs.slice());
+}
+
+let songs = getSongs();
+let currentFilter = 'todos';
+let currentLetter = 'todos';
+let selectedSongId = null;
+let currentTransposeOffset = 0;
+let chordsVisible = true;
+let currentFontSize = 18;
+
+const chromaticScale = ["Do", "Do#", "Re", "Re#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"];
+const noteSemitones = {"do":0,"re":2,"mi":4,"fa":5,"sol":7,"la":9,"si":11,"c":0,"d":2,"e":4,"f":5,"g":7,"a":9,"b":11};
+function parseNote(noteStr) {
+    const m = String(noteStr || '').trim().match(/^(Do|Re|Mi|Fa|Sol|La|Si|[A-G])([#♯b♭]?)(.*)$/i);
+    if (!m) return {root:"Do", suffix:"", index:0};
+    let root=m[1], idx=noteSemitones[root.toLowerCase()];
+    if (m[2]==='#'||m[2]==='♯') idx++;
+    if (m[2]==='b'||m[2]==='♭') idx--;
+    return {root, accidental:m[2]||'', suffix:m[3]||'', index:((idx%12)+12)%12};
+}
+function transposeChord(chord, semitones) {
+    if (!chord) return '';
+    const names = ["Do", "Do#", "Re", "Re#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"];
+    const pitch = {do:0,re:2,mi:4,fa:5,sol:7,la:9,si:11,c:0,d:2,e:4,f:5,g:7,a:9,b:11};
+    const shift = Number(semitones)||0;
+    const one = (part) => String(part).replace(/^((?:Do|Re|Mi|Fa|Sol|La|Si|[A-G]))([#♯b♭]?)(.*)$/i, (whole, root, accidental, suffix) => {
+        let idx = pitch[root.toLowerCase()];
+        if (idx === undefined) return whole;
+        if (accidental === '#' || accidental === '♯') idx++;
+        if (accidental === 'b' || accidental === '♭') idx--;
+        idx = ((idx + shift) % 12 + 12) % 12;
+        return names[idx] + suffix;
+    });
+    // Solo procesa líneas de acordes; normaliza las notas inglesas a nomenclatura española.
+    return String(chord).replace(/(^|[\s|()\-–—])((?:Do|Re|Mi|Fa|Sol|La|Si|[A-G])(?:[#♯b♭])?(?:maj7|maj|min|dim|aug|sus\d?|add\d?|m|M|\d{1,2}|\(\d+\)|[+°º])*(?:\/(?:Do|Re|Mi|Fa|Sol|La|Si|[A-G])(?:[#♯b♭])?)?)(?=$|[\s|(),;\-–—])/gi, (whole, lead, token) => {
+        const parts = token.split('/');
+        return lead + parts.map(one).join('/');
+    });
+}
+function looksLikeChordLine(line) {
+    const t=String(line||'').trim(); if(!t) return false;
+    // Acorde: raíz (Do..Si o A..G), alteración, sufijos (m, 7, maj7, sus4, dim, °...), bajo opcional (/Mi)
+    // y acordes unidos con guion (DO#m-SI, LA-FA#m-SI). Se aceptan mayúsculas, minúsculas y mixtas.
+    const R='(?:do|re|mi|fa|sol|la|si|[A-G])';
+    const S='(?:maj7|maj|min|dim|aug|sus\\d?|add\\d?|m|M|\\d{1,2}[+\\-]?|\\(\\d+\\)|[+°º])*';
+    const C=R+'[#♯b♭]?'+S+'(?:\\/'+R+'[#♯b♭]?)?';
+    const valid=new RegExp('^(?:'+C+'(?:[-–—]'+C+')*|[|/()]+|[-–—]+|\\(?(?:bis|Bis)\\)?|[xX]\\d|\\/\\/)$','i');
+    const starts=new RegExp('^\\(?'+R,'i');
+    const clean=x=>{ let y=x.replace(/[.,;:]+$/,''); if(/^\(.+\)$/.test(y)) return y.slice(1,-1); return y.replace(/^\(+(?=.)/,'').replace(/(.)\)+$/,'$1'); };
+    const tokens=t.split(/\s+/).filter(Boolean);
+    return tokens.every(x=>valid.test(clean(x))||valid.test(x)) && tokens.some(x=>starts.test(x));
+}
+function splitSongText(song) {
+    const source=(song.rawText && song.rawText.trim()) ? song.rawText : (song.lines||[]).map(l=>[l.chords,l.lyrics].filter(Boolean).join('\n')).join('\n');
+    const lines=source.replace(/\r/g,'').split('\n');
+    const out=[];
+    for(let i=0;i<lines.length;i++){
+        const line=lines[i];
+        if(!line.trim()){out.push({chords:'',lyrics:' ',blank:true});continue;}
+        if(looksLikeChordLine(line)){
+            let lyrics='';
+            if(i+1<lines.length && lines[i+1].trim() && !looksLikeChordLine(lines[i+1])) lyrics=lines[++i];
+            out.push({chords:line,lyrics});
+        } else out.push({chords:'',lyrics:line});
+    }
+    return out;
+}
+
+function renderAlphabet() {
+    const container = document.getElementById('alphabetContainer');
+    const letters = ['Todos', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    
+    container.innerHTML = '';
+    letters.forEach(char => {
+        const btn = document.createElement('button');
+        let val = char === 'Todos' ? 'todos' : char;
+        btn.className = 'alpha-btn' + (currentLetter === val ? ' active' : '');
+        if(char === 'Todos') {
+            btn.style.width = '36px';
+            btn.style.fontSize = '8px';
+        }
+        btn.innerText = char;
+        btn.onclick = (e) => setLetterFilter(val, btn);
+        container.appendChild(btn);
+    });
+}
+
+function setLetterFilter(letter, el) {
+    currentLetter = letter;
+    document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    filterSongs();
+}
+
+function filterSongs() {
+    const queryRaw = (document.getElementById('searchInput')?.value || '').trim();
+    const list = document.getElementById('songListContainer');
+    if (!list) return;
+    list.innerHTML = '';
+    const getNumber = s => { const m=String(s.title||'').match(/^\s*(\d+)\s*[.\-)]/); return m ? m[1] : String(s.id ?? ''); };
+    const getName = s => String(s.title||'').replace(/^\s*\d+\s*[.\-)]\s*/, '').replace(/^\s*-\d+-\s*/, '').trim();
+    // Ignora tildes, mayúsculas/minúsculas y diferencias de espacios para buscar títulos o frases de la letra.
+    const normalize = v => String(v ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es').replace(/[^\p{L}\p{N}]+/gu, ' ').replace(/\s+/g, ' ').trim();
+    const needle = normalize(queryRaw);
+    const filtered = songs.filter(s => {
+        const title = getName(s);
+        const matchesCat = currentFilter === 'todos' || s.category === currentFilter;
+        // Busca en título, texto bruto, descripción y TODAS las líneas estructuradas de la canción.
+        // Muchas canciones guardan la letra en s.lines y no en s.rawText; antes esas frases no se encontraban.
+        const lineText = Array.isArray(s.lines) ? s.lines.map(line => {
+            if (typeof line === 'string') return line;
+            return [line?.lyrics, line?.chords, line?.text, line?.content].filter(Boolean).join(' ');
+        }).join(' ') : '';
+        const trackText = Array.isArray(s.youtubeTracks) ? s.youtubeTracks.map(t => [t?.title, t?.lyrics, t?.text].filter(Boolean).join(' ')).join(' ') : '';
+        const searchableText = normalize([title, s.rawText, s.lyrics, s.description, s.text, lineText, trackText].filter(Boolean).join(' '));
+        // Frases con puntuación/espacios variables y sin tildes se normalizan igual.
+        const matchesQuery = !needle || searchableText.includes(needle);
+        const matchesLetter = currentLetter === 'todos' || (currentLetter === 'Ñ' ? title.trim().toLocaleUpperCase('es').startsWith('Ñ') : normalize(title).startsWith(normalize(currentLetter)));
+        return matchesCat && matchesQuery && matchesLetter;
+    }).sort((a,b)=>getName(a).localeCompare(getName(b),'es',{sensitivity:'base'}));
+    filtered.forEach(song => {
+        const item = document.createElement('div');
+        item.className = 'song-item';
+        item.innerHTML = `<span class="song-title">${escapeHTML(getName(song))}</span><div class="song-meta"><span class="song-number">N.º ${escapeHTML(getNumber(song))}</span><span class="badge-tone">${escapeHTML(song.tone || 'Sin tono')}</span></div>`;
+        item.onclick = () => projectSong(song.id);
+        list.appendChild(item);
+    });
+    const count = document.getElementById('countDisplay');
+    if (count) count.innerText = `${filtered.length} cantos`;
+    const empty = document.getElementById('emptyState');
+    if (empty) empty.style.display = filtered.length ? 'none' : 'block';
+}
+function escapeHTML(value) { return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function goHome(e) {
+    if(e) e.preventDefault();
+    currentFilter = 'todos';
+    currentLetter = 'todos';
+    document.getElementById('searchInput').value = '';
+    document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+    document.querySelector('.tag').classList.add('active');
+    renderAlphabet();
+    closeProjection();
+    filterSongs();
+}
+
+function projectSong(id) {
+    selectedSongId = id;
+    const projectionBody = document.querySelector('#projectionOverlay .projection-body');
+    if (projectionBody) projectionBody.scrollTop = 0;
+    currentTransposeOffset = 0;
+    chordsVisible = true;
+    renderProjection();
+    document.getElementById('projectionOverlay').classList.add('active');
+}
+
+function closeProjection() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+    document.getElementById('projectionOverlay').classList.remove('active');
+    document.getElementById('externalMediaSidebar').classList.remove('active');
+    const audioEl = document.getElementById('projAudioElement');
+    audioEl.pause();
+    audioEl.src = '';
+    document.getElementById('projYoutubeFrame').src = '';
+}
+
+function renderProjection() {
+    const song = songs.find(s => s.id === selectedSongId);
+    if (!song) return;
+
+    document.getElementById('projSongTitle').textContent = String(song.title || 'Canto sin título').replace(/^\s*[-–]?\d+[-.)]?\s*/, '').trim() || song.title;
+    
+    const parsed = parseNote(song.tone);
+    const newIdx = (parsed.index + currentTransposeOffset + 12) % 12;
+    document.getElementById('displayTone').innerText = chromaticScale[newIdx] + parsed.suffix;
+
+    document.getElementById('projLyricsContainer').style.setProperty('--lyrics-font-size', currentFontSize + 'px');
+
+    let html = '';
+    splitSongText(song).forEach(line => {
+        const chords = transposeChord(line.chords, currentTransposeOffset);
+        const chordClass = (chordsVisible ? 'chord-line' : 'chord-line hidden') + ((!line.blank && !String(chords||'').trim()) ? ' no-chords' : '');
+        html += `<div class="song-line${line.blank ? ' blank-line' : ''}"><div class="${chordClass}">${escapeHTML(chords) || '&nbsp;'}</div><div class="lyric-line">${escapeHTML(line.lyrics) || '&nbsp;'}</div></div>`;
+    });
+    document.getElementById('projLyricsContainer').innerHTML = html;
+
+    const externalSidebar = document.getElementById('externalMediaSidebar');
+    const youtubeContainer = document.getElementById('youtubeContainer');
+    const youtubeFrame = document.getElementById('projYoutubeFrame');
+    const audioContainer = document.getElementById('audioContainer');
+    const audioElement = document.getElementById('projAudioElement');
+
+    let hasMedia = false;
+
+    const youtubeLink = document.getElementById('projYoutubeLink');
+    const youtubeQuickLink = document.getElementById('projYoutubeQuickLink');
+    const youtubeTracksBox = document.getElementById('projYoutubeTracks');
+    if (youtubeTracksBox) youtubeTracksBox.innerHTML = '';
+    if (youtubeQuickLink) {
+        youtubeQuickLink.classList.remove('visible');
+        youtubeQuickLink.href = '#';
+    }
+    const assignedTracks = Array.isArray(song.youtubeTracks) ? song.youtubeTracks : [];
+    if (assignedTracks.length && youtubeTracksBox) {
+        assignedTracks.forEach((track, index) => {
+            const url = String(track.url || '').trim();
+            if (!url) return;
+            const embedMatch = url.match(/youtube\.com\/embed\/([^?&]+)/i);
+            let embedUrl = url;
+            if (!embedMatch && url.includes('watch?v=')) {
+                const id = url.split('watch?v=')[1].split('&')[0];
+                embedUrl = 'https://www.youtube.com/embed/' + id;
+            } else if (url.includes('youtu.be/')) {
+                const id = url.split('youtu.be/')[1].split('?')[0];
+                embedUrl = 'https://www.youtube.com/embed/' + id;
+            }
+            const label = String(track.label || song.youtubeLabel || 'Pista de YouTube');
+            const watch = String(track.watchUrl || url);
+            const card = document.createElement('div');
+            card.className = 'youtube-track-card';
+            const title = document.createElement('div');
+            title.className = 'youtube-track-title';
+            title.textContent = label;
+            const frame = document.createElement('iframe');
+            frame.src = embedUrl;
+            frame.title = 'YouTube: ' + label + ' — ' + (song.title || 'Canción');
+            frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            frame.setAttribute('allowfullscreen', '');
+            frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+            const open = document.createElement('a');
+            open.className = 'youtube-track-open';
+            open.href = watch;
+            open.target = '_blank';
+            open.rel = 'noopener noreferrer';
+            open.textContent = '▶ Abrir pista en YouTube';
+            card.appendChild(title); card.appendChild(frame); card.appendChild(open);
+            youtubeTracksBox.appendChild(card);
+        });
+        if (youtubeLink) { youtubeLink.style.display = 'none'; youtubeLink.href = '#'; }
+        if (youtubeFrame) { youtubeFrame.src = ''; youtubeFrame.style.display = 'none'; }
+        if (youtubeQuickLink) {
+            youtubeQuickLink.href = String(assignedTracks[0].watchUrl || assignedTracks[0].url || '#');
+            youtubeQuickLink.classList.add('visible');
+        }
+        youtubeContainer.style.display = 'flex';
+        hasMedia = true;
+    } else if (song.youtube && song.youtube.trim() !== "") {
+        if (youtubeQuickLink) { youtubeQuickLink.href = song.youtube.trim(); youtubeQuickLink.classList.add('visible'); }
+        const rawYoutube = song.youtube.trim();
+        if (rawYoutube.includes('youtube.com/results?') || rawYoutube.includes('youtube.com/results/')) {
+            youtubeLink.href = rawYoutube;
+            youtubeLink.style.display = 'block';
+            youtubeFrame.src = '';
+            youtubeFrame.style.display = 'none';
+        } else {
+            let ytUrl = rawYoutube;
+            if (ytUrl.includes('watch?v=')) {
+                const id = ytUrl.split('watch?v=')[1].split('&')[0];
+                ytUrl = 'https://www.youtube.com/embed/' + id;
+            } else if (ytUrl.includes('youtu.be/')) {
+                const id = ytUrl.split('youtu.be/')[1].split('?')[0];
+                ytUrl = 'https://www.youtube.com/embed/' + id;
+            }
+            youtubeLink.href = '#';
+            youtubeLink.style.display = 'none';
+            youtubeFrame.style.display = 'block';
+            youtubeFrame.src = ytUrl;
+        }
+        youtubeContainer.style.display = 'flex';
+        hasMedia = true;
+    } else {
+        if (youtubeFrame) { youtubeFrame.src = ''; youtubeFrame.style.display = 'block'; }
+        if (youtubeLink) { youtubeLink.href = '#'; youtubeLink.style.display = 'none'; }
+        youtubeContainer.style.display = 'none';
+    }
+
+    if (song.audio && song.audio.trim() !== "") {
+        audioElement.src = song.audio.trim();
+        audioContainer.style.display = 'flex';
+        hasMedia = true;
+    } else {
+        audioElement.pause();
+        audioElement.src = '';
+        audioContainer.style.display = 'none';
+    }
+
+    if (hasMedia) {
+        externalSidebar.classList.add('active');
+    } else {
+        externalSidebar.classList.remove('active');
+    }
+}
+
+function stepTranspose(delta) {
+    currentTransposeOffset = (currentTransposeOffset + delta + 12) % 12;
+    renderProjection();
+}
+
+function toggleChords() {
+    chordsVisible = !chordsVisible;
+    renderProjection();
+}
+
+function changeFontSize(delta) {
+    const container = document.getElementById('projLyricsContainer');
+    const current = container ? (parseFloat(getComputedStyle(container).getPropertyValue('--lyrics-font-size')) || currentFontSize || 18) : (currentFontSize || 18);
+    currentFontSize = Math.max(10, Math.min(42, current + Number(delta || 0)));
+    if (container) {
+        container.style.setProperty('--lyrics-font-size', currentFontSize + 'px');
+        container.querySelectorAll('.lyric-line, .chord-line').forEach(el => {
+            el.style.setProperty('font-size', currentFontSize + 'px', 'important');
+        });
+    }
+    if (typeof renderProjection === 'function' && selectedSongId != null) renderProjection();
+    if (container) {
+        container.style.setProperty('--lyrics-font-size', currentFontSize + 'px');
+        container.querySelectorAll('.lyric-line, .chord-line').forEach(el => el.style.setProperty('font-size', currentFontSize + 'px', 'important'));
+    }
+}
+
+function printSong() {
+    /* La impresión toma el estado actual: acordes visibles u ocultos. */
+    window.print();
+}
+
+function toggleFullScreen() {
+    const elem = document.getElementById('projectionOverlay');
+    if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch(err => {
+            alert(`Error al intentar pantalla completa: ${err.message}`);
+        });
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+function setFilter(cat, el) {
+    currentFilter = cat;
+    document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    filterSongs();
+}
+
+try { const savedTheme = localStorage.getItem('cantoral-theme'); if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme); } catch (e) {}
+updateThemeButton();
+function updateThemeButton() {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    const isLight = root.getAttribute('data-theme') === 'light';
+    btn.textContent = isLight ? '☀️' : '🌙';
+    btn.title = isLight ? 'Cambiar al modo oscuro' : 'Cambiar al modo claro clásico';
+    btn.setAttribute('aria-label', btn.title);
+}
+function toggleTheme() {
+    const root = document.documentElement;
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('cantoral-theme', next); } catch (e) {}
+    updateThemeButton();
+}
+document.addEventListener('DOMContentLoaded', updateThemeButton);
+
+
+function openSongModal(id = null) {
+    document.getElementById('songModal').classList.add('active');
+    if(id) {
+        const song = songs.find(s => s.id == id);
+        if(song) {
+            document.getElementById('editSongId').value = song.id;
+            document.getElementById('inputTitle').value = song.title;
+            document.getElementById('inputCategory').value = song.category;
+            document.getElementById('inputTone').value = song.tone;
+            document.getElementById('inputYoutube').value = song.youtube || '';
+            document.getElementById('inputAudio').value = song.audio || '';
+            document.getElementById('inputRawLyrics').value = song.rawText || song.lines.map(l => [l.chords, l.lyrics].filter(Boolean).join('\n')).join('\n');
+            document.getElementById('btnDeleteSong').style.display = 'block';
+        }
+    } else {
+        document.getElementById('editSongId').value = '';
+        
+        let maxNum = 0;
+        songs.forEach(s => {
+            const match = s.title.match(/^-(\d+)-/);
+            if (match) {
+                let num = parseInt(match[1]);
+                if (num > maxNum) maxNum = num;
+            }
+        });
+        let nextNum = maxNum + 1;
+
+        document.getElementById('inputTitle').value = `-${nextNum}- `;
+        document.getElementById('inputYoutube').value = '';
+        document.getElementById('inputAudio').value = '';
+        document.getElementById('inputRawLyrics').value = '';
+        document.getElementById('btnDeleteSong').style.display = 'none';
+    }
+}
+
+function closeSongModal() {
+    document.getElementById('songModal').classList.remove('active');
+}
+
+function saveSong() {
+    const id = document.getElementById('editSongId').value;
+    let titleInput = document.getElementById('inputTitle').value.trim();
+    const category = document.getElementById('inputCategory').value;
+    const tone = document.getElementById('inputTone').value;
+    const youtube = document.getElementById('inputYoutube').value.trim();
+    const audio = document.getElementById('inputAudio').value.trim();
+    const rawText = document.getElementById('inputRawLyrics').value;
+    const raw = rawText.split('\n');
+    let lines = [];
+    for (let i = 0; i < raw.length; i += 2) {
+        lines.push({ chords: raw[i] || '', lyrics: raw[i + 1] || '' });
+    }
+
+    if (!titleInput) {
+        alert('Escribe el título de la canción antes de guardar.');
+        return;
+    }
+
+    if (id) {
+        const song = songs.find(item => String(item.id) === String(id));
+        if (song) {
+            song.title = titleInput;
+            song.category = category;
+            song.tone = tone;
+            song.youtube = youtube;
+            song.audio = audio;
+            song.lines = lines;
+            song.rawText = rawText;
+        }
+    } else {
+        // El correlativo se calcula desde los títulos existentes, no desde el ID ni la fecha.
+        // El correlativo debe continuar después del último número o, si el catálogo
+        // todavía tiene títulos sin prefijo, después de la cantidad de canciones existentes.
+        let maxNum = 0;
+        songs.forEach(song => {
+            const match = String(song.title || '').match(/^\s*-\s*(\d+)\s*-/);
+            if (match) maxNum = Math.max(maxNum, parseInt(match[1], 10));
+            if (Number.isFinite(Number(song.id)) && Number(song.id) > maxNum) maxNum = Number(song.id);
+        });
+        const nextNum = Math.max(maxNum, songs.length) + 1;
+        // Evita conservar un correlativo escrito manualmente que sea incorrecto.
+        titleInput = titleInput.replace(/^\s*-\s*\d+\s*-\s*/, '').trim();
+        titleInput = `-${nextNum}- ${titleInput}`;
+        songs.push({
+            id: (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : `song-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
+            title: titleInput, category, tone, youtube, audio, lines, rawText
+        });
+    }
+
+    try {
+        localStorage.setItem(DB_KEY, JSON.stringify(songs));
+    } catch (err) {
+        alert('No se pudo guardar en el navegador. Puede estar lleno el almacenamiento.');
+        return;
+    }
+    closeSongModal();
+    filterSongs();
+
+    if (document.getElementById('projectionOverlay')?.classList.contains('active') &&
+        String(selectedSongId) === String(id)) {
+        renderProjection();
+    }
+
+    // Guarda en el navegador y descarga una copia actualizada del MISMO archivo de sección.
+    // Los navegadores no autorizan sobrescribir automáticamente el HTML local original.
+    alert('Canción guardada. Se descargará el archivo actualizado de esta sección. Reemplaza el archivo del mismo nombre en la carpeta del cancionero para que aparezca junto a las demás canciones.');
+    exportHTMLFile();
+}
+
+function deleteCurrentSong() {
+    const id = document.getElementById('editSongId').value;
+    if(id) {
+        songs = songs.filter(s => s.id != id);
+        localStorage.setItem(DB_KEY, JSON.stringify(songs));
+        closeSongModal();
+        closeProjection();
+        filterSongs();
+    }
+}
+
+function exportHTMLFile() {
+    const clone = document.documentElement.cloneNode(true);
+    const scripts = clone.querySelectorAll('script');
+    scripts.forEach(script => {
+        if (script.textContent.includes('const defaultSongs =')) {
+            const currentSongsJSON = JSON.stringify(songs, null, 4);
+            script.textContent = script.textContent.replace(
+                /const defaultSongs = \[[\s\S]*?\];/, 
+                `const defaultSongs = ${currentSongsJSON};`
+            );
+        }
+    });
+
+    const htmlContent = '<!DOCTYPE html>\n' + clone.outerHTML;
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '23-matrimonio.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+window.onload = function() {
+    renderAlphabet();
+    filterSongs();
+};
+</script>
+
+<script id="auto-open-index-song">(()=>{const params=new URLSearchParams(location.search);const raw=params.get('song');if(!raw)return;const id=Number(raw);if(!Number.isFinite(id))return;const run=()=>{if(typeof projectSong==='function'){projectSong(id);return true}return false};if(!run()){document.addEventListener('DOMContentLoaded',()=>{if(!run())setTimeout(run,250)},{once:true})}})();</script>
+<script id="cancionero-standard-projection-fix-js">
+/* Correcciones finales de navegación y proyección completa */
+(function(){
+  function updateProjectionFit(){
+    var body=document.getElementById('projectionBodyContent');
+    var overlay=document.getElementById('projectionOverlay');
+    if(!body||!overlay||!overlay.classList.contains('active'))return;
+    window.requestAnimationFrame(function(){
+      var over=body.scrollHeight>body.clientHeight+3;
+      body.classList.toggle('projection-long',over);
+      if(!over) body.scrollTop=0;
+    });
+  }
+  window.addEventListener('resize',updateProjectionFit);
+  document.addEventListener('fullscreenchange',updateProjectionFit);
+  var title=document.getElementById('projSongTitle');
+  var lyrics=document.getElementById('projLyricsContainer');
+  if(title&&window.MutationObserver){new MutationObserver(updateProjectionFit).observe(title,{childList:true,characterData:true,subtree:true});}
+  if(lyrics&&window.MutationObserver){new MutationObserver(updateProjectionFit).observe(lyrics,{childList:true,characterData:true,subtree:true});}
+  window.addEventListener('load',updateProjectionFit);
+  window.updateProjectionFit=updateProjectionFit;
+})();
+</script>
+<script id="paleta-compartida">
+(function(){var root=document.documentElement,sel=document.getElementById('religiousPalette');function apply(v){var valid=['marfil','azul-mariano','borgona','verde-liturgico','violeta','oscuro'];if(valid.indexOf(v)<0)v='marfil';root.setAttribute('data-palette',v);if(sel)sel.value=v;try{localStorage.setItem('cantosAlCorderoPaleta',v)}catch(e){}}
+var saved='marfil';try{saved=localStorage.getItem('cantosAlCorderoPaleta')||'marfil'}catch(e){}apply(saved);if(sel)sel.addEventListener('change',function(){apply(sel.value)});
+})();
+</script>
+<script>
+document.addEventListener('fullscreenchange',function(){const o=document.getElementById('projectionOverlay');if(o&&document.fullscreenElement===o){const body=o.querySelector('.projection-body');if(body){body.scrollTop=0;} }});
+</script>
+<style id="proyeccion-titulo-visible-correccion-final">
+/* Corrección: mostrar el título de la canción en pantalla completa, sin alterar el control de notas ocultas. */
+#projectionOverlay:fullscreen #projSongTitle, #projectionOverlay:-webkit-full-screen #projSongTitle,
+.projection-overlay:fullscreen #projSongTitle, .projection-overlay:-webkit-full-screen #projSongTitle,
+#projectionOverlay.active #projSongTitle, .projection-overlay.active #projSongTitle {
+  display:block!important; visibility:visible!important; opacity:1!important;
+  position:relative!important; flex:0 0 auto!important;
+  width:100%!important; max-width:1400px!important; max-height:none!important;
+  overflow:visible!important; white-space:normal!important; overflow-wrap:anywhere!important;
+  box-sizing:border-box!important; margin:0 0 22px 0!important; padding:8px 58px 14px 0!important;
+  text-align:left!important; color:#ffffff!important; -webkit-text-fill-color:#ffffff!important;
+  font-family:Constantia,Georgia,serif!important; font-size:clamp(24px,3.2vw,42px)!important;
+  font-weight:700!important; line-height:1.25!important;
+  border-bottom:1px solid rgba(255,255,255,.4)!important;
+}
+#projectionOverlay:fullscreen .projection-body, #projectionOverlay:-webkit-full-screen .projection-body,
+.projection-overlay:fullscreen .projection-body, .projection-overlay:-webkit-full-screen .projection-body {
+  padding-top:72px!important;
+  text-align:left!important;
+}
+@media(max-width:650px){
+ #projectionOverlay:fullscreen #projSongTitle, #projectionOverlay:-webkit-full-screen #projSongTitle,
+ .projection-overlay:fullscreen #projSongTitle, .projection-overlay:-webkit-full-screen #projSongTitle {
+   font-size:clamp(22px,6vw,30px)!important; margin-bottom:14px!important; padding-left:0!important; padding-right:48px!important; text-align:left!important;
+ }
+}
+</style>
+
+<style id="proyeccion-12pt-10pt-constancia">
+/* Formato definitivo de proyección: título 12 pt y letra 10 pt */
+#projectionOverlay #projSongTitle,
+#projectionOverlay:fullscreen #projSongTitle,
+#projectionOverlay:-webkit-full-screen #projSongTitle,
+#projectionOverlay.active #projSongTitle,
+#projSongTitle {
+  color:#008000 !important;
+  font-family:Constantia, Georgia, serif !important;
+  font-size:12pt !important;
+  font-weight:700 !important;
+  text-decoration:underline !important;
+  text-transform:uppercase !important;
+  line-height:1.15 !important;
+  text-align:left !important;
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+#projectionOverlay,
+#projectionOverlay:fullscreen,
+#projectionOverlay:-webkit-full-screen,
+#projectionOverlay.active {
+  font-family:Constantia, Georgia, serif !important;
+}
+#projectionOverlay #projLyricsContainer,
+#projectionOverlay #projLyricsContainer *,
+#projectionOverlay .projection-lyrics,
+#projectionOverlay .projection-lyrics *,
+#projectionOverlay .song-lyrics-container,
+#projectionOverlay .song-lyrics-container *,
+#projectionOverlay .song-line,
+#projectionOverlay .lyric-line,
+#projectionOverlay .projection-body {
+  font-family:Constantia, Georgia, serif !important;
+  font-size:10pt !important;
+  text-align:left !important;
+}
+#projectionOverlay #projLyricsContainer,
+#projectionOverlay .projection-lyrics,
+#projectionOverlay .song-lyrics-container {
+  line-height:1.08 !important;
+  text-align:left !important;
+}
+/* El botón de cierre muestra únicamente la palabra Cerrar */
+#fullscreenCloseBtn {
+  font-size:0 !important;
+  color:transparent !important;
+  text-shadow:none !important;
+  background-image:none !important;
+}
+#fullscreenCloseBtn::before {
+  content:none !important;
+  display:none !important;
+}
+#fullscreenCloseBtn::after {
+  content:"Cerrar" !important;
+  display:inline-block !important;
+  color:#fff !important;
+  font-family:Arial, sans-serif !important;
+  font-size:11px !important;
+  font-weight:600 !important;
+}
+#fullscreenCloseBtn svg,
+#fullscreenCloseBtn i,
+#fullscreenCloseBtn img,
+#fullscreenCloseBtn .icon,
+#fullscreenCloseBtn .close-icon,
+#fullscreenCloseBtn .fa,
+#fullscreenCloseBtn [aria-hidden="true"] {
+  display:none !important;
+  visibility:hidden !important;
+}
+</style>
+
+<style id="cerrar-proyeccion-discreto">
+/* Botón Cerrar compacto: sin X y sin tapar el título proyectado */
+#fullscreenCloseBtn {
+  top: 4px !important;
+  right: 6px !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 2px 5px !important;
+  border: 0 !important;
+  border-radius: 3px !important;
+  background: rgba(0,0,0,.42) !important;
+  box-shadow: none !important;
+  line-height: 1 !important;
+}
+#fullscreenCloseBtn::before { content: none !important; display: none !important; }
+#fullscreenCloseBtn::after {
+  content: "Cerrar" !important;
+  display: inline-block !important;
+  color: #fff !important;
+  font-family: Arial, sans-serif !important;
+  font-size: 8px !important;
+  font-weight: 400 !important;
+  line-height: 1.1 !important;
+}
+#fullscreenCloseBtn svg, #fullscreenCloseBtn i, #fullscreenCloseBtn img,
+#fullscreenCloseBtn .icon, #fullscreenCloseBtn .close-icon,
+#fullscreenCloseBtn .fa, #fullscreenCloseBtn [aria-hidden="true"] {
+  display: none !important;
+  visibility: hidden !important;
+}
+</style>
+
+
+<style id="fix-cerrar-sin-x-final">
+/* Corrección final de proyección: ocultar el carácter X original y dejar solo Cerrar */
+#fullscreenCloseBtn { font-size: 0 !important; width: auto !important; min-width: 0 !important; max-width: none !important; height: auto !important; min-height: 0 !important; max-height: none !important; padding: 3px 6px !important; border-radius: 4px !important; background: rgba(255,255,255,.12) !important; color: #fff !important; border: 0 !important; box-shadow: none !important; }
+#fullscreenCloseBtn::before { content: none !important; display: none !important; }
+#fullscreenCloseBtn::after { content: "Cerrar" !important; display: inline-block !important; font: 10px/1.2 Arial, sans-serif !important; color: inherit !important; }
+#fullscreenCloseBtn svg, #fullscreenCloseBtn i, #fullscreenCloseBtn img, #fullscreenCloseBtn .icon, #fullscreenCloseBtn .close-icon, #fullscreenCloseBtn .fa, #fullscreenCloseBtn [aria-hidden="true"] { display: none !important; }
+</style>
+
+
+<style id="proyeccion-cierre-signo-discreto-final">
+#fullscreenCloseBtn{display:none;position:fixed!important;top:8px!important;right:10px!important;left:auto!important;bottom:auto!important;width:auto!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;padding:0!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:rgba(255,255,255,.62)!important;font-family:Arial,sans-serif!important;font-size:17px!important;font-weight:400!important;line-height:1!important;text-decoration:none!important;opacity:.65!important;cursor:pointer!important;z-index:2147483647!important}
+.projection-overlay:fullscreen #fullscreenCloseBtn,.projection-overlay.active:fullscreen #fullscreenCloseBtn,.projection-overlay:-webkit-full-screen #fullscreenCloseBtn,.projection-overlay.active:-webkit-full-screen #fullscreenCloseBtn,#projectionOverlay:fullscreen #fullscreenCloseBtn,#projectionOverlay:-webkit-full-screen #fullscreenCloseBtn{display:block!important;top:8px!important;right:10px!important;width:auto!important;height:auto!important;min-width:0!important;min-height:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:rgba(255,255,255,.62)!important;font-size:17px!important}
+#fullscreenCloseBtn:hover{opacity:1!important}
+</style>
+<style id="proyeccion-scroll-exclusivo-fullscreen">
+/* Estas reglas solo se activan mientras la proyección está en pantalla completa. */
+#projectionOverlay:fullscreen .projection-body,
+#projectionOverlay:-webkit-full-screen .projection-body,
+.projection-overlay:fullscreen .projection-body,
+.projection-overlay:-webkit-full-screen .projection-body {
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  padding-bottom: 100px !important;
+  scroll-padding-bottom: 100px !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
+}
+</style>
+
+
+<style id="ajuste-proyeccion-compacta-notas">
+/* Solo afecta la proyección; la vista normal de las canciones queda intacta. */
+#projectionOverlay.active #projLyricsContainer,
+#projectionOverlay:fullscreen #projLyricsContainer,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer {
+  gap: 0 !important; row-gap: 0 !important; text-align: left !important;
+}
+#projectionOverlay.active #projLyricsContainer .song-line,
+#projectionOverlay:fullscreen #projLyricsContainer .song-line,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .song-line {
+  display: block !important;
+  margin: 0 !important; padding: 0 !important;
+  gap: 0 !important; line-height: 1.05 !important;
+  text-align: left !important;
+}
+#projectionOverlay.active #projLyricsContainer .lyric-line,
+#projectionOverlay:fullscreen #projLyricsContainer .lyric-line,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .lyric-line {
+  display: block !important;
+  margin: 0 !important; padding: 0 !important;
+  line-height: 1.05 !important;
+  text-align: left !important;
+}
+#projectionOverlay.active #projLyricsContainer .chord-line.hidden,
+#projectionOverlay:fullscreen #projLyricsContainer .chord-line.hidden,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .chord-line.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important; min-height: 0 !important;
+  margin: 0 !important; padding: 0 !important; line-height: 0 !important;
+  font-size: 0 !important; overflow: hidden !important;
+}
+#projectionOverlay.active #projLyricsContainer .song-line:has(.chord-line.hidden),
+#projectionOverlay:fullscreen #projLyricsContainer .song-line:has(.chord-line.hidden),
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .song-line:has(.chord-line.hidden) {
+  margin: 0 !important; padding: 0 !important; line-height: 1.05 !important;
+  text-align: left !important;
+}
+#projectionOverlay.active #projLyricsContainer .song-line:has(.chord-line.hidden) .lyric-line,
+#projectionOverlay:fullscreen #projLyricsContainer .song-line:has(.chord-line.hidden) .lyric-line,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .song-line:has(.chord-line.hidden) .lyric-line {
+  margin: 0 !important; padding: 0 !important; line-height: 1.05 !important;
+  text-align: left !important;
+}
+#projectionOverlay.active #projLyricsContainer .blank-line:has(.chord-line.hidden),
+#projectionOverlay:fullscreen #projLyricsContainer .blank-line:has(.chord-line.hidden),
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .blank-line:has(.chord-line.hidden) {
+  height: 0 !important; min-height: 0 !important;
+}
+</style>
+
+<style id="pantalla-completa-bloque-centrado-final">
+/* Pantalla completa: título + letra forman un bloque que se ajusta al texto
+   (hasta 900px) y queda centrado en la pantalla. El texto sigue alineado a la izquierda dentro del bloque. */
+#projectionOverlay:fullscreen .projection-body,
+#projectionOverlay:-webkit-full-screen .projection-body,
+.projection-overlay:fullscreen .projection-body,
+.projection-overlay.active:fullscreen .projection-body,
+.projection-overlay:-webkit-full-screen .projection-body {
+  display: grid !important;
+  grid-template-columns: fit-content(900px) !important;
+  justify-content: center !important;
+  justify-items: stretch !important;
+  align-content: start !important;
+  padding-left: 4vw !important;
+  padding-right: 4vw !important;
+}
+#projectionOverlay:fullscreen #projSongTitle,
+#projectionOverlay:-webkit-full-screen #projSongTitle,
+.projection-overlay:fullscreen #projSongTitle,
+.projection-overlay.active:fullscreen #projSongTitle,
+.projection-overlay:-webkit-full-screen #projSongTitle,
+#projectionOverlay:fullscreen #projLyricsContainer,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer,
+.projection-overlay:fullscreen #projLyricsContainer,
+.projection-overlay.active:fullscreen #projLyricsContainer,
+.projection-overlay:-webkit-full-screen #projLyricsContainer,
+#projectionOverlay:fullscreen .song-lyrics-container,
+#projectionOverlay:-webkit-full-screen .song-lyrics-container {
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+}
+#projectionOverlay:fullscreen #projSongTitle,
+#projectionOverlay:-webkit-full-screen #projSongTitle,
+.projection-overlay:fullscreen #projSongTitle,
+.projection-overlay.active:fullscreen #projSongTitle {
+  padding-right: 0 !important;
+  margin-bottom: 22px !important;
+}
+
+/* Letra bien visible sobre el fondo oscuro (solo en pantalla completa) */
+#projectionOverlay:fullscreen #projLyricsContainer,
+#projectionOverlay:fullscreen #projLyricsContainer .song-line,
+#projectionOverlay:fullscreen #projLyricsContainer .lyric-line,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .lyric-line,
+.projection-overlay:fullscreen #projLyricsContainer .lyric-line,
+.projection-overlay.active:fullscreen #projLyricsContainer .lyric-line {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+  opacity: 1 !important;
+}
+#projectionOverlay:fullscreen #projLyricsContainer .chord-line,
+#projectionOverlay:-webkit-full-screen #projLyricsContainer .chord-line,
+.projection-overlay:fullscreen #projLyricsContainer .chord-line,
+.projection-overlay.active:fullscreen #projLyricsContainer .chord-line {
+  color: #fbbf24 !important;
+  -webkit-text-fill-color: #fbbf24 !important;
+  opacity: 1 !important;
+}
+</style>
+
+<style id="pantalla-completa-scroll-hasta-el-final">
+/* Pantalla completa: el área de la letra ocupa toda la pantalla (sin desfase superior)
+   y deja espacio al final para poder llegar hasta la última línea de la canción. */
+html #projectionOverlay:fullscreen,
+html #projectionOverlay:-webkit-full-screen {
+  position: fixed !important; inset: 0 !important;
+  width: 100vw !important; height: 100vh !important; height: 100dvh !important;
+  max-height: none !important; overflow: hidden !important; display: block !important;
+}
+html #projectionOverlay:fullscreen .projection-body,
+html #projectionOverlay:-webkit-full-screen .projection-body {
+  position: absolute !important; top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important;
+  width: 100% !important; height: 100% !important; min-height: 0 !important; max-height: none !important;
+  margin: 0 !important; box-sizing: border-box !important;
+  overflow-y: scroll !important; overflow-x: hidden !important;
+  padding-top: 72px !important; padding-bottom: 48px !important;
+  scroll-padding-bottom: 160px !important;
+  grid-template-rows: none !important; grid-auto-rows: max-content !important;
+}
+html #projectionOverlay:fullscreen .projection-body::after,
+html #projectionOverlay:-webkit-full-screen .projection-body::after {
+  content: ""; display: block; grid-column: 1; height: 140px; flex: 0 0 140px;
+}
+</style>
+
+<style id="acordes-sin-fila-vacia">
+/* Las líneas de letra sin acordes no reservan una fila vacía de acordes: interlineado uniforme. */
+.chord-line.no-chords:not(.hidden){ display:none !important; height:0 !important; min-height:0 !important; margin:0 !important; padding:0 !important; }
+</style>
